@@ -16,7 +16,7 @@ dl, dt, dd, ol, ul, li {
 }
 
 header {
-    background: #36323d;
+    background: #001a23;
     overflow: hidden;
 }
 
@@ -161,18 +161,29 @@ section h4 b {
     overflow: hidden;
 }
 
-.resource-item {
+.resource-item,
+.resource-item:link,
+.resource-item:hover,
+.resource-item:active {
     box-sizing: border-box;
     width: 20rem;
     height: 114px;
     float: left;
     margin: 0 .25rem;
     border-bottom: 3px solid #f6f2f6;
+    text-decoration: none;
+    transition: background .1s ease-in; 
 }
 
 .resource-item:hover {
     background: rgba(255, 255, 255, .05);
 }
+
+
+.resource-item:hover p {
+    color: #f3dee3;
+}
+
 
 .resource-item h5 {
     font-size: 1.4rem;
@@ -190,6 +201,21 @@ section h4 b {
     line-height: 1.6rem;
     color: #c6aeb4;
     padding-left: 1.8rem;
+}
+
+.resource-item-unready h5 {
+    color: #aaa;
+}
+
+.resource-item-unready,
+.resource-item-unready:hover {
+    border-bottom: 3px solid #aaa;
+    background: none;
+}
+
+.resource-item-unready p,
+.resource-item-unready:hover p {
+    color: #909090;
 }
 
 footer {
@@ -267,4 +293,32 @@ main {
     overflow: hidden;
     width: 90rem;
     margin: 0 auto;
+}
+
+.example-main {
+    background: #19232e;
+    padding: 3rem 0 8rem;
+    font-size: 1.4rem;
+    text-align: center;
+    color: #aaa;
+}
+
+.example-main dt {
+    font-size: 1.8rem;
+    margin: 4rem 0 1rem;
+}
+
+.example-main a:link,
+.example-main a:visited,
+.example-main a:active,
+.example-main a:hover {
+    color: #fff;
+    text-decoration: none;
+    background: #bd841f;
+    padding: .3rem .6rem;
+    border-radius: .2rem;
+}
+
+.example-main a:hover {
+    background: #eaa01d;
 }
