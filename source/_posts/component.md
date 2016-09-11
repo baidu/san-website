@@ -98,7 +98,7 @@ var ListComponent = san.defineComponent({
 
 下图详细描述了组件的生存过程：
 
-![](./life-cycle.png)
+<img src="../../img/life-cycle.png" width="540">
 
 
 视图
