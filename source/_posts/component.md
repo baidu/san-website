@@ -72,6 +72,30 @@ San 的组件是 HTML 元素扩展的风格，所以其生命周期与 WebCompon
 - 互斥。attached 和 detached 是互斥的，disposed 会互斥掉其它所有的状态。
 - 有的时间点并不代表组件状态，只代表某个行为。当行为完成时，钩子函数也会触发。如 **updated** 代表每次数据变化导致的视图变更完成。
 
+
+通过声明周期的钩子函数，我们可以在生命周期到达时做一些事情。比如在生命周期 **attached** 中发起获取数据的请求，在请求返回后更新数据，使视图刷新。
+
+```javascript
+var ListComponent = san.defineComponent({
+    template: '<ul><li san-for="item in list">{{item}}</li></ul>',
+
+    initData: function () {
+        return {
+            list: []
+        };
+    },
+
+    attached: function () {
+        requestList().then(this.updateList.bind(this));
+    },
+
+    updateList: function (list) {
+        this.data.set('list', list);
+    }
+});
+```
+
+
 下图详细描述了组件的生存过程：
 
 ![](./life-cycle.png)
