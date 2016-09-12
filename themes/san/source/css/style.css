@@ -18,6 +18,7 @@ dl, dt, dd, ol, ul, li {
 header {
     background: #001a23;
     overflow: hidden;
+    color: #fff;
 }
 
 .header-index {
