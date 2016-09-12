@@ -7,7 +7,7 @@ categories:
 
 San 是一个 MVVM 的组件框架，通过 San 的视图引擎能够让用户只用操作数据，视图自动更新。
 
-我们以一些简单的例子，开始了解 San。这些例子可以从[这里](https://github.com/ecomfe/san-core/tree/master/example/start)找到。
+我们以一些简单的例子，开始了解 San。这些例子可以从[这里](https://github.com/ecomfe/san/tree/master/example/start)找到。
 
 
 Hello

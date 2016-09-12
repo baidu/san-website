@@ -13,7 +13,7 @@ categories:
 
 ### 直接下载
 
-从[下载页面](https://github.com/ecomfe/esl/releases) 可以获得最新以及过往版本的下载地址。
+从[下载页面](https://github.com/ecomfe/san/releases) 可以获得最新以及过往版本的下载地址。
 
 
 ### CDN
@@ -21,7 +21,7 @@ categories:
 我们提供了 CDN 引用地址，你可以无需下载，直接引用。
 
 ```html
-<script src="地址逮捕"></script>
+<script src="地址待补"></script>
 ```
 
 
@@ -31,7 +31,7 @@ NPM 是流行的包管理工具，通过它能够方便的管理依赖包，以�
 
 ```shell
 # 安装最新版本
-$ npm install san-core
+$ npm install san
 ```
 
 使用
@@ -46,16 +46,16 @@ $ npm install san-core
 
 ```html
 <!-- 引用直接下载下来的San-->
-<script src="san的目录/dist/san-core.js"></script>
+<script src="san的目录/dist/san.js"></script>
 
 <!-- 引用通过NPM下载下来的San-->
-<script src="node_modules/san-core/dist/san-core.js"></script>
+<script src="node_modules/san/dist/san.js"></script>
 ```
 
 注意：在引用时，
 
 - 如果页面上没有 AMD 环境，将会在页面上注册全局变量 `san`
-- 如果页面上有 AMD 环境，将会注册为模块 `san-core`
+- 如果页面上有 AMD 环境，将会注册为模块 `san`
 
 
 ### AMD
@@ -66,14 +66,14 @@ $ npm install san-core
 require.config({
     packages: [
         {
-            name: 'san-core',
+            name: 'san',
             location: 'san-path/src'
         }
     ]
 });
 ```
 
-在[这个例子](https://github.com/ecomfe/san-core/tree/master/example/todos-amd)里，我们可以看到一个通过 AMD 管理模块的项目是怎么引用 San 的。
+在[这个例子](https://github.com/ecomfe/san/tree/master/example/todos-amd)里，我们可以看到一个通过 AMD 管理模块的项目是怎么引用 San 的。
 
 ### ES6
 
