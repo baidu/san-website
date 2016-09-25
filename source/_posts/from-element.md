@@ -95,7 +95,7 @@ new MyComponent({
 
 ### 绑定
 
-绑定属性的标记方式与插值属性完全一样：在 **prop-** 为前缀的属性上声明属性的内容，双向绑定用 **{= ... =}** 的形式。
+绑定属性的标记方式与插值属性完全一样：在 **prop-** 为前缀的属性上声明属性的内容，双向绑定用 **{= expression =}** 的形式。
 
 ```html
 <ui-label prop-title="{{name}}" prop-text="{{jokeName}}"></ui-label>
