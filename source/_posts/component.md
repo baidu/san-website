@@ -112,9 +112,9 @@ var ListComponent = san.defineComponent({
 ```javascsript
 san.defineComponent({
     template: '<div>'
-        + '<label><input type="checkbox" value="errorrik" bindx-checked="online">errorrik</label>'
-        + '<label><input type="checkbox" value="otakustay" bindx-checked="online">otakustay</label>'
-        + '<label><input type="checkbox" value="firede" bindx-checked="online">firede</label>'
+        + '<label><input type="checkbox" value="errorrik" checked="{= online =}">errorrik</label>'
+        + '<label><input type="checkbox" value="otakustay" checked="{= online =}">otakustay</label>'
+        + '<label><input type="checkbox" value="firede" checked="{= online =}">firede</label>'
         + '</div>',
 
     initData: function () {
@@ -304,12 +304,12 @@ san.defineComponent({
 ```html
 <!-- Template -->
 <div class="form">
-    <input type="text" class="form-title" placeholder="标题" bindx-value="title">
-    <textarea class="form-desc" placeholder="备注" bindx-value="desc"></textarea>
+    <input type="text" class="form-title" placeholder="标题" value="{= title =}">
+    <textarea class="form-desc" placeholder="备注" value="{= desc =}"></textarea>
 
     <div>预期完成时间：
-        <ui-calendar bindx-value="endTimeDate" san-ref="endDate"></ui-calendar>
-        <ui-timepicker bindx-value="endTimeHour" san-ref="endHour"></ui-timepicker>
+        <ui-calendar value="{= endTimeDate =}" san-ref="endDate"></ui-calendar>
+        <ui-timepicker value="{= endTimeHour =}" san-ref="endHour"></ui-timepicker>
     </div>
 
     <div class="form-op">

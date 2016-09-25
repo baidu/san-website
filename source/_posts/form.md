@@ -22,16 +22,16 @@ categories:
 checkbox
 -------
 
-checkbox 常见的使用场景是分组，在组件模板中，我们把需要分组的 checkbox 将 checked 属性绑定到同名的组件数据中。
+checkbox 常见的使用场景是分组，在组件模板中，我们把需要分组的 checkbox 将 checked 属性双向绑定到同名的组件数据中。
 
-`提示`：除非你需要进行传统的表单提交，否则无需指定 checkbox 的 name 属性。San 仅以 bindx-checked 作为分组的依据。
+`提示`：除非你需要进行传统的表单提交，否则无需指定 checkbox 的 name 属性。San 仅以 checked 作为分组的依据。
 
 ```html
 <!-- Template -->
 <div>
-    <label><input type="checkbox" value="errorrik" bindx-checked="online">errorrik</label>
-    <label><input type="checkbox" value="otakustay" bindx-checked="online">otakustay</label>
-    <label><input type="checkbox" value="firede" bindx-checked="online">firede</label>
+    <label><input type="checkbox" value="errorrik" checked="{= online =}">errorrik</label>
+    <label><input type="checkbox" value="otakustay" checked="{= online =}">otakustay</label>
+    <label><input type="checkbox" value="firede" checked="{= online =}">firede</label>
 </div>
 ```
 
@@ -67,9 +67,9 @@ radio
 ```html
 <!-- Template -->
 <div>
-    <label><input type="radio" value="errorrik" bindx-checked="online" name="online">errorrik</label>
-    <label><input type="radio" value="otakustay" bindx-checked="online" name="online">otakustay</label>
-    <label><input type="radio" value="firede" bindx-checked="online" name="online">firede</label>
+    <label><input type="radio" value="errorrik" checked="{= online =}" name="online">errorrik</label>
+    <label><input type="radio" value="otakustay" checked="{= online =}" name="online">otakustay</label>
+    <label><input type="radio" value="firede" checked="{= online =}" name="online">firede</label>
 </div>
 ```
 
@@ -96,7 +96,7 @@ select 的使用方式和输入框类似，直接应用 **bind-** 到 value 属�
 
 ```html
 <!-- Template -->
-<select bindx-value="online">
+<select value="{= online =}">
     <option value="errorrik">errorrik</option>
     <option value="otakustay">otakustay</option>
     <option value="firede">firede</option>

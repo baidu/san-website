@@ -236,7 +236,7 @@ var MyComponent = san.defineComponent({
         'ui-label': Label
     },
 
-    template: '<div><ui-label bind-text="name" on-customclick="labelClicker($event)"></ui-label></div>',
+    template: '<div><ui-label text="{{name}}" on-customclick="labelClicker($event)"></ui-label></div>',
 
     labelClicker: function (doneMsg) {
         alert(doneMsg);

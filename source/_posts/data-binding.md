@@ -46,38 +46,39 @@ categories:
 ### 属性绑定
 
 
-通过 **bind-** 前缀，可以将数据绑定到子组件的 属性(property) 上。下面的例子中，当 jokeName 数据变化时，会自动将新的值设置到 label 组件的 text 属性中。
+顾名思义，属性绑定的意思是，将数据绑定到子组件的 属性(property) 上。属性绑定的形式和插值绑定相同，通过 HTML 标签的 属性(attribute)声明，通常情况只声明一个 **{{ ... }}**。
+
+下面的例子中，当 jokeName 数据变化时，会自动将新的值设置到 label 组件的 text 属性中。
 
 ```html
-<ui-label bind-text="jokeName"></ui-label>
+<ui-label text="{{jokeName}}"></ui-label>
 ```
 
 
 `表达式`：属性绑定支持任意类型的表达式，具体请参考本篇后续的[表达式](#表达式)章节。
 
-`额外提示`：**bind-** 应该仅用于绑定子组件的 属性(property)。对于普通的 HTML 标签 属性(attribute)，直接使用插值替换的形式会更灵活方便。
 
 
 
 ### 双向绑定
 
 
-通过 **bindx-** 前缀，可以声明双向绑定。
+通过  HTML 标签的 属性(attribute)声明 **{= ... =}** 的形式，可以声明双向绑定。
 
 双向绑定通常出现在 **用户输入** 的场景，将用户输入结果自动更新到组件数据。所以我们通常在 **输入表单元素** 或 **具有输入反馈的自定义组件** 上应用双向绑定。
 
 下面的例子将 input、select、自定义组件的 value 属性与声明的数据项（name、online、color）建立了双向绑定关系。当用户输入时，相应数据项的值会发生变化。
 
 ```html
-<input type="text" bindx-value="name">
+<input type="text" value="{= name =}">
 
-<select bindx-value="online">
+<select value="{= online =}">
     <option value="errorrik">errorrik</option>
     <option value="otakustay">otakustay</option>
     <option value="firede">firede</option>
 </select>
 
-<ui-colorpicker bindx-value="color"></ui-colorpicker>
+<ui-colorpicker value="{= color =}"></ui-colorpicker>
 ```
 
 `表达式`：双向绑定仅支持普通变量和属性访问表达式，否则可能导致不可预测的问题。

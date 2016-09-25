@@ -87,7 +87,7 @@ new MyComponent({
 
 ### 插值属性
 
-插值属性的标记方式是：在 **prop-** 问前缀的属性上声明插值属性的内容。
+插值属性的标记方式是：在 **prop-** 为前缀的属性上声明属性的内容。
 
 ```html
 <span title="errorrik - errorrik@gmail.com" prop-title="{{name}} - {{email}}"></span>
@@ -95,10 +95,10 @@ new MyComponent({
 
 ### 绑定
 
-绑定的方式与正常编写视图模板完全一样：单向的绑定属性用 **bind-** 前缀，双向绑定用 **bindx-** 前缀。
+绑定属性的标记方式与插值属性完全一样：在 **prop-** 为前缀的属性上声明属性的内容，双向绑定用 **{= ... =}** 的形式。
 
 ```html
-<ui-label bind-title="name" bind-text="jokeName"></ui-label>
+<ui-label prop-title="{{name}}" prop-text="{{jokeName}}"></ui-label>
 ```
 
 ### 循环
@@ -176,7 +176,7 @@ san.defineComponent({
 组件的标记与视图模板中声明是一样的，在相应的自定义元素上标记绑定。San 将根据自定义元素的标签自动识别组件。
 
 ```html
-<ui-label bind-title="name" bind-text="email">
+<ui-label prop-title="{{name}}" prop-text="{{email}}">
     <b prop-title="{{title}}" title="errorrik">errorrik@gmail.com<script type="text/san">{{text}}</script></b>
 </ui-label>
 ```
@@ -184,7 +184,7 @@ san.defineComponent({
 我们可能因为样式、兼容性等原因不想使用自定义元素。当组件未使用自定义元素时，可以在元素上通过 **san-component** 标记组件类型。
 
 ```html
-<label san-component="ui-label" bind-title="name" bind-text="email">
+<label san-component="ui-label" prop-title="{{name}}" prop-text="{{email}}">
     <b prop-title="{{title}}" title="errorrik">errorrik@gmail.com<script type="text/san">{{text}}</script></b>
 </label>
 ```

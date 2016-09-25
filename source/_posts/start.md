@@ -66,7 +66,7 @@ myApp.attach(document.body);
 var MyApp = san.defineComponent({
     template: ''
         + '<div>'
-        +   '<input bindx-value="name" placeholder="please input">'
+        +   '<input value="{= name =}" placeholder="please input">'
         +   'Hello {{name}}!'
         + '</div>'
 });
@@ -75,6 +75,6 @@ var myApp = new MyApp();
 myApp.attach(document.body);
 ```
 
-双向绑定通常出现在用户输入的场景，将用户输入结果自动更新到组件数据。在这个例子中，通过 **bindx-** 声明双向绑定，把输入框的 value 与数据项 name 绑定起来。
+双向绑定通常出现在用户输入的场景，将用户输入结果自动更新到组件数据。在这个例子中，通过 **{= ... =}** 声明双向绑定，把输入框的 value 与数据项 name 绑定起来。
 
 
