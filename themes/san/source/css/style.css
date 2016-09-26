@@ -51,7 +51,7 @@ header nav .github {
 .get-start {
     display: inline-block;
     width: 120px;
-    margin: 30px;
+    margin: 20px auto 40px;
     line-height: 26px;
     font-size: 1.6rem;
     text-align: center;
@@ -72,15 +72,20 @@ header nav .github {
 
 .header-index {
     padding-top: 20px;
-    height: 300px;
     text-align: center;
 }
 
 .logo {
     display: block;
-    width: 100px;
-    height: 200px;
     margin: 0 auto;
+}
+
+.logo-s-link {
+    float: left;
+    margin: 8px 20px 0;
+}
+.logo-s {
+    border: 0;
 }
 
 section {
@@ -220,7 +225,7 @@ section h4 b {
 }
 
 footer {
-    background: #98c5e5;
+    background: #b3a6a6;
     margin: 0;
 }
 
@@ -236,9 +241,16 @@ footer {
     width: 70px;
 }
 
-.efe-products dt a {
+.efe-products a,
+.efe-products a:link,
+.efe-products a:visited
+.efe-products a:active {
     color: #efefef;
     text-decoration: none;
+}
+
+.efe-products a:hover {
+    text-decoration: underline;
 }
 
 .efe-products dt, .efe-products dd {
@@ -269,10 +281,11 @@ footer {
 }
 
 .recommend {
-    float: left;
+    position: absolute;
+    top: 0;
+    left: 2rem;
     font-size: 1.4rem;
     width: 16rem;
-    margin-right: .9rem;
 }
 
 .recommend dt {
@@ -292,8 +305,9 @@ footer {
 
 main {
     overflow: hidden;
-    width: 90rem;
+    min-width: 90rem;
     margin: 0 auto;
+    position: relative;
 }
 
 .example-main {

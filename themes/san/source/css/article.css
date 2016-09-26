@@ -1,12 +1,12 @@
 .toc-wrap {
     background: #fff;
-    width: 20em;
-    right: 9rem;
+    width: 12em;
+    right: 2rem;
     top: 9rem;
     position: fixed;
     font-size: 1.4rem;
     line-height: 1.5;
-    border-left: 2px solid #ddd;
+    box-shadow: 6px -6px 0 #ddd;
     padding: 0 0 .5rem;
 }
 
@@ -30,9 +30,7 @@ article {
     font-size: 1.4rem;
     letter-spacing: .05rem;
     line-height: 2;
-    margin-bottom: 40px;
-    max-width: 60em;
-    float: left;
+    margin: 0 16rem 4rem 17rem;
     color: #444;
 }
 
