@@ -21,10 +21,6 @@ header {
     color: #fff;
 }
 
-.header-index {
-    background: #001a23;
-}
-
 
 header nav {
     float: right;
@@ -46,6 +42,14 @@ header nav a {
 
 header nav .github {
     font-size: 3rem;
+}
+
+header b {
+    font-size: 4rem;
+    letter-spacing: .05rem;
+    font-weight: 300;
+    line-height: 6.8rem;
+    float: left;
 }
 
 .get-start {
@@ -73,6 +77,22 @@ header nav .github {
 .header-index {
     padding-top: 20px;
     text-align: center;
+    background: #001a23;
+}
+
+.header-index p {
+    font-size: 1.8rem;
+    letter-spacing: .05rem;
+    font-weight: 300;
+    color: #aaa;
+    margin: .5rem;
+}
+
+.header-index h1 {
+    font-size: 4rem;
+    letter-spacing: .05rem;
+    font-weight: 300;
+    margin: .5rem;
 }
 
 .logo {
@@ -82,7 +102,7 @@ header nav .github {
 
 .logo-s-link {
     float: left;
-    margin: 8px 20px 0;
+    margin: 8px 10px 0 20px;
 }
 .logo-s {
     border: 0;
