@@ -45,7 +45,7 @@ header nav .github {
 }
 
 header b {
-    font-size: 4rem;
+    font-size: 3.6rem;
     letter-spacing: .05rem;
     font-weight: 300;
     line-height: 6.8rem;
@@ -102,7 +102,7 @@ header b {
 
 .logo-s-link {
     float: left;
-    margin: 8px 10px 0 20px;
+    margin: 4px 10px 0 20px;
 }
 .logo-s {
     border: 0;
