@@ -1,0 +1,9 @@
+machine:
+  node:
+    version: 6
+
+deployment:
+  production:
+    branch: master
+    commands:
+      - npm run build
