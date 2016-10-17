@@ -75,7 +75,7 @@ require.config({
 
 在[这个例子](https://github.com/ecomfe/san/tree/master/example/todos-amd)里，我们可以看到一个通过 AMD 管理模块的项目是怎么引用 San 的。
 
-### ES6
+### ESNext
 
 还在写哦，我们会赶快写完的......
 
