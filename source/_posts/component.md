@@ -36,7 +36,18 @@ myApp.attach(document.body);
 通过继承的方式定义组件的好处是，当你使用 ESNext 时，你可以很自然的 extends。
 
 ```javascript
-// 代码待补充
+import {Component} from 'san';
+
+class HelloComponent extends Component {
+
+    template = '<p>Hello {{name}}!</p>';
+
+    initData() { 
+        return {name: 'San'} 
+    }
+}
+
+new HelloComponent().attach(document.body);
 ```
 
 对于不使用 ESNext 时，写一个 function 然后调用 **san.inherits** 再写各种 prototype 实在是有点麻烦，San 提供了快捷方法 **san.defineComponent** 用于方便地定义组件。
