@@ -77,5 +77,39 @@ require.config({
 
 ### ESNext
 
-还在写哦，我们会赶快写完的......
+在支持 ESNext 的环境中，可以直接引用 
+
+```
+import san from 'san';
+```
+
+### San component
+
+一个语法如下的 `.san` 文件，就是一个 `San component` 
+
+```html
+<template>
+    <div class="hello">hello {{msg}}</div>
+</template>
+
+<script>
+    export default {
+        data: {
+            msg: 'world'
+        }
+    }
+</script>
+
+<style>
+    .hello {
+        color: blue;
+    }
+</style>
+```
+
+在 `webpack` 中可以使用 [san-loader](https://github.com/ecomfe/san-loader)  来加载 `.san` 文件
+
+在 [这个例子](https://github.com/ecomfe/san/tree/master/example/todos-esnext) 里，
+我们可以看到如何使用 `San component` 构建一个应用
+
 
