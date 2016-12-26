@@ -18,10 +18,10 @@ categories:
 
 ### CDN
 
-我们提供了 CDN 引用地址，你可以无需下载，直接引用。
+通过 unpkg，你可以无需下载，直接引用。
 
 ```html
-<script src="地址待补"></script>
+<script src="https://unpkg.com/san@latest"></script>
 ```
 
 
