@@ -54,23 +54,23 @@ header b {
 
 .get-start {
     display: inline-block;
-    width: 120px;
+    width: 180px;
     margin: 20px auto 40px;
-    line-height: 26px;
-    font-size: 1.6rem;
+    line-height: 38px;
+    font-size: 2rem;
     text-align: center;
     text-decoration: none;
 }
 
 .get-start:link,
 .get-start:visited {
-    background: #a88500;
+    background: #c7a31a;
     color: #fff;
     border-radius: 3px;
 }
 
 .get-start:hover {
-    background: #c7a31a;
+    background: #a88500;
 }
 
 
@@ -144,7 +144,7 @@ section h4 b {
 .feature-item {
     box-sizing: border-box;
     width: 33%;
-    height: 15rem;
+    height: 17rem;
     float: left;
     padding: 1rem;
 }
@@ -169,6 +169,7 @@ section h4 b {
     letter-spacing: .05rem;
     line-height: 1.6rem;
     color: #999;
+    margin-bottom: 0;
 }
 
 .resource {
