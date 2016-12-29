@@ -127,7 +127,7 @@ section h4 b {
     padding: 10px;
     position: relative;
     top: 10px;
-    color: #777;
+    color: #ddd;
 }
 
 .feature {
@@ -173,13 +173,10 @@ section h4 b {
 }
 
 .resource {
-    background: #36323d;
+    background: #19232e;
     padding-bottom: 60px;
 }
 
-.resource h4 b {
-    background: #36323d;
-}
 
 .resource-row {
     margin: 0 auto;
@@ -192,33 +189,30 @@ section h4 b {
 .resource-item:link,
 .resource-item:hover,
 .resource-item:active {
+    background: #334959;
     box-sizing: border-box;
     width: 20rem;
     height: 114px;
+    padding: 1rem;
     float: left;
     margin: 0 .25rem;
-    border-bottom: 3px solid #f6f2f6;
+    border-bottom: 3px solid #334959;
     text-decoration: none;
     transition: background .1s ease-in; 
 }
 
 .resource-item:hover {
-    background: rgba(255, 255, 255, .05);
+    border-bottom: 3px solid #c8a400;
 }
 
-
-.resource-item:hover p {
-    color: #f3dee3;
-}
 
 
 .resource-item h5 {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     font-weight: 300;
     letter-spacing: .1rem;
-    color: #fff;
-    margin: 15px 0 5px;
-    padding-left: .4rem;
+    color: #c8a400;
+    margin: 0 0 .8rem;
 }
 
 .resource-item p {
@@ -226,34 +220,34 @@ section h4 b {
     font-weight: 300;
     letter-spacing: .05rem;
     line-height: 1.6rem;
-    color: #c6aeb4;
-    padding-left: 1.8rem;
+    color: #fff;
+    margin: 0;
 }
 
 .resource-item-unready h5 {
-    color: #aaa;
+    color: #666;
 }
 
 .resource-item-unready,
 .resource-item-unready:hover {
-    border-bottom: 3px solid #aaa;
-    background: none;
+    background: #252c33;
+    border-bottom: 3px solid #252c33;
 }
 
 .resource-item-unready p,
 .resource-item-unready:hover p {
-    color: #909090;
+    color: #666;
 }
 
 footer {
-    background: #b3a6a6;
+    background: #232b33;
     margin: 0;
 }
 
 .efe-products {
     margin: 0 auto;
     max-width: 900px;
-    color: #36323d;
+    color: #999;
     padding: 10px 0;
 }
 
@@ -278,7 +272,7 @@ footer {
     float: left;
     line-height: 2.4rem;
     font-size: 1.4rem;
-    color: #444;
+    color: #999;
 }
 
 .efe-products dl:after {
@@ -290,15 +284,15 @@ footer {
 }
 
 .copyright {
-    background: #fff;
+    background: #001a23;
     text-align: center;
     line-height: 6rem;
     font-size: 1.4rem;
-    color: #8c656d;
+    color: #fff;
 }
 
 .copyright a {
-    color: #8c656d;
+    color: #fff;
 }
 
 .recommend {
