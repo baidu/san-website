@@ -132,6 +132,7 @@ section h4 b {
 
 .feature {
     background: #19232e;
+    padding-bottom: 40px;
 }
 
 
@@ -212,7 +213,7 @@ section h4 b {
     font-weight: 300;
     letter-spacing: .1rem;
     color: #c8a400;
-    margin: 0 0 .8rem;
+    margin: .7rem 0;
 }
 
 .resource-item p {
