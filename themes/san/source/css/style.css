@@ -109,7 +109,7 @@ header b {
 }
 
 section {
-    padding: 10px 0 80px;
+    padding: 10px 0 40px;
 }
 
 section h4 {
@@ -124,14 +124,15 @@ section h4 {
 
 section h4 b {
     background: #19232e;
-    padding: 10px;
+    padding: 10px 30px;
     position: relative;
     top: 10px;
-    color: #777;
+    color: #ffffff;
 }
 
 .feature {
     background: #19232e;
+    padding-bottom: 0;
 }
 
 
@@ -173,13 +174,12 @@ section h4 b {
 }
 
 .resource {
-    background: #36323d;
-    padding-bottom: 60px;
+    background: #19232e;
+    padding-bottom: 30px;
 }
 
-.resource h4 b {
-    background: #36323d;
-}
+
+
 
 .resource-row {
     margin: 0 auto;
@@ -199,7 +199,11 @@ section h4 b {
     margin: 0 .25rem;
     border-bottom: 3px solid #f6f2f6;
     text-decoration: none;
-    transition: background .1s ease-in; 
+    transition: background .1s ease-in;
+}
+
+.resource-item {
+    padding: 0 10px;
 }
 
 .resource-item:hover {
@@ -216,9 +220,8 @@ section h4 b {
     font-size: 1.4rem;
     font-weight: 300;
     letter-spacing: .1rem;
-    color: #fff;
+    color: #c8a400;
     margin: 15px 0 5px;
-    padding-left: .4rem;
 }
 
 .resource-item p {
@@ -226,8 +229,7 @@ section h4 b {
     font-weight: 300;
     letter-spacing: .05rem;
     line-height: 1.6rem;
-    color: #c6aeb4;
-    padding-left: 1.8rem;
+    color: #ffffff;
 }
 
 .resource-item-unready h5 {
@@ -246,7 +248,7 @@ section h4 b {
 }
 
 footer {
-    background: #b3a6a6;
+    background: #19232e;
     margin: 0;
 }
 
@@ -254,7 +256,7 @@ footer {
     margin: 0 auto;
     max-width: 900px;
     color: #36323d;
-    padding: 10px 0;
+    padding: 10px 0 40px 0;
 }
 
 .efe-products dt {
@@ -278,7 +280,7 @@ footer {
     float: left;
     line-height: 2.4rem;
     font-size: 1.4rem;
-    color: #444;
+    color: #999999;
 }
 
 .efe-products dl:after {
@@ -289,16 +291,20 @@ footer {
     visibility: hidden;
 }
 
+.efe-products p {
+    color: #999999;
+}
+
 .copyright {
-    background: #fff;
+    background: #001a23;
     text-align: center;
     line-height: 6rem;
     font-size: 1.4rem;
-    color: #8c656d;
+    color: #ffffff;
 }
 
 .copyright a {
-    color: #8c656d;
+    color: #ffffff;
 }
 
 .recommend {

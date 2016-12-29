@@ -29,7 +29,7 @@ show_count: false
 
 # Miscellaneous
 google_analytics:
-favicon: /favicon.png
+favicon: img/favicon.ico
 twitter:
 google_plus:
 fb_admins:
