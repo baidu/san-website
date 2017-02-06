@@ -16,8 +16,9 @@
     text-decoration: none;
 }
 
-.toc-wrap ol{
+.toc-wrap ol {
     padding-left: 1rem;
+    list-style: none;
 }
 
 .toc-top {
