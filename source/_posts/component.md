@@ -68,8 +68,8 @@ var MyApp = san.defineComponent({
 
 San 的组件是 HTML 元素扩展的风格，所以其生命周期与 WebComponents 相符合。
 
-- `inited` - 组件实例初始化完成
 - `compiled` - 组件视图模板编译完成
+- `inited` - 组件实例初始化完成
 - `created` - 组件元素创建完成
 - `attached` - 组件已被附加到页面中
 - `detached` - 组件从页面中移除
