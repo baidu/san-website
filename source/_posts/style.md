@@ -17,7 +17,7 @@ class
 <!-- template -->
 <div>
     <button on-click="toggle"></button>
-    <ul class="list {{isHidden | yesToBe('list-hidden')}}">...</ul>
+    <ul class="list{{isHidden ? ' list-hidden' : ''}}">...</ul>
 </div>
 ```
 
@@ -33,13 +33,13 @@ san.defineComponent({
 
 上面的例子中，isHidden 数据为真时，ul 具有 list-hidden 的 class，为假时不具有。
 
-San 在设计时，希望视图模板开发者像写正常的 attribute 一样编写 class 与 style，所以没有提供特殊的绑定语法，而是内置了两个过滤器 **yesToBe** 和 **yesOrNoToBe** 处理这样的场景。
+San 在设计时，希望视图模板开发者像写正常的 attribute 一样编写 class 与 style，所以没有提供特殊的绑定语法。通过三元运算符的支持可以处理这样的场景。
 
-下面例子是一个根据状态不同，使用 **yesOrNotToBe** 切换不同 class 的场景。第一个参数是表达式为真时返回的值，第二个参数是表达式为假时返回的值。
+下面例子是一个根据状态不同，切换不同 class 的场景。
 
 
 ```html
-<ul class="list {{isHidden | yesOrNoToBe('list-hidden', 'list-visible')}}">...</ul>
+<ul class="list {{isHidden ? 'list-hidden' : 'list-visible')}}">...</ul>
 ```
 
 style
@@ -52,20 +52,20 @@ style
     <li
         san-for="item, index in datasource"
         style="background: {{item.color}}"
-        class="{{item.id == value | yesToBe('selected')}}"
+        class="{{item.id == value ? 'selected' : ''}}"
         on-click="itemClick(index)"
     >{{ item.title }}</li>
 </ul>
 ```
 
-此时需要警惕的是，数据可能并不存在，导致你设置的 style 并不是一个合法的样式。如果你不能保证数据一定有值，可以使用过滤器 **nullToBe** 处理这样的场景，给一个默认值。
+此时需要警惕的是，数据可能并不存在，导致你设置的 style 并不是一个合法的样式。如果你不能保证数据一定有值，需要把样式名包含在插值中。
 
 ```html
 <ul>
     <li
         san-for="item, index in datasource"
-        style="background: {{item.color | nullToBe('green')}}"
-        class="{{item.id == value | yesToBe('selected')}}"
+        style="{{item.color ? 'background:' + item.color : ''}}"
+        class="{{item.id == value ? 'selected' : ''}}"
         on-click="itemClick(index)"
     >{{ item.title }}</li>
 </ul>

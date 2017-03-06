@@ -181,6 +181,54 @@ var AddForm = san.defineComponent({
 ```
 
 
+### computed
+
+`解释`：
+
+声明组件中的计算数据。详细描述请参考[计算数据](../../tutorial/component/#计算数据)文档。
+
+`类型`： Object
+
+`用法`：
+
+```javascript
+san.defineComponent({
+    template: '<a>{{name}}</a>',
+
+    // name 数据项由 firstName 和 lastName 计算得来
+    computed: {
+        name: function () {
+            return this.data.get('firstName') + ' ' + this.data.get('lastName');
+        }
+    }
+});
+```
+
+### messages
+
+`解释`：
+
+声明组件中的计算数据。详细描述请参考[消息](../../tutorial/component/#消息)文档。
+
+`类型`： Object
+
+`用法`：
+
+```javascript
+var Select = san.defineComponent({
+    template: '<ul><slot></slot></ul>',
+
+    messages: {
+        'UI:select-item-selected': function (arg) {
+            // arg.target 可以拿到派发消息的组件
+            var value = arg.value;
+            this.data.set('value', value);
+        }
+    }
+});
+```
+
+
 ### initData
 
 `解释`：
@@ -202,6 +250,8 @@ var MyApp = san.defineComponent({
     }
 });
 ```
+
+
 
 组件方法
 -------
@@ -260,6 +310,94 @@ var MyComponent = san.defineComponent({
 `解释`：
 
 移除事件监听器。 当 eventListener 参数为空时，移除所有 eventName 事件的监听器。
+
+
+### dispatch
+
+`描述`： dispatch({string}name, {*}value)
+
+`解释`：
+
+派发一个消息。消息将沿着组件树向上传递，直到遇到第一个处理该消息的组件。上层组件通过 **messages** 声明组件要处理的消息。消息主要用于组件与非 **owner** 的上层组件进行通信。可参考[消息](../../tutorial/component/#消息)文档。
+
+
+`用法`：
+
+
+```javascript
+var SelectItem = san.defineComponent({
+    template: 
+        '<li on-click="select" class="{{value === selectValue ? \'selected\' : \'\'">'
+        + '<slot></slot>'
+        + '</li>',
+
+    // 子组件在各种时机派发消息
+    select: function () {
+        var value = this.data.get('value');
+        this.dispatch('UI:select-item-selected', value);
+    },
+
+    attached: function () {
+        this.dispatch('UI:select-item-attached');
+    },
+
+    detached: function () {
+        this.dispatch('UI:select-item-detached');
+    }
+});
+
+var Select = san.defineComponent({
+    template: '<ul><slot></slot></ul>',
+
+    // 上层组件处理自己想要的消息
+    messages: {
+        'UI:select-item-selected': function (arg) {
+            var value = arg.value;
+            this.data.set('value', value);
+
+            // 原则上上层组件允许更改下层组件的数据，因为更新流是至上而下的
+            var len = this.items.length;
+            while (len--) {
+                this.items[len].data.set('selectValue', value);
+            }
+        },
+
+        'UI:select-item-attached': function (arg) {
+            this.items.push(arg.target);
+            arg.target.data.set('selectValue', this.data.get('value'));
+        },
+
+        'UI:select-item-detached': function (arg) {
+            var len = this.items.length;
+            while (len--) {
+                if (this.items[len] === arg.target) {
+                    this.items.splice(len, 1);
+                }
+            }
+        }
+    },
+
+    inited: function () {
+        this.items = [];
+    }
+});
+
+var MyComponent = san.defineComponent({
+    components: {
+        'ui-select': Select,
+        'ui-selectitem': SelectItem
+    },
+
+    template: ''
+        + '<div>'
+        + '  <ui-select value="{=value=}">'
+        + '    <ui-selectitem value="1">one</ui-selectitem>'
+        + '    <ui-selectitem value="2">two</ui-selectitem>'
+        + '    <ui-selectitem value="3">three</ui-selectitem>'
+        + '  </ui-select>'
+        + '</div>'
+});
+```
 
 
 ### watch

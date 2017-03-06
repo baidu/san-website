@@ -386,6 +386,46 @@ var myApp = new MyApp();
 myApp.attach(document.body);
 ```
 
+### 计算数据
+
+有时候，一个数据项的值可能由其他数据项计算得来，这时我们可以通过 **computed** 定义计算数据。 **computed** 是一个对象，key 为计算数据项的名称，value 是返回数据项值的函数。
+
+```javascript
+san.defineComponent({
+    template: '<a>{{name}}</a>',
+
+    // name 数据项由 firstName 和 lastName 计算得来
+    computed: {
+        name: function () {
+            return this.data.get('firstName') + ' ' + this.data.get('lastName');
+        }
+    }
+});
+```
+
+上面的例子中，name 数据项是计算数据，依赖 firstName 和 lastName 数据项，其值由 firstName 和 lastName 计算得来。
+
+`注意`：计算数据的函数中只能使用 *this.data.get* 方法获取数据项的值，不能通过 this.method 调用组件方法，也不能通过 this.data.set 设置组件数据。
+
+```javascript
+san.defineComponent({
+    template: '<a>{{info}}</a>',
+
+    // name 数据项由 firstName 和 lastName 计算得来
+    computed: {
+        name: function () {
+            return this.data.get('firstName') + ' ' + this.data.get('lastName');
+        },
+
+        info: function () {
+            return this.data.get('name') + ' - ' + this.data.get('email');
+        }
+    }
+});
+```
+
+计算数据项可以依赖另外一个计算数据项，上面的例子中，info 项依赖的 name 项就是一个计算数据项。但是使用时一定要注意，不要形成计算数据项之间的循环依赖。
+
 
 过滤器
 ------
@@ -404,11 +444,6 @@ San 针对常用场景，内置了几个过滤器：
 - `html` - HTML 转义。当不指定过滤器时，默认使用此过滤器
 - `url` - URL 转义
 - `raw` - 不进行转义。当不想使用 HTML 转义时，使用此过滤器
-- `yesToBe` - 当数据为真时，使用的值
-- `yesOrNoToBe` - 当数据为真或假时，使用的值
-- `nullToBe` - 当数据为 null 时，使用的值。不为 null 时使用原值
-
-后面三个内置过滤器的常用场景请参考[样式](../style/)文档。
 
 
 ### 定制过滤器
@@ -495,6 +530,62 @@ var AddForm = san.defineComponent({
 子组件声明时如果通过 **san-ref** 指定了名称，则可以在 JavaScript 中通过组件实例的 **ref** 方法调用到。
 
 `提示`：有了声明式的初始化、数据绑定与事件绑定，我们很少需要在 JavaScript 中拿到子组件的实例。San 提供了这个途径，但当你用到它的时候，请先思考是不是非要这么干。
+
+
+### 消息
+
+通过 **dispatch** 方法，组件可以向组件树的上层派发消息。
+
+```javascript
+var SelectItem = san.defineComponent({
+    template: '<li on-click="select"><slot></slot></li>',
+
+    select: function () {
+        var value = this.data.get('value');
+
+        // 向组件树的上层派发消息
+        this.dispatch('UI:select-item-selected', value);
+    }
+});
+```
+
+消息将沿着组件树向上传递，直到遇到第一个处理该消息的组件，则停止。通过 **messages** 可以声明组件要处理的消息。**messages** 是一个对象，key 是消息名称，value 是消息处理的函数，接收一个包含 target(派发消息的组件) 和 value(消息的值) 的参数对象。
+
+```javascript
+var Select = san.defineComponent({
+    template: '<ul><slot></slot></ul>',
+
+    // 声明组件要处理的消息
+    messages: {
+        'UI:select-item-selected': function (arg) {
+            var value = arg.value;
+            this.data.set('value', value);
+
+            // arg.target 可以拿到派发消息的组件
+        }
+    }
+});
+```
+
+消息主要用于组件与非 **owner** 的上层组件进行通信。比如，slot 内组件 SelectItem 的 **owner** 是更上层的组件，但它需要和 Select 进行通信。
+
+```javascript
+san.defineComponent({
+    components: {
+        'ui-select': Select,
+        'ui-selectitem': SelectItem
+    },
+
+    template: ''
+        + '<div>'
+        + '  <ui-select value="{=value=}">'
+        + '    <ui-selectitem value="1">one</ui-selectitem>'
+        + '    <ui-selectitem value="2">two</ui-selectitem>'
+        + '    <ui-selectitem value="3">three</ui-selectitem>'
+        + '  </ui-select>'
+        + '</div>'
+});
+```
 
 
 ### 动态子组件
