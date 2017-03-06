@@ -39,7 +39,7 @@ San 在设计时，希望视图模板开发者像写正常的 attribute 一样�
 
 
 ```html
-<ul class="list {{isHidden ? 'list-hidden' : 'list-visible')}}">...</ul>
+<ul class="list {{isHidden ? 'list-hidden' : 'list-visible'}}">...</ul>
 ```
 
 style
