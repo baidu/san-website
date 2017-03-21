@@ -176,13 +176,17 @@ section h4 b {
     margin-bottom: 0;
 }
 
-.resource {
+.resource, .facility {
     background: #19232e;
-    padding-bottom: 60px;
+    padding-bottom: 40px;
+}
+
+.facility {
+    padding-bottom: 80px;
 }
 
 
-.resource-row {
+.resource-row, .facility-row {
     margin: 0 auto;
     max-width: 82rem;
     padding-top: 12px;
@@ -192,7 +196,11 @@ section h4 b {
 .resource-item,
 .resource-item:link,
 .resource-item:hover,
-.resource-item:active {
+.resource-item:active,
+.facility-item,
+.facility-item:link,
+.facility-item:hover,
+.facility-item:active {
     background: #334959;
     box-sizing: border-box;
     width: 20rem;
@@ -210,6 +218,9 @@ section h4 b {
 }
 
 
+.facility-item:hover {
+    border-bottom: 3px solid #9ee0fe;
+}
 
 .resource-item h5 {
     font-size: 1.6rem;
@@ -219,7 +230,16 @@ section h4 b {
     margin: .7rem 0;
 }
 
-.resource-item p {
+.facility-item h5 {
+    font-size: 1.6rem;
+    font-weight: 300;
+    letter-spacing: .1rem;
+    color: #9ee0fe;
+    margin: .7rem 0;
+}
+
+.resource-item p,
+.facility-item p {
     font-size: 1.1rem;
     font-weight: 300;
     letter-spacing: .05rem;
@@ -228,18 +248,23 @@ section h4 b {
     margin: 0;
 }
 
-.resource-item-unready h5 {
+.resource-item-unready h5,
+.facility-item-unready h5 {
     color: #666;
 }
 
 .resource-item-unready,
-.resource-item-unready:hover {
+.resource-item-unready:hover,
+.facility-item-unready,
+.facility-item-unready:hover {
     background: #252c33;
     border-bottom: 3px solid #252c33;
 }
 
 .resource-item-unready p,
-.resource-item-unready:hover p {
+.resource-item-unready:hover p,
+.facility-item-unready p,
+.facility-item-unready:hover p {
     color: #666;
 }
 
