@@ -52,7 +52,6 @@ header b {
     letter-spacing: .05rem;
     font-weight: 300;
     line-height: 6.8rem;
-    float: left;
 }
 
 .get-start {
@@ -107,8 +106,20 @@ header b {
     float: left;
     margin: 4px 10px 0 20px;
 }
+
+.logo-s-link,
+.logo-s-link:link,
+.logo-s-link:hover,
+.logo-s-link:active {
+    color: #fff;
+}
+.logo-s-link b {
+    margin-left: 10px;
+    float: left;
+}
 .logo-s {
     border: 0;
+    float:left;
 }
 
 section {
