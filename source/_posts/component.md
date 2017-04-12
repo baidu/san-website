@@ -35,12 +35,14 @@ myApp.attach(document.body);
 
 通过继承的方式定义组件的好处是，当你使用 ESNext 时，你可以很自然的 extends。
 
+`注意`：由于 ESNext 没有能够编写 prototype 属性的语法，所以 San 对组件定义时的属性支持 static property，通过 ESNext 的 extends 继承时，template / filters / components 属性请使用 static property 的方式定义。
+
 ```javascript
 import {Component} from 'san';
 
 class HelloComponent extends Component {
 
-    template = '<p>Hello {{name}}!</p>';
+    static template = '<p>Hello {{name}}!</p>';
 
     initData() { 
         return {name: 'San'} 

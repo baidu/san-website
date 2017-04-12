@@ -208,7 +208,7 @@ san.defineComponent({
 
 `解释`：
 
-声明组件中的计算数据。详细描述请参考[消息](../../tutorial/component/#消息)文档。
+声明处理子组件派发消息的方法。详细描述请参考[消息](../../tutorial/component/#消息)文档。
 
 `类型`： Object
 
