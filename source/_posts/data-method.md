@@ -7,7 +7,7 @@ categories:
 
 San 在组件的 data 上提供了一些数据操作的方法。通过这些方法操作数据，相应的视图会被自动刷新。
 
-`说明`：为什么是通过 San 提供的方法操作数据，而不是直接操作数据？因为defineSetter并未被国内常用的浏览器广泛支持，所以我们选择了折中的方式。因此，只有通过 San 提供的方法修改数据，视图才会自动刷新。
+`说明`：为什么是通过 San 提供的方法操作数据，而不是直接操作数据？因为defineProperty并未被国内常用的浏览器广泛支持，并且我们也并不喜欢这种侵入式的风格，所以我们选择了折中的方式。因此，只有通过 San 提供的方法修改数据，视图才会自动刷新。
 
 初始化
 -----
@@ -133,6 +133,18 @@ san.defineComponent({
 san.defineComponent({
     rmAt: function (index) {
         this.data.removeAt('users', index);
+    }
+});
+```
+
+### splice
+
+向数组中添加或删除项目。
+
+```javascript
+san.defineComponent({
+    rm: function (index, deleteCount) {
+        this.data.splice('users', [index, deleteCount]);
     }
 });
 ```
