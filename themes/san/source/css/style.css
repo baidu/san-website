@@ -43,8 +43,21 @@ header nav a {
     text-decoration: none;
 }
 
-header nav .github {
+.github {
     font-size: 3rem;
+}
+
+.header-index .github {
+    display: block;
+}
+
+.header-index .github:link,
+.header-index .github:visited {
+    color: #fff;
+}
+
+.header-index .github:hover {
+    color: #9ee0fe;
 }
 
 header b {
