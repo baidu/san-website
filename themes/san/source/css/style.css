@@ -405,3 +405,8 @@ main {
 .example-main a:hover {
     background: #eaa01d;
 }
+
+.example-codepen {
+    margin: 1rem auto;
+    max-width: 80rem;
+}
