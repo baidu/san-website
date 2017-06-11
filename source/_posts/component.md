@@ -18,7 +18,7 @@ function MyApp(options) {
 }
 san.inherits(MyApp, san.Component);
 
-MyApp.prototype.template = '<ul><li san-for="item in list">{{item}}</li></ul>';
+MyApp.prototype.template = '<ul><li s-for="item in list">{{item}}</li></ul>';
 
 MyApp.prototype.attached = function () {
     this.data.set('list', ['san', 'er', 'esui', 'etpl', 'esl']);
@@ -56,7 +56,7 @@ new HelloComponent().attach(document.body);
 
 ```javascript
 var MyApp = san.defineComponent({
-    template: '<ul><li san-for="item in list">{{item}}</li></ul>',
+    template: '<ul><li s-for="item in list">{{item}}</li></ul>',
 
     attached: function () {
         this.data.set('list', ['san', 'er', 'esui', 'etpl', 'esl']);
@@ -90,7 +90,7 @@ San 的组件是 HTML 元素扩展的风格，所以其生命周期与 WebCompon
 
 ```javascript
 var ListComponent = san.defineComponent({
-    template: '<ul><li san-for="item in list">{{item}}</li></ul>',
+    template: '<ul><li s-for="item in list">{{item}}</li></ul>',
 
     initData: function () {
         return {
@@ -165,7 +165,7 @@ san.defineComponent({
 ```html
 <dl>
     <dt>name - email</dt>
-    <dd san-for="p in persons" title="{{p.name}}">{{p.name}}({{dept}}) - {{p.email}}</dd>
+    <dd s-for="p in persons" title="{{p.name}}">{{p.name}}({{dept}}) - {{p.email}}</dd>
 </dl>
 ```
 
@@ -360,7 +360,7 @@ san.defineComponent({
 
 ```javascript
 var MyApp = san.defineComponent({
-    template: '<ul><li san-for="item in list">{{item}}</li></ul>'
+    template: '<ul><li s-for="item in list">{{item}}</li></ul>'
 });
 
 var myApp = new MyApp({
@@ -375,7 +375,7 @@ new 时传入初始数据是针对实例的特例需求。有时我们在定义�
 
 ```javascript
 var MyApp = san.defineComponent({
-    template: '<ul><li san-for="item in list">{{item}}</li></ul>',
+    template: '<ul><li s-for="item in list">{{item}}</li></ul>',
 
     initData: function () {
         return {
@@ -482,8 +482,8 @@ san.defineComponent({
     <textarea class="form-desc" placeholder="备注" value="{= desc =}"></textarea>
 
     <div>预期完成时间：
-        <ui-calendar value="{= endTimeDate =}" san-ref="endDate"></ui-calendar>
-        <ui-timepicker value="{= endTimeHour =}" san-ref="endHour"></ui-timepicker>
+        <ui-calendar value="{= endTimeDate =}" s-ref="endDate"></ui-calendar>
+        <ui-timepicker value="{= endTimeHour =}" s-ref="endHour"></ui-timepicker>
     </div>
 
     <div class="form-op">
@@ -529,7 +529,7 @@ var AddForm = san.defineComponent({
 
 ### ref
 
-子组件声明时如果通过 **san-ref** 指定了名称，则可以在 JavaScript 中通过组件实例的 **ref** 方法调用到。
+子组件声明时如果通过 **s-ref** 指定了名称，则可以在 JavaScript 中通过组件实例的 **ref** 方法调用到。
 
 `提示`：有了声明式的初始化、数据绑定与事件绑定，我们很少需要在 JavaScript 中拿到子组件的实例。San 提供了这个途径，但当你用到它的时候，请先思考是不是非要这么干。
 

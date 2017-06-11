@@ -45,10 +45,10 @@ $ npm install san
 
 
 ```html
-<!-- 引用直接下载下来的San-->
+<!-- 引用直接下载下来的San -->
 <script src="san的目录/dist/san.js"></script>
 
-<!-- 引用通过NPM下载下来的San-->
+<!-- 引用通过NPM下载下来的San -->
 <script src="node_modules/san/dist/san.js"></script>
 ```
 

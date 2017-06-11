@@ -50,7 +50,7 @@ style
 ```html
 <ul>
     <li
-        san-for="item, index in datasource"
+        s-for="item, index in datasource"
         style="background: {{item.color}}"
         class="{{item.id == value ? 'selected' : ''}}"
         on-click="itemClick(index)"
@@ -63,7 +63,7 @@ style
 ```html
 <ul>
     <li
-        san-for="item, index in datasource"
+        s-for="item, index in datasource"
         style="{{item.color ? 'background:' + item.color : ''}}"
         class="{{item.id == value ? 'selected' : ''}}"
         on-click="itemClick(index)"

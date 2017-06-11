@@ -43,9 +43,9 @@ myComponent.data.set('email', 'error@gmail.com');
 ```html
 <ul id="list">
     <li>name - email</li>
-    <li san-for="p,i in persons" prop-title="{{p.name}}" title="errorrik">errorrik - errorrik@gmail.com<script type="text/san">{{p.name}} - {{p.email}}</script></li>
-    <li san-for="p,i in persons" prop-title="{{p.name}}" title="otakustay">otakustay - otakustay@gmail.com<script type="text/san">{{p.name}} - {{p.email}}</script></li>
-    <script type="text/san" san-stump="for"><li san-for="p,i in persons" title="{{p.name}}">{{p.name}} - {{p.email}}</li></script>
+    <li s-for="p,i in persons" prop-title="{{p.name}}" title="errorrik">errorrik - errorrik@gmail.com<script type="text/san">{{p.name}} - {{p.email}}</script></li>
+    <li s-for="p,i in persons" prop-title="{{p.name}}" title="otakustay">otakustay - otakustay@gmail.com<script type="text/san">{{p.name}} - {{p.email}}</script></li>
+    <script type="text/san" s-stump="for"><li s-for="p,i in persons" title="{{p.name}}">{{p.name}} - {{p.email}}</li></script>
 </ul>
 ```
 
@@ -105,32 +105,32 @@ new MyComponent({
 
 ```html
 <ul id="list">
-    <li san-for="p,i in persons" prop-title="{{p.name}}" title="errorrik">
+    <li s-for="p,i in persons" prop-title="{{p.name}}" title="errorrik">
         errorrik - errorrik@gmail.com
         <script type="text/san">{{p.name}} - {{p.email}}</script>
     </li>
-    <li san-for="p,i in persons" prop-title="{{p.name}}" title="otakustay">
+    <li s-for="p,i in persons" prop-title="{{p.name}}" title="otakustay">
         otakustay - otakustay@gmail.com
         <script type="text/san">{{p.name}} - {{p.email}}</script>
     </li>
-    <script type="text/san" san-stump="for"><li san-for="p,i in persons" title="{{p.name}}">{{p.name}} - {{p.email}}</li></script>
+    <script type="text/san" s-stump="for"><li s-for="p,i in persons" title="{{p.name}}">{{p.name}} - {{p.email}}</li></script>
 </ul>
 ```
 
-循环的标记分成两个部分。首先，对于循环的每个元素，需要标记 **san-for**。通常它们在 HTML 输出端也是以循环的形式存在，不会带来重复编写的工作量。
+循环的标记分成两个部分。首先，对于循环的每个元素，需要标记 **s-for**。通常它们在 HTML 输出端也是以循环的形式存在，不会带来重复编写的工作量。
 
 ```html
-<li san-for="p,i in persons" prop-title="{{p.name}}" title="errorrik">
+<li s-for="p,i in persons" prop-title="{{p.name}}" title="errorrik">
     errorrik - errorrik@gmail.com
     <script type="text/san">{{p.name}} - {{p.email}}</script>
 </li>
 ```
 
-在循环的结束以一个桩元素标记，桩元素是一个具有 **type="text/san"** 和 **san-stump="for"** 的 script。在 script 的内部声明循环的语句。
+在循环的结束以一个桩元素标记，桩元素是一个具有 **type="text/san"** 和 **s-stump="for"** 的 script。在 script 的内部声明循环的语句。
 
 
 ```html
-<script type="text/san" san-stump="for"><li san-for="p,i in persons" title="{{p.name}}">{{p.name}} - {{p.email}}</li></script>
+<script type="text/san" s-stump="for"><li s-for="p,i in persons" title="{{p.name}}">{{p.name}} - {{p.email}}</li></script>
 ```
 
 `提示`：当初始没有数据时，标记一个循环只需要声明桩即可。
@@ -138,28 +138,28 @@ new MyComponent({
 
 ### 分支
 
-分支的标记比较简单，以 **san-if** 标记分支元素即可。
+分支的标记比较简单，以 **s-if** 标记分支元素即可。
 
 ```html
-<span san-if="condition" title="errorrik" prop-title="{{name}}"></span>
+<span s-if="condition" title="errorrik" prop-title="{{name}}"></span>
 ```
 
-当初始条件为假时，分支元素不会出现，此时以 **type="text/san"** 和 **san-stump="if"** 的 script 作为桩，标记分支。在 script 的内部声明分支的语句。
+当初始条件为假时，分支元素不会出现，此时以 **type="text/san"** 和 **s-stump="if"** 的 script 作为桩，标记分支。在 script 的内部声明分支的语句。
 
 ```html
-<script type="text/san" san-stump="if"><span san-if="cond" title="{{name}}">{{name}}</span></script>
+<script type="text/san" s-stump="if"><span s-if="cond" title="{{name}}">{{name}}</span></script>
 ```
 
 一个包含完整 if-else 的分支，总有一个元素是具体元素，有一个元素是桩。
 
 ```html
-<script type="text/san" san-stump="if"><span san-if="isErik" title="{{name}}">{{name}}</span></script>
-<span san-else title="otakustay" prop-title="{{name2}}">otakustay<script type="text/san">{{name2}}</script></span>
+<script type="text/san" s-stump="if"><span s-if="isErik" title="{{name}}">{{name}}</span></script>
+<span s-else title="otakustay" prop-title="{{name2}}">otakustay<script type="text/san">{{name2}}</script></span>
 ```
 
 ```html
-<span san-if="isErik" title="errorrik" prop-title="{{name}}">errorrik<script type="text/san">{{name}}</script></span>
-<script type="text/san" san-stump="else"><span san-else title="{{name2}}">{{name2}}</span></script>
+<span s-if="isErik" title="errorrik" prop-title="{{name}}">errorrik<script type="text/san">{{name}}</script></span>
+<script type="text/san" s-stump="else"><span s-else title="{{name2}}">{{name2}}</span></script>
 ```
 
 
@@ -181,10 +181,10 @@ san.defineComponent({
 </ui-label>
 ```
 
-我们可能因为样式、兼容性等原因不想使用自定义元素。当组件未使用自定义元素时，可以在元素上通过 **san-component** 标记组件类型。
+我们可能因为样式、兼容性等原因不想使用自定义元素。当组件未使用自定义元素时，可以在元素上通过 **s-component** 标记组件类型。
 
 ```html
-<label san-component="ui-label" prop-title="{{name}}" prop-text="{{email}}">
+<label s-component="ui-label" prop-title="{{name}}" prop-text="{{email}}">
     <b prop-title="{{title}}" title="errorrik">errorrik@gmail.com<script type="text/san">{{text}}</script></b>
 </label>
 ```

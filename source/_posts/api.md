@@ -241,7 +241,7 @@ var Select = san.defineComponent({
 
 ```javascript
 var MyApp = san.defineComponent({
-    template: '<ul><li san-for="item in list">{{item}}</li></ul>',
+    template: '<ul><li s-for="item in list">{{item}}</li></ul>',
 
     initData: function () {
         return {
@@ -438,7 +438,7 @@ san.defineComponent({
 
 `解释`：
 
-获取定义了 **san-ref** 的子组件。详细请参考[组件层级](../../tutorial/component/#组件层级)文档。
+获取定义了 **s-ref** 的子组件。详细请参考[组件层级](../../tutorial/component/#组件层级)文档。
 
 `用法`：
 
@@ -461,8 +461,8 @@ var AddForm = san.defineComponent({
 /* template:
 <div class="form">
     <div>预期完成时间：
-        <ui-calendar bindx-value="endTimeDate" san-ref="endDate"></ui-calendar>
-        <ui-timepicker bindx-value="endTimeHour" san-ref="endHour"></ui-timepicker>
+        <ui-calendar bindx-value="endTimeDate" s-ref="endDate"></ui-calendar>
+        <ui-timepicker bindx-value="endTimeHour" s-ref="endHour"></ui-timepicker>
     </div>
 
     <div class="form-op">
@@ -488,7 +488,7 @@ var AddForm = san.defineComponent({
 
 ```javascript
 var MyApp = san.defineComponent({
-    template: '<ul><li san-for="item in list">{{item}}</li></ul>',
+    template: '<ul><li s-for="item in list">{{item}}</li></ul>',
 
     initData: function () {
         return {

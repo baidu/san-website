@@ -36,7 +36,7 @@ san.defineComponent({
 ```html
 <!-- Template -->
 <ul>
-    <li san-for="item, index in todos">
+    <li s-for="item, index in todos">
         <h3>{{ item.title }}</h3>
         <p>{{ item.desc }}</p>
         <i class="fa fa-trash-o" on-click="rmTodo(item)"></i>
