@@ -1,8 +1,11 @@
 ---
-title: API
+title: 组件API
 categories:
 - doc
 ---
+
+该文档描述了组件的 API，在 San 主模块上暴露的 API 请参考文档 [主模块API](../../doc/main-members/)。
+
 
 初始化参数
 -------
@@ -471,62 +474,6 @@ var AddForm = san.defineComponent({
 </div>
 */
 ```
-
-
-全局 API
--------
-
-### defineComponent
-
-`描述`： defineComponent({Object}propertiesAndMethods)
-
-`解释`：
-
-**方法** 。定义组件的快捷方法。详细请参考[组件定义](../../tutorial/component/#组件定义)文档。
-
-`用法`：
-
-```javascript
-var MyApp = san.defineComponent({
-    template: '<ul><li s-for="item in list">{{item}}</li></ul>',
-
-    initData: function () {
-        return {
-            list: ['san', 'er', 'esui', 'etpl', 'esl']
-        };
-    }
-});
-```
-
-
-### Component
-
-`类型`： Function
-
-`解释`：
-
-**属性** 。组件类，定义组件时可以从此继承。通常通过 **san.defineComponent** 定义组件，不使用此方法。详细请参考[组件定义](../../tutorial/component/#组件定义)文档。
-
-
-### inherits
-
-`描述`： inherits({Function}SubClass, {Function}SuperClass)
-
-`解释`：
-
-**方法** 。一个通用的实现继承的方法，定义组件时可以使用此方法从 **san.Component** 继承。通常通过 **san.defineComponent** 定义组件，不使用此方法。详细请参考[组件定义](../../tutorial/component/#组件定义)文档。
-
-
-
-### version
-
-`类型`： string
-
-`解释`：
-
-**属性** 。当前的 San 版本号。
-
-
 
 
 
