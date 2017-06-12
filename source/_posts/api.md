@@ -11,7 +11,7 @@ categories:
 
 `解释`：
 
-组件初始化数据。通常在[组件反解](../../tutorial/from-element/)的场景下使用。
+组件初始化数据。通常在[组件反解](../../tutorial/reverse/)的场景下使用。
 
 
 `类型`： Object
@@ -40,7 +40,7 @@ var myComponent = new MyComponent({
 
 `解释`：
 
-组件根元素。传入此参数意味着不使用组件的 **template** 作为视图模板，组件视图由 San 自动反解。详情可参考[组件反解](../../tutorial/from-element/)文档。
+组件根元素。传入此参数意味着不使用组件的 **template** 作为视图模板，组件视图由 San 自动反解。详情可参考[组件反解](../../tutorial/reverse/)文档。
 
 `类型`： HTMLElement
 
