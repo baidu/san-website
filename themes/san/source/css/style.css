@@ -302,6 +302,7 @@ footer {
     max-width: 900px;
     color: #999;
     padding: 10px 0;
+    font-weight: 300;
 }
 
 .efe-products dt {
@@ -323,8 +324,9 @@ footer {
 
 .efe-products dt, .efe-products dd {
     float: left;
-    line-height: 2.4rem;
-    font-size: 1.4rem;
+    line-height: 1.8rem;
+    font-size: 1.2rem;
+    font-weight: 300;
     color: #999;
 }
 
