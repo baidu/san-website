@@ -10,24 +10,31 @@ categories:
 下载
 -----
 
-
 ### 直接下载
 
-从[下载页面](https://github.com/ecomfe/san/releases) 可以获得最新以及过往版本的下载地址。
-
+从 [下载页面](https://github.com/ecomfe/san/releases) 可以获得最新以及过往版本的下载地址。
 
 ### CDN
 
 通过 unpkg，你可以无需下载，直接引用。
 
+开发版本：
+
+```html
+<script src="https://unpkg.com/san@latest/dist/san.mpa.dev.js"></script>
+```
+
+生产版本：
+
 ```html
 <script src="https://unpkg.com/san@latest"></script>
 ```
 
+> 建议在开发环境不要用生产版本，开发版本提供了有助于开发的错误提示和警告！
 
 ### NPM
 
-NPM 是流行的包管理工具，通过它能够方便的管理依赖包，以及和社区的各种开发构建工具良好配合，构建你的应用程序。
+在使用 san 来构建大型应用时我们推荐使用 NPM 来安装。通过它能够方便的管理依赖包，以及和社区的各种开发构建工具良好配合，构建你的应用程序。
 
 ```shell
 # 安装最新版本
@@ -40,16 +47,15 @@ $ npm install san
 
 ### script
 
-
 在页面上通过 script 标签引用需要的文件是常用的方式。可以引用下载下来的 San，也可以通过 CDN 引用。
 
 
 ```html
 <!-- 引用直接下载下来的San -->
-<script src="san的目录/dist/san.js"></script>
+<script src="san的目录/dist/san.mpa.js"></script>
 
 <!-- 引用通过NPM下载下来的San -->
-<script src="node_modules/san/dist/san.js"></script>
+<script src="node_modules/san/dist/san.mpa.js"></script>
 ```
 
 注意：在引用时，
@@ -67,7 +73,7 @@ require.config({
     packages: [
         {
             name: 'san',
-            location: 'san-path/src'
+            location: 'san-path/src/main'
         }
     ]
 });
@@ -77,7 +83,7 @@ require.config({
 
 ### ESNext
 
-在支持 ESNext 的环境中，可以直接引用 
+在支持 ESNext 的环境中，可以直接引用
 
 ```
 import san from 'san';
@@ -85,7 +91,7 @@ import san from 'san';
 
 ### San component
 
-一个语法如下的 `.san` 文件，就是一个 `San component` 
+一个语法如下的 `.san` 文件，就是一个 `San component`
 
 ```html
 <template>
@@ -112,4 +118,55 @@ import san from 'san';
 在 [这个例子](https://github.com/ecomfe/san/tree/master/example/todos-esnext) 里，
 我们可以看到如何使用 `San component` 构建一个应用
 
+开发版本 VS 生产版本
+----------
 
+在开发中，我们推荐使用 `san.mpa.dev.js`(位于 `san/dist/san.mpa.dev.js`)。`san.mpa.dev.js` 提供了包括 [数据校验](/san/tutorial/data-checking/)等辅助开发功能。这些辅助开发功能可以帮助你在更轻松、快速地定位和解决问题。
+
+但出于性能考虑，正式的生产环境上需要移除了这些辅助开发功能。在 san 的发布包中提供了构建好的生产版本给大家使用，即 `san.mpa.js`(位于 `san/dist/san.mpa.js`)。你应当在构建应用的生产版本时使用它。
+
+如果你使用 webpack 进行开发和构建 ，那么你可以通过在 webpack 配置添加 `resolve.alias` 再配合指定 `NODE_ENV` 来解决：
+
+```js
+{
+    module: {
+        loaders: [
+            {
+                test: /\.san$/,
+                loader: 'san-loader'
+            }
+        ]
+    },
+    resolve: {
+        alias: {
+            san: process.env.NODE_ENV === 'production'
+                ? 'san/dist/san.mpa.js'
+                : 'san/dist/san.mpa.dev.js'
+        }
+    }
+}
+```
+
+最后，你可以通过添加两个 npm scripts 来使用不同的 webpack 配置：
+
+```js
+{
+    "name": "my-san-app",
+    "scripts": {
+        "dev": "NODE_ENV=development webpack-dev-server --config webpack.config.js",
+        "build": "NODE_ENV=production webpack --config webpack.config.js"
+    }
+}
+```
+
+开始开发：
+
+```sh
+npm run dev
+```
+
+开始构建：
+
+```sh
+npm run build
+```
