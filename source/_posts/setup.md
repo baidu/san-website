@@ -77,7 +77,7 @@ require.config({
 
 ### ESNext
 
-在支持 ESNext 的环境中，可以直接引用 
+在支持 ESNext 的环境中，可以直接引用
 
 ```
 import san from 'san';
@@ -85,7 +85,7 @@ import san from 'san';
 
 ### San component
 
-一个语法如下的 `.san` 文件，就是一个 `San component` 
+一个语法如下的 `.san` 文件，就是一个 `San component`
 
 ```html
 <template>
@@ -112,4 +112,25 @@ import san from 'san';
 在 [这个例子](https://github.com/ecomfe/san/tree/master/example/todos-esnext) 里，
 我们可以看到如何使用 `San component` 构建一个应用
 
+### 使用 San 的 dev 版本
 
+san 的 dev 版本中提供了 [数据校验](/san/tutorial/data-checking/) 、 [DevTool](/san/tutorial/dev-tool/) 等功能，能帮助你在更轻松、快速地开发。
+
+但出于性能考虑，在生产模式上移除了这些功能。 因此，在不同的应用场景你应该使用正确版本的 san。
+
+下面以 `webpack` 举例：
+
+1. 开发环境上你不需要做任何特殊处理；此时你默认使用 `san.all.js`，也就是拥有完全功能支持。
+2. 在构建生产脚本时，你需要使用 `resolve.alias` 将 san 指定为生产版本。
+
+    ```js
+    // webpack config
+    module.exports = {
+        resolve: {
+            // 使用针对于 spa 应用的发布版本
+            san: 'san/dist/san.spa.js'
+        }
+    };
+    ```
+
+    具体的 san 的多个发布版本的区别与说明请参考[这里](https://github.com/ecomfe/san/tree/master/dist)
