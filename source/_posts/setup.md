@@ -21,7 +21,7 @@ categories:
 开发版本：
 
 ```html
-<script src="https://unpkg.com/san@latest/dist/san.mpa.dev.js"></script>
+<script src="https://unpkg.com/san@latest/dist/san.dev.js"></script>
 ```
 
 生产版本：
@@ -52,10 +52,10 @@ $ npm install san
 
 ```html
 <!-- 引用直接下载下来的San -->
-<script src="san的目录/dist/san.mpa.js"></script>
+<script src="san的目录/dist/san.js"></script>
 
 <!-- 引用通过NPM下载下来的San -->
-<script src="node_modules/san/dist/san.mpa.js"></script>
+<script src="node_modules/san/dist/san.js"></script>
 ```
 
 注意：在引用时，
@@ -73,7 +73,7 @@ require.config({
     packages: [
         {
             name: 'san',
-            location: 'san-path/src/main'
+            location: 'san-path/dist/san'
         }
     ]
 });
@@ -121,9 +121,9 @@ import san from 'san';
 开发版本 VS 生产版本
 ----------
 
-在开发中，我们推荐使用 `san.mpa.dev.js`(位于 `san/dist/san.mpa.dev.js`)。`san.mpa.dev.js` 提供了包括 [数据校验](/san/tutorial/data-checking/)等辅助开发功能。这些辅助开发功能可以帮助你在更轻松、快速地定位和解决问题。
+在开发中，我们推荐使用 `san.dev.js`(位于 `san/dist/san.dev.js`)。`san.dev.js` 提供了包括 [数据校验](/san/tutorial/data-checking/) 等辅助开发功能。这些辅助开发功能可以帮助你在更轻松、快速地定位和解决问题。
 
-但出于性能考虑，正式的生产环境上需要移除了这些辅助开发功能。在 san 的发布包中提供了构建好的生产版本给大家使用，即 `san.mpa.js`(位于 `san/dist/san.mpa.js`)。你应当在构建应用的生产版本时使用它。
+但出于性能考虑，正式的生产环境上需要移除了这些辅助开发功能。在 san 的发布包中提供了构建好的生产版本给大家使用，即 `san.js`(位于 `san/dist/san.js`)。你应当在构建应用的生产版本时使用它。
 
 如果你使用 webpack 进行开发和构建 ，那么你可以通过在 webpack 配置添加 `resolve.alias` 再配合指定 `NODE_ENV` 来解决：
 
@@ -140,8 +140,8 @@ import san from 'san';
     resolve: {
         alias: {
             san: process.env.NODE_ENV === 'production'
-                ? 'san/dist/san.mpa.js'
-                : 'san/dist/san.mpa.dev.js'
+                ? 'san/dist/san.js'
+                : 'san/dist/san.dev.js'
         }
     }
 }
