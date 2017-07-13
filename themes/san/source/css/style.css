@@ -72,20 +72,20 @@ header b {
     width: 180px;
     margin: 20px auto 40px;
     line-height: 38px;
-    font-size: 2rem;
+    font-size: 1.6rem;
     text-align: center;
     text-decoration: none;
 }
 
 .get-start:link,
 .get-start:visited {
-    background: #c7a31a;
+    background: #2EA2F8;
     color: #fff;
     border-radius: 3px;
 }
 
 .get-start:hover {
-    background: #a88500;
+    background: #74b8ea;
 }
 
 
