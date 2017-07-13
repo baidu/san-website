@@ -517,6 +517,17 @@ var AddForm = san.defineComponent({
 
 `注意`：考虑到组件的独立性，San 没有提供全局组件注册的方法，组件必须在自身的 **components** 中声明自己内部会用到哪些组件。
 
+有些组件可能在内容中会使用自己，比如树的节点。我们可以将 **components** 中这一项的值设置为字符串 **self**。
+
+```javascript
+var Node = san.defineComponent({
+    // template
+
+    components: {
+        'ui-node': 'self'
+    }
+});
+```
 
 ### owner 与 parent
 
