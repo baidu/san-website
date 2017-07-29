@@ -1,0 +1,95 @@
+<style>
+#practice-search {
+    width: 600px;
+    height: 30px;
+    padding: .5rem;
+    font-size: 1.4rem;
+    display: block;
+    margin: 2rem auto;
+}
+
+.practice dl {
+    width: 80rem;
+    margin: 2rem auto;
+}
+
+.practice dt {
+    padding: 2rem 0 1rem;
+    font-size: 1.8rem;
+    color: #295892;
+    border-bottom: 1px solid #d8d8d8;
+}
+
+.practice dd {
+    font-size: 1.4rem;
+    line-height: 2rem;
+    color: #295892;
+    border-bottom: 1px solid #d8d8d8;
+    border-left: 1px solid #d8d8d8;
+    border-right: 1px solid #d8d8d8;
+    background: #f6f6f6;
+    padding: .2rem .5rem;
+}
+
+.practice dd:hover {
+    background: #fff;
+}
+
+.practice a:link,
+.practice a:visited {
+    color: #5a7d96;
+    text-decoration: none;
+}
+</style>
+
+<main class="practice">
+<input type="text" id="practice-search">
+<dl id="practice-list">
+    <dt>数据</dt>
+    <dd><a href="<%- url_for('practice/data-valid/') %>">什么东西可以保存在 data 里？</a></dd>
+    <dd><a href="<%- url_for('practice/data-invalid/') %>">什么东西不要保存在 data 里？</a></dd>
+
+    <dt>视图模板</dt>
+    <dd><a href="<%- url_for('practice/traverse-object/') %>">如何遍历一个对象？</a></dd>
+    
+    
+    <dt>组件间通信</dt>
+    <dd><a href="<%- url_for('practice/parent-to-child/') %>">父组件如何更新子组件？</a></dd>
+    <dd><a href="<%- url_for('practice/child-to-parent/') %>">子组件如何通知父组件？</a></dd>
+    <dd><a href="<%- url_for('practice/child-to-grandparent/') %>">子组件与更高层的组件如何通信？</a></dd>
+    
+    <dt>组件管理</dt>
+    <dd><a href="<%- url_for('practice/can-we-use-dom/') %>">我们可以操作 DOM 吗？</a></dd>
+    <dd><a href="<%- url_for('practice/posotion-absolute-dom/') %>">如何处理绝对定位组件的 DOM？</a></dd>
+
+    <dt>DevTool</dt>
+
+    <dt>应用状态管理</dt>
+</dl>
+</main>
+
+<script>
+(function () {
+    var searchEl = document.getElementById('practice-search');
+    var timeout;
+    searchEl.onkeyup = function () {
+        if (timeout) {
+            clearTimeout(timeout);
+        }
+
+        timeout = setTimeout(doSearch, 500);
+    };
+
+    function doSearch() {
+        var key = searchEl.value;
+        var dds = document.getElementById('practice-list').getElementsByTagName('dd');
+        var len = dds.length;
+
+        while (len--) {
+            var dd = dds[len];
+            dd.style.display = key && dd.getElementsByTagName('a')[0].innerHTML.indexOf(key) < 0
+                ? 'none' : '';
+        }
+    }
+})();
+</script>
