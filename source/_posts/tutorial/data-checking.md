@@ -84,7 +84,7 @@ san.defineComponent({
     // 如果校验失败，它应该丢出一个异常。
     customProp: function (props, propName, componentName) {
         if (!/matchme/.test(props[propName])) {
-            return new Error(
+            throw new Error(
                 'Invalid prop `' + propName + '` supplied to' +
                 ' `' + componentName + '`. Validation failed.'
             );
@@ -97,7 +97,7 @@ san.defineComponent({
     // 第一个参数是这个数组或者对象，第二个参数是元素的 key。
     customArrayProp: DataTypes.arrayOf(function (dataValue, key, componentName, dataFullName) {
         if (!/matchme/.test(dataValue[key])) {
-            return new Error(
+            throw new Error(
                 'Invalid prop `' + dataFullName + '` supplied to' +
                 ' `' + componentName + '`. Validation failed.'
             );
