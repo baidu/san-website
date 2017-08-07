@@ -1,5 +1,5 @@
 ---
-title: 如何变量一个对象？
+title: 如何遍历一个对象？
 categories:
 - practice
 ---
@@ -23,3 +23,8 @@ class MyComponent extends San.component {
     };
 }
 ```
+
+#### 示例
+
+<p data-height="265" data-theme-id="dark" data-slug-hash="rzMZeN" data-default-tab="js,result" data-user="asd123freedom" data-embed-version="2" data-pen-title="san-traverse-object" class="codepen">See the Pen <a href="https://codepen.io/asd123freedom/pen/rzMZeN/">san-traverse-object</a> by liuchaofan (<a href="https://codepen.io/asd123freedom">@asd123freedom</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
