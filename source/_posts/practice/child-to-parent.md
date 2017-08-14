@@ -52,6 +52,7 @@ var parentComponent = san.defineComponent({
 
 });
 ```
+我们知道使用「双向绑定」可以将子组件内部的数据变化同步给父组件，但除了类表单组件外，其它情况不建议使用这种方式来达到通知父组件的目的。
 
 #### 示例
 <p data-height="265" data-theme-id="0" data-slug-hash="wqrGLy" data-default-tab="result" data-user="naatgit" data-embed-version="2" data-pen-title="child-to-parent" class="codepen">See the Pen <a href="https://codepen.io/naatgit/pen/wqrGLy/">child-to-parent</a> by funa (<a href="https://codepen.io/naatgit">@naatgit</a>) on <a href="https://codepen.io">CodePen</a>.</p>
