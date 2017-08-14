@@ -17,7 +17,7 @@ var childComponent = san.defineComponent({
     
     onClick: function () {
         // 向父组件派发一个child-change事件
-        this.fire('child-change', 'I'm changed!');
+        this.fire('child-change', 'I\'m changed!');
     }
 });
 
