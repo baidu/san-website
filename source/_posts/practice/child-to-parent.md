@@ -4,7 +4,7 @@ categories:
 - practice
 ---
 
-子组件可以通过调用[fire](https://ecomfe.github.io/san/doc/api/#fire)方法派发一个自定义事件通知父组件它内部的变化，父组件在视图模板中通过on-的方式或通过组件实例的on方法对事件进行监听。
+子组件可以通过调用[fire](/san/doc/api/#fire)方法派发一个自定义事件通知父组件它内部的变化，父组件在视图模板中通过on-的方式或通过组件实例的on方法对事件进行监听。
 
 #### 使用
 ```javascript
