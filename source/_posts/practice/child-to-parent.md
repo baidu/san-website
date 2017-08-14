@@ -4,13 +4,15 @@ categories:
 - practice
 ---
 
-子组件可以通过调用[fire](https://ecomfe.github.io/san/doc/api/#fire)方法派发一个自定义事件通知父组件它内部的变化，父组件在视图模板中通过on-的方式绑定监听，或者通过组件实例的on方法监听对应的自定义事件。
+子组件可以通过调用[fire](https://ecomfe.github.io/san/doc/api/#fire)方法派发一个自定义事件通知父组件它内部的变化，父组件在视图模板中通过on-的方式或通过组件实例的on方法监听相应的自定义事件。
 
-####使用
+#### 使用
 ```javascript
 var childComponent = san.defineComponent({
     initData: function () {
-        return {val: ''};
+        return {
+            val: ''
+        };
     },
     
     template: `
@@ -28,7 +30,9 @@ var childComponent = san.defineComponent({
 
 var parentComponent = san.defineComponent({
     initData: function () {
-        return {val: '123'};
+        return {
+            val: '123'
+        };
     },
 
     components: {
@@ -49,6 +53,6 @@ var parentComponent = san.defineComponent({
 });
 ```
 
-####示例
-<p data-height="265" data-theme-id="0" data-slug-hash="wqrGLy" data-default-tab="result" data-user="naatgit" data-embed-version="2" data-pen-title="wqrGLy" class="codepen">See the Pen <a href="https://codepen.io/naatgit/pen/wqrGLy/">wqrGLy</a> by funa (<a href="https://codepen.io/naatgit">@naatgit</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+#### 示例
+<p data-height="265" data-theme-id="0" data-slug-hash="wqrGLy" data-default-tab="result" data-user="naatgit" data-embed-version="2" data-pen-title="child-to-parent" class="codepen">See the Pen <a href="https://codepen.io/naatgit/pen/wqrGLy/">child-to-parent</a> by funa (<a href="https://codepen.io/naatgit">@naatgit</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
