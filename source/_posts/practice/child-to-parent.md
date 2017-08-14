@@ -23,7 +23,7 @@ var childComponent = san.defineComponent({
     `,
     
     onClick: function () {
-        // 向父组件派发一个change事件
+        // 向父组件派发一个child-change事件
         this.fire('child-change', '12345');
     }
 });
@@ -46,7 +46,7 @@ var parentComponent = san.defineComponent({
     `,
   
     changeHandler: function (changedVal) {
-        // 处理
+        // 事件处理
         this.data.set('val', changedVal);
     }
 
