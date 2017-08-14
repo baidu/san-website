@@ -49,7 +49,7 @@ header nav a {
 header .san-query-input
 {
     display: inline-block;
-    height: 8.33rem;
+    height: 7.08rem;
 }
 
 #san-query-input{
@@ -58,7 +58,7 @@ header .san-query-input
     background: #ccc;
     height: 2.5rem;
     font-size: 1.6rem;
-    margin: 2.5rem 0 0 1.66rem;
+    margin: 2rem 0 0 1.66rem;
 }
 #san-query-input:focus{
     outline: none;
