@@ -1,6 +1,9 @@
 <header>
     <a href="<%- url_for('') %>" class="logo-s-link"><img height="80" src="<%- url_for('img/logo.svg') %>" class="logo-s" alt="LOGO" title="San"><b>San</b></a>
-    
+    <div class="san-query-input">
+        <input type="text" id="san-query-input" class="search-query st-default-search-input"/>
+    </div>
+
     <nav>
         <ul>
             <li><a href="<%- url_for('') %>">HOME</a>
@@ -11,3 +14,13 @@
         </ul>
     </nav>
 </header>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript">
+    var Input = document.getElementById('san-query-input');
+    docsearch({
+        apiKey: '1c360e1f2503c4fa59ea3d28e3b8f6b3',
+        indexName: 'san',
+        inputSelector: '#san-query-input',
+        debug: false // Set debug to true if you want to inspect the dropdown
+    });
+</script>

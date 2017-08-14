@@ -16,10 +16,14 @@ dl, dt, dd, ol, ul, li {
 
 header {
     background: #001a23;
-    overflow: hidden;
     color: #fff;
 }
-
+header:after{
+    content: '';
+    display: block;
+    clear: both;
+    overflow: hidden;
+}
 
 header nav {
     float: right;
@@ -42,7 +46,23 @@ header nav a {
     margin: 0 2rem;
     text-decoration: none;
 }
+header .san-query-input
+{
+    display: inline-block;
+    height: 8.33rem;
+}
 
+#san-query-input{
+    display: inline-block;
+    border: none;
+    background: #ccc;
+    height: 2.5rem;
+    font-size: 1.6rem;
+    margin: 2.5rem 0 0 1.66rem;
+}
+#san-query-input:focus{
+    outline: none;
+}
 .github {
     font-size: 3rem;
 }
