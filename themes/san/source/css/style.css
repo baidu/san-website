@@ -50,18 +50,46 @@ header .san-query-input
 {
     display: inline-block;
     height: 7.08rem;
+    position: relative;
 }
-
+header .icon{
+    display: inline-block;
+    width: 1.5rem;
+    height: 1.5rem;
+    opacity: 0.5;
+    background-image: url("../img/search_32px_1197039_easyicon.net.ico");
+    background-size: 100% 100%;
+    position: absolute;
+    right: 0.3rem;
+    top: 50%;
+    margin-top: -1rem;
+    z-index: 1;
+}
 #san-query-input{
+    width: 13rem;
     display: inline-block;
     border: none;
     background: #ccc;
     height: 2.5rem;
     font-size: 1.6rem;
     margin: 2rem 0 0 1.66rem;
+    padding-right: 2rem;
+    border-radius: 0.5rem;
+    -webkit-border-radius: 0.5rem;
+    -moz-border-radius: 0.5rem;
+    -o-border-radius: 0.5rem;
+    -ms-border-radius: 0.5rem;
+    transition: background-color .1s ease-in;
+    -webkit-transition: background-color .1s ease-in;
+    -moz-transition: background-color .1s ease-in;
+    -ms-transition: background-color .1s ease-in;
+    -o-transition: background-color .1s ease-in;
+
 }
 #san-query-input:focus{
     outline: none;
+    background: #fff;
+    text-indent: 1rem;
 }
 .github {
     font-size: 3rem;
