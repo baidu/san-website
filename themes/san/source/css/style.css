@@ -58,20 +58,19 @@ header .icon{
     filter:alpha(opacity=30);
     fill: #fff;
     position: absolute;
-    right: 0.6rem;
+    right: 1rem;
     top: 50%;
     margin-top: -0.77rem;
     z-index: 1;
 }
 
 #san-query-input{
-    width: 13rem;
+    width: 12rem;
     display: inline-block;
     background: #001a23;
     height: 2.5rem;
-    font-size: 1.6rem;
-    padding-right: 2rem;
-    text-indent: 1rem;
+    padding-right: 2.5rem;
+    padding-left: 1rem;
     border: 0.1rem solid rgba(255,255,255,0.3);
     border-radius: 3rem;
     -webkit-border-radius: 3rem;
