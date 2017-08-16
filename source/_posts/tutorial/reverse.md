@@ -37,14 +37,14 @@ var myComponent = new MyComponent({
 
 插值文本的标记方式是：在文本的前后各添加一个注释。
 
-- 文本前的注释以 **s-ts:** 开头，紧跟着插值文本的声明。（意思是 san text start)
-- 文本后的注释内容为 **s-te**，代表插值文本片段结束。（意思是 san text end)
+- 文本前的注释以 **s-text:** 开头，紧跟着插值文本的声明。
+- 文本后的注释内容为 **/s-text**，代表插值文本片段结束。
 
 ```html
-<span><!--s-ts:{{name}} - {{email}}-->errorrik - errorrik@gmail.com<!--s-te--></span>
+<span><!--s-text:{{name}} - {{email}}-->errorrik - errorrik@gmail.com<!--s-text--></span>
 ```
 
-`提示`：**type="text/san"** 的 **script** 是重要的标记手段，在循环与分支标记中也会用到它。
+`提示`：**s- 开头的 HTML Comment** 是重要的标记手段，在循环与分支标记中也会用到它。
 
 
 ### 插值属性
@@ -76,29 +76,29 @@ var myComponent = new MyComponent({
 
 ```html
 <ul id="list">
-    <script type="text/san" s-stump="for-start"><li s-for="p,i in persons" title="{{p.name}}">{{p.name}} - {{p.email}}</li></script>
-    <li prop-title="{{p.name}}" title="errorrik"><!--s-ts:{{p.name}} - {{p.email}}-->errorrik - errorrik@gmail.com<!--s-te--></li>
-    <li prop-title="{{p.name}}" title="otakustay"><!--s-ts:{{p.name}} - {{p.email}}-->otakustay - otakustay@gmail.com<!--s-te--></li>
-    <script type="text/san" s-stump="for-end"></script>
+    <!--s-for:<li s-for="p,i in persons" title="{{p.name}}">{{p.name}} - {{p.email}}</li>-->
+    <li prop-title="{{p.name}}" title="errorrik"><!--s-text:{{p.name}} - {{p.email}}-->errorrik - errorrik@gmail.com<!--/s-text--></li>
+    <li prop-title="{{p.name}}" title="otakustay"><!--s-text:{{p.name}} - {{p.email}}-->otakustay - otakustay@gmail.com<!--/s-text--></li>
+    <!--/s-for-->
 </ul>
 ```
 
-**起始** 的桩元素标记是一个具有 **type="text/san"** 和 **s-stump="for-start"** 的 script，在 script 的内部声明循环的语句。
+**起始** 的桩元素标记是一个以 **s-for:** 开头的 HTML Comment，接着是声明循环的标签内容。
 
 ```html
-<script type="text/san" s-stump="for-start"><li s-for="p,i in persons" title="{{p.name}}">{{p.name}} - {{p.email}}</li></script>
+<!--s-for:<li s-for="p,i in persons" title="{{p.name}}">{{p.name}} - {{p.email}}</li>-->
 ```
 
-**结束** 的桩元素标记是一个具有 **type="text/san"** 和 **s-stump="for-end"** 的 script，script 的内容为空。
+**结束** 的桩元素标记是一个内容为 **/s-for** 的 HTML Comment。
 
 ```html
-<script type="text/san" s-stump="for-end"></script>
+<!--/s-for-->
 ```
 
 对于循环的每个元素，按照普通元素标记，无需标记 **for** directive。通常它们在 HTML 输出端也是以循环的形式存在，不会带来重复编写的工作量。
 
 ```html
-<li prop-title="{{p.name}}" title="otakustay"><!--s-ts:{{p.name}} - {{p.email}}-->otakustay - otakustay@gmail.com<!--s-te--></li>
+<li prop-title="{{p.name}}" title="otakustay"><!--s-text:{{p.name}} - {{p.email}}-->otakustay - otakustay@gmail.com<!--/s-text--></li>
 ```
 
 `提示`：当初始没有数据时，标记循环只需要声明 **起始** 和 **结束** 桩即可。
@@ -112,22 +112,22 @@ var myComponent = new MyComponent({
 <span s-if="condition" title="errorrik" prop-title="{{name}}"></span>
 ```
 
-当初始条件为假时，分支元素不会出现，此时以 **type="text/san"** 和 **s-stump="if"** 的 script 作为桩，标记分支。在 script 的内部声明分支的语句。
+当初始条件为假时，分支元素不会出现，此时以 **HTML Comment** 为桩，标记分支。在桩的内部声明分支的语句。
 
 ```html
-<script type="text/san" s-stump="if"><span s-if="cond" title="{{name}}">{{name}}</span></script>
+<!--s-if:<span s-if="cond" title="{{name}}">{{name}}</span>-->
 ```
 
 一个包含完整 if-else 的分支，总有一个元素是具体元素，有一个元素是桩。
 
 ```html
-<script type="text/san" s-stump="if"><span s-if="isErik" title="{{name}}">{{name}}</span></script>
-<span s-else title="otakustay" prop-title="{{name2}}"><!--s-ts:{{name2}}-->otakustay<!--s-te--></span>
+<!--s-if:<span s-if="isErik" title="{{name}}">{{name}}</span>-->
+<span s-else title="otakustay" prop-title="{{name2}}"><!--s-text:{{name2}}-->otakustay<!--/s-text--></span>
 ```
 
 ```html
-<span s-if="isErik" title="errorrik" prop-title="{{name}}"><!--s-ts:{{name}}-->errorrik<!--s-te--></span>
-<script type="text/san" s-stump="else"><span s-else title="{{name2}}">{{name2}}</span></script>
+<span s-if="isErik" title="errorrik" prop-title="{{name}}"><!--s-text:{{name}}-->errorrik<!--/s-text--></span>
+<!--s-else:<span s-else title="{{name2}}">{{name2}}</span>-->
 ```
 
 
@@ -145,7 +145,7 @@ san.defineComponent({
 
 ```html
 <ui-label prop-title="{{name}}" prop-text="{{email}}">
-    <b prop-title="{{title}}" title="errorrik"><!--s-ts:{{text}}-->errorrik@gmail.com<!--s-te--></b>
+    <b prop-title="{{title}}" title="errorrik"><!--s-text:{{text}}-->errorrik@gmail.com<!--/s-text--></b>
 </ui-label>
 ```
 
@@ -153,7 +153,7 @@ san.defineComponent({
 
 ```html
 <label s-component="ui-label" prop-title="{{name}}" prop-text="{{email}}">
-    <b prop-title="{{title}}" title="errorrik"><!--s-ts:{{text}}-->errorrik@gmail.com<!--s-te--></b>
+    <b prop-title="{{title}}" title="errorrik"><!--s-text:{{text}}-->errorrik@gmail.com<!--/s-text--></b>
 </label>
 ```
 
@@ -163,17 +163,17 @@ slot 的标记与循环类似，我们需要以桩元素，分别标记循环的
 
 ```html
 <div id="main">
-    <script type="text/san" s-stump="data">{"tabText":"tab","text":"one","title":"1"}</script>
+    <!--s-data:{"tabText":"tab","text":"one","title":"1"}-->
     <div s-component="ui-tab" prop-text="{{tabText}}">
         <div prop-class="head" class="head">
-            <script type="text/san" s-stump="slot-start" name="title"></script>
-            <h3 prop-title="{{title}}" title="1"><!--s-ts:{{title}}-->1<!--s-te--></h3>
-            <script type="text/san" s-stump="slot-end"></script>
+            <!--s-slot:title-->
+            <h3 prop-title="{{title}}" title="1"><!--s-text:{{title}}-->1<!--/s-text--></h3>
+            <!--/s-slot-->
         </div>
         <div>
-            <script type="text/san" s-stump="slot-start"></script>
-            <p prop-title="{{text}}" title="one"><!--s-ts:{{text}}-->one<!--s-te--></p>
-            <script type="text/san" s-stump="slot-end"></script>
+            <!--s-slot-->
+            <p prop-title="{{text}}" title="one"><!--s-text:{{text}}-->one<!--/s-text--></p>
+            <!--/s-slot-->
         </div>
     </div>
 </div>
@@ -207,22 +207,23 @@ var myComponent = new MyComponent({
 });
 ```
 
-**起始** 的桩元素标记是一个具有 **type="text/san"** 和 **s-stump="slot-start"** 的 script，通过 **name** 属性声明 slot 名称，script 的内容为空。
+
+**起始** 的桩元素标记是一个以 **s-slot:** 开头的 HTML Comment，接着是 slot 名称。
 
 ```html
-<script type="text/san" s-stump="slot-start" name="title"></script>
+<!--s-slot:title-->
 ```
 
-**结束** 的桩元素标记是一个具有 **type="text/san"** 和 **s-stump="slot-end"** 的 script，script 的内容为空。
+**结束** 的桩元素标记是一个内容为 **/s-slot** 的 HTML Comment。
 
 ```html
-<script type="text/san" s-stump="slot-end"></script>
+<!--/s-slot-->
 ```
 
-当 owner 未给予相应内容时，slot 的内容为组件内声明的默认内容，这时 slot 内环境为组件内环境，而不是组件外环境。对默认内容，需要在 **起始** 的桩元素上通过 **by-default** 属性声明。
+当 owner 未给予相应内容时，slot 的内容为组件内声明的默认内容，这时 slot 内环境为组件内环境，而不是组件外环境。对默认内容，需要在 **起始** 的桩元素 name 之前加上 **!** 声明。
 
 ```html
-<script type="text/san" s-stump="slot-start" name="title" by-default="1"></script>
+<!--s-slot:!title-->
 ```
 
 
@@ -230,17 +231,15 @@ var myComponent = new MyComponent({
 数据
 ----
 
-组件的视图是数据的呈现。我们需要通过在组件起始时标记 **data**，以指定正确的初始数据。初始数据标记是一个具有 **type="text/san"** 和 **s-stump="data"** 的 script，在 script 的内部声明组件数据。
+组件的视图是数据的呈现。我们需要通过在组件起始时标记 **data**，以指定正确的初始数据。初始数据标记是一个 **s-data:** 开头的 HTML Comment，在其中声明数据。
 
 ```html
 <div id="wrap">
-    <script type="text/san" s-stump="data">
-    {
+    <!--s-data:{
         email: 'error@gmail.com',
         name: 'errorrik'
-    }
-    </script>
-    <span title="errorrik@gmail.com" prop-title="{{email}}"><!--s-ts:{{name}}-->errorrik<!--s-te--></span>
+    }-->
+    <span title="errorrik@gmail.com" prop-title="{{email}}"><!--s-text:{{name}}-->errorrik<!--/s-text--></span>
 </div>
 ```
 
@@ -257,10 +256,10 @@ var myComponent = new MyComponent({
 ```html
 <ul id="list">
     <li>name - email</li>
-    <script type="text/san" s-stump="for-start"><li s-for="p,i in persons" title="{{p.name}}">{{p.name}} - {{p.email}}</li></script>
-    <li prop-title="{{p.name}}" title="errorrik"><!--s-ts:{{p.name}} - {{p.email}}-->errorrik - errorrik@gmail.com<!--s-te--></li>
-    <li prop-title="{{p.name}}" title="otakustay"><!--s-ts:{{p.name}} - {{p.email}}-->otakustay - otakustay@gmail.com<!--s-te--></li>
-    <script type="text/san" s-stump="for-end"></script>
+    <!--s-for:<li s-for="p,i in persons" title="{{p.name}}">{{p.name}} - {{p.email}}</li>-->
+    <li prop-title="{{p.name}}" title="errorrik"><!--s-text:{{p.name}} - {{p.email}}-->errorrik - errorrik@gmail.com<!--/s-text--></li>
+    <li prop-title="{{p.name}}" title="otakustay"><!--s-text:{{p.name}} - {{p.email}}-->otakustay - otakustay@gmail.com<!--/s-text--></li>
+    <!--/s-for-->
 </ul>
 ```
 
@@ -279,8 +278,8 @@ myComponent.data.removeAt('persons', 1);
 ```html
 <!-- ui-label 组件拥有 owner，无需进行初始数据标记 -->
 <div id="main">
-    <script type="text/san" s-stump="data">{"name":"errorrik"}</script>
-    <span s-component="ui-label" prop-text="{{name}}"><!--s-ts:{{text}}-->errorrik<!--s-te--></span>
+    <!--s-data:{"name":"errorrik"}-->
+    <span s-component="ui-label" prop-text="{{name}}"><!--s-text:{{text}}-->errorrik<!--/s-text--></span>
 </div>
 ```
 
