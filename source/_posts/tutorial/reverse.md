@@ -76,10 +76,10 @@ var myComponent = new MyComponent({
 
 ```html
 <ul id="list">
-    <script type="text/san" s-stump="for-start"><li s-for="p,i in persons" title="{{p.name}}">{{p.name}} - {{p.email}}</li></script>
+    <!--s-for:<li s-for="p,i in persons" title="{{p.name}}">{{p.name}} - {{p.email}}</li>-->
     <li prop-title="{{p.name}}" title="errorrik"><!--s-text:{{p.name}} - {{p.email}}-->errorrik - errorrik@gmail.com<!--/s-text--></li>
     <li prop-title="{{p.name}}" title="otakustay"><!--s-text:{{p.name}} - {{p.email}}-->otakustay - otakustay@gmail.com<!--/s-text--></li>
-    <script type="text/san" s-stump="for-end"></script>
+    <!--/s-for-->
 </ul>
 ```
 
@@ -163,17 +163,17 @@ slot 的标记与循环类似，我们需要以桩元素，分别标记循环的
 
 ```html
 <div id="main">
-    <script type="text/san" s-stump="data">{"tabText":"tab","text":"one","title":"1"}</script>
+    <!--s-data:{"tabText":"tab","text":"one","title":"1"}-->
     <div s-component="ui-tab" prop-text="{{tabText}}">
         <div prop-class="head" class="head">
-            <script type="text/san" s-stump="slot-start" name="title"></script>
+            <!--s-slot:title-->
             <h3 prop-title="{{title}}" title="1"><!--s-text:{{title}}-->1<!--/s-text--></h3>
-            <script type="text/san" s-stump="slot-end"></script>
+            <!--/s-slot-->
         </div>
         <div>
-            <script type="text/san" s-stump="slot-start"></script>
+            <!--s-slot-->
             <p prop-title="{{text}}" title="one"><!--s-text:{{text}}-->one<!--/s-text--></p>
-            <script type="text/san" s-stump="slot-end"></script>
+            <!--/s-slot-->
         </div>
     </div>
 </div>
@@ -211,7 +211,7 @@ var myComponent = new MyComponent({
 **起始** 的桩元素标记是一个以 **s-slot:** 开头的 HTML Comment，接着是 slot 名称。
 
 ```html
-<!--s-slot:!title-->
+<!--s-slot:title-->
 ```
 
 **结束** 的桩元素标记是一个内容为 **/s-slot** 的 HTML Comment。
@@ -256,10 +256,10 @@ var myComponent = new MyComponent({
 ```html
 <ul id="list">
     <li>name - email</li>
-    <script type="text/san" s-stump="for-start"><li s-for="p,i in persons" title="{{p.name}}">{{p.name}} - {{p.email}}</li></script>
+    <!--s-for:<li s-for="p,i in persons" title="{{p.name}}">{{p.name}} - {{p.email}}</li>-->
     <li prop-title="{{p.name}}" title="errorrik"><!--s-text:{{p.name}} - {{p.email}}-->errorrik - errorrik@gmail.com<!--/s-text--></li>
     <li prop-title="{{p.name}}" title="otakustay"><!--s-text:{{p.name}} - {{p.email}}-->otakustay - otakustay@gmail.com<!--/s-text--></li>
-    <script type="text/san" s-stump="for-end"></script>
+    <!--/s-for-->
 </ul>
 ```
 
