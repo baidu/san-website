@@ -4,7 +4,7 @@ categories:
 - practice
 ---
 
-在我们使用 San 开发的时候，我们常常会写各种的组件 ，当写一个绝对定位组件(比如：Select、Tip 等)的时候，我们需要考虑元素是相对于谁 (offsetParent[not static]) 进行绝对定位，这时候我们会遇到两种场景：
+在我们使用 San 开发的时候，我们常常会写各种的组件，当一个父组件的子组件是绝对定位组件(比如：Select、Tip 等)的时候，我们会遇到两种场景：
 
 - 场景一：父(祖)组件足够大或不存在 `overflow: hidden;`
 - 场景二：父(祖)组件不够大且存在 `overflow: hidden;`
@@ -18,7 +18,7 @@ categories:
 #### 场景一
 父(祖)组件足够大或不存在 `overflow: hidden;` 时的绝对定位。
 
-这种情况比较常规，我们可以直接引入组件，然后自由选择在外部或组件内部包含一个 (not static) 元素，来控制显示即可。
+这种情况比较常规，我们可以直接引入组件，然后可选择在外部或组件内部包含一个 (not static) 元素，来控制显示即可。
 
 ##### 使用
 
@@ -57,9 +57,9 @@ new Parent().attach(document.querySelector('#paIsRel'));
     data-default-tab="js,result"
     data-user="The-only"
     data-embed-version="2"
-    data-pen-title="san-traverse-object"
+    data-pen-title="position-absolute-dom"
     class="codepen">See the Pen
-        <a href="https://codepen.io/The-only/pen/EvbQQd">san-traverse-object</a>
+        <a href="https://codepen.io/The-only/pen/EvbQQd">position-absolute-dom</a>
         by dengxiaohong (<a href="https://codepen.io/The-only">@The-only</a>)
         on <a href="https://codepen.io">CodePen</a>.
 </p>
@@ -68,9 +68,9 @@ new Parent().attach(document.querySelector('#paIsRel'));
 #### 场景二
 父(祖)组件不够大且存在 `overflow: hidden;` 时的绝对定位。
 
-这种情况会很常见，如果直接包含的话绝对定位元素会因为父(祖)组件有`overflow: hidden;`且不够大而导致组件中超出部分被遮住，比如：Select、Tip 等组件。
+这种情况会很常见，如果直接包含的话绝对定位元素会因为父(祖)组件有`overflow: hidden;`且不够大而导致组件中超出部分被遮住。
 
-这时候想要不被遮住的话，我们可以需要在组件中做一层处理：
+若不想被遮住的话，我们可以在组件中做一层处理：
 
 - 将组件元素挂到 body 上
 - 需要显示的时候进行位置控制
@@ -162,9 +162,9 @@ new Parent().attach(document.querySelector('#instance'));
     data-default-tab="js,result"
     data-user="The-only"
     data-embed-version="2"
-    data-pen-title="san-traverse-object"
+    data-pen-title="position-absolute-dom"
     class="codepen">See the Pen
-        <a href="https://codepen.io/The-only/pen/VzMjNQ">san-traverse-object</a>
+        <a href="https://codepen.io/The-only/pen/VzMjNQ">position-absolute-dom</a>
         by dengxiaohong (<a href="https://codepen.io/The-only">@The-only</a>)
         on <a href="https://codepen.io">CodePen</a>.
 </p>
