@@ -53,7 +53,7 @@ myApp.attach(document.body);
 
 ```
 #### 原因分析
-san 的 data 的数据是 Immutable 的，因此 set firstData 时变量的引用没变， diff 的时候还是相等的，不会触发更新。
+san 的 data 的数据是 Immutable 的，因此 set firstNews 时变量的引用没变， diff 的时候还是相等的，不会触发更新。
 
 #### 解决方式如下
 
