@@ -132,9 +132,9 @@ san-router的router对象用于将特定的URL对应到相应组件类上,在URL
 因此,我们可以通过调用router.add({Object}options)来添加路由规则。在options对象中指定Component和target参数,当规则匹配时将对应Component渲染到target上。
 
 > san-router有2种路由规则配置:
-> 1. rule为string时,URL的path部分与字符串完全匹配才可
-> 2. rule为RegExp(正则)时,URL的path部分与该正则部分匹配即可
-> 详细请参考: [~~https://github.com/ecomfe/san-router~~](https://github.com/ecomfe/san-router)
+> rule为string时,URL的path部分与字符串完全匹配才可
+> rule为RegExp(正则)时,URL的path部分与该正则部分匹配即可
+> 详细请参考: https://github.com/ecomfe/san-router
 
 ```javascript
 // router.js
@@ -188,7 +188,7 @@ export default [
 
 ```
 
-#### 逻辑组件
+#### 逻辑组件说明
 
 本文逻辑组件即为通过路由对象渲染到页面中的业务逻辑组件。这些组件(Home,List, About, Add, Edit等)按照业务逻辑,由基础组件库中的组件组装而成,在匹配到对应路由时,进行渲染。
 
