@@ -8,7 +8,14 @@ categories:
 
 众所周知，Web系统的早期路由是由后端来实现的，服务器根据url来重新加载整个页面。这种做法用户体验不但不好，而且页面若是变得复杂，服务器端的压力也会随之变大。随着ajax的广泛应用，页面能够做到无需刷新浏览器也可更新数据，这也给单页应用和前端路由的出现奠定了基础。因此，在单页应用系统中使用前端路由也十分常见，很多前端框架也提供或者推荐配套使用的路由系统。[san-router](https://github.com/ecomfe/san-router)是[San](https://ecomfe.github.io/san/)框架的官方router，以方便用户基于san构建单页或同构应用为目标。本文也主要来说明实践过程中如何使用san-router来构建一个单页面后台管理系统。
 
-> 完整代码示例：https://github.com/sqliang/san-router-spa
+#### 项目示例
+
+<p data-height="365" data-theme-id="dark" data-slug-hash="DzxGNe" data-default-tab="js,result" data-user="sqliang" data-embed-version="2" data-pen-title="san-router-spa" class="codepen">See the Pen <a href="https://codepen.io/sqliang/project/full/DzxGNe/">san-router-spa</a> by sqliang (<a href="https://codepen.io/sqliang">@sqliang</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+
+
+
+> 全部源代码地址：https://github.com/sqliang/san-router-spa
 
 #### 系统整体结构
 
