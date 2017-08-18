@@ -1,9 +1,9 @@
 ---
-​---
+---
 title: 动态子组件如何传递消息给父组件
 categories:
 - practice
-​---
+---
 
 ---
 
@@ -34,30 +34,25 @@ const Parent = san.defineComponent({
             </button>
             {{childMsg}}
         </div>`,
-  
+
     addChild() {
-        const store = [{
-            data: 'I am child1',
-            msg: 'child1 send msg'
-        }, {
-            data: 'I am child2',
-            msg: 'child2 send msg'
-        }];
 
-        store.forEach(child => {
+        const childs = this.data.get('childs');
+        const parentEl = this.el;
+
+        childs.forEach(child => {
+
             let childIns = new Child({
-                data: {
-                    name: child.data,
-                    msg: child.msg
-                }
+                parent: this,
+                data: child
             });
-            childIns.attach(document.getElementById(this.el.id));
 
-            childIns.parentComponent = this;
+            childIns.attach(parentEl);
             this.childs.push(childIns);
+
         });
     },
-  
+
     messages: {
         'child-msg': function(arg) {
             this.data.set('childMsg', arg.value);
@@ -65,12 +60,22 @@ const Parent = san.defineComponent({
     }
 });
 
-const parent = new Parent();
+const parent = new Parent({
+    data: {
+        childs: [{
+            name: 'I am child1',
+            msg: 'child1 send msg'
+        }, {
+            name: 'I am child2',
+            msg: 'child2 send msg'
+        }]
+    }
+});
 
 parent.attach(document.body);
 ```
 
 #### 实例
 
-<p data-height="265" data-theme-id="0" data-slug-hash="QMMZPV" data-default-tab="result" data-user="zhanfang" data-embed-version="2" data-pen-title="QMMZPV" class="codepen">See the Pen <a href="https://codepen.io/zhanfang/pen/QMMZPV/">QMMZPV</a> by zhanfang (<a href="https://codepen.io/zhanfang">@zhanfang</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<p data-height="365" data-theme-id="0" data-slug-hash="QMMZPV" data-default-tab="js,result" data-user="zhanfang" data-embed-version="2" data-pen-title="QMMZPV" class="codepen">See the Pen <a href="https://codepen.io/zhanfang/pen/QMMZPV/">QMMZPV</a> by zhanfang (<a href="https://codepen.io/zhanfang">@zhanfang</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
