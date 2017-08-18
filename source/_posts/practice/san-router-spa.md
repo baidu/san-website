@@ -10,14 +10,13 @@ categories:
 
 #### 项目示例
 
-<p data-height="365" data-theme-id="dark" data-slug-hash="DzxGNe" data-default-tab="js,result" data-user="sqliang" data-embed-version="2" data-pen-title="san-router-spa" class="codepen">See the Pen <a href="https://codepen.io/sqliang/project/full/DzxGNe/">san-router-spa</a> by sqliang (<a href="https://codepen.io/sqliang">@sqliang</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<p data-height="365" data-theme-id="dark" data-slug-hash="DzxGNe" data-default-tab="js,result" data-user="sqliang" data-embed-version="2" data-pen-title="san-router-spa" class="codepen">See the Project <a href="https://codepen.io/sqliang/project/full/DzxGNe/">san-router-spa</a> by sqliang (<a href="https://codepen.io/sqliang">@sqliang</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 
 
+#### 系统整体结构
 
 > 全部源代码地址：https://github.com/sqliang/san-router-spa
-
-#### 系统整体结构
 
 使用san-router和San构建单页应用的后台系统主要基于路由和组件。路由处理放在浏览器端来直接响应浏览器地址的变换，分发到对应的路由。在路由发生变化时，不再刷新整个页面，而是通过加载、组合相应的组件，替换需要改变的部分，来向用户呈现对应的界面。整体结构如下图所示：
 
