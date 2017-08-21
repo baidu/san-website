@@ -74,5 +74,5 @@ parent.attach(document.body);
 
 #### 实例
 
-<p data-height="265" data-theme-id="0" data-slug-hash="QMMZPV" data-default-tab="result" data-user="zhanfang" data-embed-version="2" data-pen-title="QMMZPV" class="codepen">See the Pen <a href="https://codepen.io/zhanfang/pen/QMMZPV/">QMMZPV</a> by zhanfang (<a href="https://codepen.io/zhanfang">@zhanfang</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<p data-height="365" data-theme-id="0" data-slug-hash="QMMZPV" data-default-tab="js,result" data-user="zhanfang" data-embed-version="2" data-pen-title="QMMZPV" class="codepen">See the Pen <a href="https://codepen.io/zhanfang/pen/QMMZPV/">QMMZPV</a> by zhanfang (<a href="https://codepen.io/zhanfang">@zhanfang</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
