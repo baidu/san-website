@@ -1,5 +1,5 @@
 ---
-title: 动态父组件与动态子组件之间如何传递消息?
+title: 动态子组件如何传递消息给父组件?
 categories:
 - practice
 ---
@@ -11,40 +11,45 @@ categories:
 此处给一个简单的例子，我们需要根据一个简单的状态树实现一个相应的组件样式，并实现父子组件的通信：
 
 ```javascript
-let store = {
-    parent: [{
-        data: 'I am child1',
-        msg: 'child1 send msg' 
-    }, {
-        data: 'I am child2',
-        msg: 'child2 send msg'
-    }]
-};
+const Child = san.defineComponent({
+    template: `
+        <div class="child">
+            {{name}}<button on-click="sendMsg">send msg</button>
+        </div>
+    `,
+    sendMsg() {
+        this.dispatch('child-msg', this.data.get('msg'));
+    }
+});
 
 const Parent = san.defineComponent({
-    template: '<div class="parent" style="border: 1px solid red">I am parent<button on-click="addChild">add child</button>{{childMsg}}</div>',
-  
+    template: `
+        <div class="parent" style="border: 1px solid red">
+            I am parent
+            <button on-click="addChild">
+                add child
+            </button>
+            {{childMsg}}
+        </div>`,
+
     addChild() {
-        const Child = san.defineComponent({
-            template: `<div class="child">{{name}}<button on-click="sendMsg">send msg</button></div>`,
-            sendMsg() {
-                this.dispatch('child-msg', this.data.get('msg'));
-            }
-        });
 
-        store.parent.forEach(child => {
+        const childs = this.data.get('childs');
+        const parentEl = this.el;
+
+        childs.forEach(child => {
+
             let childIns = new Child({
-                data: {
-                    name: child.data,
-                    msg: child.msg
-                }
+                parent: this,
+                data: child
             });
-            childIns.attach(document.getElementById(this.el.id));
 
-            childIns.parentComponent = this;
+            childIns.attach(parentEl);
+            this.childs.push(childIns);
+
         });
     },
-  
+
     messages: {
         'child-msg': function(arg) {
             this.data.set('childMsg', arg.value);
@@ -52,7 +57,17 @@ const Parent = san.defineComponent({
     }
 });
 
-const parent = new Parent();
+const parent = new Parent({
+    data: {
+        childs: [{
+            name: 'I am child1',
+            msg: 'child1 send msg'
+        }, {
+            name: 'I am child2',
+            msg: 'child2 send msg'
+        }]
+    }
+});
 
 parent.attach(document.body);
 ```
