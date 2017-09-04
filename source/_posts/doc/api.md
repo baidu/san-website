@@ -74,18 +74,18 @@ var myComponent = new MyComponent({
 生命周期代表组件的生存过程，在每个过程到达时将触发钩子函数。具体请参考[生命周期](../../tutorial/component/#生命周期)文档。
 
 
-### inited
-
-`解释`：
-
-组件实例初始化完成。组件上的 **inited** 方法将会被调用。
-
-
 ### compiled
 
 `解释`：
 
 组件视图模板编译完成。组件上的 **compiled** 方法将会被调用。
+
+
+### inited
+
+`解释`：
+
+组件实例初始化完成。组件上的 **inited** 方法将会被调用。
 
 
 ### created
