@@ -78,6 +78,36 @@ new Child().attach(document.body);
 
 在上面例子中，Child组件初始data中包含一项键值为`data-self`的数据。我们将其分别以`dataSelf`和`data-self`打印到li标签中，可以看到，两种都没有正确打印出我们初始化的值。说明对于自身data属性而言，如果属性的键值不是camelCase的形式，san并不会对其进行auto camel转换，所以我们无论以哪种方式，都无法拿到这个数据。
 
+##  原理分析
+
+在san的compile过程中，对template的解析会返回一个ANODE类的实例。其中template中绑定属性的时候，属性对象的信息会解析为ANODE实例中的props属性。对于子组件来说，会根据父组件的aNode.props来生成自身的data binds。
+
+在san中，非根组件接受做data binds过程中，接受父组件的aNode.props这一步时，会做auto camel处理。这就解释了上述两个例子为什么父组件kebab属性传入后，子组件camel属性表现正常，其余情况都是异常的。事实上在san的源码中，我们可以找到相关的处理函数：
+
+```javascript
+function kebab2camel(source) {
+    return source.replace(/-([a-z])/g, function (match, alpha) {
+        return alpha.toUpperCase();
+    });
+}
+
+function camelComponentBinds(binds) {
+    var result = new IndexedList();
+    binds.each(function (bind) {
+        result.push({
+            name: kebab2camel(bind.name),
+            expr: bind.expr,
+            x: bind.x,
+            raw: bind.raw
+        });
+    });
+
+    return result;
+}
+```
+
+在生成子组件的绑定过程中，正是由于调用了camelComponentBinds这个函数，所以才有auto camel的特性。
+
 ##  结论
 
 san的auto camel只适用于父组件调用子组件时候的数据绑定。对于一个组件自身的初始数据，如果属性为kebab-case，我们将无法正确拿到数据。因此，在写san组件的过程中，无论何时，对于data中的属性键值，我们都应该自觉地严格遵循camelCase规范。
