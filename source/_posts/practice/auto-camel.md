@@ -82,7 +82,7 @@ new Child().attach(document.body);
 
 在san的compile过程中，对template的解析会返回一个ANODE类的实例。其中template中绑定属性的时候，属性对象的信息会解析为ANODE实例中的props属性。对于子组件来说，会根据父组件的aNode.props来生成自身的data binds。
 
-在san中，非根组件接受做data binds过程中，接受父组件的aNode.props这一步时，会做auto camel处理。这就解释了上述两个例子为什么父组件kebab属性传入后，子组件camel属性表现正常，其余情况都是异常的。事实上在san的源码中，我们可以找到相关的处理函数：
+在san中，非根组件做data binds过程中，接受父组件的aNode.props这一步时，会做auto camel处理。这就解释了上述两个例子为什么父组件kebab属性传入后，子组件camel属性表现正常，其余情况都是异常的。事实上在san的源码中，我们可以找到相关的处理函数：
 
 ```javascript
 function kebab2camel(source) {
