@@ -20,6 +20,10 @@ hexo s
 $ hexo deploy
 ```
 
+
+
+
+
 给 san 文档做贡献
 ------------
 
@@ -32,7 +36,7 @@ $ hexo deploy
 
 - **提交前的fork同步更新操作** ：每次 pr 前请进行 fork 同步更新操作，避免产生冲突
 
-- **文档内容**： 必须包含对实践问题的原理分析总结，包含实际的 demo，demo 的编写请使用codepen，最后将其嵌入到文档中，具体详情及嵌入方式请见[例子](https://github.com/ecomfe/san)
+- **文档内容**： 必须包含对实践问题的原理分析总结，包含实际的 demo，demo 的编写请使用`codepen`，最后将其嵌入到文档中，具体详情及嵌入方式请见[例子](https://github.com/ecomfe/san)
 
 - **实践类文档项目路径**：
 
