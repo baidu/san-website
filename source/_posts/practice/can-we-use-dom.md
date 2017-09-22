@@ -5,7 +5,7 @@ categories:
 ---
 
 
-我们在使用 San 的时候，特别是刚刚入坑，且 MVVM 框架的经验不是那么丰富，我们还是更习惯于使用 jQuery 作为类库来操作页面的交互，于是很自然的写出了这样的代码。
+我们在使用 San 的时候，特别是刚刚使用不久的新人，且 MVVM 框架的经验不是那么丰富，我们还是更习惯于使用 jQuery 作为类库来操作页面的交互，于是很自然的写出了这样的代码。
 
 ```
 var MyApp = san.defineComponent({
@@ -25,7 +25,7 @@ myApp.attach(document.querySelector('#app'));
 
 然后用浏览器运行了这段程序，结果完全符合预期，完美~
 
-然而当我们进一步熟悉了 San 的套路后对于上面的功能我们会写出这样的代码。
+然而当我们进一步熟悉了 San 的使用方式后，对于上面的功能我们会写出这样的代码。
 
 ```
 var MyApp = san.defineComponent({
@@ -49,9 +49,9 @@ myApp.attach(document.querySelector('#app'));
 
 带着这个问题，我们可以从这几方面进行考虑。
 
-### 你干嘛要用 San 呢？
+### 使用 San 的初衷？
 
-San 是一个 MVVM（Model-View-ViewModel） 的组件框架，借助 MVVM 框架，我们只需完成包含 **声明绑定** 的视图模板，编写 ViewModel 中业务数据变更逻辑，View 层则完全实现了自动化。这将极大的降低前端应用的操作复杂度、极大提升应用的开发效率。MVVM 最标志性的特性就是 **数据绑定** ，MVVM 的核心理念就是通过 **声明式的数据绑定** 来实现 View 层和其他层的分离。完全解耦 View 层这种理念，也使得 Web 前端的单元测试用例编写变得更容易。
+San 是一个 MVVM（Model-View-ViewModel） 的组件框架，借助 MVVM 框架，我们只需完成包含 **声明绑定** 的视图模板，编写 ViewModel 中业务数据变更逻辑，View 层则完全实现了自动化。这将极大的降低前端应用的操作复杂度、极大提升应用的开发效率。MVVM 最标志性的特性就是 **数据绑定** ，MVVM 的核心理念就是通过 **声明式的数据绑定** 来实现 View 层和其他层的分离，完全解耦 View 层这种理念，也使得 Web 前端的单元测试用例编写变得更容易。
 
 简单来说就是：操作数据，就是操作视图，也就是操作 DOM。
 
@@ -59,9 +59,9 @@ San 是一个 MVVM（Model-View-ViewModel） 的组件框架，借助 MVVM 框�
 
 在我们写的代码中的 template 属性，在 San 中被称作 **内容模板**，它是一个符合 HTML 语法规则的字符串，它会被 San 解析，返回一个 [ANode](https://github.com/ecomfe/san/blob/master/doc/anode.md) 对象。
 
-也就是说我们在 template 中写的东西实际上并不是要放到 DOM 上的，它是给 San 使用的，真正生成的 DOM 实际上是 San 根据你的 template 的解析结果也就是 ANode 生成的，你的代码与DOM之间其实还隔了一层 San。
+也就是说我们在 template 中写的东西实际上并不是要放到 DOM 上的，它是给 San 使用的，真正生成的 DOM 实际上是 San 根据你的 template 的解析结果也就是 [ANode](https://github.com/ecomfe/san/blob/master/doc/anode.md) 生成的，你的代码与DOM之间其实还隔了一层 San。
 
-显然我们如果直接使用原生的 api 或者 jQuery 来直接操作 San 生成的DOM，这是不合理的，因为那些DOM根本不是我们写的，而我们却要去修改它，还真是多管闲事。
+我们如果直接使用原生的 api 或者 jQuery 来直接操作 San 生成的DOM，这是不合理的，因为那些DOM根本不是我们写的，而我们却要去试图修改它，显然我们不应该这样做。
 
 不直接操做 DOM 这其实也是符合计算机领域中分层架构设计的基本原则的，每一层完成独立的功能，然后上层通过调用底层的 api 来使用底层暴露出来的功能，但禁止跨层的调用。
 
