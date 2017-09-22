@@ -24,6 +24,20 @@ s-if
 
 `提示`：San 的条件判断不是严格的 === false。所以，一切 JavaScript 的假值都会认为条件不成立：0、空字符串、null、undefined、NaN等。
 
+s-elif
+------
+
+`> 3.2.3`
+
+**s-elif** 指令可以给 **s-if** 增加一个额外条件分支块。**s-elif** 指令的值可以是任何类型的[表达式](../data-binding/#表达式)。
+
+```html
+<span s-if="isActive">Active</span>
+<span s-elif="isOnline">Pending</span>
+```
+
+`提示`：**s-elif** 指令元素必须跟在 **s-if** 或 **s-elif** 指令元素后，否则将抛出 **elif not match if** 的异常。
+
 
 s-else
 ------
@@ -35,4 +49,4 @@ s-else
 <span s-else>Offline</span>
 ```
 
-`提示`：**s-else** 指令元素必须跟在 **s-if** 指令元素后，否则将抛出 **else not match if** 的异常。
+`提示`：**s-else** 指令元素必须跟在 **s-if** 或 **s-elif** 指令元素后，否则将抛出 **else not match if** 的异常。
