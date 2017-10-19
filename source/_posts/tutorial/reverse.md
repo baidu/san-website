@@ -41,7 +41,7 @@ var myComponent = new MyComponent({
 - 文本后的注释内容为 **/s-text**，代表插值文本片段结束。
 
 ```html
-<span><!--s-text:{{name}} - {{email}}-->errorrik - errorrik@gmail.com<!--s-text--></span>
+<span><!--s-text:{{name}} - {{email}}-->errorrik - errorrik@gmail.com<!--/s-text--></span>
 ```
 
 `提示`：**s- 开头的 HTML Comment** 是重要的标记手段，在循环与分支标记中也会用到它。
