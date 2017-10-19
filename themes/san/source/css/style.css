@@ -16,10 +16,14 @@ dl, dt, dd, ol, ul, li {
 
 header {
     background: #001a23;
-    overflow: hidden;
     color: #fff;
 }
-
+header:after{
+    content: '';
+    display: block;
+    clear: both;
+    overflow: hidden;
+}
 
 header nav {
     float: right;
@@ -33,14 +37,56 @@ header nav ul {
 header nav li {
     float:left;
 }
+header nav li:first-child{
+    position: relative;
+}
 
-header nav a {
+header nav .router {
     color: #fff;
     font-size: 1.6rem;
     line-height: 3rem;
     letter-spacing: .2rem;
     margin: 0 2rem;
     text-decoration: none;
+}
+
+header .icon{
+    display: inline-block;
+    width: 1.5rem;
+    height: 1.5rem;
+    opacity: 0.3;
+    filter:alpha(opacity=30);
+    fill: #fff;
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    margin-top: -0.77rem;
+    z-index: 1;
+}
+
+#san-query-input{
+    width: 12rem;
+    display: inline-block;
+    background: #001a23;
+    height: 2.5rem;
+    padding-right: 2.5rem;
+    padding-left: 1rem;
+    border: 0.1rem solid rgba(255,255,255,0.3);
+    border-radius: 3rem;
+    -webkit-border-radius: 3rem;
+    -moz-border-radius: 0.3rem;
+    -o-border-radius: 0.3rem;
+    -ms-border-radius: 0.3rem;
+    transition: background-color .1s ease-in;
+    -webkit-transition: background-color .1s ease-in;
+    -moz-transition: background-color .1s ease-in;
+    -ms-transition: background-color .1s ease-in;
+    -o-transition: background-color .1s ease-in;
+
+}
+#san-query-input:focus{
+    outline: none;
+    background: #fff;
 }
 
 .github {

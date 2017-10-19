@@ -35,6 +35,17 @@ article {
     color: #444;
 }
 
+.article-title {
+    position: relative;
+}
+.article-edit-link {
+    position: absolute;
+    top :5px;
+    right: 0;
+}
+.article-edit-link:link {
+    text-decoration: none;
+}
 .article-meta {
     margin-bottom: 20px;
     color: #999;

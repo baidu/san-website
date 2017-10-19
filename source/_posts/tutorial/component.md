@@ -42,10 +42,15 @@ import {Component} from 'san';
 
 class HelloComponent extends Component {
 
+    constructor(options) {
+        super(options);
+        // .....
+    }
+
     static template = '<p>Hello {{name}}!</p>';
 
-    initData() { 
-        return {name: 'San'} 
+    initData() {
+        return {name: 'San'}
     }
 }
 
@@ -454,7 +459,7 @@ San 针对常用场景，内置了几个过滤器：
 
 ```javascript
 san.defineComponent({
-    template: '<a>{{createTime | dateFormat('yyyy-MM-dd')}}</a>',
+    template: '<a>{{createTime | dateFormat("yyyy-MM-dd")}}</a>',
 
     filters: {
         dateFormat: function (value, format) {
@@ -638,6 +643,3 @@ san.defineComponent({
     }
 });
 ```
-
-
-
