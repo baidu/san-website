@@ -33,6 +33,7 @@ article {
     line-height: 2;
     margin: 0 17rem 4rem;
     color: #444;
+    min-height: 750px;
 }
 
 .article-title {
