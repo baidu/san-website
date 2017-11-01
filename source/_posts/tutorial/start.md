@@ -4,11 +4,15 @@ categories:
 - tutorial
 ---
 
+San，是一个 MVVM 的组件框架。它体积小巧（11K），兼容性好（IE6），性能卓越，是一个可靠、可依赖的实现响应式用户界面的解决方案。
 
-San 是一个 MVVM 的组件框架，通过 San 的视图引擎能够让用户只用操作数据，视图自动更新。
+San 通过声明式的类 HTML 视图模板，在支持所有原生 HTML 的语法特性外，还支持了数据到视图的绑定指令、业务开发中最常使用的分支、循环指令等，在保持良好的易用性基础上，由框架完成基于字符串的模板解析，并构建出视图层的 [节点关系树](https://github.com/ecomfe/san/blob/master/doc/anode.md)，通过高性能的视图引擎快速生成 UI 视图。San 中定义的数据会被封装，使得当数据发生有效变更时通知 San 组件，San 组件依赖模板编译阶段生成的[节点关系树](https://github.com/ecomfe/san/blob/master/doc/anode.md)，确定需要变更的最小视图，进而完成视图的异步更新，保证了视图更新的高效性。
 
-我们以一些简单的例子，开始了解 San。这些例子可以从[这里](https://github.com/ecomfe/san/tree/master/example/start)找到。
+组件是 San 的基本单位，是独立的数据、逻辑、视图的封装单元。从页面角度看，组件是 HTML 元素的扩展；从功能模式角度看，组件是一个 ViewModel。San 组件提供了完整的生命周期，与 WebComponent 的生命周期相符合，组件间是可嵌套的树形关系，完整的支持了组件层级、组件间的通信，方便组件间的数据流转。San 的组件机制，可以有效支撑业务开发上的组件化需求。
 
+San 支持[组件反解](https://ecomfe.github.io/san/tutorial/reverse/)，以此提供[服务端渲染](https://ecomfe.github.io/san/tutorial/ssr/)能力，可以解决纯前端渲染导致的响应用户交互时延长、SEO 问题。除此之外，San 还提供了一些周边开源产品，与 San 配合使用，可以帮助开发者快速搭建可维护的大型 SPA 应用。
+
+现在，我们从一些简单的例子，开始了解 San。这些例子可以从[这里](https://github.com/ecomfe/san/tree/master/example/start)找到。
 
 Hello
 -------
