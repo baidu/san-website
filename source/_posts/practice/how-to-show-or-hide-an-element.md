@@ -12,7 +12,7 @@ categories:
 
 ### 如何处理
 
- san 提供在视图模板中进行样式处理的方案，[详见教程](https://ecomfe.github.io/san/tutorial/style/)。你可以用不同的 class 控制样式，也可以用 inline 样式实现。
+ San 提供在视图模板中进行样式处理的方案，[详见教程](https://ecomfe.github.io/san/tutorial/style/)。你可以用不同的 class 控制样式，也可以用 inline 样式实现。
 
 #### 1. 用 class 控制元素的显示与隐藏
 
