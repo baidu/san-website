@@ -4,7 +4,7 @@ categories:
 - practice
 ---
 
-在 san 组件中，对数据的变更需要通过`set` 或 `splice` 等方法，实现用最简单的方式，解决兼容性的问题，同时为了保证数据操作的过程可控，san 的数据变更在内部是 Immutable 的，因此遇到数组深层做数据交换时直接 set 数据会发现没有触发视图的更新
+在 San 组件中，对数据的变更需要通过`set` 或 `splice` 等方法，实现用最简单的方式，解决兼容性的问题，同时为了保证数据操作的过程可控，San 的数据变更在内部是 Immutable 的，因此遇到数组深层做数据交换时直接 set 数据会发现没有触发视图的更新
 
 
 
@@ -53,7 +53,7 @@ myApp.attach(document.body);
 
 ```
 #### 原因分析
-san 的 data 的数据是 Immutable 的，因此 set firstNews 时变量的引用没变， diff 的时候还是相等的，不会触发更新。
+San 的 data 的数据是 Immutable 的，因此 set firstNews 时变量的引用没变， diff 的时候还是相等的，不会触发更新。
 
 #### 解决方式如下
 
