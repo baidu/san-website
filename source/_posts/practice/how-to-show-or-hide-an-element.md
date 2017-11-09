@@ -183,7 +183,7 @@ san.defineComponent({
 <p data-height="265" data-theme-id="0" data-slug-hash="XzpmVa" data-default-tab="js,result" data-user="LeuisKen" data-embed-version="2" data-pen-title="没有显式声明依赖的tab bug演示" class="codepen">See the Pen <a href="https://codepen.io/LeuisKen/pen/XzpmVa/">没有显式声明依赖的tab bug演示</a> by LeuisKen (<a href="https://codepen.io/LeuisKen">@LeuisKen</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 
-此处当我在点击 tab 的时候，虽然 active 能够正常更新，但是视图不会引起变化，因为 san 的依赖收集机制不认为 active 的修改会影响到视图，因此需要我们在模板中显式声明对 active 的依赖，参考如下代码：
+此处当我在点击 tab 的时候，虽然 active 能够正常更新，但是视图不会引起变化，因为 San 的依赖收集机制不认为 active 的修改会影响到视图，因此需要我们在模板中显式声明对 active 的依赖，参考如下代码：
 
 ```js
 san.defineComponent({
@@ -236,7 +236,7 @@ san.defineComponent({
 <p data-height="265" data-theme-id="0" data-slug-hash="mqReLg" data-default-tab="js,result" data-user="LeuisKen" data-embed-version="2" data-pen-title="显式声明依赖的tab演示" class="codepen">See the Pen <a href="https://codepen.io/LeuisKen/pen/mqReLg/">显式声明依赖的tab演示</a> by LeuisKen (<a href="https://codepen.io/LeuisKen">@LeuisKen</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 
-通过在模板中显示声明视图对 active 的依赖， san 就能正常更新视图了。这也是为什么我会在一开始说 filter 的特点是能够显式地声明属性值与数据的依赖关系。
+通过在模板中显示声明视图对 active 的依赖， San 就能正常更新视图了。这也是为什么我会在一开始说 filter 的特点是能够显式地声明属性值与数据的依赖关系。
 
 ### 结语
 
