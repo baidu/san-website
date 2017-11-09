@@ -11,11 +11,11 @@ categories:
 输入框
 -----
 
-输入框的绑定方法比较简单，直接应用 **bind-** 到输入框的 value 属性就行了。
+输入框的绑定方法比较简单，直接对输入框的 value 属性应用双向绑定就行了。
 
 
 ```html
-<input type="text" bindx-value="name">
+<input type="text" value="{= name =}">
 ```
 
 
@@ -92,7 +92,7 @@ san.defineComponent({
 select
 ------
 
-select 的使用方式和输入框类似，直接应用 **bind-** 到 value 属性。
+select 的使用方式和输入框类似，直接对 value 属性应用双向绑定。
 
 ```html
 <!-- Template -->
@@ -117,6 +117,3 @@ san.defineComponent({
     }
 });
 ```
-
-
-
