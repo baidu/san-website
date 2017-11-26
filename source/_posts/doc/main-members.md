@@ -225,6 +225,8 @@ aNode = {
 
 ### LifeCycle
 
+`版本`： < 3.3.0 (已废弃)
+
 `类型`： Function
 
 `解释`：
