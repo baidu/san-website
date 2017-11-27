@@ -38,8 +38,7 @@ article .entry .gist .gist-file .gist-meta a:visited {
   color: color-link;
 }
 article figure.highlight {
-  border: 1px solid #e2e2e2;
-  background: #fff;
+  background: #f2f4f6;
   margin: 15px 0 0;
   border-radius: 2px;
   line-height: 1.6;
@@ -73,12 +72,16 @@ article figure.highlight .gutter {
   display: none;
 }
 article figure.highlight .code {
-  padding: 10px;
+  padding: 1.2em 1.4em;
   color: #666;
   border: 0;
 }
 article figure.highlight .line {
   height: 20px;
+}
+article pre{
+  background-color:#f2f4f6;
+  color: #555555; 
 }
 article pre .comment,
 article pre .template_comment,

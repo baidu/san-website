@@ -1,7 +1,10 @@
 <%- partial('_partial/head') %>
-<body>
+<body style="background: #01222d;">
+  <div class="body-inner">
   <%- partial('_partial/header') %>
   <%- body %>
-  <%- partial('_partial/footer') %>
+  <%- partial('_partial/mobilenav') %>
+  </div>
+  <script src="<%- url_for('js/layout_control.js') %>"></script>
 </body>
 </html>

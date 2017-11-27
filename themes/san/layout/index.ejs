@@ -2,31 +2,57 @@ layout: false
 ---
 
 <%- partial('_partial/head') %>
-<body>
-    <header class="header-index">
-        <img height="220" src="<%- url_for('img/logo-colorful.svg') %>" class="logo" alt="LOGO" title="San">
-        <h1>San</h1>
-        <p>an MVVM Component Framework for the Web</p>
-        <a href="https://github.com/ecomfe/san" class="github" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a>
-        <a href="<%- url_for('tutorial/start/') %>" class="get-start">GET STARTED</a>
-    </header>
 
-    <section class="feature">
-        <h4><b>FEATURES</b></h4>
+
+<body id="home">
+    <div class="overlay">
+        <iframe src="https://ghbtns.com/github-btn.html?user=ecomfe&repo=san&type=star&count=true&size=large" class="home-iframe"></iframe>
+
+        <img height="220" src="img/logo-colorful.svg" class="logo" alt="LOGO" title="San">
+        <h1>San</h1>
+        <p class="overlay-p">An MVVM Component Framework for the Web</p>
+        <a href="/san/tutorial/start/" class="get-start">GET STARTED</a>
+    </div>
+        
+    <!-- NavBar-->
+    <nav class="navbar-default" role="navigation">
+        <div class="navbar-container">
+            
+            <a href="#home"><img class="nav-logo" src="img/logo2.png"></a>
+            
+
+            <div class="navbar-right">
+                <ul class="nav navbar-nav">
+                    
+                    <li><a class="nav-a1" href="#Features">Features</a></li>
+                    <li><a class="nav-a2" href="#Resources">LEARN SAN</a></li>
+                    <li><a class="nav-a3" href="#Facilities">Facilities</a></li>
+                    <li><a class="nav-a" href="#More">More</a></li>
+                </ul>
+            </div>
+           
+        </div>
+    </nav> 
+    
+    <!-- feature-->
+    
+    <div class="feature-container" id="Features">
+        
+         <section class="feature">
 
         <div class="feature-row">
             <div class="feature-item">
-                <i class="fa fa-code" aria-hidden="true"></i>
+                <embed src="img/8.svg" width="44" height="44" type="image/svg+xml" pluginspage="http://www.adobe.com/svg/viewer/install/"></embed>
                 <h5>HTML模版</h5>
                 <p>声明式的模板，在编写视图时就像是在写一个普通的页面，更符合 HTML 开发人员的习惯。</p>
             </div>
             <div class="feature-item">
-                <i class="fa fa-database" aria-hidden="true"></i>
+               <embed src="img/1.svg" width="44" height="44" type="image/svg+xml" pluginspage="http://www.adobe.com/svg/viewer/install/"></embed>
                 <h5>数据驱动</h5>
                 <p>修改数据，视图引擎会根据绑定关系自动刷新视图，从此摆脱手工调用 DOM API 的繁琐与可能的遗漏。</p>
             </div>
             <div class="feature-item">
-                <i class="fa fa-cube" aria-hidden="true"></i>
+                <embed src="img/2.svg" width="44" height="44" type="image/svg+xml" pluginspage="http://www.adobe.com/svg/viewer/install/"></embed>
                 <h5>组件化</h5>
                 <p>组件是数据、逻辑与视图的聚合体。通过组件，我们封装独立的功能区块，小到输入组合，大到一个页面。</p>
             </div>
@@ -34,17 +60,17 @@ layout: false
 
         <div class="feature-row">
             <div class="feature-item">
-                <i class="fa fa-flash" aria-hidden="true"></i>
+                <embed src="img/3.svg" width="44" height="44" type="image/svg+xml" pluginspage="http://www.adobe.com/svg/viewer/install/"></embed>
                 <h5>高性能视图</h5>
                 <p>通过修改数据的方法，视图引擎能够直接刷新需要变更的视图区域，无需进行任何检测，性能更高。</p>
             </div>
             <div class="feature-item">
-                <i class="fa fa-retweet" aria-hidden="true"></i>
+                <embed src="img/5.svg" width="44" height="44" type="image/svg+xml" pluginspage="http://www.adobe.com/svg/viewer/install/"></embed>
                 <h5>组件反解</h5>
                 <p>为首屏时间优化，服务端通常直接输出HTML。我们能从现有的元素中反向解析出组件，并构建绑定关系。</p>
             </div>
             <div class="feature-item">
-                <i class="fa fa-download" aria-hidden="true"></i>
+                <embed src="img/4.svg" width="44" height="44" type="image/svg+xml" pluginspage="http://www.adobe.com/svg/viewer/install/"></embed>
                 <h5>体积小巧</h5>
                 <p>&lt;10k (gzipped) 的体积，无需担心对页面下载带来负担。体积强迫症患者的福音。</p>
             </div>
@@ -52,23 +78,199 @@ layout: false
 
         <div class="feature-row">
             <div class="feature-item">
-                <i class="fa fa-internet-explorer" aria-hidden="true"></i>
+                <embed src="img/9.svg" width="44" height="44" type="image/svg+xml" pluginspage="http://www.adobe.com/svg/viewer/install/"></embed>
                 <h5>良好的兼容性</h5>
                 <p>通过方法修改数据的另一好处是，可以获得更好的浏览器兼容性。毕竟有时我们产品的受众用户有点死板。</p>
             </div>
             <div class="feature-item">
-                <i class="fa fa-cogs" aria-hidden="true"></i>
+                <embed src="img/6.svg" width="44" height="44" type="image/svg+xml" pluginspage="http://www.adobe.com/svg/viewer/install/"></embed>
                 <h5>模块管理自由</h5>
                 <p>项目中可以任意选择 ESNext Module 或 AMD 管理模块。当然，如果你想要用全局变量也是支持的。</p>
             </div>
             <div class="feature-item">
-                <i class="fa fa-share-alt" aria-hidden="true"></i>
+                <embed src="img/7.svg" width="44" height="44" type="image/svg+xml" pluginspage="http://www.adobe.com/svg/viewer/install/"></embed>
                 <h5>引用方便</h5>
                 <p>支持多种引用方式：NPM、GitHub、下载、HTTP 与 HTTPS CDN，让开发和线上引用更便利。</p>
             </div>
         </div>
     </section>
+    </div>
+    
+    <!--Resources -->
+    <section id ="Resources" class="resource">
+    <hr>
+    <div class="resource-title">
+    <h4>LEARN SAN</h4>
+    <p>For a beginner ,there's everything you need to know about San</p>
+    </div>
 
-<%- partial('_partial/footer') %>
+    <div class="resource-row">
+        <div class="resource-block">
+            <a class="resource-item" href="<%- url_for('tutorial/start/')%>">
+                <div class="resource-item-top resource-item-top-one">
+                    <div style="width:130px;height:130px;display:inline-block;" class="bodymovin" data-movpath="<%- url_for('js/tutor.json') %>"></div>  
+                </div>
+                <div class="resource-item-bottom">
+                    <h5>教程</h5>
+                    <p>教程是入门的捷径，请从这里开始了解San。</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="resource-block" href="/san/layout/">
+            <a class="resource-item" href="<%- url_for('practice/')%>">
+                <div class="resource-item-top resource-item-top-two">
+                    <div style="width:130px;height:130px;display:inline-block;" class="bodymovin" data-movpath="<%- url_for('js/compass.json') %>"></div>
+                </div>
+                <div class="resource-item-bottom">
+                    <h5>指南</h5>
+                    <p>我们正在编写指南手册，以指导各种应用场景下怎么使用San。</p>
+                </div>
+            </a>
+        </div>
+   
+       <div class="resource-block"> 
+            <a class="resource-item" href="<%- url_for('example/')%>">
+                <div class="resource-item-top resource-item-top-three">
+                    <div style="width:130px;height:130px;display:inline-block;" class="bodymovin" data-movpath="<%- url_for('js/example.json') %>"></div>
+                </div>
+                <div class="resource-item-bottom">
+                    <h5>示例</h5>
+                    <p>这里展示了一些简单例子，以及在实际项目如何使用San。</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="resource-block">
+            <a class="resource-item" href="<%- url_for('doc/api/')%>">
+                <div class="resource-item-top resource-item-top-four">
+                    <div style="width:130px;height:130px;display:inline-block;" class="bodymovin" data-movpath="<%- url_for('js/api.json') %>"></div> 
+                </div>
+                <div class="resource-item-bottom">
+                    <h5>组件 API</h5>
+                    <p>当你想不起来组件的接口时，请查阅这里。</p>
+                </div>
+            </a>
+        </div>
+        </div>
+    </section>  
+
+
+<!-- facilities -->
+
+<section class="facility" id="Facilities">
+<hr>
+<div class="facility-title">
+    <h4>FACILITIES</h4>
+    <p>These facilities can help you to build your application</p>
+    </div>
+
+    <div class="facility-row">
+
+        <div class="facility-block">
+            <a class="facility-item" href="https://github.com/ecomfe/san-router" target="_blank">
+                <div class="facility-item-top facility-item-top-one">
+                    <div style="width:130px;height:130px;display:inline-block;" class="bodymovin" data-movpath="<%- url_for('js/test.json') %>"></div>
+                </div>
+                <div class="facility-item-bottom">
+                    <h5>Router</h5>
+                    <p>支持hash和html5模式的router，单页或同构的Web应用通常需要它。</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="facility-block">
+            <a class="facility-item facility-item-unready" href="https://github.com/ecomfe/san-store" target="_blank">
+                <div class="facility-item-top facility-item-top-two">
+                    <div style="width:130px;height:130px;display:inline-block;" class="bodymovin" data-movpath="<%- url_for('js/store.json') %>"></div>
+                </div>
+                <div class="facility-item-bottom">  
+                    <h5>Store</h5>
+                    <p>应用状态管理套件，其理念是类似flux的单向流。</p>
+                </div>
+            </a>
+        </div>
+   
+        <div class="facility-block"> 
+            <a class="facility-item" href="https://github.com/ecomfe/san-update" target="_blank">
+                <div class="facility-item-top facility-item-top-three">
+                    <div style="width:130px;height:130px;display:inline-block;" class="bodymovin" data-movpath="<%- url_for('js/update.json') %>"></div>
+                </div>
+                <div class="facility-item-bottom">
+                    <h5>Update</h5>
+                    <p>Immutable的对象更新库，和san-store配合进行应用状态数据更新。</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="facility-block">
+            <a class="facility-item" href="https://ecomfe.github.io/san-mui/" target="_blank">
+                <div class="facility-item-top facility-item-top-four">
+                    <div style="width:130px;height:130px;display:inline-block;" class="bodymovin" data-movpath="<%- url_for('js/design.json') %>"></div>
+                </div>
+                <div class="facility-item-bottom">
+                    <h5>MaterialUI组件库</h5>
+                    <p>基于material-design设计规范的组件库</p>
+                </div>
+            </a>
+        </div>
+
+    </div>
+</section>
+    
+    <footer id="More">
+      <div class="container2">
+             <p>开源的 San-MUI 来自百度 EFE。在 <a target="_blank" href="http://efe.baidu.com">EFE</a>，我们有一系列开源产品：</p>
+                    <div class="footer-links">
+                        <dl>
+                            <dt><a target="_blank" href="http://fecs.baidu.com/">FECS</a></dt>
+                            <dd>前端代码风格检查套件，包含 HTML、CSS、JavaScript 与 Less 代码的检查与修复。</dd>
+                            <dt><a target="_blank" href="http://echarts.baidu.com/">ECharts</a></dt>
+                            <dd>直观，生动，可交互，可高度个性化定制的数据可视化图表。</dd>
+                            <dt><a target="_blank" href="https://github.com/ecomfe/esl">ESL</a></dt>
+                            <dd>比 Require.js 更精简、更高效、更健壮的 AMD Loader。</dd>
+                            <dt><a target="_blank" href="http://ecomfe.github.io/edp/">EDP</a></dt>
+                            <dd>提供了前端开发时常用工具：项目管理、包管理、调试、构建、代码生成、代码检测等，并允许用户自定义扩展。</dd>
+                            <dt><a target="_blank" href="http://ecomfe.github.io/est/">EST</a></dt>
+                            <dd>基于 Less 的样式工具库，提供了一系列方便快捷的 mixin，只在调用时才输出代码。</dd>
+                            <dt><a target="_blank" href="https://ecomfe.github.io/san/">San</a></dt>
+                            <dd>一套 MVVM 的组件框架，体积小、性能高、兼容性好，适用于 SPA 和传统 Web 应用。</dd>
+                            <dt><a target="_blank" href="https://github.com/ecomfe/er">ER</a></dt>
+                            <dd>富浏览器端 Web 应用的框架，适用于并能很方便地构建一个整站式的 AJAX Web 应用。</dd>
+                            <dt><a target="_blank" href="https://github.com/ecomfe/esui">ESUI</a></dt>
+                            <dd>一套功能完善，并具有强大扩展机制的 UI 组件库。基于模板、声明式地编程方式让视图更具表达能力。</dd>
+                            <dt><a target="_blank" href="http://ecomfe.github.io/etpl">ETpl</a></dt>
+                            <dd>强复用、灵活、高性能的 JavaScript 模板引擎。</dd>
+                            <dt><a target="_blank" href="http://tushuo.baidu.com/">图说</a></dt>
+                            <dd>一个向广大用户提供数据可视化服务平台。</dd>
+                            <dt><a target="_blank" href="http://ecomfe.github.io/fontmin/">Fontmin</a></dt>
+                            <dd>第一个纯 JavaScript 字体子集化方案，让 @font-face 在中文世界成为可能。</dd>
+                            <dt><a target="_blank" href="http://efe.baidu.com/">......</a></dt>
+                            <dd>更多来自百度 EFE 的项目与文章。</dd>
+                        </dl>
+                    </div>
+             <div class="copyright">
+                 <p>Copyright © 2017 <a href="http://efe.baidu.com/">Baidu EFE</a><br>    
+             </div>           
+        </div>
+    </footer>
+    
+
+
+    <!-- JavaScript -->
+    <script src="<%- url_for('js/jquery-1.10.2.js') %>"></script>
+    <script src="<%- url_for('js/script.js') %>"></script>
+    <script src="<%- url_for('js/bodymovin.min.js') %>"></script>
+    <!-- StikyMenu -->
+    <script src="<%- url_for('js/stickUp.min.js') %>"></script>
+
+    <script type="text/javascript">
+       jQuery(function($) {
+            $(document).ready( function() {
+                $('.navbar-default').stickUp();
+            });
+        });
+    
+    </script>
 </body>
 </html>
