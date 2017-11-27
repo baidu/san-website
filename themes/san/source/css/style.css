@@ -187,46 +187,6 @@ footer {
     margin: 0;
 }
 
-.efe-products {
-    margin: 0 auto;
-    max-width: 900px;
-    color: #999;
-    padding: 10px 0;
-    font-weight: 300;
-}
-
-.efe-products dt {
-    clear: left;
-    width: 70px;
-}
-
-.efe-products a,
-.efe-products a:link,
-.efe-products a:visited
-.efe-products a:active {
-    color: #efefef;
-    text-decoration: none;
-}
-
-.efe-products a:hover {
-    text-decoration: underline;
-}
-
-.efe-products dt, .efe-products dd {
-    float: left;
-    line-height: 1.8rem;
-    font-size: 1.2rem;
-    font-weight: 300;
-    color: #999;
-}
-
-.efe-products dl:after {
-    content: ".";
-    display: block;
-    height: 0;
-    clear: both;
-    visibility: hidden;
-}
 
 .recommend {
     position: absolute;
