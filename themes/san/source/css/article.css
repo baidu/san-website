@@ -1,38 +1,80 @@
 .toc-wrap {
-    background: #fff;
-    width: 12em;
-    right: 2rem;
-    top: 9rem;
-    position: fixed;
+    width: 12.5em;
+    right: 9.5rem;
+    top: 3rem;
+    position: absolute;
     font-size: 1.4rem;
     line-height: 1.5;
-    box-shadow: 6px -6px 0 #ddd;
-    padding: 0 0 .5rem;
+    padding: 1.1rem 0 .5rem;
+    background-color: rgba(242, 244, 246, 0.65);
+    overflow-y:auto;
+    max-height: 700px;
 }
-
+.toc-wrap-fixed{
+    position: fixed;
+    top:3rem;
+}
 .toc a:link,
 .toc a:visited {
-    color: #999;
+    color: #818688;
+    box-sizing: border-box;
+    display: inline-block;
     text-decoration: none;
+    font-weight: 300;
+    font-size:1.05em;
+    line-height: 1;
+    margin: 9px 0;
+    padding-left: 5px;
+    transition-timing-function: ease;
+    transition-duration: .2s;
+    transition-property: color;
+    cursor: pointer;
+}
+.toc a:hover{
+    color: #2EA2F8;
+}
+.h3red{
+    color: red;
 }
 
+/*控制右侧导航变色*/
+.toc-level-2-on>a{
+    color: #2EA2F8!important;
+}
+
+.toc-level-3-on>a{
+    
+    color: #2EA2F8!important;
+    box-shadow: -2px 0 0 rgba(46, 162, 248, 1); 
+}
+
+
 .toc-wrap ol {
-    padding-left: 1rem;
+    padding-left: 1.5rem;
     list-style: none;
+}
+.toc-child{
+    font-size:0.9em;
 }
 
 .toc-top {
-    font-size: 3rem;
-    color: #666;
-    margin: 3rem 1rem;
+    font-size: 0.85rem;
+    color: #2EA2F8;
+    margin: 3rem 1rem 1rem 2rem;
+    display: inline-block;
+}
+
+.toc-top:focus,.toc-top:hover{
+    text-decoration: none;
+    color: #2EA2F8;
 }
 
 article {
     font-size: 1.4rem;
-    letter-spacing: .05rem;
-    line-height: 2;
-    margin: 0 17rem 4rem;
-    color: #444;
+    letter-spacing: .03rem;
+    line-height: 1.8;
+    margin: 0 30rem 4rem 20rem;
+    color: #59636f;
     min-height: 750px;
 }
 
@@ -91,20 +133,21 @@ article h1 {
     font-size: 3rem;
     color: #555;
     line-height: 3rem;
-    border-left: 5px solid #888;
-    padding-left: 1rem;
-    margin: 2rem 0 3rem;
+    margin: 1.6rem 0 3rem;
+    font-weight: 500;
 }
 
 article h2 {
     font-size: 2rem;
     margin: 4rem 0 2rem;
     color: #555;
-    border-bottom: 2px solid #ccc;
+    border-bottom: 1px solid #e8e8e8;
+    padding-bottom: 1em;
+    font-weight: 500;
 }
 
 article h3 {
-    font-size: 18px;
+    font-size: 20px;
 }
 
 article h4 {
@@ -121,7 +164,7 @@ article h6 {
 
 article a:link,
 article a:visited {
-    color: #268bd2;
+    color: #2EA2F8;
 }
 
 article h1:hover a.anchor,
@@ -215,10 +258,8 @@ article .caption {
 article code,
 article tt {
     margin: 0 2px;
-    padding: 0 5px;
-    border: 1px solid #ddd;
-    background-color: #eee;
-    border-radius: 3px;
+    padding: 2px 7px;
+    background-color: #f2f4f6;
 }
 
 article pre,
