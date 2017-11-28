@@ -60,8 +60,10 @@ body{
 .home-iframe{
   position: absolute;
   top: 30px;
-  right: -140px;
+  right: 10px;
   border:0;
+  width: 134px;
+  height: 40px;
 }
 
 
@@ -206,7 +208,7 @@ body{
         z-index: 999;
 }
 .navbar-container{
-  width: 1170px;
+  max-width: 1170px;
   margin: 0 auto;
   height: 60px;
 }
@@ -226,16 +228,13 @@ body{
 .navbar-default .navbar-nav>li>a:hover{
   color: #2EA2F8;
 }
-.nav-a1{
-  color: red;
-}
 
 .nav-a{
-  margin-right:-30px; 
 }
 
 .nav>li>a{
-  padding-right: 30px;
+  padding-right: 10px;
+  padding-left: 35px;
 }
 .navbar-right>a>embed{
   margin-top: 17px;
@@ -245,7 +244,7 @@ body{
 /*feature*/
 .feature-container{
   margin: 0 auto;
-  width: 1170px;
+  max-width: 1170px;
   overflow:hidden;
 }
 .feature{
