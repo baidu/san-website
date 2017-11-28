@@ -475,6 +475,60 @@ var AddForm = san.defineComponent({
 */
 ```
 
+### slot
+
+`版本`：>= 3.3.0
+
+`描述`： {Array} slot({string=}name)
+
+`解释`：
+
+获取组件插槽的节点信息。返回值是一个数组，数组中的项是节点对象。通常只有一项，当 slot 声明中应用了 if 或 for 时可能为 0 项或多项。节点对象包含 isScoped 、 isInserted 和 children。
+
+插槽详细用法请参考 [slot](../../tutorial/component/#slot) 文档。
+
+`注意`：不要对返回的 slot 对象进行任何修改。如果希望操作视图变更，请操作数据。
+
+`用法`：
+
+
+```javascript
+var Panel = san.defineComponent({
+    template: '<div><slot s-if="!hidden"/></div>',
+});
+
+var MyComponent = san.defineComponent({
+    components: {
+      'x-panel': Panel
+    },
+
+    template: ''
+        + '<div>'
+          + '<x-panel hidden="{{folderHidden}}" s-ref="panel"><p>{{desc}}</p></x-panel>'
+        + '</div>',
+
+    attached: function () {
+        // 1
+        this.ref('panel').slot().length
+
+        var contentSlot = this.ref('panel').slot()[0];
+
+        // truthy
+        contentSlot.isInserted
+
+        // falsy
+        contentSlot.isScoped
+    }
+});
+
+
+var myComponent = new MyComponent({
+    data: {
+        desc: 'MVVM component framework',
+    }
+});
+```
+
 
 
 
