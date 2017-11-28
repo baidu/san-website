@@ -230,7 +230,7 @@ body{
   color: red;
 }
 
-.navbar-right{
+.nav-a{
   margin-right:-30px; 
 }
 
@@ -497,9 +497,7 @@ footer dt{
     width: 190px;
     margin-bottom: 50px;
   }
-  .feature-container{
-  width: 100%;
-}
+
   .feature{
     margin-top: 30px;
   }
