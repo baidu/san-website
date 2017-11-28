@@ -31,6 +31,37 @@ var MyApp = san.defineComponent({
 ```
 
 
+### compileComponent
+
+`版本`：>= 3.3.0
+
+`描述`： {void} compileComponent({Function}ComponentClass)
+
+`解释`：
+
+**方法** 。编译组件，组件的编译过程主要是解析 template 成 [ANode](https://github.com/ecomfe/san/blob/master/doc/anode.md)，并对 components 中的 plain object 执行 defineComponent。
+
+组件会在其第一个实例初始化时自动编译。我们通常不会使用此方法编译组件，除非你有特殊的需求希望组件的编译过程提前。
+
+`用法`：
+
+```javascript
+var MyApp = san.defineComponent({
+    template: '<ul><li s-for="item in list">{{item}}</li></ul>',
+
+    initData: function () {
+        return {
+            list: ['san', 'er', 'esui', 'etpl', 'esl']
+        };
+    }
+});
+
+typeof MyApp.prototype.aNode // undefined
+san.compileComponent(MyApp);
+typeof MyApp.prototype.aNode // object
+```
+
+
 ### Component
 
 `类型`： Function
@@ -71,6 +102,8 @@ class HelloComponent extends Component {
 
 ### compileToRenderer
 
+`版本`：>= 3.1.0
+
 `描述`： {function(Object):string} compileToRenderer({Function}ComponentClass)
 
 `解释`：
@@ -94,6 +127,8 @@ var render = san.compileToRenderer(MyApp);
 ```
 
 ### compileToSource
+
+`版本`：>= 3.1.0
 
 `描述`： {string} compileToRenderer({Function}ComponentClass)
 
@@ -124,6 +159,8 @@ fs.writeFileSync('your-module.js', 'exports = module.exports = ' + renderSource,
 
 ### ExprType
 
+`版本`：>= 3.0.3
+
 `类型`： Object
 
 `解释`：
@@ -132,6 +169,8 @@ fs.writeFileSync('your-module.js', 'exports = module.exports = ' + renderSource,
 
 
 ### parseExpr
+
+`版本`：>= 3.0.3
 
 `描述`： {Object} parseExpr({string}source)
 
@@ -158,6 +197,8 @@ expr = {
 ```
 
 ### parseTemplate
+
+`版本`：>= 3.0.3
 
 `描述`： {ANode} parseTemplate({string}source)
 
@@ -223,6 +264,15 @@ aNode = {
 - 当前页面环境中的 San 是带有 **devtool** 功能的版本。[查看San的打包发布版本](https://github.com/ecomfe/san/tree/master/dist)
 
 
+### version
+
+`类型`： string
+
+`解释`：
+
+**属性** 。当前的 San 版本号。
+
+
 ### LifeCycle
 
 `版本`： < 3.3.0 (已废弃)
@@ -280,10 +330,3 @@ lifeCycle.set('detached');
 lifeCycle.is('attached'); // false
 ```
 
-### version
-
-`类型`： string
-
-`解释`：
-
-**属性** 。当前的 San 版本号。
