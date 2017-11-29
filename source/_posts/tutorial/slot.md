@@ -142,6 +142,8 @@ var MyComponent = san.defineComponent({
 动态插槽
 -----
 
+`版本`：>= 3.3.0
+
 在 slot 声明时应用 if 或 for 指令，可以让插槽根据组件数据动态化。
 
 
@@ -181,6 +183,12 @@ var myComponent = new MyComponent({
         name: 'San'
     }
 });
+
+/* MyComponent渲染结果，hidden为true所以不包含default slot
+<div>
+    <b>San</b>
+</div>
+*/
 ```
 
 ### for指令
@@ -199,7 +207,7 @@ var MyComponent = san.defineComponent({
 
     template: ''
         + '<div>'
-          + '<x-panel data="{{folderHidden}}" s-ref="panel">'
+          + '<x-panel data="{{panelData}}" s-ref="panel">'
               + '<p>{{name}}</p>'
           + '</x-panel>'
         + '</div>',
@@ -231,6 +239,9 @@ var myComponent = new MyComponent({
 
 scoped 插槽
 -----
+
+`版本`：>= 3.3.0
+
 
 如果 slot 声明中包含 1 个以上 **var-** 数据前缀声明，该 slot 为 scoped slot。scoped slot 具有独立的 **数据环境**，其中仅包含 **var-** 声明的数据。scoped 数据声明的形式为 **var-name="expression"**。
 

@@ -50,3 +50,31 @@ s-else
 ```
 
 `提示`：**s-else** 指令元素必须跟在 **s-if** 或 **s-elif** 指令元素后，否则将抛出 **else not match if** 的异常。
+
+
+虚拟元素
+------
+
+在 san 中，template 元素在渲染时不会包含自身，只会渲染其内容。对 template 元素应用 if 指令能够让多个元素同时根据条件渲染视图，可以省掉一层不必要的父元素。
+
+```html
+<div>
+    <template s-if="num > 10000">
+        <h2>biiig</h2>
+        <p>{{num}}</p>
+    </template>
+    <template s-elif="num > 1000">
+        <h3>biig</h3>
+        <p>{{num}}</p>
+    </template>
+    <template s-elif="num > 100">
+        <h4>big</h4>
+        <p>{{num}}</p>
+    </template>
+    <template s-else>
+        <h5>small</h5>
+        <p>{{num}}</p>
+    </template>
+</div>
+```
+

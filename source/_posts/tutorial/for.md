@@ -81,3 +81,20 @@ san.defineComponent({
 
 列表数据的增加、删除等操作请使用组件 data 提供的数组方法。详细请参考[数组方法](../data-method/#数组方法)文档。
 
+
+虚拟元素
+------
+
+和 if 指令一样，对 template 元素应用 for 指令，能够让多个元素同时根据遍历渲染，可以省掉一层不必要的父元素。
+
+
+```html
+<!-- Template -->
+<dl>
+    <template s-for="p in persons">
+        <dt>{{p.name}}</dt>
+        <dd>{{p.email}}</dd>
+    </template>
+</dl>
+```
+
