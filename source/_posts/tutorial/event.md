@@ -73,10 +73,10 @@ san.defineComponent({
 自定义事件
 --------
 
-在 WebComponents-like 的组件体系下，每个组件具有一个根元素，所以通过 **on- + 事件名** 我们可以为组件的根元素绑定 DOM 事件处理，也可以为组件绑定自定义事件处理。
+在组件上通过 **on-** 前缀，可以绑定组件的自定义事件。
 
 
-下面的例子中，MyComponent 为 Label 组件绑定了 done 事件的处理方法。组件事件的绑定语法与 DOM 事件绑定完全相同。
+下面的例子中，MyComponent 为 Label 组件绑定了 done 事件的处理方法。
 
 ```javascript
 var MyComponent = san.defineComponent({
@@ -104,6 +104,37 @@ var Label = san.defineComponent({
 });
 ```
 
-`额外提示`：在组件中，由于 **on-** 能绑定组件根元素事件与组件自定义事件，所以组件开发者在设计自定义事件时，事件名不能和 DOM 事件名相同，否则可能导致不可预测的后果。
+
+修饰符
+--------
+
+
+
+### native
+
+`版本`：>= 3.3.0
+
+
+在组件的事件声明中使用 native 修饰符，事件将被绑定到组件根元素的 DOM 事件。
+
+```javascript
+var Button = san.defineComponent({
+    template: '<a class="my-button"><slot/></a>'
+});
+
+var MyComponent = san.defineComponent({
+    components: {
+        'ui-button': Button
+    },
+
+    template: '<div><ui-button on-click="native:clicker(title)">{{title}}</ui-button></div>',
+
+    clicker: function (title) {
+        alert(title);
+    }
+});
+```
+
+有时候组件封装了一些基础结构和样式，同时希望点击、触摸等 DOM 事件由外部使用方处理。如果组件需要 fire 每个根元素 DOM 事件是很麻烦并且难以维护的。native 修饰符解决了这个问题。
 
 
