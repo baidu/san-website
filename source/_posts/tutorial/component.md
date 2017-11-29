@@ -181,9 +181,9 @@ san.defineComponent({
 ```
 
 
-### slot
+### 插槽
 
-顾名思义，在视图模板中可以通过 slot 声明一个插槽的位置，其位置的内容可以由外层组件定义。
+在视图模板中可以通过 slot 声明一个插槽的位置，其位置的内容可以由外层组件定义。具体请参考[插槽](../slot/)文档。
 
 ```javascript
 var Panel = san.defineComponent({
@@ -212,100 +212,6 @@ var MyComponent = san.defineComponent({
 </div>
 */
 ```
-
-插入 slot 部分的内容，其数据环境为 **声明时的环境**，也就是 MyComponent。
-
-```javascript
-var Panel = san.defineComponent({
-    template: '<div>'
-        + '  <div class="head" on-click="toggle">title</div>'
-        + '  <p><slot></slot></p>'
-        + '</div>',
-
-    initData: function () {
-        return {name: 'Panel'};
-    }
-});
-
-var MyComponent = san.defineComponent({
-    components: {
-        'ui-panel': Panel
-    },
-
-    template: '<div><ui-panel>I am {{name}}</ui-panel></div>',
-
-    initData: function () {
-        return {name: 'MyComponent'};
-    }
-});
-
-/* MyComponent渲染结果
-<div>
-  <div class="head">title</div>
-  <p>I am MyComponent</p>
-</div>
-*/
-```
-
-通过 name 属性可以给 slot 命名。一个视图模板的声明可以包含一个默认 slot 和多个命名 slot。外层组件的元素通过 `slot="name"` 的属性声明，可以指定自身的插入点。
-
-```javascript
-var Tab = san.defineComponent({
-    template: '<div>'
-        + '  <header><slot name="title"></slot></header>'
-        + '  <main><slot></slot></main>'
-        + '</div>'
-});
-
-var MyComponent = san.defineComponent({
-    components: {
-        'ui-tab': Tab
-    },
-
-    template: '<div><ui-tab>'
-        + '<h3 slot="title">1</h3><p>one</p>'
-        + '<h3 slot="title">2</h3><p>two</p>'
-        + '</ui-tab></div>'
-});
-
-/* MyComponent渲染结果
-<div>
-  <header><h3>1</h3><h3>2</h3></header>
-  <main><p>one</p><p>two</p></main>
-</div>
-*/
-```
-
-`注意`：外层组件的替换元素，只有在直接子元素上才能声明 `slot="name"` 指定自身的插入点。下面例子中的 a 元素无法被插入 title slot。
-
-```javascript
-var Tab = san.defineComponent({
-    template: '<div>'
-        + '  <header><slot name="title"></slot></header>'
-        + '  <main><slot></slot></main>'
-        + '</div>'
-});
-
-var MyComponent = san.defineComponent({
-    components: {
-        'ui-tab': Tab
-    },
-
-    template: '<div><ui-tab>'
-        + '<h3 slot="title">1</h3><p>one</p>'
-        + '<h3 slot="title">2</h3><p>two<a slot="title">slot fail</a></p>'
-        + '</ui-tab></div>'
-});
-
-/* MyComponent渲染结果，a 元素无法被插入 title slot
-<div>
-  <header><h3>1</h3><h3>2</h3></header>
-  <main><p>one</p><p>two<a>slot fail</a></p></main>
-</div>
-*/
-```
-
-更多关于 slot 的描述可以参考 [这里](https://developers.google.com/web/fundamentals/getting-started/primers/shadowdom#slots)
 
 
 ### el
