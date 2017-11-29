@@ -199,7 +199,7 @@ var MyComponent = san.defineComponent({
 
     template: ''
         + '<div>'
-          + '<x-panel data="{{folderHidden}}" s-ref="panel">'
+          + '<x-panel data="{{panelData}}" s-ref="panel">'
               + '<p>{{name}}</p>'
           + '</x-panel>'
         + '</div>',
