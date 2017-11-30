@@ -108,7 +108,30 @@ var Label = san.defineComponent({
 修饰符
 --------
 
+### capture
 
+`版本`：>= 3.3.0
+
+在元素的事件声明中使用 capture 修饰符，事件将被绑定到捕获阶段。
+
+```javascript
+var MyComponent = san.defineComponent({
+    template: ''
+        + '<div on-click="capture:mainClick">'
+            + '<button on-click="capture:btnClick">click</button>'
+        + '</div>',
+
+    mainClick: function (title) {
+        alert('Main');
+    },
+
+    btnClick: function (title) {
+        alert('Button');
+    }
+});
+```
+
+`注意`：只有在支持 **addEventListener** 的浏览器环境支持此功能，老旧 IE 上使用 capture 修饰符将没有效果。
 
 ### native
 
