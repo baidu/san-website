@@ -260,6 +260,17 @@ san.defineComponent({
 });
 ```
 
+此外，**data.get** 方法的参数为空时，会返回整个 data 对象：
+
+```javascript
+san.defineComponent({
+    attached: function () {
+        var data = this.data.get();
+        this.data.set('list', getList(data.params[1]));
+    }
+});
+```
+
 ### 操作数据
 
 **data** 上提供了一些数据操作的方法，具体请参考[数据操作](../data-method/)文档。
