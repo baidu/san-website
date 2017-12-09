@@ -263,6 +263,8 @@ var MyApp = san.defineComponent({
 - **blank** 时将清除空白文本节点
 - **all** 时将清除所有文本节点的前后空白字符
 
+`版本`：>= 3.2.5
+
 `类型`： string
 
 `用法`：
