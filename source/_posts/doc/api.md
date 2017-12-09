@@ -255,6 +255,28 @@ var MyApp = san.defineComponent({
 ```
 
 
+### trimWhitespace
+
+定义组件模板解析时对空白字符的 trim 模式。
+
+- 默认为 **none**，不做任何事情
+- **blank** 时将清除空白文本节点
+- **all** 时将清除所有文本节点的前后空白字符
+
+`类型`： string
+
+`用法`：
+
+```javascript
+var MyApp = san.defineComponent({
+    trimWhitespace: 'blank'
+
+    // ,
+    // ......
+});
+```
+
+
 
 组件方法
 -------
