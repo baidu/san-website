@@ -553,6 +553,35 @@ var myComponent = new MyComponent({
 });
 ```
 
+### nextTick
+`解释`：
+
+等dom数据更新完毕之后再执行回调。如果你修改了某些数据，想要马上获得dom更新后的状态，则需要把回调放在nextTick中。
+
+`用法`：
+
+```javascript
+const Component = san.defineComponent({
+    template: `
+    <div>
+    	<div s-ref="name">{{name}}</div>
+    	<button on-click="clicker">change name</button>
+ 	</div>`,
+  	
+  	initData() {
+  		return {name: 'erik'};
+  	},
+
+    clicker() {
+    	this.data.set('name', 'leeight');
+    	console.log(this.ref('name').innerHTML); // erik
+    	this.nextTick(() => {
+    		console.log(this.ref('name').innerHTML); // leeight
+    	});
+    }
+});
+
+```
 
 
 
