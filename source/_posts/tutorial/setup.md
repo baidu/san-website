@@ -100,7 +100,7 @@ import san from 'san';
 
 <script>
     export default {
-        data: {
+        initData: {
             msg: 'world'
         }
     }
