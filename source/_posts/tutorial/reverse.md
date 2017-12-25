@@ -115,19 +115,19 @@ var myComponent = new MyComponent({
 当初始条件为假时，分支元素不会出现，此时以 **HTML Comment** 为桩，标记分支。在桩的内部声明分支的语句。
 
 ```html
-<!--s-if:<span s-if="cond" title="{{name}}">{{name}}</span>-->
+<!--s-if:<span s-if="cond" title="{{name}}">{{name}}</span>--><!--/s-if-->
 ```
 
 一个包含完整 if-else 的分支，总有一个元素是具体元素，有一个元素是桩。
 
 ```html
-<!--s-if:<span s-if="isErik" title="{{name}}">{{name}}</span>-->
+<!--s-if:<span s-if="isErik" title="{{name}}">{{name}}</span>--><!--/s-if-->
 <span s-else title="otakustay" prop-title="{{name2}}"><!--s-text:{{name2}}-->otakustay<!--/s-text--></span>
 ```
 
 ```html
 <span s-if="isErik" title="errorrik" prop-title="{{name}}"><!--s-text:{{name}}-->errorrik<!--/s-text--></span>
-<!--s-else:<span s-else title="{{name2}}">{{name2}}</span>-->
+<!--s-else:<span s-else title="{{name2}}">{{name2}}</span>--><!--/s-else-->
 ```
 
 
