@@ -215,7 +215,7 @@ aNode = {
     "directives": [],
     "props": [],
     "events": [],
-    "childs": [
+    "children": [
         {
             "isText": true,
             "text": "Hello {{name}}!",
