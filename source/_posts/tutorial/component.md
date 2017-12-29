@@ -534,7 +534,7 @@ san.defineComponent({
             this.layer.attach(document.body);
 
             // 如果有下面一句，则可以不用手动在 disposed 中释放
-            // this.childs.push(this.layer);
+            // this.children.push(this.layer);
         }
 
         this.layer.show();
