@@ -295,9 +295,6 @@ body{
 /*facilities*/
 
 
-.resource,.facility{
-  height: 800px;
-}
 
 .resource-title,.facility-title{
 text-align: center;
@@ -474,7 +471,13 @@ footer dt{
   text-align: center;
   padding: 18px 0 0 0;
 }  
-  
+
+.banner-md {
+  max-width: 1160px;
+  margin: 20px auto 40px;
+  padding: 0 20px;
+}
+
 /*响应式的部分*/
 
 @media only screen and  (max-width: 768px){
@@ -549,8 +552,6 @@ footer dt{
   footer dt {
     width: 20%;
   }
-
-
 
 }
 
