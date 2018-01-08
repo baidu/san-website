@@ -48,6 +48,51 @@ san.defineComponent({
 });
 ```
 
+merge
+-----
+
+merge 方法用于将目标数据对象（target）和传入数据对象（source）的键进行合并，作用类似于 JavaScript 中的 `Object.assign(target, source)`。
+
+`版本`：>= 3.4.0
+
+```javascript
+san.defineComponent({
+    attached: function () {
+        requestUser().then(this.updateUserInfo.bind(this));
+    },
+
+    updateUserInfo: function (data) {
+        this.data.merge('user', data);
+    }
+});
+```
+
+apply
+-----
+
+apply 方法接受一个函数作为参数，传入当前的值到函数，然后用新返回的值更新它。其行为类似 `Array.prototype.map` 方法。
+
+`版本`：>= 3.4.0
+
+```javascript
+san.defineComponent({
+    attached: function () {
+        this.data.set('number', {
+            value: 1
+        });
+        this.updateNumber();
+    },
+
+    updateNumber: function (data) {
+        this.data.apply('number', function (number) {
+            return {
+                value: number.value * 2
+            };
+        })
+    }
+});
+```
+
 数组方法
 ------
 
@@ -148,9 +193,3 @@ san.defineComponent({
     }
 });
 ```
-
-
-
-
-
-
