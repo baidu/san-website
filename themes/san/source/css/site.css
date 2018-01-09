@@ -324,7 +324,7 @@ text-align: center;
 .resource-row,.facility-row{
   display: flex;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 60px auto;
 }
 .resource-block,.facility-block{
   flex-basis: 25%;
