@@ -473,14 +473,15 @@ footer dt{
 }  
 
 .banner-md {
-  max-width: 1160px;
-  margin: 20px auto 40px;
+  max-width: 1200px;
+  margin: 100px auto;
   padding: 0 20px;
 }
 
+
 /*响应式的部分*/
 
-@media only screen and  (max-width: 768px){
+@media only screen and (max-width: 768px) {
   .overlay{
     animation: none;
     padding-top: 5px;
@@ -551,6 +552,10 @@ footer dt{
 
   footer dt {
     width: 20%;
+  }
+
+  .banner-md {
+    margin: 0 auto 20px;
   }
 
 }
