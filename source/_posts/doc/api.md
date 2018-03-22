@@ -278,6 +278,26 @@ var MyApp = san.defineComponent({
 });
 ```
 
+### delimiters
+
+`解释`：
+
+定义组件模板解析时插值的分隔符。值为2个项的数组，分别为起始分隔符和结束分隔符。默认为 `['{{', '}}']`。
+
+
+`版本`：>= 3.5.0
+
+`类型`： Array
+
+`用法`：
+
+```javascript
+var MyComponent = san.defineComponent({
+    delimiters: ['{%', '%}'],
+    template: '<a><span title="Good {%name%}">Hello {%name%}</span></a>'
+});
+```
+
 
 
 组件方法
