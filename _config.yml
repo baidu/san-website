@@ -69,6 +69,6 @@ theme: san
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:ecomfe/san.git
+  repo: git@github.com:baidu/san.git
   branch: gh-pages
   message: deploy san website
