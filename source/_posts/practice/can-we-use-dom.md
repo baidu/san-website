@@ -57,9 +57,9 @@ San 是一个 MVVM（Model-View-ViewModel） 的组件框架，借助 MVVM 框�
 
 ### 此 DOM 非彼 DOM
 
-在我们写的代码中的 template 属性，在 San 中被称作 **内容模板**，它是一个符合 HTML 语法规则的字符串，它会被 San 解析，返回一个 [ANode](https://github.com/ecomfe/san/blob/master/doc/anode.md) 对象。
+在我们写的代码中的 template 属性，在 San 中被称作 **内容模板**，它是一个符合 HTML 语法规则的字符串，它会被 San 解析，返回一个 [ANode](https://github.com/baidu/san/blob/master/doc/anode.md) 对象。
 
-也就是说我们在 template 中写的东西实际上并不是要放到 DOM 上的，它是给 San 使用的，真正生成的 DOM 实际上是 San 根据你的 template 的解析结果也就是 [ANode](https://github.com/ecomfe/san/blob/master/doc/anode.md) 生成的，你的代码与DOM之间其实还隔了一层 San。
+也就是说我们在 template 中写的东西实际上并不是要放到 DOM 上的，它是给 San 使用的，真正生成的 DOM 实际上是 San 根据你的 template 的解析结果也就是 [ANode](https://github.com/baidu/san/blob/master/doc/anode.md) 生成的，你的代码与DOM之间其实还隔了一层 San。
 
 我们如果直接使用原生的 api 或者 jQuery 来直接操作 San 生成的DOM，这是不合理的，因为那些DOM根本不是我们写的，而我们却要去试图修改它，显然我们不应该这样做。
 

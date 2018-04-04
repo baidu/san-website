@@ -24,7 +24,7 @@ let MyComponent = san.defineComponent({
 
 **考虑到性能原因，`dataTypes` 只会在 `development` 模式下进行数据校验。**
 
-请参考[这里](https://github.com/ecomfe/san/tree/master/dist)来确认在不同的 san 发布版本中数据校验功能的支持情况。
+请参考[这里](https://github.com/baidu/san/tree/master/dist)来确认在不同的 san 发布版本中数据校验功能的支持情况。
 
 ## DataTypes
 

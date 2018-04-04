@@ -39,7 +39,7 @@ var MyApp = san.defineComponent({
 
 `解释`：
 
-**方法** 。编译组件，组件的编译过程主要是解析 template 成 [ANode](https://github.com/ecomfe/san/blob/master/doc/anode.md)，并对 components 中的 plain object 执行 defineComponent。
+**方法** 。编译组件，组件的编译过程主要是解析 template 成 [ANode](https://github.com/baidu/san/blob/master/doc/anode.md)，并对 components 中的 plain object 执行 defineComponent。
 
 组件会在其第一个实例初始化时自动编译。我们通常不会使用此方法编译组件，除非你有特殊的需求希望组件的编译过程提前。
 
@@ -165,7 +165,7 @@ fs.writeFileSync('your-module.js', 'exports = module.exports = ' + renderSource,
 
 `解释`：
 
-**属性** 。表达式类型枚举，有助于帮你理解和使用 San 的模板编译结果。详细请参考[ANode](https://github.com/ecomfe/san/blob/master/doc/anode.md)文档。
+**属性** 。表达式类型枚举，有助于帮你理解和使用 San 的模板编译结果。详细请参考[ANode](https://github.com/baidu/san/blob/master/doc/anode.md)文档。
 
 
 ### parseExpr
@@ -176,7 +176,7 @@ fs.writeFileSync('your-module.js', 'exports = module.exports = ' + renderSource,
 
 `解释`：
 
-**方法** 。将源字符串解析成表达式对象。详细请参考[ANode](https://github.com/ecomfe/san/blob/master/doc/anode.md)文档。
+**方法** 。将源字符串解析成表达式对象。详细请参考[ANode](https://github.com/baidu/san/blob/master/doc/anode.md)文档。
 
 `用法`：
 
@@ -204,7 +204,7 @@ expr = {
 
 `解释`：
 
-**方法** 。将源字符串解析成 ANode 对象。如果你想使用 San 的模板形式，但是自己开发视图渲染机制，可以使用该方法解析模板。详细请参考[ANode](https://github.com/ecomfe/san/blob/master/doc/anode.md#user-content-%E6%A8%A1%E6%9D%BF%E8%A7%A3%E6%9E%90%E7%BB%93%E6%9E%9C)文档。
+**方法** 。将源字符串解析成 ANode 对象。如果你想使用 San 的模板形式，但是自己开发视图渲染机制，可以使用该方法解析模板。详细请参考[ANode](https://github.com/baidu/san/blob/master/doc/anode.md#user-content-%E6%A8%A1%E6%9D%BF%E8%A7%A3%E6%9E%90%E7%BB%93%E6%9E%9C)文档。
 
 `用法`：
 
@@ -261,7 +261,7 @@ aNode = {
 **属性** 。是否开启调试功能。当同时满足以下两个条件时，可以在 chrome 中使用 **devtool** 进行调试。
 
 - 主模块 **debug** 属性设为 **true**
-- 当前页面环境中的 San 是带有 **devtool** 功能的版本。[查看San的打包发布版本](https://github.com/ecomfe/san/tree/master/dist)
+- 当前页面环境中的 San 是带有 **devtool** 功能的版本。[查看San的打包发布版本](https://github.com/baidu/san/tree/master/dist)
 
 
 ### version
