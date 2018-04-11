@@ -236,7 +236,12 @@ main {
     position: relative;
     background-color: #fff;
 }
-
+.san-perf {
+    display: block;
+    margin: 60px auto;
+    width: 728px;
+    height: 1150px;
+}
 .example-main {
     background: #00222d;
     padding: 3rem 1rem 8rem;
@@ -305,6 +310,9 @@ main {
 
 @media only screen and  (max-width: 768px){
 
+    .san-perf {
+        display: none;
+    }
     .algolia-autocomplete .ds-dropdown-menu {
         margin-top: 0;
         top: 56px !important;
