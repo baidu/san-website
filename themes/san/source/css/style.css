@@ -203,7 +203,7 @@ footer {
     color: #2da2f8;
 }
 
-.recommend dd a:link
+.recommend dd a
 {
     color: #818688;
     text-decoration: none;
@@ -223,10 +223,9 @@ footer {
     color: #2EA2F8;
 }
 
-.recommend dd a:active{
-    color:red;
+.recommend-blue{
+    color: #2EA2F8 !important;
 }
-
 
 
 main {
