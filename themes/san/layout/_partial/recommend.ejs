@@ -1,25 +1,25 @@
     <dl>
         <dt>教程</dt>
-        <dd><a href="<%- url_for('tutorial/setup/') %>" class="<%if(page.path.indexOf('tutorial/setup/')==0){%>recommend-blue<%}%>">安装</a></dd>
-        <dd><a href="<%- url_for('tutorial/background/') %>" class="<%if(page.path.indexOf('tutorial/background/')==0){%>recommend-blue<%}%>">背景</a></dd>
-        <dd><a href="<%- url_for('tutorial/start/') %>" class="<%if(page.path.indexOf('tutorial/start/')==0){%>recommend-blue<%}%>">开始</a></dd>
-        <dd><a href="<%- url_for('tutorial/data-binding/') %>" class="<%if(page.path.indexOf('tutorial/data-binding/')==0){%>recommend-blue<%}%>">数据绑定</a></dd>
-        <dd><a href="<%- url_for('tutorial/data-method/') %>" class="<%if(page.path.indexOf('tutorial/data-method/')==0){%>recommend-blue<%}%>">数据操作</a></dd>
-        <dd><a href="<%- url_for('tutorial/data-checking/') %>" class="<%if(page.path.indexOf('tutorial/data-checking/')==0){%>recommend-blue<%}%>">数据校验</a></dd>
-        <dd><a href="<%- url_for('tutorial/style/') %>" class="<%if(page.path.indexOf('tutorial/style/')==0){%>recommend-blue<%}%>">样式</a></dd>
-        <dd><a href="<%- url_for('tutorial/if/') %>" class="<%if(page.path.indexOf('tutorial/if/')==0){%>recommend-blue<%}%>">条件</a></dd>
-        <dd><a href="<%- url_for('tutorial/for/') %>" class="<%if(page.path.indexOf('tutorial/for/')==0){%>recommend-blue<%}%>">循环</a></dd>
-        <dd><a href="<%- url_for('tutorial/event/') %>" class="<%if(page.path.indexOf('tutorial/event/')==0){%>recommend-blue<%}%>">事件处理</a></dd>
-        <dd><a href="<%- url_for('tutorial/form/') %>" class="<%if(page.path.indexOf('tutorial/form/')==0){%>recommend-blue<%}%>">表单</a></dd>
-        <dd><a href="<%- url_for('tutorial/slot/') %>" class="<%if(page.path.indexOf('tutorial/slot/')==0){%>recommend-blue<%}%>">插槽</a></dd>
-        <dd><a href="<%- url_for('tutorial/transition/') %>" class="<%if(page.path.indexOf('tutorial/transition/')==0){%>recommend-blue<%}%>">过渡</a></dd>
-        <dd><a href="<%- url_for('tutorial/component/') %>" class="<%if(page.path.indexOf('tutorial/component/')==0){%>recommend-blue<%}%>">组件</a></dd>
-        <dd><a href="<%- url_for('tutorial/reverse/') %>" class="<%if(page.path.indexOf('tutorial/reverse/')==0){%>recommend-blue<%}%>">组件反解</a></dd>
-        <dd><a href="<%- url_for('tutorial/ssr/') %>" class="<%if(page.path.indexOf('tutorial/ssr/')==0){%>recommend-blue<%}%>">服务端渲染</a></dd>
+        <dd><a href="<%- url_for('tutorial/setup/') %>"<%if(page.path.indexOf('tutorial/setup/')==0){%> class="recommend-active"<%}%>>安装</a></dd>
+        <dd><a href="<%- url_for('tutorial/background/') %>"<%if(page.path.indexOf('tutorial/background/')==0){%> class="recommend-active"<%}%>>背景</a></dd>
+        <dd><a href="<%- url_for('tutorial/start/') %>"<%if(page.path.indexOf('tutorial/start/')==0){%> class="recommend-active"<%}%>>开始</a></dd>
+        <dd><a href="<%- url_for('tutorial/data-binding/') %>"<%if(page.path.indexOf('tutorial/data-binding/')==0){%> class="recommend-active"<%}%>>数据绑定</a></dd>
+        <dd><a href="<%- url_for('tutorial/data-method/') %>"<%if(page.path.indexOf('tutorial/data-method/')==0){%> class="recommend-active"<%}%>>数据操作</a></dd>
+        <dd><a href="<%- url_for('tutorial/data-checking/') %>"<%if(page.path.indexOf('tutorial/data-checking/')==0){%> class="recommend-active"<%}%>>数据校验</a></dd>
+        <dd><a href="<%- url_for('tutorial/style/') %>"<%if(page.path.indexOf('tutorial/style/')==0){%> class="recommend-active"<%}%>>样式</a></dd>
+        <dd><a href="<%- url_for('tutorial/if/') %>"<%if(page.path.indexOf('tutorial/if/')==0){%> class="recommend-active"<%}%>>条件</a></dd>
+        <dd><a href="<%- url_for('tutorial/for/') %>"<%if(page.path.indexOf('tutorial/for/')==0){%> class="recommend-active"<%}%>>循环</a></dd>
+        <dd><a href="<%- url_for('tutorial/event/') %>"<%if(page.path.indexOf('tutorial/event/')==0){%> class="recommend-active"<%}%>>事件处理</a></dd>
+        <dd><a href="<%- url_for('tutorial/form/') %>"<%if(page.path.indexOf('tutorial/form/')==0){%> class="recommend-active"<%}%>>表单</a></dd>
+        <dd><a href="<%- url_for('tutorial/slot/') %>"<%if(page.path.indexOf('tutorial/slot/')==0){%> class="recommend-active"<%}%>>插槽</a></dd>
+        <dd><a href="<%- url_for('tutorial/transition/') %>"<%if(page.path.indexOf('tutorial/transition/')==0){%> class="recommend-active"<%}%>>过渡</a></dd>
+        <dd><a href="<%- url_for('tutorial/component/') %>"<%if(page.path.indexOf('tutorial/component/')==0){%> class="recommend-active"<%}%>>组件</a></dd>
+        <dd><a href="<%- url_for('tutorial/reverse/') %>"<%if(page.path.indexOf('tutorial/reverse/')==0){%> class="recommend-active"<%}%>>组件反解</a></dd>
+        <dd><a href="<%- url_for('tutorial/ssr/') %>"<%if(page.path.indexOf('tutorial/ssr/')==0){%> class="recommend-active"<%}%>>服务端渲染</a></dd>
 
         <dt>了解更多</dt>
-        <dd><a href="<%- url_for('doc/api/') %>" class="<%if(page.path.indexOf('doc/api/')==0){%>recommend-blue<%}%>">组件 API</a></dd>
-        <dd><a href="<%- url_for('doc/main-members/') %>" class="<%if(page.path.indexOf('doc/main-members/')==0){%>recommend-blue<%}%>">主模块 API</a></dd>
+        <dd><a href="<%- url_for('doc/api/') %>"<%if(page.path.indexOf('doc/api/')==0){%> class="recommend-active"<%}%>>组件 API</a></dd>
+        <dd><a href="<%- url_for('doc/main-members/') %>"<%if(page.path.indexOf('doc/main-members/')==0){%> class="recommend-active"<%}%>>主模块 API</a></dd>
         <dd><a href="https://github.com/baidu/san/blob/master/doc/anode.md" target="_blank">ANode DOC</a></dd>
         <dd><a href="https://github.com/baidu/san/tree/master/dist" target="_blank">发布版本说明</a></dd>
         <dd><a href="https://github.com/baidu/san/blob/master/CHANGELOG.md" target="_blank">版本更新日志</a></dd>
