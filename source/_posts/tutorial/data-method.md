@@ -30,7 +30,17 @@ san.defineComponent({
 set
 -----
 
+```
+set({string|Object}expr, {*}value, {Object?}option)
+```
+
+
+`解释`：
+
 set 方法是最常用的操作数据的方法，作用相当于 JavaScript 中的赋值 (=)。
+
+
+`用法`：
 
 ```javascript
 san.defineComponent({
@@ -48,12 +58,22 @@ san.defineComponent({
 });
 ```
 
+
 merge
 -----
 
-merge 方法用于将目标数据对象（target）和传入数据对象（source）的键进行合并，作用类似于 JavaScript 中的 `Object.assign(target, source)`。
+```
+merge({string|Object}expr, {*}value, {Object?}option)
+```
 
 `版本`：>= 3.4.0
+
+`解释`：
+
+merge 方法用于将目标数据对象（target）和传入数据对象（source）的键进行合并，作用类似于 JavaScript 中的 `Object.assign(target, source)`。
+
+`用法`：
+
 
 ```javascript
 san.defineComponent({
@@ -70,9 +90,18 @@ san.defineComponent({
 apply
 -----
 
-apply 方法接受一个函数作为参数，传入当前的值到函数，然后用新返回的值更新它。其行为类似 `Array.prototype.map` 方法。
+```
+apply({string|Object}expr, {function({*}):{*}}value, {Object?}option)
+```
 
 `版本`：>= 3.4.0
+
+`解释`：
+
+apply 方法接受一个函数作为参数，传入当前的值到函数，然后用新返回的值更新它。其行为类似 `Array.prototype.map` 方法。
+
+
+`用法`：
 
 ```javascript
 san.defineComponent({
@@ -111,7 +140,17 @@ san.defineComponent({
 
 ### push
 
+
+```
+{number} push({string|Object}expr, {*}value, {Object?}option)
+```
+
+`解释`：
+
 在数组末尾插入一条数据。
+
+`用法`：
+
 
 ```javascript
 san.defineComponent({
@@ -123,7 +162,15 @@ san.defineComponent({
 
 ### pop
 
+```
+{*} push({string|Object}expr, {Object?}option)
+```
+
+`解释`：
+
 在数组末尾弹出一条数据。
+
+`用法`：
 
 ```javascript
 san.defineComponent({
@@ -136,7 +183,15 @@ san.defineComponent({
 
 ### unshift
 
+```
+{number} unshift({string|Object}expr, {*}value, {Object?}option)
+```
+
+`解释`：
+
 在数组开始插入一条数据。
+
+`用法`：
 
 ```javascript
 san.defineComponent({
@@ -148,7 +203,15 @@ san.defineComponent({
 
 ### shift
 
+```
+{*} shift({string|Object}expr, {Object?}option)
+```
+
+`解释`：
+
 在数组开始弹出一条数据。
+
+`用法`：
 
 ```javascript
 san.defineComponent({
@@ -160,7 +223,15 @@ san.defineComponent({
 
 ### remove
 
+```
+remove({string|Object}expr, {*}item, {Object?}option)
+```
+
+`解释`：
+
 移除一条数据。只有当数组项与传入项完全相等(===)时，数组项才会被移除。
+
+`用法`：
 
 ```javascript
 san.defineComponent({
@@ -172,7 +243,15 @@ san.defineComponent({
 
 ### removeAt
 
+```
+removeAt({string|Object}expr, {number}index, {Object?}option)
+```
+
+`解释`：
+
 通过数据项的索引移除一条数据。
+
+`用法`：
 
 ```javascript
 san.defineComponent({
@@ -184,7 +263,15 @@ san.defineComponent({
 
 ### splice
 
+```
+{Array} removeAt({string|Object}expr, {Array}spliceArgs, {Object?}option)
+```
+
+`解释`：
+
 向数组中添加或删除项目。
+
+`用法`：
 
 ```javascript
 san.defineComponent({
