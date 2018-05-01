@@ -39,6 +39,19 @@ s-elif
 `提示`：**s-elif** 指令元素必须跟在 **s-if** 或 **s-elif** 指令元素后，否则将抛出 **elif not match if** 的异常。
 
 
+s-elif
+------
+
+`> 3.5.6`
+
+**s-else-if** 指令是 **s-elif** 指令的别名，效果相同。
+
+```html
+<span s-if="isActive">Active</span>
+<span s-else-if="isOnline">Pending</span>
+```
+
+
 s-else
 ------
 
