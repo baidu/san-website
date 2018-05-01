@@ -39,7 +39,7 @@ s-elif
 `提示`：**s-elif** 指令元素必须跟在 **s-if** 或 **s-elif** 指令元素后，否则将抛出 **elif not match if** 的异常。
 
 
-s-elif
+s-else-if
 ------
 
 `> 3.5.6`
