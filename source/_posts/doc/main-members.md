@@ -249,6 +249,42 @@ aNode = {
 ```
 
 
+数据
+----
+
+San 开放了组件中使用的数据容器类与表达式计算函数，开发者可以用来管理一些与组件无关的数据，比如应用状态等。
+
+
+### Data
+
+`版本`：>= 3.5.6
+
+`类型`： Class Function
+
+`解释`：
+
+数据容器类，包含 get、set、splice、push、pop、unshift、shift、merge、apply 数据操作方法，详细请参考[数据操作](../../tutorial/data-method/)文档。
+
+通过方法变更数据时，data 对象将 fire change 事件。通过 listen 和 unlisten 方法可以监听或取消监听 change 事件。
+
+```javascript
+var data = new san.Data({
+    num1: 1,
+    num2: 2
+});
+
+data.listen(function (change) {
+    console.log(change.value);
+});
+
+data.set('num2', 10);
+// console 10
+```
+
+
+
+
+
 其他
 ----
 
