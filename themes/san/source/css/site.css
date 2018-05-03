@@ -13,7 +13,7 @@ body{
 
 .overlay{
    background:url(..//img/lowpoly.jpg);
-   background-size: cover; 
+   background-size: cover;
   -webkit-animation:150s scroll infinite linear;
   -moz-animation:150s scroll infinite linear;
   -o-animation:150s scroll infinite linear;
@@ -21,7 +21,7 @@ body{
   animation:150s scroll infinite linear;
   width:100%;
  height:460px;
- padding-top:25px; 
+ padding-top:25px;
  overflow: hidden;
  text-align: center;
  position: relative;
@@ -223,7 +223,7 @@ body{
   text-transform:uppercase;
   transition-timing-function: ease;
     transition-duration: .2s;
-    transition-property: color; 
+    transition-property: color;
 }
 .navbar-default .navbar-nav>li>a:hover{
   color: #2EA2F8;
@@ -351,7 +351,7 @@ text-decoration: none;
 
 .resource-item:hover,.facility-item:hover{
   text-decoration: none;
-  box-shadow: 
+  box-shadow:
 }
 .resource-item-top,.facility-item-top{
   height: 200px;
@@ -441,17 +441,17 @@ dl {
 footer{
   border-top: 1px solid #F1F1F1;
   background: #F2F4F6;
-  position: relative; 
+  position: relative;
   display: block;
   overflow: hidden;
 }
 .efe-products{
-  padding-top:40px; 
+  padding-top:40px;
   margin: 0 auto;
   width:720px;
-}  
+}
 
-  
+
 footer dt,footer dd {
   float: left;
   line-height: 24px;
@@ -460,7 +460,7 @@ footer dt,footer dd {
   color: #999;
   margin-left: 0;
 }
-  
+
 footer dt{
   clear: left;
   width: 70px;
@@ -470,7 +470,7 @@ footer dt{
   clear: both;
   text-align: center;
   padding: 18px 0 0 0;
-}  
+}
 
 .banner-md {
   max-width: 1200px;
@@ -487,9 +487,17 @@ footer dt{
     padding-top: 5px;
     height: 100%;
   }
-  .navbar-container,.home-iframe{
+  .navbar-container{
     display: none;
   }
+
+  .home-iframe{
+    position: static;
+    height: 33px;
+    transform: scale(0.75);
+    margin: 20px auto 0 auto;
+  }
+
   .overlay>h1{
     font-size: 45px;
   }
