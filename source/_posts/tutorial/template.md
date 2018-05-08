@@ -162,3 +162,34 @@ filter支持参数传递，参数可以是任何支持的[表达式](#表达式)
 
 过滤器在组件声明时注册，具体请参考组件文档。
 
+
+字符实体
+------
+
+在我们编写 HTML 时，如果内容中包含 HTML 预留字符或特殊字符，我们需要写字符实体。San 的模板 HTML 是自解析的，由于体积的关系，只支持有限的具名字符实体：
+
+- &amp;lt;
+- &amp;gt;
+- &amp;nbsp;
+- &amp;quot;
+- &amp;emsp;
+- &amp;ensp;
+- &amp;thinsp;
+- &amp;copy;
+- &amp;reg;
+- &amp;zwnj;
+- &amp;zwj;
+- &amp;amp;
+
+```html
+<p>LiLei &amp; HanMeiMei are a couple.</p>
+<p>1 + 1 &lt; 3</p>
+```
+
+除此之外，我们可以使用 `&#[entity_number];` 或 `&#x[entity_number];` 形式的编号字符实体。
+
+```html
+<p>LiLei &#38; HanMeiMei are a couple.</p>
+<p>1 + 1 &#60; 3</p>
+```
+
