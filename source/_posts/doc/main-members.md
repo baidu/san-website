@@ -293,7 +293,7 @@ data.set('num2', 10);
 
 **方法** ，计算表达式的值。 
 
-- `expr` 可以通过 [parseExpr](#parseExpr) 方法得到。支持的表达式类型可参考[表达式](../../tutorial/data-binding/#表达式)文档
+- `expr` 可以通过 [parseExpr](#parseExpr) 方法得到。支持的表达式类型可参考[表达式](../../tutorial/template/#表达式)文档
 - `data` 可以是组件的数据对象，也可以是自己通过 new [Data](#Data) 得到的数据对象
 - `owner` 仅用于表达式中 filter 的执行，表达式中无自定义 filter 时无需此参数
 

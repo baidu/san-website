@@ -16,7 +16,7 @@ s-if
 <span s-if="isOK">Hello San!</span>
 ```
 
-**s-if** 指令的值可以是任何类型的[表达式](../data-binding/#表达式)。
+**s-if** 指令的值可以是任何类型的[表达式](../template/#表达式)。
 
 ```html
 <span s-if="isReady && isActive">Hello San!</span>
@@ -29,7 +29,7 @@ s-elif
 
 `> 3.2.3`
 
-**s-elif** 指令可以给 **s-if** 增加一个额外条件分支块。**s-elif** 指令的值可以是任何类型的[表达式](../data-binding/#表达式)。
+**s-elif** 指令可以给 **s-if** 增加一个额外条件分支块。**s-elif** 指令的值可以是任何类型的[表达式](../template/#表达式)。
 
 ```html
 <span s-if="isActive">Active</span>
