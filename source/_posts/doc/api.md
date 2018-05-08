@@ -298,6 +298,28 @@ var MyComponent = san.defineComponent({
 });
 ```
 
+### transition
+
+`解释`：
+
+定义组件根节点的过渡动画控制器。可参考 [动画控制器](../../tutorial/transition/#动画控制器) 和 [动画控制器 Creator](../../tutorial/transition/#动画控制器-Creator) 文档。
+
+
+`版本`：>= 3.3.0
+
+`类型`： Object
+
+`用法`：
+
+```javascript
+var MyComponent = san.defineComponent({
+    template: '<span>transition</span>',
+    transition: {
+        enter: function (el) { /* 根节点进入时的过渡动画 */ },
+        leave: function (el, done) { /* 根节点离开时的过渡动画 */ },
+    }
+});
+```
 
 
 组件方法
