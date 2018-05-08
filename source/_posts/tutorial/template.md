@@ -1,5 +1,5 @@
 ---
-title: 数据绑定
+title: 模板
 categories:
 - tutorial
 ---
