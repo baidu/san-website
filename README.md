@@ -10,6 +10,7 @@ $ npm i
 ### preview
 
 ```
+# npm start
 hexo s
 ```
 
@@ -17,6 +18,7 @@ hexo s
 ### deploy
 
 ```
+# npm run deploy
 $ hexo deploy
 ```
 
