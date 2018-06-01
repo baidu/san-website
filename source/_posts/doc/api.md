@@ -68,6 +68,33 @@ var myComponent = new MyComponent({
 ```
 
 
+### transition
+
+`解释`：
+
+组件的过渡动画控制器。可参考 [动画控制器](../../tutorial/transition/#动画控制器) 和 [动画控制器 Creator](../../tutorial/transition/#动画控制器-Creator) 文档。
+
+
+`版本`：>= 3.6.0
+
+`类型`： Object
+
+`用法`：
+
+```javascript
+var MyComponent = san.defineComponent({
+    template: '<span>transition</span>'
+});
+
+var myComponent = new MyComponent({
+    transition: {
+        enter: function (el, done) { /* 进入时的过渡动画 */ },
+        leave: function (el, done) { /* 离开时的过渡动画 */ },
+    }
+});
+```
+
+
 生命周期钩子
 -------
 
@@ -302,10 +329,10 @@ var MyComponent = san.defineComponent({
 
 `解释`：
 
-定义组件根节点的过渡动画控制器。可参考 [动画控制器](../../tutorial/transition/#动画控制器) 和 [动画控制器 Creator](../../tutorial/transition/#动画控制器-Creator) 文档。
+定义组件根节点的过渡动画控制器。已废弃。
 
 
-`版本`：>= 3.3.0
+`版本`：>= 3.3.0, < 3.6.0
 
 `类型`： Object
 
