@@ -60,6 +60,21 @@ categories:
 `表达式`：属性绑定支持任意类型的表达式，具体请参考本篇后续的[表达式](#表达式)章节。
 
 
+### 属性整体绑定
+
+`版本`：>= 3.5.8
+
+通过 **s-bind** ，可以为组件绑定整个数据。当**s-bind** 和单个的属性绑定并存时，单个的属性绑定将覆盖整体绑定中相应的数据项。
+
+```html
+<ui-label s-bind="{{ {text: email, title: name} }}"></ui-label>
+
+<!-- text 单个属性声明将覆盖 s-bind 中的 text 项 -->
+<ui-label s-bind="{{ {text: email, title: name} }}" text="{{name}}"></ui-label>
+```
+
+
+`提示`：对象字面量常用于属性整体绑定。
 
 
 ### 双向绑定
