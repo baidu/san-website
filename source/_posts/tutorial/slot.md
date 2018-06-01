@@ -239,12 +239,19 @@ var myComponent = new MyComponent({
 scoped 插槽
 -----
 
+如果 slot 声明中包含 **s-bind** 或 1 个以上 **var-** 数据前缀声明，该 slot 为 scoped slot。scoped slot 具有独立的 **数据环境**。
+
+scoped slot 通常用于组件的视图部分期望由 **外部传入视图结构**，渲染过程使用组件内部数据。
+
+`注意`：scoped slot 中不支持双向绑定。
+
+
+### var
+
 `版本`：>= 3.3.0
 
 
-如果 slot 声明中包含 1 个以上 **var-** 数据前缀声明，该 slot 为 scoped slot。scoped slot 具有独立的 **数据环境**，其中仅包含 **var-** 声明的数据。scoped 数据声明的形式为 **var-name="expression"**。
-
-scoped slot 通常用于组件的视图部分期望由 **外部传入视图结构**，渲染过程使用组件内部数据。下面是典型的列表数据渲染场景：
+**var-** 的 scoped 数据声明的形式为 **var-name="expression"**。
 
 
 ```javascript
@@ -302,7 +309,70 @@ var myComponent = new MyComponent({
 */
 ```
 
-`注意`：scoped slot 中不支持双向绑定。
+### s-bind
+
+`版本`：>= 3.6.0
+
+
+**s-bind** 的 scoped 数据声明的形式为 **s-bind="expression"**。
+
+当 **s-bind** 和 **var-** 并存时，**var-** 将覆盖整体绑定中相应的数据项。
+
+
+```javascript
+var Men = san.defineComponent({
+    template: '<div>'
+      + '<slot s-for="item in data" s-bind="{n: item.name, email: item.email, sex: item.sex ? \'male\' : \'female\'}">'
+        + '<p>{{n}},{{sex}},{{email}}</p>'
+      + '</slot>'
+      + '</div>'
+});
+
+var MyComponent = san.defineComponent({
+    components: {
+        'x-men': Men
+    },
+
+    template: '<div><x-men data="{{men}}" s-ref="men">'
+          + '<h3>{{n}}</h3>'
+          + '<p><b>{{sex}}</b><u>{{email}}</u></p>'
+        + '</x-men></div>',
+
+    attached: function () {
+        var slots = this.ref('men').slot();
+
+        // 3
+        slots.length
+
+        // truthy
+        slots[0].isInserted
+
+        // truthy
+        contentSlot.isScoped
+    }
+});
+
+var myComponent = new MyComponent({
+    data: {
+        men: [
+            {name: 'errorrik', sex: 1, email: 'errorrik@gmail.com'},
+            {name: 'leeight', sex: 0, email: 'leeight@gmail.com'},
+            {name: 'otakustay', email: 'otakustay@gmail.com', sex: 1}
+        ]
+    }
+});
+
+/* MyComponent渲染结果
+<div>
+    <h3>errorrik</h3>
+    <p><b>male</b><u>errorrik@gmail.com</u></p>
+    <h3>leeight</h3>
+    <p><b>female</b><u>leeight@gmail.com</u></p>
+    <h3>otakustay</h3>
+    <p><b>male</b><u>otakustay@gmail.com</u></p>
+</div>
+*/
+```
 
 
 ### 访问环境数据
