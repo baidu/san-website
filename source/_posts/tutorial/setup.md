@@ -115,7 +115,7 @@ import san from 'san';
 </style>
 ```
 
-在 `webpack` 中可以使用 [san-loader](https://github.com/baidu/san-loader)  来加载 `.san` 文件
+在 `webpack` 中可以使用 [san-loader](https://github.com/ecomfe/san-loader)  来加载 `.san` 文件
 
 在 [这个例子](https://github.com/baidu/san/tree/master/example/todos-esnext) 里，
 我们可以看到如何使用 `San component` 构建一个应用
