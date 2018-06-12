@@ -191,7 +191,7 @@ san.defineComponent({
 ### pop
 
 ```
-{*} push({string|Object}expr, {Object?}option)
+{*} pop({string|Object}expr, {Object?}option)
 ```
 
 `解释`：
@@ -292,7 +292,7 @@ san.defineComponent({
 ### splice
 
 ```
-{Array} removeAt({string|Object}expr, {Array}spliceArgs, {Object?}option)
+{Array} splice({string|Object}expr, {Array}spliceArgs, {Object?}option)
 ```
 
 `解释`：
