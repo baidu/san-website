@@ -524,7 +524,7 @@ san.defineComponent({
 
 - 动态创建的子组件无需在 **components** 中声明类型
 - 保证动态子组件不要被重复创建。常见的做法是在实例的属性上持有对创建组件的引用，并以此作判断
-- 保证动态子组件能够被销毁。你可以在创建时 push 到 **childs** 中，或者在 **disposed** 中销毁它
+- 保证动态子组件能够被销毁。你可以在创建时 push 到 **children** 中，或者在 **disposed** 中销毁它
 
 ```javascript
 san.defineComponent({
