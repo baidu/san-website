@@ -17,7 +17,7 @@ class
 <!-- template -->
 <div>
     <button on-click="toggle"></button>
-    <ul class="list{{isHidden ? ' list-hidden' : ''}}">...</ul>
+    <ul class="list {{isHidden ? ' list-hidden' : ''}}">...</ul>
 </div>
 ```
 
