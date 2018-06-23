@@ -68,6 +68,10 @@ san.defineComponent({
 
     attached: function () {
         this.data.get().width; // 200
+
+        // top: 100
+        // left: -1000
+        let {top, left} = this.data.get();
     }
 });
 ```
