@@ -30,7 +30,7 @@ get
 -----
 
 ```
-{*} get({string|Object}expr)
+{*} get({string|Object?}expr)
 ```
 
 
@@ -53,6 +53,26 @@ san.defineComponent({
     }
 });
 ```
+
+当 expr 参数为空时，将返回整个数据项的对象。提供无参的 **get** 方法，主要是为了 ESNext 的解构，能够在一个表达式中获取多个数据项。
+
+```javascript
+san.defineComponent({
+    initData: function () {
+        return {
+            width: 200,
+            top: 100,
+            left: -1000
+        };
+    },
+
+    attached: function () {
+        this.data.get().width; // 200
+    }
+});
+```
+
+`注意`： **get** 方法获取的数据不能直接修改，否则可能导致不一致的问题。数据修改请使用本文下面的 **set** 、 **splice** 等方法
 
 
 set
