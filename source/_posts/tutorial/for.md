@@ -13,7 +13,7 @@ categories:
 **s-for** 指令的语法形式如下：
 
 ```
-item-identifier[, index-identifier] in expression
+item-identifier[, index-identifier] in expression[ trackBy accessor-expression]
 ```
 
 列表渲染
@@ -97,4 +97,39 @@ san.defineComponent({
     </template>
 </dl>
 ```
+
+trackBy
+------
+
+在 **s-for** 指令声明中指定 **trackBy**，San 在数组更新时，将自动跟踪项的变更，进行相应的 insert/remove 等操作。 **trackBy** 只能声明 item-identifier 的属性访问。
+
+
+```html
+<!-- Template -->
+<dl>
+    <dt>name - email</dt>
+    <dd s-for="p in persons trackBy p.name" title="{{p.name}}">{{p.name}}({{dept}}) - {{p.email}}</dd>
+</dl>
+```
+
+```js
+// Component
+san.defineComponent({
+    // template
+
+    initData: function () {
+        return {
+            dept: 'ssg',
+            persons: [
+                {name: 'errorrik', email: 'errorrik@gmail.com'},
+                {name: 'otakustay', email: 'otakustay@gmail.com'}
+            ]
+        };
+    }
+});
+```
+
+
+
+
 
