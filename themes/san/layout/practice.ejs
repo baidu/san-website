@@ -45,7 +45,7 @@
 <main class="practice">
 <input type="text" id="practice-search">
 <dl id="practice-list">
-    <dt>数据</dt>
+    <dt><%= __('practice.data.title') %></dt>
     <dd><a href="<%- url_for('practice/data-valid/') %>">什么东西可以保存在 data 里？</a></dd>
     <dd><a href="<%- url_for('practice/data-invalid/') %>">什么东西不要保存在 data 里？</a></dd>
     <dd><a href="<%- url_for('practice/auto-camel/') %>">data bind 时的 auto camel</a></dd>
