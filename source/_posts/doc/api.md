@@ -191,6 +191,47 @@ san.defineComponent({
 });
 ```
 
+`警告`：
+
+filter 方法在运行时通过 this.data 可以触及组件的数据。但是，这么干会造成对数据的隐式依赖，导致数据变化时，视图不会随着更新。所以，filter 方法应该是无副作用的 pure function。
+
+```javascript
+var Bad = san.defineComponent({
+    template: '<u>{{num | enhance}}</u>',
+
+    filters: {
+        enhance: function (n) {
+            return n * this.data.get('times');
+        }
+    },
+
+    initData: function () {
+        return {
+            num: 2,
+            times: 3
+        };
+    }
+});
+
+var Good = san.defineComponent({
+    template: '<u>{{num | enhance(times)}}</u>',
+
+    filters: {
+        enhance: function (n, times) {
+            return n * times;
+        }
+    },
+
+    initData: function () {
+        return {
+            num: 2,
+            times: 3
+        };
+    }
+});
+```
+
+
 ### components
 
 `解释`：
