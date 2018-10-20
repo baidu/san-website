@@ -7,7 +7,7 @@ categories:
 Introduction
 -----
 
-Chrome released V8 JavaScript engine in 2008 which enormously improved the performance of JavaScript. The emergence of V8 engine is destined to be a significant milestone in the history of JavaScript development.
+V8 engine was shipped with Chrome in 2008 which enormously improved the performance of running JavaScript. The emergence of V8 engine is destined to be a significant milestone in the history of JavaScript development.
 
 It provides the best choice for [Ryan Dahl](http://tinyclouds.org/), wanted to develop a high-performance server with no progress for a long time.
 
