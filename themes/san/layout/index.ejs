@@ -6,7 +6,7 @@ layout: false
 
 <body id="home">
     <div class="overlay">
-        <img height="220" src="/san/img/logo-colorful.svg" class="logo" alt="LOGO" title="San">
+        <img height="220" src="<%- url_for('img/logo-colorful.svg') %>" class="logo" alt="LOGO" title="San">
         <h1>San</h1>
         <iframe src="https://ghbtns.com/github-btn.html?user=baidu&repo=san&type=star&count=true&size=large" class="home-iframe"></iframe>
         <p class="overlay-p">A Flexible JavaScript Component Framework</p>
@@ -17,7 +17,7 @@ layout: false
     <nav class="navbar-default" role="navigation">
         <div class="navbar-container">
 
-            <a href="#home"><img class="nav-logo" src="/san/img/logo2.png"></a>
+            <a href="#home"><img class="nav-logo" src="<%- url_for('img/logo2.png') %>"></a>
 
 
             <div class="navbar-right">
@@ -39,17 +39,17 @@ layout: false
 
         <div class="feature-row">
             <div class="feature-item">
-                <img src="/san/img/8.svg" width="44" height="44">
+                <img src="<%- url_for('img/8.svg') %>" width="44" height="44">
                 <h5>HTML模版</h5>
                 <p>声明式的模板，在编写视图时就像是在写一个普通的页面，更符合 HTML 开发人员的习惯。</p>
             </div>
             <div class="feature-item">
-               <img src="/san/img/1.svg" width="44" height="44">
+               <img src="<%- url_for('img/1.svg') %>" width="44" height="44">
                 <h5>数据驱动</h5>
                 <p>修改数据，视图引擎会根据绑定关系自动刷新视图，从此摆脱手工调用 DOM API 的繁琐与可能的遗漏。</p>
             </div>
             <div class="feature-item">
-                <img src="/san/img/2.svg" width="44" height="44">
+                <img src="<%- url_for('img/2.svg') %>" width="44" height="44">
                 <h5>组件化</h5>
                 <p>组件是数据、逻辑与视图的聚合体。通过组件，我们封装独立的功能区块，小到输入组合，大到一个页面。</p>
             </div>
@@ -57,17 +57,17 @@ layout: false
 
         <div class="feature-row">
             <div class="feature-item">
-                <img src="/san/img/3.svg" width="44" height="44">
+                <img src="<%- url_for('img/3.svg') %>" width="44" height="44">
                 <h5>高性能视图</h5>
                 <p>通过修改数据的方法，视图引擎能够直接刷新需要变更的视图区域，无需进行任何检测，性能更高。</p>
             </div>
             <div class="feature-item">
-                <img src="/san/img/5.svg" width="44" height="44">
+                <img src="<%- url_for('img/5.svg') %>" width="44" height="44">
                 <h5>组件反解</h5>
                 <p>为首屏时间优化，服务端通常直接输出HTML。我们能从现有的元素中反向解析出组件，并构建绑定关系。</p>
             </div>
             <div class="feature-item">
-                <img src="/san/img/4.svg" width="44" height="44">
+                <img src="<%- url_for('img/4.svg') %>" width="44" height="44">
                 <h5>体积小巧</h5>
                 <p>13k (gzipped) 的体积，无需担心对页面下载带来负担。体积强迫症患者的福音。</p>
             </div>
@@ -75,23 +75,23 @@ layout: false
 
         <div class="feature-row">
             <div class="feature-item">
-                <img src="/san/img/9.svg" width="44" height="44">
+                <img src="<%- url_for('img/9.svg') %>" width="44" height="44">
                 <h5>良好的兼容性</h5>
                 <p>通过方法修改数据的另一好处是，可以获得更好的浏览器兼容性。毕竟有时我们产品的受众用户有点死板。</p>
             </div>
             <div class="feature-item">
-                <img src="/san/img/6.svg" width="44" height="44">
+                <img src="<%- url_for('img/6.svg') %>" width="44" height="44">
                 <h5>模块管理自由</h5>
                 <p>项目中可以任意选择 ESNext Module 或 AMD 管理模块。当然，如果你想要用全局变量也是支持的。</p>
             </div>
             <div class="feature-item">
-                <img src="/san/img/7.svg" width="44" height="44">
+                <img src="<%- url_for('img/7.svg') %>" width="44" height="44">
                 <h5>引用方便</h5>
                 <p>支持多种引用方式：NPM、GitHub、下载、HTTP 与 HTTPS CDN，让开发和线上引用更便利。</p>
             </div>
         </div>
     </section>
-    <img src="/san/img/san-perf.png" class="san-perf">
+    <img src="<%- url_for('img/san-perf.png') %>" class="san-perf">
     </div>
 
     <!--Resources -->
