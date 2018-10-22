@@ -22,7 +22,7 @@ let MyComponent = san.defineComponent({
 
 `DataTypes` provides a series of validators to ensure the data received is valid. In the above example, a `DataTypes.string` validator is used so that san will throw an error when the value for `name` is not a `String`.
 
-**Considering performance, `dataTypes` only get evaluated in `development` environment.**
+**For performance considerations, `dataTypes` only get evaluated in `development` environment.**
 
 Please refer to this [link](https://github.com/baidu/san/tree/master/dist) to check out their availabilities in different san releases.
 
