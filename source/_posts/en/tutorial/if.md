@@ -8,7 +8,7 @@ categories:
 s-if
 ------
 
-**s-if** directive can be used for conditional rendering. The element will be rendered if and only if the condition is evaluated as true.
+**s-if** directive can be used for conditional rendering. The element will be rendered if and only if the condition evaluates to true.
 
 `Note`: The element will be removed rather than hidden when the condition is not satisfied.
 
@@ -16,7 +16,7 @@ s-if
 <span s-if="isOK">Hello San!</span>
 ```
 
-The [expression](../template/#Expression) for **s-if** can be of any type.
+The **s-if** directive can contain any type of [expression](../template/#Expression).
 
 ```html
 <span s-if="isReady && isActive">Hello San!</span>
@@ -29,7 +29,7 @@ s-elif
 
 `> 3.2.3`
 
-**s-elif** directive can be used to add a conditional branch for **s-if**. The [expression](../template/#Expression) for **s-elif** can be of any type.
+**s-elif** directive can be used to add a condition branch for **s-if**. The **s-elif** directive can contain any type of [expression](../template/#Expression).
 
 ```html
 <span s-if="isActive">Active</span>
