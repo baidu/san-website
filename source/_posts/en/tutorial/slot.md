@@ -1,12 +1,10 @@
 ---
-title: 插槽
+title: Slots
 categories:
 - tutorial
 ---
 
-
-
-在视图模板中可以通过 slot 声明一个插槽的位置，其位置的内容可以由外层组件定义。
+Templates can contain slots, the contents in which position can be defined by its parent component.
 
 ```javascript
 var Panel = san.defineComponent({
@@ -28,7 +26,7 @@ var MyComponent = san.defineComponent({
     template: '<div><ui-panel>Hello San</ui-panel></div>'
 });
 
-/* MyComponent渲染结果
+/* Render results for MyComponent
 <div>
   <div class="head">title</div>
   <p style="display:none">Hello San</p>
@@ -36,13 +34,13 @@ var MyComponent = san.defineComponent({
 */
 ```
 
-HTML 标准关于 slot 的描述可以参考 [这里](https://developers.google.com/web/fundamentals/getting-started/primers/shadowdom#slots)
+Please refer to [the HTML Spec](https://developers.google.com/web/fundamentals/getting-started/primers/shadowdom#slots) for more information about slots.
 
 
-数据环境
+Data Scope
 -------
 
-插入 slot 部分的内容，其数据环境为 **声明时的环境**。
+Inside a slot, the scope is **the one defined for the contents**, i.e. the parent component's scope.
 
 ```javascript
 var Panel = san.defineComponent({
@@ -68,7 +66,7 @@ var MyComponent = san.defineComponent({
     }
 });
 
-/* MyComponent渲染结果
+/* Render results for MyComponent
 <div>
   <div class="head">title</div>
   <p>I am MyComponent</p>
@@ -76,10 +74,10 @@ var MyComponent = san.defineComponent({
 */
 ```
 
-命名
+Named Slots
 -----
 
-通过 name 属性可以给 slot 命名。一个视图模板的声明可以包含一个默认 slot 和多个命名 slot。外层组件的元素通过 `slot="name"` 的属性声明，可以指定自身的插入点。
+Slots can be named by assigning a name attribute. A template can contain one unnamed slot and multiple named slots. By declaring the attribute `slot="name"`, parent components can specify where the contents are placed in.
 
 
 ```javascript
@@ -101,7 +99,7 @@ var MyComponent = san.defineComponent({
         + '</ui-tab></div>'
 });
 
-/* MyComponent渲染结果
+/* Render results for MyComponent
 <div>
   <header><h3>1</h3><h3>2</h3></header>
   <main><p>one</p><p>two</p></main>
@@ -109,7 +107,7 @@ var MyComponent = san.defineComponent({
 */
 ```
 
-`注意`：外层组件的替换元素，只有在直接子元素上才能声明 `slot="name"` 指定自身的插入点。下面例子中的 a 元素无法被插入 title slot。
+`Note`: `slot="name"` attribute only takes effect on the direct child of the component element to be injected. The `a` element will NOT be rendered into the `title` slot.
 
 ```javascript
 var Tab = san.defineComponent({
@@ -130,7 +128,7 @@ var MyComponent = san.defineComponent({
         + '</ui-tab></div>'
 });
 
-/* MyComponent渲染结果，a 元素无法被插入 title slot
+/* Render results for MyComponent, the `a` element is not injected into the `title` slot
 <div>
   <header><h3>1</h3><h3>2</h3></header>
   <main><p>one</p><p>two<a>slot fail</a></p></main>
@@ -138,17 +136,16 @@ var MyComponent = san.defineComponent({
 */
 ```
 
-插槽指令应用
+Use Cases
 -----
 
-`版本`：>= 3.3.0
+`Version`: >= 3.3.0
 
-在 slot 声明时应用 if 或 for 指令，可以让插槽根据组件数据动态化。
+Slots can be used along with `if` or `for` directives.
 
+### if Directive
 
-### if指令
-
-下面的例子中，panel 的 hidden 属性为 true 时，panel 中默认插槽将不会渲染，仅包含 title 插槽，通过 slot 方法获取的数组长度为 0。
+In the following example, the unnamed slot won't be rendered since the `hidden` attribute for the panel is set to true. The `.slot()` method returns `0`.
 
 ```javascript
 var Panel = san.defineComponent({
@@ -183,16 +180,16 @@ var myComponent = new MyComponent({
     }
 });
 
-/* MyComponent渲染结果，hidden为true所以不包含default slot
+/* Render results for MyComponent, the unnamed slot is not rendered cause hidden is true
 <div>
     <b>San</b>
 </div>
 */
 ```
 
-### for指令
+### for Directive
 
-下面的例子没什么用，纯粹为了演示 slot 上应用 for 指令。在后续 **scoped 插槽** 章节中可以看到有意义的场景。
+The following case may not be useful, it's only intended to demonstrate how to use slots along with the `for` directive. There's a real world case latter in the **scoped slots** section.
 
 ```javascript
 var Panel = san.defineComponent({
@@ -225,7 +222,7 @@ var myComponent = new MyComponent({
     }
 });
 
-/* MyComponent渲染结果，<p>{{name}}</p>输出 3 遍
+/* Render results for MyComponent, there's a `<p>{{name}}</p>` repeated 3 times
 <div>
     <p>San</p>
     <p>San</p>
@@ -236,22 +233,22 @@ var myComponent = new MyComponent({
 
 
 
-scoped 插槽
+Scoped Slots
 -----
 
-如果 slot 声明中包含 **s-bind** 或 1 个以上 **var-** 数据前缀声明，该 slot 为 scoped slot。scoped slot 具有独立的 **数据环境**。
+If there's a **s-bind** attribute or one or more **var-** prefixed attributes specified, the slot is called a scoped slot.
 
-scoped slot 通常用于组件的视图部分期望由 **外部传入视图结构**，渲染过程使用组件内部数据。
+Scoped slot is useful when the contents is expected to be rendered using **external layouts** with internal data.
 
-`注意`：scoped slot 中不支持双向绑定。
+`Note`: Bi-directional binding is not supported in scoped slots.
 
 
 ### var
 
-`版本`：>= 3.3.0
+`Version`: >= 3.3.0
 
 
-**var-** 的 scoped 数据声明的形式为 **var-name="expression"**。
+A **var-** prefixed attribute is set in **var-name="expression"** format.
 
 
 ```javascript
@@ -297,7 +294,7 @@ var myComponent = new MyComponent({
     }
 });
 
-/* MyComponent渲染结果
+/* Render results for MyComponent
 <div>
     <h3>errorrik</h3>
     <p><b>male</b><u>errorrik@gmail.com</u></p>
@@ -311,12 +308,12 @@ var myComponent = new MyComponent({
 
 ### s-bind
 
-`版本`：>= 3.6.0
+`Version`: >= 3.6.0
 
 
-**s-bind** 的 scoped 数据声明的形式为 **s-bind="expression"**。
+A **s-bind** attribute is set in **s-bind="expression"** format.
 
-当 **s-bind** 和 **var-** 并存时，**var-** 将覆盖整体绑定中相应的数据项。
+When both **s-bind** and **var-** attributes are set, **var-** attributes will hide the corresponding items in **s-bind**.
 
 
 ```javascript
@@ -362,7 +359,7 @@ var myComponent = new MyComponent({
     }
 });
 
-/* MyComponent渲染结果
+/* Render results for MyComponent
 <div>
     <h3>errorrik</h3>
     <p><b>male</b><u>errorrik@gmail.com</u></p>
@@ -375,14 +372,14 @@ var myComponent = new MyComponent({
 ```
 
 
-### 访问环境数据
+### Scope Data Access
 
-`版本`：>= 3.3.1
+`Version`: >= 3.3.1
 
-scoped slot 中，除了可以访问 **var-** 声明的数据外，还可以访问当前环境的数据。
+Besides data declared by **var-**, scope data is also available in scoped slots.
 
-- 使用 slot 默认内容时，可以访问组件内部环境数据
-- 外层组件定义的 slot 内容，可以访问外层组件环境的数据
+- When the default contents is used, the internal scope is available
+- When the external contents is used, the external component's scope is available
 
 ```javascript
 var Man = san.defineComponent({
@@ -416,7 +413,7 @@ var myComponent = new MyComponent({
     }
 });
 
-/* MyComponent渲染结果
+/* Render results for MyComponent
 <div>
     <p>
         <b>errorrik - HN</b>
@@ -427,13 +424,13 @@ var myComponent = new MyComponent({
 ```
 
 
-动态命名
+Dynamic Naming
 -----
 
-`版本`：>= 3.3.1
+`Version`: >= 3.3.1
 
 
-slot 声明中，组件可以使用当前的数据环境进行命名，从而提供动态的插槽。插槽的动态命名常用于 **组件结构根据数据生成** 的场景下，比如表格组件。
+Slots can be named using data from the current scope to provide dynamic slots, which is useful in cases when **the layouts are data-generated**, for example, the table components.
 
 ```javascript
 var Table = san.defineComponent({
@@ -467,8 +464,8 @@ var MyComponent = san.defineComponent({
 var myComponent = new MyComponent({
     data: {
         columns: [
-            {name: 'name', label: '名'},
-            {name: 'email', label: '邮'}
+            {name: 'name', label: 'N'},
+            {name: 'email', label: 'E'}
         ],
         list: [
             {name: 'errorrik', email: 'errorrik@gmail.com'},
@@ -477,13 +474,13 @@ var myComponent = new MyComponent({
     }
 });
 
-/* MyComponent渲染结果
+/* Render results for MyComponent
 <div>
     <table>
         <thead>
             <tr>
-                <th>名</th>
-                <th>邮</th>
+                <th>N</th>
+                <th>E</th>
             </tr>
         </thead>
         <tbody>
@@ -501,6 +498,6 @@ var myComponent = new MyComponent({
 */
 ```
 
-`注意`：表格的视图更新在 IE 下可能存在兼容性问题。
+`Note`: There're compatibility issues with table updating in IE.
 
 
