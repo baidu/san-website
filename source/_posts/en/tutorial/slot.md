@@ -107,7 +107,7 @@ var MyComponent = san.defineComponent({
 */
 ```
 
-`Note`: `slot="name"` attribute only takes effect on the direct child of the component element to be injected. The `a` element will NOT be rendered into the `title` slot.
+`Note`: `slot="name"` attribute only takes effect when specified on the direct child of the component element to be injected. The `a` element will NOT be rendered into the `title` slot.
 
 ```javascript
 var Tab = san.defineComponent({
