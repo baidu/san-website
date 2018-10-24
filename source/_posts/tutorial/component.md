@@ -35,7 +35,7 @@ myApp.attach(document.body);
 
 通过继承的方式定义组件的好处是，当你使用 ESNext 时，你可以很自然的 extends。
 
-`注意`：由于 ESNext 没有能够编写 prototype 属性的语法，所以 San 对组件定义时的属性支持 static property，通过 ESNext 的 extends 继承时，template / filters / components 属性请使用 static property 的方式定义。
+`注意`：由于 ESNext 没有能够编写 prototype 属性的语法，所以 San 对组件定义时的属性支持 static property。通过 ESNext 的 extends 继承时，template / filters / components 属性请使用 static property 的方式定义。
 
 ```javascript
 import {Component} from 'san';
@@ -85,13 +85,13 @@ San 的组件是 HTML 元素扩展的风格，所以其生命周期与 WebCompon
 组件的生命周期有这样的一些特点：
 
 - 生命周期代表组件的状态，生命周期本质就是状态管理。
-- 在生命周期到达时，对应的钩子函数会被触发运行。
+- 在生命周期的不同阶段，组件对应的钩子函数会被触发运行。
 - 并存。比如 attached 和 created 等状态是同时并存的。
 - 互斥。attached 和 detached 是互斥的，disposed 会互斥掉其它所有的状态。
 - 有的时间点并不代表组件状态，只代表某个行为。当行为完成时，钩子函数也会触发。如 **updated** 代表每次数据变化导致的视图变更完成。
 
 
-通过声明周期的钩子函数，我们可以在生命周期到达时做一些事情。比如在生命周期 **attached** 中发起获取数据的请求，在请求返回后更新数据，使视图刷新。
+通过生命周期的钩子函数，我们可以在生命周期到达时做一些事情。比如在生命周期 **attached** 中发起获取数据的请求，在请求返回后更新数据，使视图刷新。
 
 ```javascript
 var ListComponent = san.defineComponent({
@@ -168,10 +168,15 @@ san.defineComponent({
 `强调`：San 要求组件对应 **一个** HTML 元素，所以视图模板定义时，只能包含一个 HTML 元素，其它所有内容需要放在这个元素下。
 
 ```html
+<!-- 正确 -->
 <dl>
     <dt>name - email</dt>
     <dd s-for="p in persons" title="{{p.name}}">{{p.name}}({{dept}}) - {{p.email}}</dd>
 </dl>
+
+<!-- 错误 -->
+<p>name</p>
+<p>email</p>
 ```
 
 组件对应的 HTML 元素可能是由其 **owner** 组件通过视图模板指定的，视图模板不好直接定死对应 HTML 元素的标签。此时可以将视图模板对应的 HTML 元素指定为 **template**。
@@ -227,7 +232,7 @@ var MyComponent = san.defineComponent({
 
 有时我们为了首屏时间，期望初始的视图是直接的 HTML，不希望初始视图是由组件渲染的。但是我们希望组件为我们管理数据、逻辑与视图，后续的用户交互行为与视图变换通过组件管理，此时就可以通过 **el** 传入一个现有元素。
 
-组件将以传入的 **el** 元素作为组件根元素并反解析出视图结构。这个过程我们称作 **组件反解**。详细请参考[组件反解](../reverse/)文档。
+组件将以 **el** 传入的元素作为组件根元素并反解析出视图结构。这个过程我们称作 **组件反解**。详细请参考[组件反解](../reverse/)文档。
 
 
 
@@ -282,7 +287,7 @@ var myApp = new MyApp({
 myApp.attach(document.body);
 ```
 
-new 时传入初始数据是针对实例的特例需求。有时我们在定义组件时希望每个实例都具有初始的一些数据，此时可以定义 **initData** 方法，可以在定义组件时指定组件初始化时的数据。**initData** 方法返回组件实例的初始化数据。
+new 时传入初始数据是针对实例的特例需求。当我们希望在定义组件时，就设置每个实例的初始数据，可以通过 **initData** 方法指定组件初始化时的数据。**initData** 方法返回组件实例的初始化数据。
 
 ```javascript
 var MyApp = san.defineComponent({
@@ -451,9 +456,9 @@ var Node = san.defineComponent({
 
 ### ref
 
-子组件声明时如果通过 **s-ref** 指定了名称，则可以在 JavaScript 中通过组件实例的 **ref** 方法调用到。
+声明子组件时，如果通过 **s-ref** 指定了名称，则可以在owner组件实例的 **ref** 方法调用到。
 
-`提示`：有了声明式的初始化、数据绑定与事件绑定，我们很少需要在 JavaScript 中拿到子组件的实例。San 提供了这个途径，但当你用到它的时候，请先思考是不是非要这么干。
+`提示`：有了声明式的初始化、数据绑定与事件绑定，我们很少需要在 owner 中拿到子组件的实例。虽然 San 提供了这个途径，但当你用到它的时候，请先思考是不是非要这么干。
 
 
 ### 消息
