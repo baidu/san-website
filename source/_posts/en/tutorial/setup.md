@@ -1,72 +1,74 @@
 ---
-title: 安装
+title: Setup
 categories:
 - tutorial
 ---
 
-你可以通过任何喜欢或者习惯的方式安装和使用 San。
+San can be installed and used in many ways.
 
 
-下载
+Download
 -----
 
-### 直接下载
+### from Github Releases
 
-从 [下载页面](https://github.com/baidu/san/releases) 可以获得最新以及过往版本的下载地址。
+Both the latest and history versions are available on [Github Releases](https://github.com/baidu/san/releases).
 
-### CDN
+### from CDN
 
-通过 unpkg，你可以无需下载，直接引用。
+Skip the download and make use of the **unpkg** CDN:
 
-开发版本：
+Development:
 
 ```html
 <script src="https://unpkg.com/san@latest/dist/san.dev.js"></script>
 ```
 
-生产版本：
+Production:
 
 ```html
 <script src="https://unpkg.com/san@latest"></script>
 ```
 
-> 建议在开发环境不要用生产版本，开发版本提供了有助于开发的错误提示和警告！
+> Development version is recommended for development environment, it provides many useful error information and warnings!
 
 ### NPM
 
-在使用 san 来构建大型应用时我们推荐使用 NPM 来安装。通过它能够方便的管理依赖包，以及和社区的各种开发构建工具良好配合，构建你的应用程序。
+Installing by NPM is recommended when used to build large-scaled applications.
+It's a package manager with a large community, which is especially useful when it comes to development tooling.
 
 ```shell
-# 安装最新版本
+# install the latest version
 $ npm install san
 ```
 
-使用
+Usage
 -----
 
 
 ### script
 
-在页面上通过 script 标签引用需要的文件是常用的方式。可以引用下载下来的 San，也可以通过 CDN 引用。
+It is a common way to load san via a script tag on the page. The `src` URL can be either a CDN location or a local file URL.
 
 
 ```html
-<!-- 引用直接下载下来的San -->
-<script src="san的目录/dist/san.js"></script>
+<!-- load your local copy -->
+<script src="<path to san>/dist/san.js"></script>
 
-<!-- 引用通过NPM下载下来的San -->
+<!-- load san from node_modules -->
 <script src="node_modules/san/dist/san.js"></script>
 ```
 
-注意：在引用时，
+Note: when san is being loaded,
 
-- 如果页面上没有 AMD 环境，将会在页面上注册全局变量 `san`
-- 如果页面上有 AMD 环境，将会注册为模块 `san`
+- In [AMD](https://requirejs.org) environment, a module named `san` will be defined.
+- Otherwise, a global variable named `san` will be created.
 
 
 ### AMD
 
-将 San 下载下来后，通过 AMD 的方式引用 src 目录下的 main.js，可以获得灵活的模块名和整体编译的好处。但是你可能需要先配置好 packages 或 paths 项。
+By requiring `src/main.js` directly, you can build san along with your project, thus the module name can be customized.
+To do this, you'll need to make sure the [packages](https://requirejs.org/docs/api.html#config-packages) or [paths](https://requirejs.org/docs/api.html#config-paths) are properly configured.
 
 ```js
 require.config({
@@ -79,19 +81,19 @@ require.config({
 });
 ```
 
-在[这个例子](https://github.com/baidu/san/tree/master/example/todos-amd)里，我们可以看到一个通过 AMD 管理模块的项目是怎么引用 San 的。
+In [this example](https://github.com/baidu/san/tree/master/example/todos-amd), you'll see how to use san in AMD environment.
 
 ### ESNext
 
-在支持 ESNext 的环境中，可以直接引用
+In ESNext environment, san can be directly imported:
 
 ```
 import san from 'san';
 ```
 
-### San component
+### San Component
 
-一个语法如下的 `.san` 文件，就是一个 `San component`
+A `.san` file with the following content is called a `San component`:
 
 ```html
 <template>
@@ -115,19 +117,20 @@ import san from 'san';
 </style>
 ```
 
-在 `webpack` 中可以使用 [san-loader](https://github.com/ecomfe/san-loader)  来加载 `.san` 文件
+There's a [san-loader](https://github.com/ecomfe/san-loader) to load `.san` files in webpack.
 
-在 [这个例子](https://github.com/baidu/san/tree/master/example/todos-esnext) 里，
-我们可以看到如何使用 `San component` 构建一个应用
+In [this example](https://github.com/baidu/san/tree/master/example/todos-esnext), you'll see how to build `San component`s.
 
-开发版本 VS 生产版本
+Development vs. Production
 ----------
 
-在开发中，我们推荐使用 `san.dev.js`(位于 `san/dist/san.dev.js`)。`san.dev.js` 提供了包括 [数据校验](/san/tutorial/data-checking/) 等辅助开发功能。这些辅助开发功能可以帮助你在更轻松、快速地定位和解决问题。
+In development environment, we recommended the `san.dev.js`(located at `san/dist/san.dev.js`).
+`san.dev.js` provides facilities such as [data validation](/san/tutorial/data-checking/) to help you identify and solve problems more easily.
 
-但出于性能考虑，正式的生产环境上需要移除了这些辅助开发功能。在 san 的发布包中提供了构建好的生产版本给大家使用，即 `san.js`(位于 `san/dist/san.js`)。你应当在构建应用的生产版本时使用它。
+For performance considerations, the production build removed these functionalities.
+There's a production build in san releases, located at `san/dist/san.js`, which is intended for production usage.
 
-如果你使用 webpack 进行开发和构建 ，那么你可以通过在 webpack 配置添加 `resolve.alias` 再配合指定 `NODE_ENV` 来解决：
+If you're using webpack, development/production modes can be set via `resolve.alias` configuration and a corresponding `NODE_ENV` environment variable:
 
 ```js
 {
@@ -149,7 +152,7 @@ import san from 'san';
 }
 ```
 
-最后，你可以通过添加两个 npm scripts 来使用不同的 webpack 配置：
+Finally, you can use npm scripts to apply these two webpack configurations:
 
 ```js
 {
@@ -161,13 +164,13 @@ import san from 'san';
 }
 ```
 
-开始开发：
+For development:
 
 ```sh
 npm run dev
 ```
 
-开始构建：
+Production building:
 
 ```sh
 npm run build
