@@ -4,8 +4,7 @@ categories:
 - tutorial
 ---
 
-In order to deliver better user experience, it's common to introduce transitions during view components insertion or removal.
-San provides basic transition mechanism to facilitate the development of experience-rich web apps.
+In order to deliver better user experience, it's common to introduce transitions during view components insertion or removal. San provides basic transition mechanism to facilitate the development of experience-rich web apps.
 
 `version`: >= 3.3.0
 
