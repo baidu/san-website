@@ -34,8 +34,8 @@ Production:
 
 ### NPM
 
-Installing by NPM is recommended when used to build large-scaled applications.
-It's a package manager with a large community, which is especially useful when it comes to development tooling.
+Via NPM is recommended when used to build large-scaled applications.
+NPM is a package manager with a large community, which is especially useful when it comes to development tooling.
 
 ```shell
 # install the latest version
@@ -124,10 +124,10 @@ In [this example](https://github.com/baidu/san/tree/master/example/todos-esnext)
 Development vs. Production
 ----------
 
-In development environment, we recommended the `san.dev.js`(located at `san/dist/san.dev.js`).
+In development environment, we recommend you to use the `san.dev.js`(located at `san/dist/san.dev.js`).
 `san.dev.js` provides facilities such as [data validation](/san/tutorial/data-checking/) to help you identify and solve problems more easily.
 
-For performance considerations, the production build removed these functionalities.
+For performance considerations, the production build removes these functionalities.
 There's a production build in san releases, located at `san/dist/san.js`, which is intended for production usage.
 
 If you're using webpack, development/production modes can be set via `resolve.alias` configuration and a corresponding `NODE_ENV` environment variable:
