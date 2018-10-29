@@ -40,7 +40,7 @@ Please refer to [the HTML Spec](https://developers.google.com/web/fundamentals/g
 Data Scope
 -------
 
-Inside a slot, the scope is **the one defined for the contents**, i.e. the parent component's scope.
+Inside a slot, the scope is **the parent component's scope**.
 
 ```javascript
 var Panel = san.defineComponent({
@@ -430,7 +430,7 @@ Dynamic Naming
 `Version`: >= 3.3.1
 
 
-Slots can be named using data from the current scope to provide dynamic slots, which is useful in cases when **the layouts are data-generated**, for example, the table components.
+Slots can be named using data from the current scope to provide dynamic slots, which is useful in cases when **the layouts are generated from data**, for example, the table components.
 
 ```javascript
 var Table = san.defineComponent({
