@@ -15,7 +15,7 @@ Initialization Arguments
 
 `Explanation`:
 
-Component initialization data. Usually used in the [component reverse](../../tutorial/reverse/) scenario.
+Component initialization data. Usually used in the [component reversion](../../tutorial/reverse/) scenario.
 
 `Type`: Object
 
