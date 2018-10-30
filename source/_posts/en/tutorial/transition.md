@@ -1,37 +1,37 @@
 ---
-title: 过渡
+title: Transitions
 categories:
 - tutorial
 ---
 
-在视图中，过渡效果是常见的场景。平滑的过渡动画能够给用户更好的感官体验。san 提供了基础的过渡机制，你可以基于此开发丰富的过渡效果。
+In order to deliver better user experience, it's common to introduce transitions during view components insertion or removal. San provides basic transition mechanism to facilitate the development of experience-rich web apps.
 
-`版本`：>= 3.3.0
+`version`: >= 3.3.0
 
 
 s-transition
 -----
 
-在元素上通过 **s-transition** 指令，可以声明过渡动画控制器。
+Transition controllers can be specified on elements using **s-transition** directives.
 
 ```html
 <button s-transition="opacityTransition">click</button>
 ```
 
-这个对象是元素 owner 的成员。
+The directive value is the corresponding property name of the element's owner component.
 
 ```javascript
 san.defineComponent({
     template: '<div><button s-transition="opacityTransition">click</button></div>',
 
     opacityTransition: {
-        // 过渡动画控制器的结构在下文中描述
+        // The controller structure will be described in the following sections.
         // ...
     }
 });
 ```
 
-我们通常把 **s-transition** 和条件或循环指令一起使用。
+**s-transition** directives are typically used with **if** or **for** directives.
 
 ```html
 <button s-transition="opacityTransition" s-if="allowEdit">Edit</button>
@@ -39,7 +39,7 @@ san.defineComponent({
 ```
 
 
-**s-transition** 声明的过渡动画控制器可以是 owner 组件的深层成员。
+The transition controller specified by **s-transition** directive can be a deep property of the owner component.
 
 ```javascript
 san.defineComponent({
@@ -47,22 +47,22 @@ san.defineComponent({
 
     trans: {
         opacity: {
-            // 过渡动画控制器的结构在下文中描述
+            // The controller structure will be described in the following sections.
             // ...
         }
     }
 });
 ```
 
-`注意`：**s-transition** 只能应用在具体的元素中。template 这种没有具体元素的标签上应用 **s-transition** 将没有效果。
+`Note`: **s-transition** can be used on concrete elements only. If used on virtual elements, like **template**, **s-transition** will have no effect.
 
 
 Animation Controller
 ------
 
-过渡动画控制器是一个包含 **enter** 和 **leave** 方法的对象。
+Animation controllers are objects that have **enter** and **leave** methods.
 
-**enter** 和 **leave** 方法的签名为 **function({HTMLElement}el, {Function}done)**。san 会把要过渡的元素传给过渡动画控制器，控制器在完成动画后调用 **done** 回调函数。
+The signature for both **enter** and **leave** methods are: **function({HTMLElement}el, {Function}done)**. They will be called with the element to be transitioned, and shall call the **done()** callback when the transition is complete.
 
 ```javascript
 san.defineComponent({
@@ -118,22 +118,22 @@ san.defineComponent({
 });
 ```
 
-`提示`：
+`Note`:
 
-san 把动画控制器留给应用方实现，框架本身不内置动画控制效果。应用方可以：
+There's no transition controllers built in san. They're left to the developers to implement, by means of:
 
-- 使用 css 动画，在 transitionend 或 animationend 事件监听中回调 done
-- 使用 requestAnimationFrame 控制动画，完成后回调 done
-- 在老旧浏览器使用 setTimeout / setInterval 控制动画，完成后回调 done
-- 发挥想象力
+- Using CSS transitions or animations. Call `done` on `transitionend` or `animationend` events.
+- Using `requestAnimationFrame`. Call `done` when it's complete.
+- Using `setTimeout` / `setInterval` in legacy browsers, call `done` when it's complete.
+- Any way within your imagination.
 
 
 Animation Controller Creator
 ------
 
-**s-transition** 指令声明对应的对象如果是一个 function，san 将把它当成 **过渡动画控制器 Creator**。
+If the property specified by **s-transition** directive is a `function`, it will be treated as a **transition controller creator**.
 
-每次触发过渡动画前，san 会调用**过渡动画控制器 Creator**，用其返回的对象作为过渡动画控制器。
+Each time a transition is requested, the **transition controller creator** gets called and it's return value is used as the **transition controller**.
 
 
 ```javascript
@@ -192,7 +192,7 @@ san.defineComponent({
 });
 ```
 
-和[事件声明](../event/)类似，**过渡动画控制器 Creator**调用支持传入参数。
+As with [the event attributes](../event/), **transition controller creator**s accept arguments.
 
 ```javascript
 san.defineComponent({
