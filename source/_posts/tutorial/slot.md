@@ -28,7 +28,7 @@ var MyComponent = san.defineComponent({
     template: '<div><ui-panel>Hello San</ui-panel></div>'
 });
 
-/* MyComponent渲染结果
+/* MyComponent 渲染结果
 <div>
   <div class="head">title</div>
   <p style="display:none">Hello San</p>
@@ -68,7 +68,7 @@ var MyComponent = san.defineComponent({
     }
 });
 
-/* MyComponent渲染结果
+/* MyComponent 渲染结果
 <div>
   <div class="head">title</div>
   <p>I am MyComponent</p>
@@ -101,7 +101,7 @@ var MyComponent = san.defineComponent({
         + '</ui-tab></div>'
 });
 
-/* MyComponent渲染结果
+/* MyComponent 渲染结果
 <div>
   <header><h3>1</h3><h3>2</h3></header>
   <main><p>one</p><p>two</p></main>
@@ -130,7 +130,7 @@ var MyComponent = san.defineComponent({
         + '</ui-tab></div>'
 });
 
-/* MyComponent渲染结果，a 元素无法被插入 title slot
+/* MyComponent 渲染结果，a 元素无法被插入 title slot
 <div>
   <header><h3>1</h3><h3>2</h3></header>
   <main><p>one</p><p>two<a>slot fail</a></p></main>
@@ -138,7 +138,7 @@ var MyComponent = san.defineComponent({
 */
 ```
 
-插槽指令应用
+插槽的应用
 -----
 
 `版本`：>= 3.3.0
@@ -183,7 +183,7 @@ var myComponent = new MyComponent({
     }
 });
 
-/* MyComponent渲染结果，hidden为true所以不包含default slot
+/* MyComponent 渲染结果，hidden为true所以不包含default slot
 <div>
     <b>San</b>
 </div>
@@ -225,7 +225,7 @@ var myComponent = new MyComponent({
     }
 });
 
-/* MyComponent渲染结果，<p>{{name}}</p>输出 3 遍
+/* MyComponent 渲染结果，<p>{{name}}</p> 输出 3 遍
 <div>
     <p>San</p>
     <p>San</p>
@@ -297,7 +297,7 @@ var myComponent = new MyComponent({
     }
 });
 
-/* MyComponent渲染结果
+/* MyComponent 渲染结果
 <div>
     <h3>errorrik</h3>
     <p><b>male</b><u>errorrik@gmail.com</u></p>
@@ -362,7 +362,7 @@ var myComponent = new MyComponent({
     }
 });
 
-/* MyComponent渲染结果
+/* MyComponent 渲染结果
 <div>
     <h3>errorrik</h3>
     <p><b>male</b><u>errorrik@gmail.com</u></p>
@@ -416,7 +416,7 @@ var myComponent = new MyComponent({
     }
 });
 
-/* MyComponent渲染结果
+/* MyComponent 渲染结果
 <div>
     <p>
         <b>errorrik - HN</b>
@@ -477,7 +477,7 @@ var myComponent = new MyComponent({
     }
 });
 
-/* MyComponent渲染结果
+/* MyComponent 渲染结果
 <div>
     <table>
         <thead>

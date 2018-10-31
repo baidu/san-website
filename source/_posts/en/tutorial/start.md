@@ -1,18 +1,18 @@
 ---
-title: 开始
+title: Start
 categories:
 - tutorial
 ---
 
-San，是一个 MVVM 的组件框架。它体积小巧（13K），兼容性好（IE6），性能卓越，是一个可靠、可依赖的实现响应式用户界面的解决方案。
+San is an MVVM component-based framework. Its compact size (13K), good compatibility (supports IE6), and excellent performance make it a reliable solution for implementing responsive user interfaces.
 
-San 通过声明式的类 HTML 视图模板，在支持所有原生 HTML 的语法特性外，还支持了数据到视图的绑定指令、业务开发中最常使用的分支、循环指令等，在保持良好的易用性基础上，由框架完成基于字符串的模板解析，并构建出视图层的 [节点关系树](https://github.com/baidu/san/blob/master/doc/anode.md)，通过高性能的视图引擎快速生成 UI 视图。San 中定义的数据会被封装，使得当数据发生有效变更时通知 San 组件，San 组件依赖模板编译阶段生成的[节点关系树](https://github.com/baidu/san/blob/master/doc/anode.md)，确定需要变更的最小视图，进而完成视图的异步更新，保证了视图更新的高效性。
+San declaratively renders data to the DOM using an HTML-based template syntax. In the process, San compiles string-based templates to [ANode](https://github.com/baidu/san/blob/master/doc/anode.md), builds UI view instantly by high-performance view engine. Apart from raw HTML features, all San templates implement HTML-data binding, and usual syntaxes such as branching, loop, etc. Combined with the reactivity system(two-way binding and [ANode](https://github.com/baidu/san/blob/master/doc/anode.md)), San is able to intelligently figure out the minimal number of components to re-render asynchronously and apply the minimal amount of DOM manipulations when the app state changes.
 
-组件是 San 的基本单位，是独立的数据、逻辑、视图的封装单元。从页面角度看，组件是 HTML 元素的扩展；从功能模式角度看，组件是一个 ViewModel。San 组件提供了完整的生命周期，与 WebComponent 的生命周期相符合，组件间是可嵌套的树形关系，完整的支持了组件层级、组件间的通信，方便组件间的数据流转。San 的组件机制，可以有效支撑业务开发上的组件化需求。
+Component, the basic unit of San, is an independent unit of data, logic, and view. From a page perspective, a component is an extension of an HTML element; from a functional mode perspective, a component is a ViewModel. San components provide a complete lifecycle, which is part of the Web Components Spec. Also, San components can be tree-nested and communicated with each other via cross-component data flow. Therefore, San's component mechanism can effectively support the componentization requirements of business development.
 
-San 支持[组件反解](https://baidu.github.io/san/tutorial/reverse/)，以此提供[服务端渲染](https://baidu.github.io/san/tutorial/ssr/)能力，可以解决纯前端渲染导致的响应用户交互时延长、SEO 问题。除此之外，San 还提供了一些周边开源产品，与 San 配合使用，可以帮助开发者快速搭建可维护的大型 SPA 应用。
+Based on the [component reversion](https://baidu.github.io/san/tutorial/reverse/), San provides server side rendering features through which we can create SEO friendly apps with faster initial page rendering and other pros compared with pure client side rendering. Meanwhile, the ecosystem of San offer a series of modern tooling and supporting libraries. In short, San is perfectly capable of powering large-scaled maintainable Single-Page Applications.
 
-现在，我们从一些简单的例子，开始了解 San。这些例子可以从[这里](https://github.com/baidu/san/tree/master/example/start)找到。
+The easiest way to try out San is using some simple [examples]. Now, Here we go.
 
 Hello
 -------
@@ -33,18 +33,16 @@ var myApp = new MyApp();
 myApp.attach(document.body);
 ```
 
+We create our San app following steps below:
 
-可以看到，通常情况使用 San 会经过这么几步：
-
-1. 我们先定义了一个 San 的组件，在定义时指定了组件的 **内容模板** 与 **初始数据** 。
-2. 初始化组件对象
-3. 让组件在相应的地方渲染
-
-
-`额外提示`：在 JavaScript 中书写 HTML 片段对维护来说是不友好的，我们可以通过 WebPack、AMD plugin、异步请求等方式管理。这里为了例子的简单就写在一起了。
+1. First, we define a San component that specifies the component's **content template** and **initial data** .
+2. Initialize the component object.
+3. Attach the component to a HTML element to render.
 
 
-列表渲染
+`tips`：It is unfriendly for maintenance to write HTML snippets in JavaScript. We can manage it through WebPack, AMD plugin, asynchronous request, etc. The example here is for convenience.
+
+List rendering
 --------
 
 ```javascript
@@ -60,10 +58,9 @@ var myApp = new MyApp();
 myApp.attach(document.body);
 ```
 
-上面的例子使用 for 指令对列表进行遍历并输出。这里有个很常用的实践方法：在生命周期 **attached** 中重新灌入数据，使视图刷新。在这里，我们可以发起获取数据的请求，在请求返回后更新数据。
+We can use the **for** directive to render a list of items based on an array. Here is a usual practice: inject data in **attached** lifecycle method to re-render. For we can initiate a request to get data and update the data in **attached** after the request returns.
 
-
-双向绑定
+Two-way binding
 --------
 
 ```javascript
@@ -79,6 +76,4 @@ var myApp = new MyApp();
 myApp.attach(document.body);
 ```
 
-双向绑定通常出现在用户输入的场景，将用户输入结果自动更新到组件数据。在这个例子中，通过 **{= expression =}** 声明双向绑定，把输入框的 value 与数据项 name 绑定起来。
-
-
+In this case, We use the **{= expression =}** directive to create two-way data bindings on the input element. It automatically picks the correct way to update the element based on the input. 
