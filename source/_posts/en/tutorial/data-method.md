@@ -1,18 +1,18 @@
 ---
-title: 数据操作
+title: Data Manipulation
 categories:
 - tutorial
 ---
 
 
-San 在组件的 data 上提供了一些数据操作的方法。通过 get 方法可以获取数据；通过 set、splice 等方法修改数据，相应的视图会被自动刷新。
+San provides a number of methods on components' data. You can retrieve data via `.get()` method and modify data via `.set()`, `.splice()` methods, views will be updated automatically.
 
-`说明`：为什么是通过 San 提供的方法操作数据，而不是直接操作数据？因为defineProperty并未被国内常用的浏览器广泛支持，并且我们也并不喜欢这种侵入式的风格，所以我们选择了折中的方式。因此，只有通过 San 提供的方法修改数据，视图才会自动刷新。
+`Note`: You may ask why do we have to use these methods instead of manipulate data directly? That's because the [defineProperty](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty) API is still not fully supported by major browsers in China and we prefer non-invasive ways to implement data binding. As a result, you have to use the methods provided by San in order to get the views updated automatically.
 
-初始化
+Initialization
 -----
 
-通过定义 initData 方法，可以在定义组件时指定组件初始化时的数据。initData 方法返回组件实例的初始化数据。
+By defining an `initData` method, you can specify the data used to initialize the component. The return value of `initData` method will be used as the initialization data.
 
 ```javascript
 san.defineComponent({
@@ -34,9 +34,9 @@ get
 ```
 
 
-`解释`：
+`Explanation`:
 
-get 方法能够让我们从 data 中获取数据。
+Use `.get()` method to retrieve data.
 
 ```javascript
 san.defineComponent({
@@ -54,7 +54,7 @@ san.defineComponent({
 });
 ```
 
-当 expr 参数为空时，将返回整个数据项的对象。提供无参的 **get** 方法，主要是为了 ESNext 的解构，能够在一个表达式中获取多个数据项。
+The entire data object will be returned if the `expr` argument is not provided. The no argument function overload is provided for ESNext destructuring to retrieve multiple data items with a single expression.
 
 ```javascript
 san.defineComponent({
@@ -76,7 +76,7 @@ san.defineComponent({
 });
 ```
 
-`注意`： **get** 方法获取的数据不能直接修改，否则可能导致不一致的问题。数据修改请使用本文下面的 **set** 、 **splice** 等方法
+`Note`: The data retrieved via **get** method is not expected to be modified, which will lead to an inconsistent state. Use the following **set**, **splice** methods to modify any data.
 
 
 set
@@ -87,12 +87,12 @@ set({string|Object}expr, {*}value, {Object?}option)
 ```
 
 
-`解释`：
+`Explanation`:
 
-set 方法是最常用的数据修改方法，作用相当于 JavaScript 中的赋值 (=)。
+The `.set()` method should be used in most cases, which is equivalent to the JavaScript assignment operator (=).
 
 
-`用法`：
+`Usage`:
 
 ```javascript
 san.defineComponent({
@@ -118,13 +118,13 @@ merge
 merge({string|Object}expr, {*}value, {Object?}option)
 ```
 
-`版本`：>= 3.4.0
+`Version`: >= 3.4.0
 
-`解释`：
+`Explanation`:
 
-merge 方法用于将目标数据对象（target）和传入数据对象（source）的键进行合并，作用类似于 JavaScript 中的 `Object.assign(target, source)`。
+The `.merge()` method is used to assign properties of the source object to the target object, just like the `Object.assign()` method in JavaScript.
 
-`用法`：
+`Usage`:
 
 
 ```javascript
@@ -146,14 +146,14 @@ apply
 apply({string|Object}expr, {function({*}):{*}}value, {Object?}option)
 ```
 
-`版本`：>= 3.4.0
+`Version`: >= 3.4.0
 
-`解释`：
+`Explanation`:
 
-apply 方法接受一个函数作为参数，传入当前的值到函数，然后用新返回的值更新它。其行为类似 `Array.prototype.map` 方法。
+`.apply()` method accepts a function argument, which takes the data's current value as its input, and returns the updated value. It's behavior is like the JavaScript `Array.prototype.map` method.
 
 
-`用法`：
+`Usage`:
 
 ```javascript
 san.defineComponent({
@@ -174,12 +174,12 @@ san.defineComponent({
 });
 ```
 
-数组方法
+Array Methods
 ------
 
-我们提供了一些数组操作的方法，这些方法与 JavaScript 的数组操作方法基本同名，以减少使用者的学习与记忆成本。除了 **删除** 操作。
+We provide a number of methods for `Array` manipulation. All of them take the same name as the corresponding JavaScript `Array` methods except **remove**. Hope it helps to memorize!
 
-`提示`：修改数组项还是直接使用 set 方法。我们可以认为，基本上所有写 JavaScript 时使用 = 赋值的场景，都用 set 方法。
+`Note`: Use `.set()` method to modify an Array element. Actually whenever you want a JavaScript `=` assignment, you'll need the `.set()` method.
 
 ```javascript
 san.defineComponent({
@@ -197,11 +197,11 @@ san.defineComponent({
 {number} push({string|Object}expr, {*}value, {Object?}option)
 ```
 
-`解释`：
+`Explanation`:
 
-在数组末尾插入一条数据。
+Append an element into an array.
 
-`用法`：
+`Usage`:
 
 
 ```javascript
@@ -218,11 +218,11 @@ san.defineComponent({
 {*} pop({string|Object}expr, {Object?}option)
 ```
 
-`解释`：
+`Explanation`:
 
-在数组末尾弹出一条数据。
+Pop one element out of an array.
 
-`用法`：
+`Usage`:
 
 ```javascript
 san.defineComponent({
@@ -239,11 +239,11 @@ san.defineComponent({
 {number} unshift({string|Object}expr, {*}value, {Object?}option)
 ```
 
-`解释`：
+`Explanation`:
 
-在数组开始插入一条数据。
+Insert one element to the beginning of an array.
 
-`用法`：
+`Usage`:
 
 ```javascript
 san.defineComponent({
@@ -259,11 +259,11 @@ san.defineComponent({
 {*} shift({string|Object}expr, {Object?}option)
 ```
 
-`解释`：
+`Explanation`:
 
-在数组开始弹出一条数据。
+Remove one element from the beginning of an array.
 
-`用法`：
+`Usage`:
 
 ```javascript
 san.defineComponent({
@@ -279,11 +279,13 @@ san.defineComponent({
 remove({string|Object}expr, {*}item, {Object?}option)
 ```
 
-`解释`：
+`Explanation`:
 
-移除一条数据。只有当数组项与传入项完全相等(===)时，数组项才会被移除。
+Remove the given item.
 
-`用法`：
+`.remove()` compares `item` to elements of the Array using [strict equality](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comparison_Operators#Using_the_Equality_Operators) (the same method used by the `===` operator).
+
+`Usage`:
 
 ```javascript
 san.defineComponent({
@@ -299,11 +301,11 @@ san.defineComponent({
 removeAt({string|Object}expr, {number}index, {Object?}option)
 ```
 
-`解释`：
+`Explanation`:
 
-通过数据项的索引移除一条数据。
+Remove the element at the given index.
 
-`用法`：
+`Usage`:
 
 ```javascript
 san.defineComponent({
@@ -319,11 +321,11 @@ san.defineComponent({
 {Array} splice({string|Object}expr, {Array}spliceArgs, {Object?}option)
 ```
 
-`解释`：
+`Explanation`:
 
-向数组中添加或删除项目。
+The `.splice()` method changes the contents of an array by removing existing elements and/or adding new elements.
 
-`用法`：
+`Usage`:
 
 ```javascript
 san.defineComponent({
@@ -336,22 +338,22 @@ san.defineComponent({
 option
 ------
 
-每个数据操作方法，最后都可以包含一个类型为 Object 的数据操作选项参数对象，该对象中的参数可控制视图更新行为。
+Each of the above methods accepts an extra `option` argument, which is a plain object of key-value pairs to control how the views will be updated.
 
 
 ### silent
 
-`解释`：
+`Explanation`:
 
-静默更新数据，不触发视图变更。
+Update the data silently without updating the view.
 
 
 ### force
 
-`版本`：>= 3.5.5
+`Version`: >= 3.5.5
 
-`解释`：
+`Explanation`:
 
-设置相同的数据时，强制触发视图变更。该参数仅对 set 方法有效
+Force update the view even if the data to be set is identical to the existing value. Available for `.set()` method only.
 
 
