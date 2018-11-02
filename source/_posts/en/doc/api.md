@@ -13,15 +13,13 @@ Initialization Arguments
 
 ### data
 
-`Explanation`：
+`Explanation`:
 
-Initialization Data. Can be used for [component reverse](../../tutorial/reverse/).
+Component initialization data. Usually used in the [component reverse](../../tutorial/reverse/) scenario.
 
+`Type`: Object
 
-`Type`： Object
-
-
-`Usage`：
+`Usage`:
 
 ```javascript
 var MyComponent = san.defineComponent({});
@@ -43,13 +41,13 @@ var myComponent = new MyComponent({
 
 ### el
 
-`description`：
+`explanation`:
 
-the root of the component. the value of this param is a DOM Element and San will take this component's innerHTML value as the component template.  See [here](../../tutorial/reverse/) for more details.
+Component root element. Passing in this parameter means that the component's **template** is not used as the view template, and the component view is automatically reversed by San. See [here](../../tutorial/reverse/) for more details.
 
-`type`： HTMLElement
+`type`: HTMLElement
 
-`code`：
+`code`:
 
 ```javascript
 var MyComponent = san.defineComponent({});
@@ -72,16 +70,16 @@ var myComponent = new MyComponent({
 
 ### transition
 
-`description`：
+`explanation`:
 
-the controller of component's animation. See [animation controller](../../tutorial/transition/#Animation-Controller) and [animation controller creator](../../tutorial/transition/#Animation-Controller-Creator) for more details.
+The transition animation controller for the component. See [animation controller](../../tutorial/transition/#Animation-Controller) and [animation controller creator](../../tutorial/transition/#Animation-Controller-Creator) for more details.
 
 
-`version`：>= 3.6.0
+`version`:>= 3.6.0
 
-`type`： Object
+`type`: Object
 
-`code`：
+`code`:
 
 ```javascript
 var MyComponent = san.defineComponent({
@@ -90,8 +88,8 @@ var MyComponent = san.defineComponent({
 
 var myComponent = new MyComponent({
     transition: {
-        enter: function (el, done) { /* 进入时的过渡动画 */ },
-        leave: function (el, done) { /* 离开时的过渡动画 */ },
+        enter: function (el, done) { /* Transition animation when entering */ },
+        leave: function (el, done) { /* Transition animation when leaving */ },
     }
 });
 ```
@@ -100,68 +98,65 @@ var myComponent = new MyComponent({
 Lifecycle hooks
 -------
 
-The lifecycle described all state of a component including mounting, updating and destroyed. It will invoke a bind function when component reached progress. See [lifecycle](../../tutorial/component/#lifecycle) for more details.
-
+The life cycle represents the survival process of the component, and the hook function is triggered when each process arrives. See [lifecycle](../../tutorial/component/#lifecycle) for more details.
 
 ### compiled
 
-`description`：
+`explanation`:
 
-Trigged when component's template compiled. 
-
+The component view template is compiled. The **compiled** method on the component will be called. 
 
 ### inited
 
-`description`：
+`explanation`:
 
-Trigged when component is inited.
+The component instance initialization is complete. The **inited** method on the component will be called.
 
 
 ### created
 
-`description`：
+`explanation`:
 
-Trigged when the DOM element is created.
+The component element is created. The **created** method on the component will be called.
 
 
 ### attached
 
-`description`：
+`explanation`:
 
-Trigged when the DOM element is appended to the body.
+The component has been attached to the page. The **attached** method on the component will be called.
 
 
 ### detached`
 
-`description`：
+`explanation`:
 
-Trigged when the DOM element is removed from the body.
+The component is removed from the DOM. The **detached** method on the component will be called.
 
 ### disposed
 
-`description`：
+`explanation`:
 
-Trigged when the DOM element is removed from the body and the state of component destroyed.
+The component is removed from the DOM and components had destroyed. The **disposed** method on the component will be called.
 
 ### updated
 
-`description`：
+`explanation`:
 
-Trigged when component's state changed and view update once.
-
+The component completes a refresh due to data changes. The **updated** method on the component will be called. 
 
 define Component
 -------
 
 ### template
 
-`description`：
+`explanation`:
 
-the template of component. see [component template](../../tutorial/component/#component-template) for more details.
+The view template for the component. see [component template](../../tutorial/component/#component-template) for more details.
 
-`type`： string
+`type`: string
 
-`usage`：
+`usage`:
 
 ```javascript
 san.defineComponent({
@@ -171,13 +166,13 @@ san.defineComponent({
 
 ### filters
 
-`description`：
+`explanation`:
 
-the filter function can be used in the template. see [filter](../../tutorial/component/#filter) for more details.
+Declare which filters can be used in a component view template. see [filter](../../tutorial/component/#filter) for more details.
 
-`type`： Object
+`type`: Object
 
-`usage`：
+`usage`:
 
 ```javascript
 san.defineComponent({
@@ -191,15 +186,57 @@ san.defineComponent({
 });
 ```
 
+
+`Warning`:
+
+The filter method can access the component's data through `this.data` at runtime. However, doing so can result in an implicit dependency on the data, causing the view to not update as the data changes. Therefore, the filter method should be a pure function with no side effects. 
+
+```javascript
+var Bad = san.defineComponent({
+    template: '<u>{{num | enhance}}</u>',
+
+    filters: {
+        enhance: function (n) {
+            return n * this.data.get('times');
+        }
+    },
+
+    initData: function () {
+        return {
+            num: 2,
+            times: 3
+        };
+    }
+});
+
+var Good = san.defineComponent({
+    template: '<u>{{num | enhance(times)}}</u>',
+
+    filters: {
+        enhance: function (n, times) {
+            return n * times;
+        }
+    },
+
+    initData: function () {
+        return {
+            num: 2,
+            times: 3
+        };
+    }
+});
+```
+
+
 ### components
 
-`description`：
+`explanation`:
 
-define which kinds of child components can be used inside of the component. see [components](../../tutorial/component/#components) for more details.
+Declare which types of subcomponents can be used in a component. see [components](../../tutorial/component/#components) for more details.
 
-`type`： Object
+`type`: Object
 
-`usage`：
+`usage`:
 
 ```javascript
 var AddForm = san.defineComponent({
@@ -213,19 +250,19 @@ var AddForm = san.defineComponent({
 
 ### computed
 
-`description`：
+`explanation`:
 
-declare the computed value of the component. see [computed data](../../tutorial/component/#computed-data) for more details.
+Declare the calculated data in the component. see [computed data](../../tutorial/component/#computed-data) for more details.
 
-`类型`： Object
+`type`: Object
 
-`usage`：
+`usage`:
 
 ```javascript
 san.defineComponent({
     template: '<a>{{name}}</a>',
 
-    // name 数据项由 firstName 和 lastName 计算得来
+    // The name data item is calculated from firstName and lastName
     computed: {
         name: function () {
             return this.data.get('firstName') + ' ' + this.data.get('lastName');
@@ -236,13 +273,13 @@ san.defineComponent({
 
 ### messages
 
-`description`：
+`explanation`:
 
-声明处理子组件派发消息的方法。详细描述请参考[message](../../tutorial/component/#message)文档。
+declare how to handle subcomponent dispatch messages. see [message](../../tutorial/component/#message) for more details. 
 
-`类型`： Object
+`type`: Object
 
-`usage`：
+`usage`:
 
 ```javascript
 var Select = san.defineComponent({
@@ -250,7 +287,7 @@ var Select = san.defineComponent({
 
     messages: {
         'UI:select-item-selected': function (arg) {
-            // arg.target 可以拿到派发消息的组件
+            // arg.target can get the component that dispatches the message
             var value = arg.value;
             this.data.set('value', value);
         }
@@ -261,13 +298,13 @@ var Select = san.defineComponent({
 
 ### initData
 
-`description`：
+`explanation`:
 
-返回组件实例的初始数据。详细描述请参考[init data](../../tutorial/component/#init-data)文档。
+Return the initial data of the component instance. see [init data](../../tutorial/component/#init-data) for more details.
 
-`类型`： function():Object
+`type`: function():Object
 
-`usage`：
+`usage`:
 
 ```javascript
 var MyApp = san.defineComponent({
@@ -284,17 +321,17 @@ var MyApp = san.defineComponent({
 
 ### trimWhitespace
 
-定义组件模板解析时对空白字符的 trim 模式。
+Defines the trim mode for whitespace characters when parsing component templates.
 
-- 默认为 **none**，不做任何事情
-- **blank** 时将清除空白文本节点
-- **all** 时将清除所有文本节点的前后空白字符
+- **none**(default) nothing
+- **blank** clear blank text node
+- **all** clear the leading and trailing whitespace characters of all text nodes.
 
-`版本`：>= 3.2.5
+`version`:>= 3.2.5
 
-`类型`： string
+`type`: string
 
-`usage`：
+`usage`:
 
 ```javascript
 var MyApp = san.defineComponent({
@@ -307,19 +344,21 @@ var MyApp = san.defineComponent({
 
 ### delimiters
 
-`description`：
+`explanation`:
 
-定义组件模板解析时插值的分隔符。值为2个项的数组，分别为起始分隔符和结束分隔符。默认为:
+Define the separator for interpolation when parsing a component template. An array of 2 items with starting and ending delimiters. 
+
+default:
 
 ```js
 ['{{', '}}']
 ```
 
-`版本`：>= 3.5.0
+`version`:>= 3.5.0
 
-`类型`： Array
+`type`: Array
 
-`usage`：
+`usage`:
 
 ```javascript
 var MyComponent = san.defineComponent({
@@ -328,43 +367,41 @@ var MyComponent = san.defineComponent({
 });
 ```
 
-### transition
+### transition (Deprecated)
 
-`description`：
+`explanation`:
 
-定义组件根节点的过渡动画控制器。已废弃。
+Transition animation controller that defines the root node of the component.
 
+`版本`:>= 3.3.0, < 3.6.0
 
-`版本`：>= 3.3.0, < 3.6.0
+`type`: Object
 
-`类型`： Object
-
-`usage`：
+`usage`:
 
 ```javascript
 var MyComponent = san.defineComponent({
     template: '<span>transition</span>',
     transition: {
-        enter: function (el) { /* 根节点进入时的过渡动画 */ },
-        leave: function (el, done) { /* 根节点离开时的过渡动画 */ },
+        enter: function (el) { /* transition animation when the root node enters */ },
+        leave: function (el, done) { /* transition animation when the root node leaves */ },
     }
 });
 ```
 
 
-组件方法
+Component Method
 -------
 
 ### fire
 
-`描述`： fire({string}eventName, {*}eventArgument)
+`description`: fire({string}eventName, {*}eventArgument)
 
-`description`：
+`explanation`:
 
-派发一个自定义事件。San 为组件提供了自定义事件功能，组件开发者可以通过该方法派发事件。事件可以在视图模板中通过 **on-** 的方式绑定监听，也可以通过组件实例的 **on** 方法监听。可参考[customized event](../../tutorial/event/#customized-event)文档。
+Fire a custom event. San provides custom event functionality for components. Component developers can fire events through this method. Events can be bound in the view template by **on-**, or be listened to by the **on** method of the component instance. see [customized event](../../tutorial/event/#customized-event) for more details. 
 
-
-`usage`：
+`usage`:
 
 
 ```javascript
@@ -395,32 +432,29 @@ var MyComponent = san.defineComponent({
 
 ### on
 
-`描述`： on({string}eventName, {Function}eventListener)
+`description`: on({string}eventName, {Function}eventListener)
 
-`description`：
+`explanation`:
 
-添加自定义事件监听器。 **on** 一般仅用在使用 JavaScript 动态创建的组件中，通过视图模板创建的子组件应通过 **on-** 的方式绑定监听。可参考[dynamic child components](../../tutorial/component/#dynamic-child-components)文档
-
+Add a custom event listener.  **on** is generally only used in components that are dynamically created using JavaScript. Subcomponents created through view template should be bound by **on-**. see [dynamic child components](../../tutorial/component/#dynamic-child-components) for more details.
 
 ### un
 
-`描述`： un({string}eventName, {Function=}eventListener)
+`description`: un({string}eventName, {Function=}eventListener)
 
-`description`：
+`explanation`:
 
-移除事件监听器。 当 eventListener 参数为空时，移除所有 eventName 事件的监听器。
-
+Remove event listener. Remote the listeners for all eventName events when the eventListener params is empty.
 
 ### dispatch
 
-`描述`： dispatch({string}name, {*}value)
+`description`: dispatch({string}name, {*}value)
 
-`description`：
+`explanation`:
 
-派发一个消息。消息将沿着组件树向上传递，直到遇到第一个处理该消息的组件。上层组件通过 **messages** 声明组件要处理的消息。消息主要用于组件与非 **owner** 的上层组件进行通信。可参考[message](../../tutorial/component/#message)文档。
+Dispatch a message. The message will be passed up in the component tree util it encounters the first component that processes the message. The upper component declares the message to be processed by the component via **message**. The message is mainly used for communication between components with none owner upper components. see [message](../../tutorial/component/#message) for more details.
 
-
-`usage`：
+`usage`:
 
 
 ```javascript
@@ -430,7 +464,7 @@ var SelectItem = san.defineComponent({
         + '<slot></slot>'
         + '</li>',
 
-    // 子组件在各种时机派发消息
+    // child component dispatch message anytime.
     select: function () {
         var value = this.data.get('value');
         this.dispatch('UI:select-item-selected', value);
@@ -448,13 +482,13 @@ var SelectItem = san.defineComponent({
 var Select = san.defineComponent({
     template: '<ul><slot></slot></ul>',
 
-    // 上层组件处理自己想要的消息
+    // upper component process message when needed.
     messages: {
         'UI:select-item-selected': function (arg) {
             var value = arg.value;
             this.data.set('value', value);
 
-            // 原则上上层组件允许更改下层组件的数据，因为更新流是至上而下的
+            // Upper component can modify child component's data in principle. Because the update stream is top-down.
             var len = this.items.length;
             while (len--) {
                 this.items[len].data.set('selectValue', value);
@@ -501,11 +535,11 @@ var MyComponent = san.defineComponent({
 
 ### watch
 
-`描述`： watch({string}dataName, {function({*}value)}listener)
+`description`: watch({string}dataName, {function({*}value)}listener)
 
-`description`：
+`explanation`:
 
-监听组件的数据变化。通常我们使用绑定，在子组件数据变化时自动更新父组件的对应数据。 **watch** 一般仅用在使用 JavaScript 动态创建的组件中。可参考[dynamic child components](../../tutorial/component/#dynamic-child-components)文档
+Watch component's data changes. Usually we use bindings to automatically update the corresponding data of the parent component when the child component data changes. **watch** is generally only used in components that are dynamically created using JavaScript. see [dynamic child components](../../tutorial/component/#dynamic-child-components) for more details. 
 
 
 ```javascript
@@ -533,13 +567,13 @@ san.defineComponent({
 
 ### ref
 
-`描述`： ref({string}name)
+`description`: ref({string}name)
 
-`description`：
+`explanation`:
 
-获取定义了 **s-ref** 的子组件。详细请参考[component level](../../tutorial/component/#component-level)文档。
+Get the subcomponents that define **s-ref**. see [component level](../../tutorial/component/#component-level) for more details. 
 
-`usage`：
+`usage`:
 
 
 ```javascript
@@ -559,7 +593,7 @@ var AddForm = san.defineComponent({
 
 /* template:
 <div class="form">
-    <div>预期完成时间：
+    <div>Expected completion time:
         <ui-calendar bindx-value="endTimeDate" s-ref="endDate"></ui-calendar>
         <ui-timepicker bindx-value="endTimeHour" s-ref="endHour"></ui-timepicker>
     </div>
@@ -573,19 +607,17 @@ var AddForm = san.defineComponent({
 
 ### slot
 
-`版本`：>= 3.3.0
+`version`:>= 3.3.0
 
-`描述`： {Array} slot({string=}name)
+`description`: {Array} slot({string=}name)
 
-`description`：
+`explanation`:
 
-获取组件插槽的节点信息。返回值是一个数组，数组中的项是节点对象。通常只有一项，当 slot 声明中应用了 if 或 for 时可能为 0 项或多项。节点对象包含 isScoped 、 isInserted 和 children。
+Get the node information of the component slot. The return value is an array, and the items in the array are node objects and usually only one. And there will be more that one node objects when if or for is applied in the slot declaration. The node objects include `isScoped`, `isInserted`, and `children` property. see [slot](../../tutorial/component/#slot) for more details. 
 
-插槽详细usage请参考 [slot](../../tutorial/component/#slot) 文档。
+`attention`: do not make any modifications to the returned slot object. If you want to manipulate the view changes, please manipulate the data.
 
-`注意`：不要对返回的 slot 对象进行任何修改。如果希望操作视图变更，请操作数据。
-
-`usage`：
+`usage`:
 
 
 ```javascript
@@ -627,11 +659,11 @@ var myComponent = new MyComponent({
 
 ### nextTick
 
-`description`：
+`explanation`:
 
-San 的视图更新是异步的。组件数据变更后，将在下一个时钟周期更新视图。如果你修改了某些数据，想要在 DOM 更新后做某些事情，则需要使用 `nextTick` 方法。
+San's view update is asynchronous. After the component data is changed, the view will be updated in the next clock cycle. If you modify some data and want to do something after the DOM update, you need to use the `nextTick` method.
 
-`usage`：
+`usage`:
 
 ```javascript
 const Component = san.defineComponent({
