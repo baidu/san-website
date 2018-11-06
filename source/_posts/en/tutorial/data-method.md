@@ -7,7 +7,7 @@ categories:
 
 San provides a number of methods on components' data. You can retrieve data via `.get()` method and modify data via `.set()`, `.splice()` methods, views will be updated automatically.
 
-`Note`: You may ask why do we have to use these methods instead of manipulate data directly? That's because the [defineProperty](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty) API is still not fully supported by major browsers in China and we prefer non-invasive ways to implement data binding. As a result, you have to use the methods provided by San in order to get the views updated automatically.
+`Note`: You may ask why do we have to use these methods instead of manipulating data directly? That's because the [defineProperty](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty) API is still not fully supported by major browsers in China and we prefer non-invasive ways to implement data binding. As a result, you have to use the methods provided by San in order to get the views updated automatically.
 
 Initialization
 -----
@@ -76,7 +76,7 @@ san.defineComponent({
 });
 ```
 
-`Note`: The data retrieved via **get** method is not expected to be modified, which will lead to an inconsistent state. Use the following **set**, **splice** methods to modify any data.
+`Note`: The data retrieved via **get** method is not expected to be modified, which will lead to inconsistent state. Use the following **set**, **splice** methods to modify any data.
 
 
 set
@@ -150,7 +150,7 @@ apply({string|Object}expr, {function({*}):{*}}value, {Object?}option)
 
 `Explanation`:
 
-`.apply()` method accepts a function argument, which takes the data's current value as its input, and returns the updated value. It's behavior is like the JavaScript `Array.prototype.map` method.
+`.apply()` method accepts a function argument, which takes the data's current value as its input, and returns the updated value. The behavior of `.apply()` is like the JavaScript `Array.prototype.map` method.
 
 
 `Usage`:
@@ -177,7 +177,7 @@ san.defineComponent({
 Array Methods
 ------
 
-We provide a number of methods for `Array` manipulation. All of them take the same name as the corresponding JavaScript `Array` methods except **remove**. Hope it helps to memorize!
+We provide a number of methods for array manipulation. All of them take the same name as the `Array.prototype` except **remove**. Hope it helps to memorize!
 
 `Note`: Use `.set()` method to modify an Array element. Actually whenever you want a JavaScript `=` assignment, you'll need the `.set()` method.
 
