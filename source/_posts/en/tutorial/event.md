@@ -1,5 +1,5 @@
 ---
-title: Handle Event
+title: Event Handling
 categories:
 - tutorial
 ---
@@ -110,7 +110,7 @@ Modifier
 
 ### capture
 
-`version`：>= 3.3.0
+`Version`：>= 3.3.0
 
 The capture modifier is used in the element's event declaration and the event is bound to the capture phase.
 
@@ -135,7 +135,7 @@ var MyComponent = san.defineComponent({
 
 ### native
 
-`version`：>= 3.3.0
+`Version`：>= 3.3.0
 
 
 Using the native modifier in the component's event declaration, the event is bound to the DOM event of the component's root element.

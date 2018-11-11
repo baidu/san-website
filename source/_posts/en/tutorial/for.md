@@ -1,25 +1,25 @@
 ---
-title: 循环
+title: loop
 categories:
 - tutorial
 ---
 
-通过循环渲染列表是常见的场景。通过在元素上作用 **s-for** 指令，我们可以渲染一个列表。
+Rendering a list by looping is a common scenario. We can render a list by applying the **s-for** directive on the element.
 
 
-语法
+Syntax
 ----
 
-**s-for** 指令的语法形式如下：
+The syntax of the **s-for** directive is as follows:
 
 ```
 item-identifier[, index-identifier] in expression[ trackBy accessor-expression]
 ```
 
-列表渲染
+List Rendering
 ----
 
-下面的代码描述了在元素上作用 **s-for** 指令，渲染一个列表。在列表渲染的元素内部，可以正常访问到 owner 组件上的其他数据（下面例子中的dept）。
+The following code describes the use of the **s-for** directive on an element to render a list. Inside the elements rendered by the list, you can access other data on the owner component (dept in the example below).
 
 ```html
 <!-- Template -->
@@ -46,10 +46,10 @@ san.defineComponent({
 });
 ```
 
-索引
+Index
 ----
 
-**s-for** 指令中可以指定索引变量名（下面例子中的index），从而在列表渲染过程获得列表元素的索引。
+The index variable name (index in the example below) can be specified in the **s-for** directive to get the index of the list element in the list rendering process.
 
 ```html
 <!-- Template -->
@@ -76,16 +76,16 @@ san.defineComponent({
 });
 ```
 
-列表数据操作
+List data operation
 -------
 
-列表数据的增加、删除等操作请使用组件 data 提供的数组方法。详细请参考[数组方法](../data-method/#数组方法)文档。
+For the addition, deletion, etc. of list data, use the array method provided by the component data. For details, please refer to the [Array Method] (../data-method/#Array-Method) document.
 
 
-虚拟元素
+Virtual element
 ------
 
-和 if 指令一样，对 template 元素应用 for 指令，能够让多个元素同时根据遍历渲染，可以省掉一层不必要的父元素。
+As with the if directive, applying the for directive to the template element allows multiple elements to be rendered at the same time based on traversal, eliminating the need for an unnecessary parent element.
 
 
 ```html
@@ -104,7 +104,7 @@ trackBy
 `>= 3.6.1`
 
 
-在 **s-for** 指令声明中指定 **trackBy**，San 在数组更新时，将自动跟踪项的变更，进行相应的 insert/remove 等操作。 **trackBy** 只能声明 item-identifier 的属性访问。
+Specify **trackBy** in the **s-for** directive declaration. When the array is updated, San will automatically track the changes of the items and perform the corresponding insert/remove operations. **trackBy** can only declare attribute access to item-identifier.
 
 
 ```html
@@ -133,12 +133,12 @@ san.defineComponent({
 ```
 
 
-trackBy 通常用在对后端返回的 JSON 数据渲染时。因为前后两次 JSON parse 无法对列表元素进行 === 比对，通过 trackBy， 框架将在内部跟踪变更。结合 transition 时，变更过程的动画效果将更符合常理。
+TrackBy is typically used when rendering JSON data returned by the backend. Because the two JSON parse cannot make a === comparison on the list elements, the track will track the changes internally through trackBy. When combined with transitions, the animation of the change process will be more reasonable.
 
-在下面的场景下，使用 trackBy 的性能上反而会变差：
+In the following scenario, the performance of using trackBy will be worse:
 
-- 所有数据项都发生变化
-- 数据项变化前后的顺序不同
+- All data items have changed
+- The order of data items before and after changes is different
 
 
 
