@@ -6,7 +6,7 @@ categories:
 
 #### props
 
-Typically, child components update is done by passing data to child components with **props**, the MVVM framework will do the rest.
+Pass parent data to a child component with **props**, the child component will automatically get updated upon data changes.
 
 
 ```javascript
