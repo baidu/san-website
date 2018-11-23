@@ -76,7 +76,7 @@ customized event
 
 Custom events for components can be bound by the **on-** prefix on the component.
 
-In the following example, MyComponent binds the handling of the done event to the Label component.
+In the following example, MyComponent binds the done event of Label component with an event handler.
 
 ```javascript
 var MyComponent = san.defineComponent({

@@ -4,7 +4,7 @@ categories:
 - tutorial
 ---
 
-Rendering a list by looping is a common scenario. We can render a list by applying the **s-for** directive on the element.
+It is a common scenario to render a list via loop. We can render a list by applying the **s-for** directive on the element.
 
 
 Syntax
@@ -79,7 +79,7 @@ san.defineComponent({
 List data operation
 -------
 
-For the addition, deletion, etc. of list data, use the array method provided by the component data. For details, please refer to the [Array Method] (../data-method/#Array-Method) document.
+To manipulate list data such as inserting or deleting items, we use the array method provided by the component data. For details, please refer to the [Array Method] (../data-method/#Array-Method) document.
 
 
 Virtual element
