@@ -7,7 +7,7 @@ categories:
 Events are the most commonly used behavior management methods in development.
 Bind the processing of events to the component's methods with the **on-** prefix。
 
-`Hint`: In San, both the DOM event and the component's custom event are bound by the **on-** prefix, with no syntax distinction.
+`Hint`: In San, both DOM event and component's custom event are bound by the **on-** prefix, with no syntax distinction.
 
 
 DOM Event
@@ -158,7 +158,7 @@ var MyComponent = san.defineComponent({
 });
 ```
 
-Sometimes components encapsulate some infrastructure and styles, and hope that DOM events such as clicks and touches are handled by external consumers. 
+Sometimes components encapsulate some infrastructure and styles, and expect that DOM events such as clicks and touches are handled by external consumers. 
 If the component needs fire each root element DOM event is cumbersome and difficult to maintain. The native modifier solves this problem.
 
 
