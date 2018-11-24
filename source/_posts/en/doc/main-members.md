@@ -1,22 +1,22 @@
 ---
-title: 主模块API
+title: San API
 categories:
 - doc
 ---
 
 
-组件初始化
+Component Initialization
 -------
 
 ### defineComponent
 
-`描述`： defineComponent({Object}propertiesAndMethods)
+`Description`: defineComponent({Object}propertiesAndMethods)
 
-`解释`：
+`Explanation`:
 
-**方法** 。定义组件的快捷方法。详细请参考[组件定义](../../tutorial/component/#组件定义)文档。
+**Method**. A shortcut to define components. Refer to [Component Definition](../../tutorial/component/#component-definition) for details.
 
-`用法`：
+`Usage`:
 
 ```javascript
 var MyApp = san.defineComponent({
@@ -33,17 +33,17 @@ var MyApp = san.defineComponent({
 
 ### compileComponent
 
-`版本`：>= 3.3.0
+`Version`:>= 3.3.0
 
-`描述`： {void} compileComponent({Function}ComponentClass)
+`Description`: {void} compileComponent({Function}ComponentClass)
 
-`解释`：
+`Explanation`:
 
-**方法** 。编译组件，组件的编译过程主要是解析 template 成 [ANode](https://github.com/baidu/san/blob/master/doc/anode.md)，并对 components 中的 plain object 执行 defineComponent。
+**Method**. Compile a component. The compilation mainly consists of parsing the template into [ANode](https://github.com/baidu/san/blob/master/doc/anode.md)s and call `.defineComponent()` for plain object within the component.
 
-组件会在其第一个实例初始化时自动编译。我们通常不会使用此方法编译组件，除非你有特殊的需求希望组件的编译过程提前。
+Components will compile automatically on its first instantiation. Typically you won't need to call this API to compile components manually, but it's provided anyway in case you need ahead-of-time compilation.
 
-`用法`：
+`Usage`:
 
 ```javascript
 var MyApp = san.defineComponent({
@@ -64,13 +64,13 @@ typeof MyApp.prototype.aNode // object
 
 ### Component
 
-`类型`： Function
+`Type`: Function
 
-`解释`：
+`Explanation`:
 
-**属性** 。组件类，定义组件时可以从此继承。通常通过 **san.defineComponent** 定义组件，不使用此方法。详细请参考[组件定义](../../tutorial/component/#组件定义)文档。
+**Property**. The component class, from which the newly defined components will inherit. For most cases the **san.defineComponent** method should be used instead. Refer to [Component Definition](../../tutorial/component/#component-definition) for details.
 
-`用法`：
+`Usage`:
 
 ```javascript
 import {Component} from 'san';
@@ -88,29 +88,29 @@ class HelloComponent extends Component {
 
 ### inherits
 
-`描述`： inherits({Function}SubClass, {Function}SuperClass)
+`Description`: inherits({Function}SubClass, {Function}SuperClass)
 
-`解释`：
+`Explanation`:
 
-**方法** 。一个通用的实现继承的方法，定义组件时可以使用此方法从 **san.Component** 继承。通常在 ES5 下通过 **san.defineComponent** 定义组件，在 ESNext 下使用 **extends** 定义组件。
+**Method**. An util method to implement inheritance, which is the case when defining components (inherit from **san.Component**). Usually, to define a component we use **san.defineComponent** in ES5 and **extends** in ESNext.
 
-绝大多数情况不推荐使用此方法。详细请参考[组件定义](../../tutorial/component/#组件定义)文档。
+It is not recommended to use `.inherits()` in most cases. Refer to [Component Definition](../../tutorial/component/#component-definition) for details.
 
 
-服务端渲染
+Server-Side Rendering
 ------
 
 ### compileToRenderer
 
-`版本`：>= 3.1.0
+`Version`:>= 3.1.0
 
-`描述`： {function(Object):string} compileToRenderer({Function}ComponentClass)
+`Description`: {function(Object):string} compileToRenderer({Function}ComponentClass)
 
-`解释`：
+`Explanation`:
 
-**方法** 。将组件类编译成 renderer 方法。详细请参考[服务端渲染](../../tutorial/ssr/#输出HTML)文档。
+**Method**. Compile a component class into a renderer method. Refer to [Server-Side Rendering](../../tutorial/ssr/#output-HTML) for details.
 
-`用法`：
+`Usage`:
 
 ```javascript
 var MyApp = san.defineComponent({
@@ -128,15 +128,15 @@ var render = san.compileToRenderer(MyApp);
 
 ### compileToSource
 
-`版本`：>= 3.1.0
+`Version`:>= 3.1.0
 
-`描述`： {string} compileToRenderer({Function}ComponentClass)
+`Description`: {string} compileToRenderer({Function}ComponentClass)
 
-`解释`：
+`Explanation`:
 
-**方法** 。将组件类编译成 renderer 方法的源文件。详细请参考[服务端渲染](../../tutorial/ssr/#编译NodeJS模块)文档。
+**Method**. Compile a component class into a source file containing the renderer method. Refer to [Server-Side Rendering](../../tutorial/ssr/#compiling-nodejs-modules) for details.
 
-`用法`：
+`Usage`:
 
 ```javascript
 var MyApp = san.defineComponent({
@@ -154,31 +154,31 @@ fs.writeFileSync('your-module.js', 'exports = module.exports = ' + renderSource,
 ```
 
 
-模板编译
+Template Compilation
 ------
 
 ### ExprType
 
-`版本`：>= 3.0.3
+`Version`:>= 3.0.3
 
-`类型`： Object
+`Type`: Object
 
-`解释`：
+`Explanation`:
 
-**属性** 。表达式类型枚举，有助于帮你理解和使用 San 的模板编译结果。详细请参考[ANode](https://github.com/baidu/san/blob/master/doc/anode.md)文档。
+**Property**. An enum value representing the expression type, which helps to understand and use the compile output produced by San. Refer to [ANode](https://github.com/baidu/san/blob/master/doc/anode.md) for details.
 
 
 ### parseExpr
 
-`版本`：>= 3.0.3
+`Version`:>= 3.0.3
 
-`描述`： {Object} parseExpr({string}source)
+`Description`: {Object} parseExpr({string}source)
 
-`解释`：
+`Explanation`:
 
-**方法** 。将源字符串解析成表达式对象。详细请参考[ANode](https://github.com/baidu/san/blob/master/doc/anode.md)文档。
+**Method**. Parse the source string into an expression object. Refer to [ANode](https://github.com/baidu/san/blob/master/doc/anode.md) for details.
 
-`用法`：
+`Usage`:
 
 ```javascript
 var expr = san.parseExpr('!user.isLogin');
@@ -198,15 +198,15 @@ expr = {
 
 ### parseTemplate
 
-`版本`：>= 3.0.3
+`Version`:>= 3.0.3
 
-`描述`： {ANode} parseTemplate({string}source)
+`Description`: {ANode} parseTemplate({string}source)
 
-`解释`：
+`Explanation`:
 
-**方法** 。将源字符串解析成 ANode 对象。如果你想使用 San 的模板形式，但是自己开发视图渲染机制，可以使用该方法解析模板。详细请参考[ANode](https://github.com/baidu/san/blob/master/doc/anode.md#user-content-%E6%A8%A1%E6%9D%BF%E8%A7%A3%E6%9E%90%E7%BB%93%E6%9E%9C)文档。
+**Method**. Parse the source string into an ANode object. The San template engine can be reused via this method. Refer to [ANode](https://github.com/baidu/san/blob/master/doc/anode.md#user-content-%E6%A8%A1%E6%9D%BF%E8%A7%A3%E6%9E%90%E7%BB%93%E6%9E%9C) for details.
 
-`用法`：
+`Usage`:
 
 ```javascript
 var aNode = san.parseTemplate('<p>Hello {{name}}!</p>');
@@ -249,23 +249,23 @@ aNode = {
 ```
 
 
-数据
+Data
 ----
 
-San 开放了组件中使用的数据容器类与表达式计算函数，开发者可以用来管理一些与组件无关的数据，比如应用状态等。
+Data container and expression evaluator in San components are also exposed. These classes can be useful to handle component-independent data such as application state.
 
 
 ### Data
 
-`版本`：>= 3.5.6
+`Version`:>= 3.5.6
 
-`类型`： Class Function
+`Type`: Class Function
 
-`解释`：
+`Explanation`:
 
-**数据容器类** ，包含 get、set、splice、push、pop、unshift、shift、merge、apply 数据方法，详细请参考[数据操作](../../tutorial/data-method/)文档。
+**Data Container** provides get, set, splice, push, pop, unshift, shift, merge and apply methods. Refer to [Data Manipulation](../../tutorial/data-method/) for details.
 
-通过方法变更数据时，data 对象将 fire change 事件。通过 listen 和 unlisten 方法可以监听或取消监听 change 事件。
+`change` event is fired when the data is changed via data manipulation methods. Handlers for the `change` event can be registered and unregistered via `listen` and `unlisten` methods respectively.
 
 ```javascript
 var data = new san.Data({
@@ -284,18 +284,18 @@ data.set('num2', 10);
 
 ### evalExpr
 
-`版本`：>= 3.5.6
+`Version`:>= 3.5.6
 
-`描述`： {*} evalExpr({Object}expr, {Data}data, {Component=}owner)
+`Description`: {*} evalExpr({Object}expr, {Data}data, {Component=}owner)
 
 
-`解释`：
+`Explanation`:
 
-**方法** ，计算表达式的值。 
+**Method** is used to evaluate the value of an expression. 
 
-- `expr` 可以通过 [parseExpr](#parseExpr) 方法得到。支持的表达式类型可参考[表达式](../../tutorial/template/#表达式)文档
-- `data` 可以是组件的数据对象，也可以是自己通过 new [Data](#Data) 得到的数据对象
-- `owner` 仅用于表达式中 filter 的执行，表达式中无自定义 filter 时无需此参数
+- `expr` can be obtained via [parseExpr](#parseExpr) method. For the supported expression types, refer to [Expression](../../tutorial/template/#expressions)
+- `data` can be either component's data object, or any data object obtained by new [Data](#Data)
+- `owner` is used for evaluating filters in the expression, required when there're custom filters in the expression, optional otherwise.
 
 
 ```javascript
@@ -309,41 +309,41 @@ san.evalExpr(san.parseExpr('num1 + num2'), data)
 ```
 
 
-其他
+Others
 ----
 
 ### debug
 
-`类型`： boolean
+`Type`: boolean
 
-`解释`：
+`Explanation`:
 
-**属性** 。是否开启调试功能。当同时满足以下两个条件时，可以在 chrome 中使用 **devtool** 进行调试。
+**Property**. Whether or not to enable debug functionalities. Before using Chrome **DevTools** to debug your San application, make sure the following conditions are matched:
 
-- 主模块 **debug** 属性设为 **true**
-- 当前页面环境中的 San 是带有 **devtool** 功能的版本。[查看San的打包发布版本](https://github.com/baidu/san/tree/master/dist)
+- the **debug** property of San module is set to **true**
+- the San loaded in the current page is built with **DevTools** functionality. Refer to [San releases](https://github.com/baidu/san/tree/master/dist) for details
 
 
 ### version
 
-`类型`： string
+`Type`: string
 
-`解释`：
+`Explanation`:
 
-**属性** 。当前的 San 版本号。
+**Property**. The San version number.
 
 
 ### LifeCycle
 
-`版本`： < 3.3.0 (已废弃)
+`Version`: < 3.3.0 (deprecated)
 
-`类型`： Function
+`Type`: Function
 
-`解释`：
+`Explanation`:
 
-**属性** 。生命周期类。如果你想自己开发管理组件的渲染和交互更新过程，LifeCycle 可能对你有所帮助。
+**Property**. Lifecycle Class is useful when you need to render and update components manually.
 
-LifeCycle 定义了以下生命周期，并且生命周期之间包含互斥关系，描述如下：
+LifeCycle defines the following lifecycle states, some of which are mutually exclusive. In detail:
 
 ```
 {
@@ -376,9 +376,9 @@ LifeCycle 定义了以下生命周期，并且生命周期之间包含互斥关�
 }
 ```
 
-通过 LifeCycle 的 set 方法，可以指定生命周期； 通过 LifeCycle 的 is 方法，可以判断是否处于生命周期。
+The current state can be set via the `.set()` method of LifeCycle class, and can be tested via the `is` method.
 
-`用法`：
+`Usage`:
 
 ```javascript
 var lifeCycle = new san.LifeCycle();

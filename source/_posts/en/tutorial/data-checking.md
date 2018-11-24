@@ -1,12 +1,12 @@
 ---
-title: 数据校验
+title: Data Validation
 categories:
 - tutorial
 ---
 
-我们可以给组件的 data 指定校验规则。如果传入的数据不符合规则，那么 san 会抛出异常。当组件给其他人使用时，这很有用。
+Validation rules can be specified for component data. san will throw the corresponding error when validation fails. It's rather useful in collaboration.
 
-指定校验规则，需要使用 `DataTypes` 进行声明：
+Use `DataTypes` to declare validation rules:
 
 ```js
 import san, {DataTypes} from 'san';
@@ -20,23 +20,23 @@ let MyComponent = san.defineComponent({
 });
 ```
 
-`DataTypes` 提供了一系列校验器，可以用来保证组件得到的数据是合法的。在上边的示例中，我们使用了 `DataTypes.string`。当一个 `name` 得到了一个不合法的数据值时，san 会抛出异常。
+`DataTypes` provides a series of validators to ensure the data received is valid. In the above example, a `DataTypes.string` validator is used so that san will throw an error when the value for `name` is not a `String`.
 
-**考虑到性能原因，`dataTypes` 只会在 `development` 模式下进行数据校验。**
+**For performance considerations, `dataTypes` only get evaluated in `development` environment.**
 
-请参考[这里](https://github.com/baidu/san/tree/master/dist)来确认在不同的 san 发布版本中数据校验功能的支持情况。
+Please refer to this [link](https://github.com/baidu/san/tree/master/dist) to check out their availabilities in different san releases.
 
 ## DataTypes
 
-下边是 `DataTypes` 提供的各种校验的一个示例代码：
+Following is a demo for a variety of `DataTypes` validators:
 
 ```js
 import san, {DataTypes} from 'san';
 
 san.defineComponent({
 
-    // 你可以声明数据为 JS 原生类型。
-    // 默认的以下这些数据是可选的。
+    // specified as JavaScript primitive types
+    // these fields are optional by default
     optionalArray: DataTypes.array,
     optionalBool: DataTypes.bool,
     optionalFunc: DataTypes.func,
@@ -45,43 +45,42 @@ san.defineComponent({
     optionalString: DataTypes.string,
     optionalSymbol: DataTypes.symbol,
 
-    // 你也可以声明数据为指定类的实例。
-    // 这里会使用 instanceof 进行判断。
+    // specified as instances of some class
+    // it's implemented by `instanceof`
     optionalMessage: DataTypes.instanceOf(Message),
 
-    // 如果你可以确定你的数据是有限的几个值之一，那么你可以将它声明为枚举类型。
+    // if values are from a fixed set, declare it as an enum type
     optionalEnum: DataTypes.oneOf(['News', 'Photos']),
 
-    // 可以是指定的几个类型之一
+    // can be specified as one of many types
     optionalUnion: DataTypes.oneOfType([
         DataTypes.string,
         DataTypes.number,
         DataTypes.instanceOf(Message)
     ]),
 
-    // 数组中每个元素都必须是指定的类型
+    // each item of the Array must be of the specified type
     optionalArrayOf: DataTypes.arrayOf(DataTypes.number),
 
-    // 对象的所有属性值都必须是指定的类型
+    // each property of the Object must have a value of the specified type
     optionalObjectOf: DataTypes.objectOf(DataTypes.number),
 
-    // 具有特定形状的对象
+    // objects with a specified structure
     optionalObjectWithShape: DataTypes.shape({
         color: DataTypes.string,
         fontSize: DataTypes.number
     }),
 
-    // 以上所有校验器都拥有 `isRequired` 方法，来确保此数据必须被提供
+    // every validator above provides a `isRequired` method to specify the field as required
     requiredFunc: DataTypes.func.isRequired,
     requiredObject: DataTypes.shape({
         color: DataTypes.string
     }).isRequired,
 
-    // 一个必须的但可以是任何类型的数据
+    // a required field of any type
     requiredAny: DataTypes.any.isRequired,
 
-    // 你也可指定一个自定义的校验器。
-    // 如果校验失败，它应该丢出一个异常。
+    // custom validators can be defined, simply throw an error to indicate a validation failure
     customProp: function (props, propName, componentName) {
         if (!/matchme/.test(props[propName])) {
             throw new Error(
@@ -91,10 +90,11 @@ san.defineComponent({
         }
     },
 
-    // 你也可以给 `arrayOf` 和 `objectOf` 提供一个自定义校验器。
-    // 如果校验失败，那么应该当抛出一个异常。
-    // 对于数组或者对象中的每个元素都会调用校验器进行校验。
-    // 第一个参数是这个数组或者对象，第二个参数是元素的 key。
+    // Validators for `arrayOf` and `objectOf` can be defined.
+    // Throw an error if validation fails.
+    // Every item of the Array (or Object) will be validated against the custom validator.
+    // The first argument is the Array (or Object),
+    // The second argument is the index (or property name) of the item (or property) to be validated.
     customArrayProp: DataTypes.arrayOf(function (dataValue, key, componentName, dataFullName) {
         if (!/matchme/.test(dataValue[key])) {
             throw new Error(

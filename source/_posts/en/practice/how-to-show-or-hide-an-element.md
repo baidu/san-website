@@ -1,20 +1,19 @@
 ---
-title: 如何实现元素的显示/隐藏？
+title: How to Implement Hide and Show?
 categories:
 - practice
 ---
 
-通过`s-if`指令，我们可以为元素指定条件。只有当条件成立时元素才会渲染，否则元素不会被加载。
+With the `s-if` directive, we can conditionally render a element.
 
-但`s-if`无法实现这样的需求：我们需要在符合条件的情况下显示某元素，条件不满足时，元素在页面中隐藏，但依然被挂载到 DOM 。这个时候，元素的展现用 CSS 控制更为合适。
+But that's not sufficient if we want to hide rather than remove the element when conditions not satisfied, in which case the element is still attached to the DOM tree and therefore CSS is more eligible.
 
-这一需求的本质可以归纳为：如何根据条件实现元素的显示/隐藏。
+We'll discuss how to implement Hide and Show in the rest of this article.
 
-### 如何处理
+In San, `class` and `style` attributes can be used to applying CSS styles. See [this article](https://baidu.github.io/san/tutorial/style/) for details.
 
- San 提供在视图模板中进行样式处理的方案，[详见教程](https://baidu.github.io/san/tutorial/style/)。你可以用不同的 class 控制样式，也可以用 inline 样式实现。
+#### 1. Applying Specific `class` Names
 
-#### 1. 用 class 控制元素的显示与隐藏
 
 ```html
 <!-- template -->
@@ -23,9 +22,9 @@ categories:
 </div>
 ```
 
-注意， class 属性有多个类名时，需要为第一个以后的类名加上空格。
+Note: An extra space should be present before every subsequent class name.
 
- codepen 演示如下：
+A demo from codepen:
 
 <p
     data-height="365"
@@ -34,16 +33,16 @@ categories:
     data-default-tab="js,result"
     data-user="Mona_"
     data-embed-version="2"
-    data-pen-title="根据条件添加不同样式－用class控制"
+    data-pen-title="Conditionally Applying Styles - Via the Class Attribute"
     class="codepen">See the Pen
-    <a href="https://codepen.io/Mona_/pen/ZaOajj/">根据条件添加不同样式－用class控制</a>
+    <a href="https://codepen.io/Mona_/pen/ZaOajj/">Conditionally Applying Styles - Via the Class Attribute</a>
      by MinZhou (<a href="https://codepen.io/Mona_">@Mona_</a>) on
      <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 
- CSS 控制着样式的展现，所以 DOM 始终都存在页面节点树中。你可以打开控制台看看。
+With visibility controled by CSS, the element is always attached to the DOM tree. Open your console to check it out.
 
-#### 2. 用内联样式控制元素的隐藏与显示
+#### 2. Via the `style` Attribute
 
 ```html
 <!-- template -->
@@ -59,14 +58,14 @@ categories:
     data-default-tab="js,result"
     data-user="Mona_"
     data-embed-version="2"
-    data-pen-title="根据条件添加不同样式－用内联样式控制"
+    data-pen-title="Conditionally Applying Styles - Via the Style Attribute"
     class="codepen">See the Pen
-    <a href="https://codepen.io/Mona_/pen/gXMvBN/">根据条件添加不同样式－用内联样式控制</a>
+    <a href="https://codepen.io/Mona_/pen/gXMvBN/">Conditionally Applying Styles - Via the Style Attribute</a>
      by MinZhou (<a href="https://codepen.io/Mona_">@Mona_</a>) on
      <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 
-有时候数据可能并不存在，所以把样式名包含在插值中更为可靠。
+In case `isHidden` is absent, it's more robust to toggle the value along with the property name.
 
 ```html
 <!-- template -->
@@ -75,9 +74,9 @@ categories:
 </div>
 ```
 
-#### 3. 使用计算属性
+#### 3. Computed Attributes
 
-前面的两种方案都可以通过使用计算属性，将判断逻辑从模板中解耦出来，以便更好的应对可能变得更为复杂的需求。下面是基于 class 的例子：
+In both of the above examples, the attribute value can be dynamically computed so that the Hide and Show logic can be extracted out of the template to better cope with complex situations. In the following example, we use a computed class name:
 
 ```js
 san.defineComponent({
@@ -98,14 +97,14 @@ san.defineComponent({
 })
 ```
 
- codepen 演示如下：
+Demo from codepen:
 
-<p data-height="265" data-theme-id="0" data-slug-hash="zPNvwz" data-default-tab="js,result" data-user="LeuisKen" data-embed-version="2" data-pen-title="基于 computed 的元素显示隐藏" class="codepen">See the Pen <a href="https://codepen.io/LeuisKen/pen/zPNvwz/">基于 computed 的元素显示隐藏</a> by LeuisKen (<a href="https://codepen.io/LeuisKen">@LeuisKen</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<p data-height="265" data-theme-id="0" data-slug-hash="zPNvwz" data-default-tab="js,result" data-user="LeuisKen" data-embed-version="2" data-pen-title="Hide and Show Via a Computed Attribute" class="codepen">See the Pen <a href="https://codepen.io/LeuisKen/pen/zPNvwz/">Hide and Show Via a Computed Attribute</a> by LeuisKen (<a href="https://codepen.io/LeuisKen">@LeuisKen</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 
-#### 4. 使用 filter
+#### 4. Applying a Filter
 
- filter 也可以用于对 class 和 style 进行处理，解耦的效果和 computed 类似，其特点是能够显式地声明属性值与数据的依赖关系。下面是基于 class 的例子：
+*filters* can also be applied to transform the class and style attributes. As with the computed attributes, the Hide and Show logic is extracted out of the template, but into the filters this time. The difference is that the input dependency is declared explicitly. In the following example, we apply a filter to the class attribute:
 
 ```js
 san.defineComponent({
@@ -125,14 +124,14 @@ san.defineComponent({
 })
 ```
 
- codepen 演示如下：
+Demo from codepen:
 
-<p data-height="265" data-theme-id="0" data-slug-hash="ZaLbae" data-default-tab="js,result" data-user="LeuisKen" data-embed-version="2" data-pen-title="基于 filter 的元素显示隐藏" class="codepen">See the Pen <a href="https://codepen.io/LeuisKen/pen/ZaLbae/">基于 filter 的元素显示隐藏</a> by LeuisKen (<a href="https://codepen.io/LeuisKen">@LeuisKen</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<p data-height="265" data-theme-id="0" data-slug-hash="ZaLbae" data-default-tab="js,result" data-user="LeuisKen" data-embed-version="2" data-pen-title="Hide and Show - Applying a Filter" class="codepen">See the Pen <a href="https://codepen.io/LeuisKen/pen/ZaLbae/">Hide and Show - Applying a Filter</a> by LeuisKen (<a href="https://codepen.io/LeuisKen">@LeuisKen</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 
-我们可以很明显地看出，class 是由 isHidden 控制的。
+It's obvious that the class is determined by `isHidden`.
 
-这里要额外注意的是，如果和 class 关联的有多个 data ，用 filter 的方法可能会有一些问题，比如我在下面的例子中实现了一个tab组件：
+Issues can arise when the filter depends on additional data, take the Tab component for example:
 
 ```js
 san.defineComponent({
@@ -152,11 +151,11 @@ san.defineComponent({
             active: '',
             tabs: [
                 {
-                    name: '第一项',
+                    name: 'First Item',
                     value: 'one'
                 },
                 {
-                    name: '第二项',
+                    name: 'Second Item',
                     value: 'two'
                 }
             ]
@@ -178,16 +177,16 @@ san.defineComponent({
 });
 ```
 
- codepen 演示如下：
+Demo from codepen:
 
-<p data-height="265" data-theme-id="0" data-slug-hash="XzpmVa" data-default-tab="js,result" data-user="LeuisKen" data-embed-version="2" data-pen-title="没有显式声明依赖的tab bug演示" class="codepen">See the Pen <a href="https://codepen.io/LeuisKen/pen/XzpmVa/">没有显式声明依赖的tab bug演示</a> by LeuisKen (<a href="https://codepen.io/LeuisKen">@LeuisKen</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<p data-height="265" data-theme-id="0" data-slug-hash="XzpmVa" data-default-tab="js,result" data-user="LeuisKen" data-embed-version="2" data-pen-title="Tab Bug from Not Declared Dependency" class="codepen">See the Pen <a href="https://codepen.io/LeuisKen/pen/XzpmVa/">Tab Bug from Not Declared Dependency</a> by LeuisKen (<a href="https://codepen.io/LeuisKen">@LeuisKen</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 
-此处当我在点击 tab 的时候，虽然 active 能够正常更新，但是视图不会引起变化，因为 San 的依赖收集机制不认为 active 的修改会影响到视图，因此需要我们在模板中显式声明对 active 的依赖，参考如下代码：
+When the tab is clicked, the class won't update despite that the `active` is changed. That happens due to the San dependency collection mechanism not recognizing the `active` as one of the dependencies of the view. The fix is simple: we declare the dependency explicitly.
 
 ```js
 san.defineComponent({
-    // 将下面的 mapActive 改成 mapActive(active)，显示声明视图对 active 的依赖
+    // change `mapActive` to `mapActive(active)`, declare the dependency to `active`
     template: `
         <div class="tab">
             <div
@@ -204,11 +203,11 @@ san.defineComponent({
             active: '',
             tabs: [
                 {
-                    name: '第一项',
+                    name: 'First Item',
                     value: 'one'
                 },
                 {
-                    name: '第二项',
+                    name: 'Second Item',
                     value: 'two'
                 }
             ]
@@ -219,7 +218,7 @@ san.defineComponent({
         this.fire('change', value);
     },
     filters: {
-        // 这里就不需要通过 this.data.get('active') 拿到 active 了
+        // Now `active` is passed in
         mapActive(value, active) {
             const classStr = 'sm-tab-item';
             if (value === active) {
@@ -231,15 +230,15 @@ san.defineComponent({
 });
 ```
 
- codepen 演示如下：
+Demo from codepen:
 
-<p data-height="265" data-theme-id="0" data-slug-hash="mqReLg" data-default-tab="js,result" data-user="LeuisKen" data-embed-version="2" data-pen-title="显式声明依赖的tab演示" class="codepen">See the Pen <a href="https://codepen.io/LeuisKen/pen/mqReLg/">显式声明依赖的tab演示</a> by LeuisKen (<a href="https://codepen.io/LeuisKen">@LeuisKen</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<p data-height="265" data-theme-id="0" data-slug-hash="mqReLg" data-default-tab="js,result" data-user="LeuisKen" data-embed-version="2" data-pen-title="Tab Demo with Dependency Declared" class="codepen">See the Pen <a href="https://codepen.io/LeuisKen/pen/mqReLg/">Tab Demo with Dependency Declared</a> by LeuisKen (<a href="https://codepen.io/LeuisKen">@LeuisKen</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 
-通过在模板中显示声明视图对 active 的依赖， San 就能正常更新视图了。这也是为什么我会在一开始说 filter 的特点是能够显式地声明属性值与数据的依赖关系。
+Now the view will be updated properly. Again we see that the usage of filters makes input dependencies explicit.
 
-### 结语
+### Conclusion
 
-隐藏和显示是开发中较为常见的需求，还有一些其他的**样式切换**需求，使用以上两种方法都可以轻松实现。
+Besides Hide and Show, there're plenty of other cases related to **style switching**, which can be implemented in the same way.
 
-总结一下，如果你要控制元素的渲染与否（是否添加到节点树），你需要使用`s-if`指令；如果你仅仅只想控制 DOM 节点的样式，比如元素的显示/隐藏样式，请使用数据控制 class 或内联样式。
+In conclusion, if you need a conditional rendering, use the `s-if` directive; if you only need to switch styles, such as Hide and Show, use `class` and `style` attributes.
