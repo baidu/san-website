@@ -55,7 +55,7 @@ class HelloComponent extends Component {
 new HelloComponent().attach(document.body);
 ```
 
-When defining a component no in ESNext way, it is boring to create a function, call **san.inherits** and define various prototypes. San provides a shortcut method **san.defineComponent** to make it easy.
+When defining a component in non-ESNext way, it is boring to create a function, call **san.inherits** and define various prototypes. San provides a shortcut method **san.defineComponent** to make it easy.
 
 ```javascript
 var MyApp = san.defineComponent({
@@ -71,7 +71,7 @@ var MyApp = san.defineComponent({
 Lifecycle
 ------
 
-San components use HTML-based template syntax, so their lifecycle is consistent with WebComponents.
+San components use HTML-based template syntax in order too keep their lifecycles consistent with WebComponents.
 
 - `compiled` - Compiled the template of a component
 - `inited` - Initialized a component instance with template and data
