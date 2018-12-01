@@ -10,7 +10,7 @@ categories:
 
 ### defineComponent
 
-`描述`： defineComponent({Object}propertiesAndMethods)
+`描述`： {Function} defineComponent({Object}propertiesAndMethods)
 
 `解释`：
 
@@ -29,6 +29,56 @@ var MyApp = san.defineComponent({
     }
 });
 ```
+
+### createComponentLoader
+
+`版本`：>= 3.7.0
+
+`描述`： {Object} createComponentLoader({Object|Function}options)
+
+`解释`：
+
+**方法** 。创建组件 Loader，主要应用于子组件的后加载与异步渲染，详细请参考 [异步组件](../../tutorial/component/#异步组件) 文档。 options 参数为 Object 类型时，支持如下成员：
+
+- {function():Promise}options.load : load 方法。该方法需要返回一个 Promise，load 完成时 reslove，由框架自动调用
+- {Function=}options.placeholder : loading 过程中渲染的占位组件
+- {Function=}options.fallback : load 失败时渲染的组件
+
+options 参数为 Function时，代表 load 方法。不需要指定 placeholder 和 fallback 时，直接传入 load 方法会更方便。
+
+
+`用法`：
+
+```javascript
+var InputComponent = san.defineComponent({
+    template: '<input type="text" value="{{value}}"/>'
+});
+
+var MyApp = san.defineComponent({
+    components: {
+        // component loader 示例，1秒后渲染 x-input
+        'x-input': san.createComponentLoader(function () {
+            return new Promise(function (resolve) {
+                
+                setTimeout(function () {
+                    resolve(InputComponent);
+                }, 1000);
+            });
+        })
+    },
+
+    template: '<div><x-input value="{{name}}"/></div>'
+});
+
+var myApp = new MyApp({
+    data: {
+        name: 'San'
+    }
+});
+myApp.attach(document.body);
+```
+
+
 
 
 ### compileComponent
