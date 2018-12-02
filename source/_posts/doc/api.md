@@ -67,17 +67,54 @@ var myComponent = new MyComponent({
 */
 ```
 
+### owner
+
+
+`版本`：>= 3.7.0
+
+`类型`： Object
+
+`解释`：
+
+指定组件所属的 owner 组件。指定 owner 组件后：
+
+- 组件无需手工 dispose，owner dispose 时会自动释放
+- 组件及其子组件 dispatch 的消息，owner 组件可以接收
+
+`注意`：
+
+指定 owner 后，不允许将组件 push 到 owner 的 children 中
+
+
+`用法`：
+
+```javascript
+san.defineComponent({
+    mainClick: function () {
+        if (!this.layer) {
+            // 为动态创建的子组件指定 owner
+            this.layer = new Layer({
+                owner: this
+            });
+            this.layer.attach(document.body);
+        }
+
+        this.layer.show();
+    }
+});
+```
 
 ### transition
+
+`版本`：>= 3.6.0
+
+`类型`： Object
 
 `解释`：
 
 组件的过渡动画控制器。可参考 [动画控制器](../../tutorial/transition/#动画控制器) 和 [动画控制器 Creator](../../tutorial/transition/#动画控制器-Creator) 文档。
 
 
-`版本`：>= 3.6.0
-
-`类型`： Object
 
 `用法`：
 
