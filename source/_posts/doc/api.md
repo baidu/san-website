@@ -96,6 +96,7 @@ san.defineComponent({
             this.layer = new Layer({
                 owner: this
             });
+
             this.layer.attach(document.body);
         }
 
@@ -103,6 +104,44 @@ san.defineComponent({
     }
 });
 ```
+
+
+### source
+
+`版本`：>= 3.7.0
+
+`类型`： string|Object
+
+`解释`：
+
+通过 HTML 格式的一个标签，声明组件与 owner 之间的数据绑定和事件。指定 source 同时需要指定 owner。更详细的用法请参考 [动态子组件](../../tutorial/component/#动态子组件) 文档，更多声明格式细节请参考 [模板](../../tutorial/template/) 与 [事件](../../tutorial/event/) 文档。
+
+`提醒`：
+
+source 串的标签名称通常没什么用，除了以下情况：组件本身根节点为 template 时，以 source 的标签名称为准。
+
+
+`用法`：
+
+```javascript
+san.defineComponent({
+    mainClick: function () {
+        if (!this.calendar) {
+            this.calendar = new Calendar({
+                owner: this,
+                source: '<x-cal value="{{birthday}}' on-change="birthdayChange($event)"/>'
+            });
+
+            this.calendar.attach(document.body);
+        }
+    },
+
+    birthdayChange: function (value) {
+        this.data.set('birthday', value);
+    }
+});
+```
+
 
 ### transition
 
