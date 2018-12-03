@@ -1,14 +1,14 @@
 ---
-title: 什么东西不要保存在 data 里？
+title: What Content is Not Suitable for the Data?
 categories:
 - practice
 ---
 
-我们知道，data 里应该存与视图相关的数据状态。我们在下面列举了一些不当的使用场景，这些场景是我们不止发现过一次的。
+As introduced before, the contents of data are expected to be view related. In this article we give a list of inproppriate uses of the data.
 
-#### 函数
+#### Functions
 
-不要把函数作为数据存放。函数应该是独立的，或者作为组件方法存在。
+Functions are not suitable to be stored in the data. Functions are expected to be separated from the data, and can be imported from other source files or implemented as component methods.
 
 ```javascript
 // bad
@@ -19,18 +19,17 @@ this.data.set('camel2kebab', function (source) {
 });
 ```
 
-#### DOM 对象
-
-这个应该不用解释吧。
+#### DOM Objects
 
 ```javascript
 // bad
 this.data.set('sideEl', document.querySelector('sidebar'));
 ```
 
-#### 组件等复杂对象
+#### Complex Objects
 
-不要使用数据来做动态子组件的管理。动态子组件对象可以直接存在组件的成员中。
+Complex objects like components are not suitable to be stored in the data.
+For example, using data to store dynamic child components is not recommended, use member properties instead.
 
 ```javascript
 // bad
