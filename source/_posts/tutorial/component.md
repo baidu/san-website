@@ -529,7 +529,6 @@ san.defineComponent({
 
 - 动态创建的子组件无需在 **components** 中声明类型
 - 保证动态子组件不要被重复创建。常见的做法是在实例的属性上持有对创建组件的引用，并以此作判断
-- 保证动态子组件能够被销毁。你可以在创建时 push 到 **children** 中，或者在 **disposed** 中销毁它
 
 ```javascript
 san.defineComponent({
@@ -537,9 +536,6 @@ san.defineComponent({
         if (!this.layer) {
             this.layer = new Layer();
             this.layer.attach(document.body);
-
-            // 如果有下面一句，则可以不用手动在 disposed 中释放
-            // this.children.push(this.layer);
         }
 
         this.layer.show();
@@ -554,3 +550,164 @@ san.defineComponent({
     }
 });
 ```
+
+在 3.7.0 以上的版本，创建动态子组件时，增加了 owner 和 source 参数的支持。
+
+指定 owner 可以自动维护 owner 与动态子组件之间的关系：
+
+- owner 可以收到动态子组件 dispatch 的消息
+- owner dispose 时，动态子组件将自动 dispose
+
+source 可以声明动态子组件与 owner 之间的绑定关系：
+
+- 数据绑定，含双向绑定
+- 事件
+
+
+#### 数据与事件绑定
+
+
+```javascript
+// 3.7.0+
+var Person = san.defineComponent({
+    template: '<div>'
+        + '  <input type="text" value="{=name=}">'
+        + '  <input type="text" value="{=email=}">'
+        + '  <button on-click="done">Done</button>'
+        + '</div>',
+
+    done: function () {
+        this.fire('done', {
+            name: this.data.get('name'),
+            email: this.data.get('email')
+        });
+    }
+});
+
+var MyApp = san.defineComponent({
+    template: '<div>'
+        + '  name: {{author.name}}; email{{author.email}}'
+        + '  <button on-click="edit">edit</button>'
+        + '</div>',
+
+    edit: function () {
+        if (!this.editor) {
+            this.editor = new Person({
+                owner: this,
+                source: '<x-person name="{{author.name}}" email="{{author.email}}" on-done="editDone($event)"/>'
+            });
+            this.editor.attach(document.body)
+        }
+    },
+
+    editDone: function (e) {
+        this.data.set('author', e);
+    }
+});
+
+var myApp = new MyApp({
+    data: {
+        author: {
+            name: 'erik',
+            email: 'errorrik@gmail.com'
+        }
+    }
+});
+myApp.attach(document.body);
+```
+
+
+#### 双向绑定
+
+```javascript
+// 3.7.0+
+var Person = san.defineComponent({
+    template: '<div>'
+        + '  <input type="text" value="{=name=}">'
+        + '  <input type="text" value="{=email=}">'
+        + '</div>'
+});
+
+var MyApp = san.defineComponent({
+    template: '<div>'
+        + '  name: {{author.name}}; email{{author.email}}'
+        + '  <button on-click="edit">edit</button>'
+        + '</div>',
+
+    edit: function () {
+        if (!this.editor) {
+            this.editor = new Person({
+                owner: this,
+                source: '<x-person name="{=author.name=}" email="{=author.email=}"/>'
+            });
+            this.editor.attach(document.body)
+        }
+    }
+});
+
+var myApp = new MyApp({
+    data: {
+        author: {
+            name: 'erik',
+            email: 'errorrik@gmail.com'
+        }
+    }
+});
+myApp.attach(document.body);
+```
+
+
+#### 消息dispatch
+
+```javascript
+// 3.7.0+
+var Person = san.defineComponent({
+    template: '<div>'
+        + '  <input type="text" value="{=name=}">'
+        + '  <input type="text" value="{=email=}">'
+        + '  <button on-click="done">Done</button>'
+        + '</div>',
+
+    done: function () {
+        this.dispatch('person-done', {
+            name: this.data.get('name'),
+            email: this.data.get('email')
+        });
+    }
+});
+
+var MyApp = san.defineComponent({
+    template: '<div>'
+        + '  name: {{author.name}}; email{{author.email}}'
+        + '  <button on-click="edit">edit</button>'
+        + '</div>',
+
+    edit: function () {
+        if (!this.editor) {
+            this.editor = new Person({
+                owner: this,
+                source: '<x-person name="{{author.name}}" email="{{author.email}}"/>'
+            });
+            this.editor.attach(document.body)
+        }
+    },
+
+    messages: {
+        'person-done': function (e) {
+            this.data.set('author', e.value);
+        }
+    }
+});
+
+var myApp = new MyApp({
+    data: {
+        author: {
+            name: 'erik',
+            email: 'errorrik@gmail.com'
+        }
+    }
+});
+myApp.attach(document.body);
+```
+
+
