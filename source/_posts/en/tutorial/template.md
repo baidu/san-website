@@ -1,90 +1,86 @@
 ---
-title: 模板
+title: Template
 categories:
 - tutorial
 ---
 
-在模板 HTML 中，我们通过一定的数据绑定语法编写，相应的数据就能在视图上呈现。
+ San uses an HTML-based template syntax that allows you to declaratively bind the rendered DOM to the underlying San instance’s data. 
 
 
-场景
+Scenes
 -----
 
-### 插值
+### Interpolation
 
-和许多模板引擎一样，插值的语法形式是表达式位于双大括号中，表达式后可以接任意多个过滤器。
+Like many template engines, the syntax of interpolation is that the expression is in double braces, and can be followed by any number of filters.
 
 ```
 {{ expr [[| filter-call1] | filter-call2...] }}
 ```
 
-
-在文本内容区域我们可以使用插值替换。
+In the text content area, we can use interpolation to replace.
 
 ```html
 <p>Hello {{name}}!</p>
 ```
 
-在 HTML 标签的 属性(attribute) 内，我们也可以使用插值替换。
+Within the attributes of the HTML tag, we can also use interpolation to replace.
 
 ```html
 <span title="This is {{name}}">{{name}}</span>
 ```
 
-使用过滤器可以对插值数据进行处理。
+Interpolated data can be processed using filters.
 
 ```html
 <p>Hello {{name | upper}}!</p>
 ```
 
-`表达式`：在插值替换的双大括号中，San 提供了丰富的表达式支持，具体请参考本篇后续的[表达式](#表达式)章节。
+`Expression`: In the double braces of interpolation substitution, San provides a wealth of expression support; please refer to [expression](#expression) section for details.
 
-`过滤器`：过滤器相关描述请参考本篇后续的[过滤器](#过滤器)章节。
-
-
-`提示`：插值将默认进行 HTML 转义。如果不需要 HTML 转义请参考本篇后续的[输出HTML](#输出HTML)章节。
+`Filter`: For a description of the filter, please refer to the [Filter](#Filter) section.
 
 
-### 属性绑定
+`tips`: Interpolation will default to HTML escaping. If you don't need HTML escaping, please refer to the [Output HTML] (#Output HTML) section later in this article.
 
 
-顾名思义，属性绑定的意思是，将数据绑定到子组件的 属性(property) 上。属性绑定的形式和插值绑定相同，通过 HTML 标签的 属性(attribute)声明，通常情况只声明一个 **{{ expression }}**。
+### property binding
 
-下面的例子中，当 jokeName 数据变化时，会自动将新的值设置到 label 组件的 text 属性中。
+
+As the name suggests, property binding means binding data to the properties of a child component. The way of the property binding is the same as the interpolation binding, and the property declaration is passed through the HTML tag. The way of the attribute binding is the same as the interpolation binding, which is declared through the attributes of the HTML tag. And usaslly we only declare one **{{ expression }}**.
+
+In the following example, when the jokeName data changes, the new value is automatically set to the text property of the label component.
 
 ```html
 <ui-label text="{{jokeName}}"></ui-label>
 ```
 
 
-`表达式`：属性绑定支持任意类型的表达式，具体请参考本篇后续的[表达式](#表达式)章节。
+`expression`: Attribute binding supports any type of expression. Please refer to the [expression](#expression) section for details.
 
+### overall propertys binding
 
-### 属性整体绑定
+`version`：>= 3.5.8
 
-`版本`：>= 3.5.8
-
-通过 **s-bind** ，可以为组件绑定整个数据。当**s-bind** 和单个的属性绑定并存时，单个的属性绑定将覆盖整体绑定中相应的数据项。
+By **s-bind**, you can bind the entire data to a component. When **s-bind** coexists with a single property binding, a single property binding overrides the corresponding data item in the overall binding.
 
 ```html
 <ui-label s-bind="{{ {text: email, title: name} }}"></ui-label>
 
-<!-- text 单个属性声明将覆盖 s-bind 中的 text 项 -->
+<!-- `text` of a-single-property-binding overrides `text` of s-bind -->
 <ui-label s-bind="{{ {text: email, title: name} }}" text="{{name}}"></ui-label>
 ```
 
 
-`提示`：对象字面量常用于属性整体绑定。
+`tips`: Two-way binding only supports primitive type and property accessor exprssion. Otherwise, it may lead to unpredictable problems.
 
+### two-way binding
 
-### 双向绑定
+Two-way binding is possible through the HTML tag's attribute to declare **{= expression =}**.
 
+Two-way bindings typically appear in the **user input** scenario, which automatically updates user input results to component data. So we usually apply two-way binding to the ** input form element** or **custom component with input feedback**.
 
-通过  HTML 标签的 属性(attribute)声明 **{= expression =}** 的形式，可以声明双向绑定。
-
-双向绑定通常出现在 **用户输入** 的场景，将用户输入结果自动更新到组件数据。所以我们通常在 **输入表单元素** 或 **具有输入反馈的自定义组件** 上应用双向绑定。
-
-下面的例子将 input、select、自定义组件的 value 属性与声明的数据项（name、online、color）建立了双向绑定关系。当用户输入时，相应数据项的值会发生变化。
+The following example establishes a two-way binding between the declared data item (name, online, color) and the value attribute of input, or select, or custom components. When the user enters, the value of the corresponding data item changes.
 
 ```html
 <input type="text" value="{= name =}">
@@ -98,16 +94,16 @@ categories:
 <ui-colorpicker value="{= color =}"></ui-colorpicker>
 ```
 
-`表达式`：双向绑定仅支持普通变量和属性访问表达式，否则可能导致不可预测的问题。
+`expression`: 
 
 
-输出HTML
+Raw HTML
 ------
 
-有时候我们希望输出原封不动的 HTML，不希望经过 HTML 转义。在 San 里有两种方式可以做到。
+Sometimes we want to output real HTML not be escaped. There are two ways to do this in San.
 
-1. 指令 s-html
-2. 过滤器 raw。过滤器 raw 是一个虚拟过滤器
+1. `s-html` directive
+2. `raw` filter. It is a virtual filter
 
 ```html
 <p s-html="rawHTML"></p>
@@ -115,117 +111,117 @@ categories:
 ```
 
 
-表达式
+Expression
 ------
 
-San 提供了丰富的表达式类型支持，让使用者在编写视图模板时更方便。
+San provides rich expression type support, making it easier for users to write view templates.
 
-- 数据访问(普通变量、属性访问)
-- 一元否定
-- 一元取负 `>= 3.6.6`
-- 二元运算
-- 二元关系
-- 三元条件
-- 括号
-- 字符串
-- 数值
-- 布尔
-- 数组字面量 `>= 3.5.9`
-- 对象字面量 `>= 3.5.9`
-- 方法调用 `>= 3.6.11`
+- data access(primitive type and property accessor exprssion)
+- unitary NOT
+- unitary negative `>= 3.6.6`
+- two-number operation
+- two-number relationship
+- ternary conditional operation
+- brackets
+- string
+- number
+- boolean
+- array literal `>= 3.5.9`
+- object literal `>= 3.5.9`
+- method call `>= 3.6.11`
 
 
-下面通过插值替换的例子列举支持的表达式类型。
+Below, the supported expression types are listed by examples of interpolating.
 
 ```html
-<!-- 普通变量 -->
+<!-- primitive type -->
 <p>{{name}}</p>
 
-<!-- 属性访问 -->
+<!-- property accessor exprssion -->
 <p>{{person.name}}</p>
 <p>{{persons[1]}}</p>
 
-<!-- 一元否定 -->
+<!-- unitary NOT -->
 <p>{{!isOK}}</p>
 <p>{{!!isOK}}</p>
 
-<!-- 一元取负 -->
+<!-- unitary negative -->
 <p>{{-num1 + num2}}</p>
 
-<!-- 二元运算 -->
+<!-- two-number operation -->
 <p>{{num1 + num2}}</p>
 <p>{{num1 - num2}}</p>
 <p>{{num1 * num2}}</p>
 <p>{{num1 / num2}}</p>
 <p>{{num1 + num2 * num3}}</p>
 
-<!-- 二元关系 -->
+<!-- two-number relationship -->
 <p>{{num1 > num2}}</p>
 <p>{{num1 !== num2}}</p>
 
-<!-- 三元条件 -->
+<!-- ternary conditional operation -->
 <p>{{num1 > num2 ? num1 : num2}}</p>
 
-<!-- 括号 -->
+<!-- brackets -->
 <p>{{a * (b + c)}}</p>
 
-<!-- 数值 -->
+<!-- number -->
 <p>{{num1 + 200}}</p>
 
-<!-- 字符串 + 三元条件 -->
+<!-- string + ternary conditional operation -->
 <p>{{item ? ',' + item : ''}}</p>
 
-<!-- 数组字面量 -->
+<!-- array literal -->
 <x-list data="{{ persons || [] }}" />
 
-<!-- 对象字面量 -->
+<!-- object literal -->
 <x-article data="{{ {title: articleTitle, author: user} }}" />
 
-<!-- 方法调用 -->
+<!-- method call -->
 <p>{{max(num1, num2)}}</p>
 ```
 
-`注意`：双向绑定仅支持普通变量和属性访问表达式。
+`tips`: two-way binding only supports primitive type and property accessor expression.
 
 
-数据的视图变换
+data computation in view
 ------
 
-我们经常遇到 **视图对数据的展示不是原始值** 的场景，比如日期的格式、上次修改时间根据当前时间显示分钟或天等等。在这种场景下，我们可以使用如下方法进行数据的处理和变换：
+We often encounter scenarios where the ** view shows that the data is not the original value**, such as the formatted date, the relative time of last modified time based on the current time, and so on. In these scenarios, we can use the following methods to process and transform the data.
 
-- 过滤器
-- 方法调用
-
-
-### 过滤器
+- filter
+- method call
 
 
-在插值替换时，过滤器可以实现对插值数据的处理和变换，使其转换成更适合视图呈现的数据形式。`注意`：过滤器仅在插值替换时支持。
+### filter
 
-插值替换支持多过滤器处理。过滤器之间以类似管道的方式，前一个过滤器的输出做为后一个过滤器的输入，向后传递。
+
+When interpolating, the filter can process and transform the interpolated data into a more suitable data for view rendering. `tips`: Filters are only supported when interpolating。
+
+Interpolating supports multi-filter processing. The filter is similar to the pipe, and the output of the previous filter is used as the input of the latter filter and is passed backward.
 
 ```html
-<!-- 普通变量 -->
+<!-- primitive type -->
 <p>{{myVariable | html | url}}</p>
 ```
 
-filter支持参数传递，参数可以是任何支持的[表达式](#表达式)。
+Filters support parameter passing, parameters can be any supported [expressions](#expression)。
 
 ```html
-<!-- // 假设存在过滤器: comma -->
+<!-- // Suppose there is a filter: comma -->
 <p>{{myVariable | comma(3)}}</p>
 <p>{{myVariable | comma(commaLength)}}</p>
 <p>{{myVariable | comma(commaLength + 1)}}</p>
 ```
 
-过滤器在组件声明时注册，具体请参考[组件文档过滤器章节](../component/#过滤器)。
+The filter is registered when the component is declared. For details, please refer to the [filters](../component/#filter)。
 
 
-### 方法调用
+### Method call
 
 `>= 3.6.11`
 
-在模板中可以直接调用组件中声明的方法。
+The methods declared in the component can be called directly in the template.
 
 ```javascript
 var MyApp = san.defineComponent({
@@ -244,11 +240,11 @@ var MyApp = san.defineComponent({
 });
 ```
 
-- `优点`：相比 [过滤器](#过滤器)，方法调用有时会显得更直观一些。比如 sum 的场景，通过 [过滤器](#过滤器) 实现就会显得有些别扭。
-- `缺点`：[过滤器](#过滤器) 让数据针对视图的处理和变换方法都放在 filters 中，组件上的方法可以专注于视图无关的逻辑行为。如果使用方法调用则破坏了这一点。
+- `pros`: Method calls are sometimes more intuitive than [filters] (#filters). For example, the scene of `sum` will be a bit awkward through [filter] (#filter).
+- `cons`: [Filter] (#Filter) Lets the data processing and transformation methods for the view are placed in filters, and the methods on the component can focus on view-independent logic behavior. This is broken if a method call is used.
 
 ```javascript
-// 通过 filter 实现 sum 显得有些别扭
+// Implementing `sum` through filter is a bit awkward
 var MyApp = san.defineComponent({
     template: '<u>{{num1 | sum(num2)}}</u>',
 
@@ -267,7 +263,7 @@ var MyApp = san.defineComponent({
 });
 ```
 
-方法调用可以动态选择方法，不过第一级必须是静态的。
+Method calls can dynamically select methods, but the first level must be static.
 
 ```javascript
 var MyApp = san.defineComponent({
@@ -293,7 +289,7 @@ var MyApp = san.defineComponent({
 });
 ```
 
-调用的方法中，可以通过 this 继续调用组件上的其他方法。
+In the method called, you can continue to call other methods on the component through this.
 
 ```javascript
 var MyApp = san.defineComponent({
@@ -315,7 +311,7 @@ var MyApp = san.defineComponent({
 });
 ```
 
-`警告`：使用方法调用，方法在运行时通过 this.data 可以触及组件的所有数据。但是，千万不要这么干，否则就会造成对数据的隐式依赖，导致数据变化时，视图不会随着更新。下面是错误和正确的示例。
+`warning`: Using method calls, the method can access all of the component's data through this.data at runtime. However, don't do this, otherwise, it will cause an implicit dependency on the data, causing the view to not update as the data changes. Below are examples of errors and correctness.
 
 ```javascript
 var Bad = san.defineComponent({
@@ -349,13 +345,13 @@ var Good = san.defineComponent({
 });
 ```
 
-`提示`：如果使用方法调用，调用的方法最好是无副作用的 pure function。
+`tips`: If you use a method call, the method you call is preferably a pure function with no side effects.
 
 
-字符实体
+HTML Entities
 ------
 
-在我们编写 HTML 时，如果内容中包含 HTML 预留字符或特殊字符，我们需要写字符实体。San 的模板 HTML 是自解析的，由于体积的关系，只支持有限的具名字符实体：
+When we write HTML, if the content contains reserved characters or special characters of HTML, we need to write the HTML entity. San's template HTML is self-parsing, and due to its volume, only limited named HTML entities are supported:
 
 - &amp;lt;
 - &amp;gt;
@@ -375,7 +371,7 @@ var Good = san.defineComponent({
 <p>1 + 1 &lt; 3</p>
 ```
 
-除此之外，我们可以使用 `&#[entity_number];` 或 `&#x[entity_number];` 形式的编号字符实体。
+Other than that, we can use numbered character entities like `&#[entity_number];` or `&#x[entity_number];`.
 
 ```html
 <p>LiLei &#38; HanMeiMei are a couple.</p>
