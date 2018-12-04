@@ -551,7 +551,7 @@ san.defineComponent({
 });
 ```
 
-在 3.7.0 以上的版本，创建动态子组件时，增加了 owner 和 source 参数的支持。
+在 3.7.0 以上的版本，创建动态子组件增加了 owner 和 source 参数的支持。
 
 指定 owner 可以自动维护 owner 与动态子组件之间的关系：
 
@@ -564,10 +564,8 @@ source 可以声明动态子组件与 owner 之间的绑定关系：
 - 事件
 
 
-#### 数据与事件绑定
-
-
 ```javascript
+// 动态子组件的数据与事件绑定，指定owner和source
 // 3.7.0+
 var Person = san.defineComponent({
     template: '<div>'
@@ -617,9 +615,8 @@ myApp.attach(document.body);
 ```
 
 
-#### 双向绑定
-
 ```javascript
+// 动态子组件双向绑定，指定owner和source
 // 3.7.0+
 var Person = san.defineComponent({
     template: '<div>'
@@ -657,9 +654,8 @@ myApp.attach(document.body);
 ```
 
 
-#### 消息dispatch
-
 ```javascript
+// 动态子组件指定owner，可以dispatch
 // 3.7.0+
 var Person = san.defineComponent({
     template: '<div>'
