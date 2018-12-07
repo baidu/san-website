@@ -558,10 +558,17 @@ san.defineComponent({
 - owner 可以收到动态子组件 dispatch 的消息
 - owner dispose 时，动态子组件将自动 dispose
 
+`注意`：
+
+指定 owner 后，不允许将组件 push 到 owner 的 children 中，否则组件 dispose 过程中，会对动态子组件进行多次 dispose 操作。
+
+
 source 可以声明动态子组件与 owner 之间的绑定关系：
 
 - 数据绑定，含双向绑定
 - 事件
+
+
 
 
 ```javascript
