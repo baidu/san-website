@@ -5,8 +5,8 @@
     "version": "3.7.1"
   },
   "scripts": {
-    "start": "hexo s",
-    "build": "hexo deploy"
+    "start": "npx hexo s",
+    "deploy": "npx hexo clean && npx hexo g && npx hexo deploy"
   },
   "dependencies": {
     "hexo": "^3.7.1",

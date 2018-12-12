@@ -1,12 +1,12 @@
 ---
-title: 父组件如何更新子组件？
+title: How to Update Child Components?
 categories:
 - practice
 ---
 
 #### props
 
-最简单的也是最常用的父组件更新子组件的方式就是父组件将数据通过**props**传给子组件，当相关的变量被更新的时候，MVVM框架会自动将数据的更新映射到视图上。
+Pass parent data to a child component with **props**, the child component will automatically get updated upon data changes.
 
 
 ```javascript
@@ -42,7 +42,8 @@ class Parent extends san.Component {
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 
 #### ref
-更灵活的方式是通过**ref**拿到子组件的实例，通过这个子组件的实例可以手动调用`this.data.set`来更新子组件的数据，或者直接调用子组件声明时定义的成员方法。
+
+Actually the reference to the child component can be obtained by the `.ref()` method. Having this reference, we can call `ref.data.set()` or its member methods to update the child component's data.
 
 ```javascript
 class Son extends san.Component {
@@ -57,7 +58,7 @@ class Parent extends san.Component {
     static template = `
         <div>
             <input value="{= firstName =}" placeholder="please input">
-            <button on-click='onClick'>传给子组件</button>
+            <button on-click='onClick'>Pass to the Child</button>
             <ui-son san-ref="son"/>
         </div>
     `;
@@ -75,7 +76,7 @@ class Parent extends san.Component {
 
 #### message
 
-除了**ref**外，父组件在接收子组件向上传递的消息的时候，也可以拿到子组件的实例，之后的操作方式就和上面所说的一样了。
+Apart from the `.ref()` method, child component's reference can also be found in the event object which is dispatched from the child.
 
 ```javascript
 class Son extends san.Component {
@@ -99,7 +100,7 @@ class Parent extends san.Component {
         </div>
     `;
 
-    // 声明组件要处理的消息
+    // declare the expected message names
     static messages = {
         'son-clicked': function (arg) {
             let son = arg.target;

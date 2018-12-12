@@ -67,17 +67,93 @@ var myComponent = new MyComponent({
 */
 ```
 
+### owner
+
+
+`版本`：>= 3.7.0
+
+`类型`： Object
+
+`解释`：
+
+指定组件所属的 owner 组件。指定 owner 组件后：
+
+- 组件无需手工 dispose，owner dispose 时会自动释放
+- 组件及其子组件 dispatch 的消息，owner 组件可以接收
+
+`注意`：
+
+指定 owner 后，不允许将组件 push 到 owner 的 children 中
+
+
+`用法`：
+
+```javascript
+san.defineComponent({
+    mainClick: function () {
+        if (!this.layer) {
+            // 为动态创建的子组件指定 owner
+            this.layer = new Layer({
+                owner: this
+            });
+
+            this.layer.attach(document.body);
+        }
+
+        this.layer.show();
+    }
+});
+```
+
+
+### source
+
+`版本`：>= 3.7.0
+
+`类型`： string|Object
+
+`解释`：
+
+通过 HTML 格式的一个标签，声明组件与 owner 之间的数据绑定和事件。指定 source 同时需要指定 owner。更详细的用法请参考 [动态子组件](../../tutorial/component/#动态子组件) 文档，更多声明格式细节请参考 [模板](../../tutorial/template/) 与 [事件](../../tutorial/event/) 文档。
+
+`提醒`：
+
+source 串的标签名称通常没什么用，除了以下情况：组件本身根节点为 template 时，以 source 的标签名称为准。
+
+
+`用法`：
+
+```javascript
+san.defineComponent({
+    mainClick: function () {
+        if (!this.calendar) {
+            this.calendar = new Calendar({
+                owner: this,
+                source: '<x-cal value="{{birthday}}' on-change="birthdayChange($event)"/>'
+            });
+
+            this.calendar.attach(document.body);
+        }
+    },
+
+    birthdayChange: function (value) {
+        this.data.set('birthday', value);
+    }
+});
+```
+
 
 ### transition
+
+`版本`：>= 3.6.0
+
+`类型`： Object
 
 `解释`：
 
 组件的过渡动画控制器。可参考 [动画控制器](../../tutorial/transition/#动画控制器) 和 [动画控制器 Creator](../../tutorial/transition/#动画控制器-Creator) 文档。
 
 
-`版本`：>= 3.6.0
-
-`类型`： Object
 
 `用法`：
 
