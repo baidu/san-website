@@ -1,21 +1,19 @@
 ---
-title: 数组深层更新如何触发视图更新？
+title: How does an array deep update trigger a view update?
 categories:
 - practice
 ---
 
-在 San 组件中，对数据的变更需要通过`set` 或 `splice` 等方法，实现用最简单的方式，解决兼容性的问题，同时为了保证数据操作的过程可控，San 的数据变更在内部是 Immutable 的，因此遇到数组深层做数据交换时直接 set 数据会发现没有触发视图的更新
+In the San component, changes to the data need to be done by methods such as `set` or `splice`. San's implementation uses the easiest way to solve compatibility problems, and in order to ensure that the data manipulation process is controllable, San's data changes are internally Immutable. Therefore, when encountering an array deep data exchange, directly calling set to modify the data will find that the view does not trigger an update.
 
-
-
-#### 场景描述
+#### Scene description
 ```javascript
 class MyApp extends san.Component {
     static template = `
         <div>
             <div 
                 style="cursor: pointer"
-                on-click="handlerClick($event)">点我交换数据</div>
+                on-click="handlerClick($event)">Point me to exchange data</div>
             <ul>
                 <li s-for="item in list">{{item.title}}</li>
             </ul>
@@ -36,14 +34,14 @@ class MyApp extends san.Component {
     }
     handlerClick() {
         
-        // 想交换两个值
+        // want to exchange two values
         let firstNews = this.data.get('list');
         let firstData = firstNews[0];
         let secondData = firstNews[1];
         firstNews[1] = firstData;
         firstNews[0] = secondData;
 
-        // 在这里直接set数据发现并没有触发视图的更新
+        // The data set directly here does not trigger the update of the view.
         this.data.set('list', firstNews);
     }
 }
@@ -52,10 +50,10 @@ let myApp = new MyApp();
 myApp.attach(document.body);
 
 ```
-#### 原因分析
-San 的 data 的数据是 Immutable 的，因此 set firstNews 时变量的引用没变， diff 的时候还是相等的，不会触发更新。
+#### Cause Analysis
+The data of San's data is Immutable, so the reference to the variable does not change when set firstNews, and the diff is still equal and does not trigger an update.
 
-#### 解决方式如下
+#### Resolutions
 
 <p 
     data-height="365" 
@@ -64,9 +62,9 @@ San 的 data 的数据是 Immutable 的，因此 set firstNews 时变量的引�
     data-default-tab="js,result" 
     data-user="sw811" 
     data-embed-version="2" 
-    data-pen-title="数组深层更新触发视图更新" 
+    data-pen-title="Array deep update triggers view update" 
     class="codepen">See the Pen 
-        <a href="https://codepen.io/sw811/pen/eEyeYj/">数组深层更新触发视图更新</a> 
+        <a href="https://codepen.io/sw811/pen/eEyeYj/">Array deep update triggers view update</a> 
         by solvan(<a href="https://codepen.io/sw811">@sw811</a>) on 
         <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
