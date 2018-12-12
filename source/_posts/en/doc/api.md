@@ -75,7 +75,7 @@ var myComponent = new MyComponent({
 The transition animation controller for the component. See [animation controller](../../tutorial/transition/#Animation-Controller) and [animation controller creator](../../tutorial/transition/#Animation-Controller-Creator) for more details.
 
 
-`version`:>= 3.6.0
+`version`: >= 3.6.0
 
 `type`: Object
 
@@ -189,7 +189,7 @@ san.defineComponent({
 
 `Warning`:
 
-The filter method can access the component's data through `this.data` at runtime. However, doing so can result in an implicit dependency on the data, causing the view to not update as the data changes. Therefore, the filter method should be a pure function with no side effects. 
+The filter method can access the component's data through `this.data` at runtime, however doing so can result in an implicit dependency on the data, causing the view to not update as the data changes. Therefore, the filter method should be a pure function with no side effects. 
 
 ```javascript
 var Bad = san.defineComponent({
@@ -327,7 +327,7 @@ Defines the trim mode for whitespace characters when parsing component templates
 - **blank** clear blank text node
 - **all** clear the leading and trailing whitespace characters of all text nodes.
 
-`version`:>= 3.2.5
+`version`: >= 3.2.5
 
 `type`: string
 
@@ -354,7 +354,7 @@ default:
 ['{{', '}}']
 ```
 
-`version`:>= 3.5.0
+`version`: >= 3.5.0
 
 `type`: Array
 
@@ -607,7 +607,7 @@ var AddForm = san.defineComponent({
 
 ### slot
 
-`version`:>= 3.3.0
+`version`: >= 3.3.0
 
 `description`: {Array} slot({string=}name)
 
