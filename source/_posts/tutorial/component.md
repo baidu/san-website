@@ -713,6 +713,62 @@ var myApp = new MyApp({
 myApp.attach(document.body);
 ```
 
+`提示`：如果你的组件包含指定 source 声明的动态子组件，并且预期会被循环多次创建，可以将 source 模板手动预编译，避免框架对 source 字符串进行多次重复编译，提升性能。
+
+```javascript
+// 手工预编译 source
+// 3.7.0+
+var PersonDetail = san.defineComponent({
+    template: '<div>'
+        + '  {{name}}, {{email}}'
+        + '  <button on-click="close">close</button>'
+        + '</div>',
+
+    close: function () { this.el.style.display = 'none' },
+    open: function () { this.el.style.display = 'block' }
+});
+
+var Person = san.defineComponent({
+    template: '<div>'
+        + '  name: {{info.name}}'
+        + '  <button on-click="showDetail">detail</button>'
+        + '</div>',
+
+    // 手工预编译 source
+    detailSource: san.parseTemplate('<x-person name="{{info.name}}" email="{{info.email}}"/>')
+        .children[0],
+
+    showDetail: function () {
+        if (!this.detail) {
+            this.detail = new PersonDetail({
+                owner: this,
+                source: this.detailSource
+            });
+            this.detail.attach(document.body)
+        }
+
+        this.detail.open();
+    }
+});
+
+var MyApp = san.defineComponent({
+    template: '<div><x-p s-for="p in members" info="{{p}}" /></div>',
+
+    components: {
+        'x-p': Person
+    }
+});
+
+var myApp = new MyApp({
+    data: {
+        members: [
+            { name: 'errorrik', email: 'errorrik@what.com' },
+            { name: 'otakustay', email: 'otakustay@what.com' }
+        ]
+    }
+});
+```
+
 
 异步组件
 ----
