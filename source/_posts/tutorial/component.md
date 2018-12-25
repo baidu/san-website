@@ -769,6 +769,46 @@ var myApp = new MyApp({
 });
 ```
 
+在 3.7.1 以上的版本，动态子组件的 source 参数允许声明子元素，指定插入 slot 部分的内容。
+
+
+```javascript
+// 指定插入 slot 部分的内容
+// 3.7.1+
+var Dialog = san.defineComponent({
+    template: '<span><slot name="title"/><slot/></span>'
+});
+
+var MyApp = san.defineComponent({
+    template: '<div><button on-click="alterStrong">alter strong</button></div>',
+
+    attached: function () {
+        if (!this.dialog) {
+            this.dialog = new Dialog({
+                owner: this,
+                source: '<x-dialog>'
+                    + '<h2 slot="title">{{title}}</h2>'
+                    + '<b s-if="strongContent">{{content}}</b><u s-else>{{content}}</u>'
+                    + '</x-dialog>'
+            });
+            this.dialog.attach(this.el);
+        }
+    },
+
+    alterStrong: function () {
+        this.data.set('strongContent', !this.data.get('strongContent'));
+    }
+});
+
+var myApp = new MyApp({
+    data: {
+        title: 'MyDialog',
+        content: 'Hello San',
+        strongContent: true
+    }
+});
+```
+
 
 异步组件
 ----
