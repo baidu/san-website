@@ -1,12 +1,12 @@
 ---
-title: 如何遍历一个对象？
+title: Object Traversal
 categories:
 - practice
 ---
 
-在San中已经提供了 san-for 指令（可以简写为 s-for ）将 Array 渲染为页面中的列表，那么对于 Object 想要进行遍历并渲染应当怎么做呢？由于 San 的指令并不直接支持 Object 的遍历，因此可以使用计算属性进行对象的遍历
+San provides san-for directive (abbreviated as s-for) to render a list from Array data. Then how to traverse and render Object data? Since san does not provide directives for Object traversal, you can make use of the **computed property**.
 
-#### 使用
+#### Usage
 
 ```javascript
 class MyComponent extends San.component {
@@ -24,7 +24,7 @@ class MyComponent extends San.component {
 }
 ```
 
-#### 示例
+#### Demo
 
 <p data-height="365" data-theme-id="dark" data-slug-hash="rzMZeN" data-default-tab="js,result" data-user="asd123freedom" data-embed-version="2" data-pen-title="san-traverse-object" class="codepen">See the Pen <a href="https://codepen.io/asd123freedom/pen/rzMZeN/">san-traverse-object</a> by liuchaofan (<a href="https://codepen.io/asd123freedom">@asd123freedom</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
