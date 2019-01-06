@@ -1,17 +1,17 @@
 ---
-title: Q&A集锦
+title: Q&A
 categories:
 - practice
 ---
 
-这里是一些常见问题的解答，有任何问题随时给我们提 issue，我们会持续更新这里，方便您尽快发现问题的答案
+Here are some answers to frequently asked questions. If you have any questions, please feel free to ask us an issue. We will continue to update them here so that you can find the answers to your questions as soon as possible.
 
-### 实践问题
+### Practice issues
 
-1.`san-for`和`san-ref`可以一起使用吗？
-A：可以的，使用方式为https://github.com/baidu/san/blob/master/test/component.spec.js#L1547
+1. Can `san-for` and `san-ref` be used together?
+A：Yes. More details refer to https://github.com/baidu/san/blob/master/test/component.spec.js#L1547
 
-### 其它问题
+### Other issues
 
 
 
