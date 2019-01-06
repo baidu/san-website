@@ -31,7 +31,7 @@ san.defineComponent({
 });
 ```
 
-In the above example, when the isHidden is `true`, ul has `list-hidden` class, which does not exist when isHidden is `false`.
+In the above example, `list-hidden` class appears when `isHidden` is `true`, otherwise it is omitted
 
 When designing, San wants the view template developer to write class and style just like a normal attribute, so no special binding syntax is provided. This can be achieved by the ternary operator.
 
