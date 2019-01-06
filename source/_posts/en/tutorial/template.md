@@ -18,13 +18,13 @@ Like many template engines, the syntax of interpolation is that the expression i
 {{ expr [[| filter-call1] | filter-call2...] }}
 ```
 
-In the text content area, we can use interpolation to replace.
+In the text content area, we can use interpolation replacement.
 
 ```html
 <p>Hello {{name}}!</p>
 ```
 
-Within the attributes of the HTML tag, we can also use interpolation to replace.
+Within the attributes of the HTML tag, we can also use interpolation replacement.
 
 ```html
 <span title="This is {{name}}">{{name}}</span>
@@ -100,7 +100,7 @@ The following example establishes a two-way binding between the declared data it
 Raw HTML
 ------
 
-Sometimes we want to output real HTML not be escaped. There are two ways to do this in San.
+Sometimes we want to output unescaped HTML. There are two ways to do this in San.
 
 1. `s-html` directive
 2. `raw` filter. It is a virtual filter
@@ -117,8 +117,8 @@ Expression
 San provides rich expression type support, making it easier for users to write view templates.
 
 - data access(primitive type and property accessor exprssion)
-- unitary NOT
-- unitary negative `>= 3.6.6`
+- unary NOT
+- unary negative `>= 3.6.6`
 - two-number operation
 - two-number relationship
 - ternary conditional operation
@@ -141,11 +141,11 @@ Below, the supported expression types are listed by examples of interpolating.
 <p>{{person.name}}</p>
 <p>{{persons[1]}}</p>
 
-<!-- unitary NOT -->
+<!-- unary NOT -->
 <p>{{!isOK}}</p>
 <p>{{!!isOK}}</p>
 
-<!-- unitary negative -->
+<!-- unary negative -->
 <p>{{-num1 + num2}}</p>
 
 <!-- two-number operation -->
