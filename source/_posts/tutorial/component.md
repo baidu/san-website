@@ -713,6 +713,102 @@ var myApp = new MyApp({
 myApp.attach(document.body);
 ```
 
+`提示`：如果你的组件包含指定 source 声明的动态子组件，并且预期会被循环多次创建，可以将 source 模板手动预编译，避免框架对 source 字符串进行多次重复编译，提升性能。
+
+```javascript
+// 手工预编译 source
+// 3.7.0+
+var PersonDetail = san.defineComponent({
+    template: '<div>'
+        + '  {{name}}, {{email}}'
+        + '  <button on-click="close">close</button>'
+        + '</div>',
+
+    close: function () { this.el.style.display = 'none' },
+    open: function () { this.el.style.display = 'block' }
+});
+
+var Person = san.defineComponent({
+    template: '<div>'
+        + '  name: {{info.name}}'
+        + '  <button on-click="showDetail">detail</button>'
+        + '</div>',
+
+    // 手工预编译 source
+    detailSource: san.parseTemplate('<x-person name="{{info.name}}" email="{{info.email}}"/>')
+        .children[0],
+
+    showDetail: function () {
+        if (!this.detail) {
+            this.detail = new PersonDetail({
+                owner: this,
+                source: this.detailSource
+            });
+            this.detail.attach(document.body)
+        }
+
+        this.detail.open();
+    }
+});
+
+var MyApp = san.defineComponent({
+    template: '<div><x-p s-for="p in members" info="{{p}}" /></div>',
+
+    components: {
+        'x-p': Person
+    }
+});
+
+var myApp = new MyApp({
+    data: {
+        members: [
+            { name: 'errorrik', email: 'errorrik@what.com' },
+            { name: 'otakustay', email: 'otakustay@what.com' }
+        ]
+    }
+});
+```
+
+在 3.7.1 以上的版本，动态子组件的 source 参数允许声明子元素，指定插入 slot 部分的内容。
+
+
+```javascript
+// 指定插入 slot 部分的内容
+// 3.7.1+
+var Dialog = san.defineComponent({
+    template: '<span><slot name="title"/><slot/></span>'
+});
+
+var MyApp = san.defineComponent({
+    template: '<div><button on-click="alterStrong">alter strong</button></div>',
+
+    attached: function () {
+        if (!this.dialog) {
+            this.dialog = new Dialog({
+                owner: this,
+                source: '<x-dialog>'
+                    + '<h2 slot="title">{{title}}</h2>'
+                    + '<b s-if="strongContent">{{content}}</b><u s-else>{{content}}</u>'
+                    + '</x-dialog>'
+            });
+            this.dialog.attach(this.el);
+        }
+    },
+
+    alterStrong: function () {
+        this.data.set('strongContent', !this.data.get('strongContent'));
+    }
+});
+
+var myApp = new MyApp({
+    data: {
+        title: 'MyDialog',
+        content: 'Hello San',
+        strongContent: true
+    }
+});
+```
+
 
 异步组件
 ----
