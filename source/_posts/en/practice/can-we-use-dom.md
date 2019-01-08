@@ -69,7 +69,7 @@ Not directly operating DOM This is actually in line with the basic principles of
 The San framework greatly improves the development efficiency of the application. It helps us to shield the cumbersome DOM operations and helps us deal with the relationship between Model and View. This looks really good, but all the good things always cost a lot. If San does this, it will bring performance overhead, so it is worse than using DOM directly. It is undoubted that the world is not likely to have better performance than direct DOM. If you want to change the display state of a page, DOM is its only API, and no framework can be bypassed.
 
 But is this performance consumption really bringing unmaintainable problems to my application? But most of the reason is because the code structure in development is unreasonable, the code is not standardized, the function division is not clear enough, etc. Projects caused by a series of subjective problems cannot be maintained.
-### Conslution
+### Conclusion
 
 In our project, choose San as the framework, which not only frees you from the cumbersome DOM operation, but also greatly reduces the operational complexity of the front-end application and greatly improves the development efficiency of the application. As a separate data, logic, and view encapsulation unit, the component system can help you sort out the application code structure in development and ensure that the system can be more easily maintained.
 
