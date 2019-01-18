@@ -1,16 +1,16 @@
 ---
-title: data bind时的auto camel
+title: Auto camel when data bind
 categories:
 - practice
 ---
 
-在 san 组件中，data 的键值必须遵守 camelCase (驼峰式)的命名规范，不得使用 kebab-case (短横线隔开式)规范。
+In the san component, the key value of data must follow the camelCase naming convention, and the kebab-case specification should not be used.
 
-## 场景一
+## Scenes 1
 
-当一个父组件调用子组件并进行 data 绑定时，如果某一项属性写法使用了 kebab-case，san 会自动将其转换为 camelCase，然后传入子组件。下面的一个例子说明了这一点：
+When a parent component calls a child component and performs data binding, if a property is written using kebab-case, san will automatically convert it to camelCase and then pass it to the child component. The following example illustrates this:
 
-### 示例一
+### Example 1
 
 ```javascript
 class Child extends san.Component {
@@ -40,17 +40,17 @@ new Parent().attach(document.body);
 <p data-height="265" data-theme-id="0" data-slug-hash="vJQgWm" data-default-tab="js,result" data-user="mly-zju" data-embed-version="2" data-pen-title="vJQgWm" class="codepen">See the Pen <a href="https://codepen.io/mly-zju/pen/vJQgWm/">vJQgWm</a> by Ma Lingyang (<a href="https://codepen.io/mly-zju">@mly-zju</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 
-### 分析
+### Analyse
 
-上面例子中，父组件调用子组件，为`data-parent`属性传入了"data from parent!"字符串。在子组件中，同时在li标签中输出`dataParent`和`data-parent`属性的值，可以看到，`dataParent`打印出的正是父组件绑定的值，作为对比，`data-parent`并没有输出我们期望的绑定值。从这个例子中可以很明显看出，对于传入的属性键值，san会自动将 kebab-case 写法转换为 camelCase。而作为对比，在原生 html 标签中，并不会有 auto-camel 的特性，我们如果传入一个自定义的 kebab-case 写法的属性，依然可以通过`dom.getAttribute('kebab-case')`来进行读取。san 的 template 与原生 html 的这一点不同值得我们注意。
+In the above example, the parent component calls the child component, passing in the "data from parent!" string for the `data-parent` property. In the sub-component, the value of the `dataParent` and `data-parent` attributes are output in the li tag at the same time. It can be seen that `dataParent` prints out the value bound to the parent component, as a comparison, `data-parent ` did not output the binding value we expected. As you can see from this example, for incoming property key values, San will automatically convert the kebab-case method to camelCase. In contrast, in native html tags, there is no auto-camel feature. If we pass in a custom kebab-case method, we can use `dom.getAttribute('kebab-case') to read. The San template differs from the native html in that it deserves our attention.
 
-在这个场景中的 auto camel 是很有迷惑性的，这个特性很容易让我们误以为在开发中，定义组件的属性键值时候我们可以随心所欲的混用 camelCase 和 kebab-case，因为反正 san 会自动帮我们转换为 camelCase 形式。那么，实际上是不是如此呢？来看场景二。
+The auto camel in this scene is very confusing. This feature makes us mistakenly think that in development, when we define the property key values of components, we can mix camelCase and kebab-case as we like, because anyway, san will automatically help. We convert to the camelCase form. So, isn't that really the case? Look at scene two.
 
-##  场景二
+## Scenes 2
 
-在场景一中，父组件为子组件绑定了一个 kebab-case 写法的属性，被自动转换为 camelCase。那么在子组件中，如果自身返回的初始 data 属性本身就是 kebab-case 类型，又会出现怎样的情况呢？我们看第二个例子：
+In scenario 1, the parent component binds a kebab-case method property to the child component and is automatically converted to camelCase. So what happens if the initial data property returned by itself is a kebab-case type in the child component? Let's look at the second example:
 
-### 示例二
+### Example 2
 
 ```javascript
 class Child extends san.Component {
@@ -74,15 +74,15 @@ new Child().attach(document.body);
 <p data-height="265" data-theme-id="0" data-slug-hash="QMJpvL" data-default-tab="js,result" data-user="mly-zju" data-embed-version="2" data-pen-title="QMJpvL" class="codepen">See the Pen <a href="https://codepen.io/mly-zju/pen/QMJpvL/">QMJpvL</a> by Ma Lingyang (<a href="https://codepen.io/mly-zju">@mly-zju</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 
-### 分析
+### Analyse
 
-在上面例子中，Child 组件初始 data 中包含一项键值为`data-self`的数据。我们将其分别以`dataSelf`和`data-self`打印到 li 标签中，可以看到，两种都没有正确打印出我们初始化的值。说明对于自身 data 属性而言，如果属性的键值不是 camelCase 的形式，san 并不会对其进行 auto camel 转换，所以我们无论以哪种方式，都无法拿到这个数据。
+In the above example, the Child component's initial data contains a data with a key value of `data-self`. We print them to the li tag with `dataSelf` and `data-self` respectively. As you can see, neither of them correctly prints out our initialized values. Explain that for its own data property, if the key value of the property is not in the form of camelCase, San does not perform auto camel conversion on it, so we can't get this data in any way.
 
-##  原理分析
+## Principle analysis
 
-在 san 的 compile 过程中，对 template 的解析会返回一个 ANODE 类的实例。其中 template 中绑定属性的时候，属性对象的信息会解析为 ANODE 实例中的 props 属性。对于子组件来说，会根据父组件的 aNode.props 来生成自身的 data binds。
+In the compile process of San, parsing the template returns an instance of the ANODE class. When the attribute is bound in template, the information of the attribute object is resolved to the props attribute in the ANODE instance. For subcomponents, their own data binds are generated based on the parent component's aNode.props.
 
-在 san 中，非根组件做 data binds 过程中，接受父组件的 aNode.props 这一步时，会做 auto camel 处理。这就解释了上述两个例子为什么父组件 kebab 属性传入后，子组件 camel 属性表现正常，其余情况都是异常的。事实上在 san 的源码中，我们可以找到相关的处理函数：
+In San, when the non-root component does data bindings, it will do auto camel processing when accepting the aNode.props step of the parent component. This explains the above two examples. After the parent component kebab property is passed in, the child component camel property behaves normally, and the rest are abnormal. In fact, in the source code of San, we can find the relevant handler:
 
 ```javascript
 function kebab2camel(source) {
@@ -106,8 +106,8 @@ function camelComponentBinds(binds) {
 }
 ```
 
-在生成子组件的绑定过程中，正是由于调用了 camelComponentBinds 这个函数，所以才有 auto camel 的特性。
+In the binding process of generating subcomponents, it is because of the call to the function of camelComponentBinds that auto camel is available.
 
-##  结论
+## Conclusion
 
-san 的 auto camel 只适用于父组件调用子组件时候的数据绑定。对于一个组件自身的初始数据，如果属性为 kebab-case，我们将无法正确拿到数据。因此，在写 san 组件的过程中，无论何时，对于 data 中的属性键值，我们都应该自觉地严格遵循 camelCase 规范。
+The auto camel of San only applies to data binding when the parent component calls the child component. For the initial data of a component itself, if the property is kebab-case, we will not get the data correctly. Therefore, in the process of writing the San component, we should consciously strictly follow the camelCase specification for the attribute key values in data.
