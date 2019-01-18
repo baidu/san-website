@@ -1,18 +1,19 @@
 ---
-title: 如何使用 san-router 建立一个单页应用的后台系统？
+title: How to use san-router to create a back-end system for a single-page application?
 categories:
 - practice
 ---
 
-#### 引言
+#### Introduction
 
-众所周知，Web 系统的早期路由是由后端来实现的，服务器根据 URL 来重新加载整个页面。这种做法用户体验不但不好，而且页面若是变得复杂，服务器端的压力也会随之变大。随着 Ajax 的广泛应用，页面能够做到无需刷新浏览器也可更新数据，这也给单页应用和前端路由的出现奠定了基础。因此，在单页应用系统中使用前端路由也十分常见，很多前端框架也提供或者推荐配套使用的路由系统。san-router 是 San 框架的官方 router，以方便用户基于 san 构建单页或同构应用为目标。本文也主要来说明实践过程中如何使用 san-router 来构建一个单页面后台管理系统。
+As we all know, the early routing of the Web system is implemented by the backend, and the server reloads the entire page based on the URL. This kind of user experience is not only bad, but if the page becomes complicated, the pressure on the server side will also become larger. With the widespread use of Ajax, pages can update data without refreshing the browser, which also lays the foundation for the emergence of single-page applications and front-end routing. Therefore, the use of front-end routing in a single-page application system is also very common, and many front-end frameworks also provide or recommend a matching routing system. San-router is the official router of the San framework, which is designed to make it easy for users to build single-page or homogeneous applications based on san. This article also focuses on how to use san-router to build a single-page back-end management system during practice.
 
 
-#### 路由配置
-使用 san-router 和 San 构建单页应用的系统主要基于路由和组件。路由处理放在浏览器端来直接响应浏览器地址的变换，分发到对应的路由。在路由发生变化时，通过加载相应的组件，替换需要改变的部分，来向用户呈现对应的界面。所以路由配置是比较关键的一步。
+#### Router Config
 
-单页应用系统中应该创建一个入口 js 文件(如 main.js )，在其中可以配置相关路由，attach 一个根组件，并将路由的 target 设置为根组件中的标签:
+Systems that use san-router and San to build single-page applications are primarily based on routing and components. The routing process is placed on the browser side to directly respond to the transformation of the browser address and distribute it to the corresponding route. When the route changes, the corresponding interface is presented to the user by loading the corresponding component and replacing the part that needs to be changed. So routing configuration is a relatively important step.
+
+A single-page application should create an entry js file (such as main.js ) in which you can configure the relevant route, attach a root component, and set the target of the route to the label in the root component:
 
 ```javascript
 // main.js
@@ -38,47 +39,46 @@ const routes = [
       Component: About
     }
 ];
-// 将路由规则的 target 属性设置为根组件中的标签
+// Set the target property of the routing rule to the label in the root component
 routes.forEach(item => {
     router.add({
         ...item,
         target: '#main'
     });
 });
-// 设置路由模式 'html5 | hash'
+// set router mode to 'html5 | hash'
 router.setMode('html5');
-// 设置路由监听
+// set router listen
 router.listen((e, config) => {
-    // 在路由发生变化时触发
+    // trigger when router changes
     console.log(e);
     console.log(config);
 });
-// 启动路由
+// start router
 router.start();
 
 ```
 
+In the routing rule configuration process, the routing rules are added by calling router.add({Object}options), and the Component and target parameters are specified in the options object. Maps specific URL rules to the corresponding component class, and when the URL changes and matches the routing rules, the corresponding logical subcomponent is initialized and rendered into the page.
 
-在路由规则配置过程中，通过调用 router.add({Object}options) 来添加路由规则，在 options 对象中指定 Component 和 target 参数。将特定的 URL 规则映射到相应的组件类上，在 URL 变化并匹配路由规则时，将对应逻辑子组件初始化并渲染到页面中。
+> san-router has two routing rule configurations:
+> When rule is string, the path part of the URL matches the string exactly.
+> rule is RegExp (regular), the path part of the URL matches the regular part
 
-> san-router 有两种路由规则配置:
-> rule 为 string 时，URL 的 path 部分与字符串完全匹配才可
-> rule 为 RegExp (正则)时，URL 的 path 部分与该正则部分匹配即可
+After the routing rules are configured, you can set the routing mode by calling the setMode method, and add the route listener by calling the listen method, which is triggered when the routing behavior occurs.
 
-路由规则配置完成后，可以通过调用 setMode 方法来设置路由模式，通过调用 listen 方法来添加路由监听器，当发生路由行为时被触发。
-
-最后，可通过调用 start 方法来启动路由，根据 URL 的变化来匹配规则，渲染相应的组件到界面上。
+Finally, you can start the route by calling the start method, matching the rules based on the changes in the URL, and rendering the corresponding components to the interface.
 
 
-#### App根组件
+#### App root component
 
-App 作为根组件，布局了整个系统界面不需要更新的部分，搭建出了系统界面基本的骨架。那些需要更新的部分则是在 App 组件被附加到页面后，通过启动路由，来加载不同的逻辑组件，渲染到路由规则 target 属性对应的标签里:
+As the root component, the App lays out the parts of the entire system interface that do not need to be updated, and builds the basic skeleton of the system interface. The part that needs to be updated is to load different logical components by launching the route after the App component is attached to the page, and render it to the label corresponding to the target attribute of the routing rule:
 
 
 ```javascript
 // App.san
 
-// Link 组件
+// Link Component
 import {Link} from 'san-router';
 
 // App Component
@@ -90,7 +90,7 @@ class App extends san.Component {
           <div class="app-container">
             <div class="app-drawer">
                 <div class="drawer-title">
-                  <h3>XXX管理系统</h3>
+                  <h3>XXX Manage System</h3>
                 </div>
                 <div class="menu">
                     <ul>
@@ -106,7 +106,7 @@ class App extends san.Component {
                 </div>
             </div>
             <div class="app-content">
-              <!-- 逻辑组件渲染处 -->
+              <!-- Logical component rendering here -->
               <div id="main"></div>
             </div>
            </div>
@@ -115,18 +115,18 @@ class App extends san.Component {
 ```
 
 
-#### 逻辑子组件
+#### Logical subcomponent
 
-逻辑子组件是指根据路由匹配规则渲染到页面中的业务逻辑组件。这些组件按照业务逻辑，由基础组件库中的组件组装而成，在匹配到对应路由时，进行初始化和渲染。
+A logical subcomponent is a business logic component that is rendered into a page based on a route matching rule. These components are assembled from the components in the base component library according to the business logic, and are initialized and rendered when they match the corresponding route.
 
-逻辑子组件是正规的 san 组件，每一个逻辑子组件可以放在一个单独的文件里，调用基本组件库来组装而成，设置在不同生命周期阶段想要处理的业务:
+The logical subcomponents are regular san components. Each logical subcomponent can be placed in a separate file, called by the basic component library, to set up the business to be processed in different lifecycle phases:
 
 ```javascript
 // About.san
 
 class About extends san.Component {
     static template = `
-        <p>关于关于</p>
+        <p>About us</p>
     `;
     initData() {
         return {};
@@ -163,11 +163,11 @@ class Home extends san.Component {
 ```
 
 
-#### 总结
+#### Conclusion
 
-使用 san-router 构建一个单页应用后台系统的关键点在路由配置、根组件和逻辑子组件三个方面，如果能优雅地做好以上三个方面，就能在后期开发与扩展过程中复用组件和模块，提高开发效率。另外，单页应用基于前端路由、组件化思想和前端数据流方案。因此，在构建一个单页应用系统时，还需关注前端数据流管理，对于业务比较复杂多变的后台管理系统，复用组件、有效管理 Ajax 请求和前端数据流有利于提高开发和维护效率。所以单页应用在实践中也被广泛应用，但是每种技术方案有其局限性，单页应用要在一个页面上提供所有功能，首次需要加载大量资源，资源加载时间也相对较长，在选择技术方案时还需要兼顾具体应用场景。
+The key to constructing a single-page application back-end system using san-router is the three aspects of routing configuration, root components and logical sub-components. If you can do these three aspects gracefully, you can reuse them in the later development and expansion process. Components and modules to increase development efficiency. In addition, single-page applications are based on front-end routing, componentization ideas, and front-end data flow scenarios. Therefore, when constructing a single-page application system, it is also necessary to pay attention to front-end data stream management. For a back-end management system with complex and variable services, multiplexing components, effectively managing Ajax requests and front-end data streams can improve development and maintenance efficiency. Therefore, single-page applications are also widely used in practice, but each technical solution has its limitations. Single-page applications need to provide all functions on one page. For the first time, a large amount of resources need to be loaded, and resource loading time is relatively long. The technical solution also needs to take into account the specific application scenarios.
 
-#### 示例
+#### Example
 
 <p data-height="265" data-theme-id="0" data-slug-hash="VzQeZm" data-default-tab="js,result" data-user="sqliang" data-embed-version="2" data-pen-title="san-router-spa" class="codepen">See the Pen <a href="https://codepen.io/sqliang/pen/VzQeZm/">san-router-spa</a> by sqliang (<a href="https://codepen.io/sqliang">@sqliang</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
