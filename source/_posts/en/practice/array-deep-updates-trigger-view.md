@@ -4,7 +4,7 @@ categories:
 - practice
 ---
 
-In the San component, changes to the data need to be done by methods such as `set` or `splice`. San's implementation uses the easiest way to solve compatibility problems, and in order to ensure that the data manipulation process is controllable, San's data changes are internally Immutable. Therefore, when encountering an array deep data exchange, directly calling set to modify the data will find that the view does not trigger an update.
+In the San component, changes to the data need to be done by methods such as `set` or `splice`. San's implementation uses the easiest way to solve compatibility problems, and in order to ensure that the data manipulation process is controllable, San's data changes are internally Immutable. Therefore, when encountering data manipulation in a deep array, directly calling set to modify the data will find that the view does not trigger an update.
 
 #### Scene description
 ```javascript
@@ -51,7 +51,7 @@ myApp.attach(document.body);
 
 ```
 #### Cause Analysis
-The data of San's data is Immutable, so the reference to the variable does not change when set firstNews, and the diff is still equal and does not trigger an update.
+The data of San is Immutable, so the reference to the variable does not change when set firstNews, and the diff is still equal and does not trigger an update.
 
 #### Resolutions
 
