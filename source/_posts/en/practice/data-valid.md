@@ -1,23 +1,25 @@
 ---
-title: 什么东西可以保存在data里？
+title: What Content is Suitable for the Data?
 categories:
 - practice
 ---
 
 
-在 San 的文档中写道：" San 是一个 MVVM 的组件框架，通过 San 的视图引擎能够让用户只用操作数据，视图自动更新"。这里要说的 data 指的就是用户操作的"数据"。data 里应该存与视图相关的数据状态。
+The introduction of san says: "San is a MVVM component framework. With the help of san view engine, one can focus on the data only and views will be updated automatically." We're going to discuss the "data" to be manipulated. The contents of the "data" are expected to be view related states only.
 
-#### data 中保存的数据
+#### Sources of the Data
 
-对于一个组件，data 数据的来源可分为如下两种：
-1、组件自身定义的数据;
-2、从父组件中传入的数据;
-3、computed 中定义的数据;
-以上三种，我们都可以通过`this.data.get()`方法获取。
+For a component, the source of the data can be:
 
-组件自身定义的数据（状态）保存在该组件的 data 中，可以对其进行修改从而影响当前组件以及子组件的视图。从父组件传入的数据，可以从 data 中获取，但通常我们只是使用这个数据，如果要更改从父组件传入的数据，虽然可以直接在组件内更改，但通常的做法是到该数据初始化的地方去更改。
+1. Data defined by the component itself;
+2. Data passed in from the parent component;
+3. Data defined by the computed property.
 
-#### data 数据应该是纯数据
+All of the above data can be accessed by `this.data.get()` method.
 
-data 数据可以是字符串、数值、 数组、原生对象这样的纯数据。对于正则表达式，纯函数这样的，如果是在组件自身使用，则需要外部引入，或者作为组件的方法。 但如果要传递给子组件使用，则可以存放在 data 中。 例如，在表单组件中，我们可能会在业务层自定义验证方法，传入子组件使用。
+The data defined by the component itself can be modified directly to update the view of the component and it's descendant components. The data passed in from the parent component are usually for read purposes only. Though we can also change these data in child components, the better practice is to change it in the component where the data is initially created.
+
+#### Contents of the Data
+
+The entries in the data can be of primitive types like String, Number, Array, plain Objects. Other objects like regular expressions and functions are not expected to be part of the data and can be imported or implemented inside the component instead. There's an exception when we need to pass objects to the child components, such as passing custom form validation functions to the child components.
 

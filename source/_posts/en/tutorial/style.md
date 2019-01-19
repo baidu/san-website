@@ -1,17 +1,17 @@
 ---
-title: 样式
+title: Style
 categories:
 - tutorial
 ---
 
-样式处理是编写视图模板时常见的场景，涉及到的 attribute 有 class 和 style，它们的处理方式和其他元素 attribute 有一些区别。本文专门描述样式处理上常见的场景。
+Style processing is a common scenario when writing view templates. The attributes involved are class and style, and they are handled differently from other element attributes. This article specifically describes the common scenarios in style processing.
 
-在开始前，先强调一下：San 并没有为 class 和 style 处理提供特殊的绑定语法，他们的处理与其它 attribute 方式一样。
+Before starting, let's emphasize that San does not provide a special binding syntax for class and style processing, and they handle the same way as other attributes.
 
 class
 ------
 
-我们可能会设计一些用于表示状态的 class，这些 class 是否应该被添加到元素上，取决于某些数据的值。一个简单的场景是下拉列表的收起和展开状态切换。
+We might design some class to represent the state, whether these classes should be added to the element, depending on the value of some data. A simple scenario is the unfolding and unfolding state of a drop-down list.
 
 ```html
 <!-- template -->
@@ -31,11 +31,11 @@ san.defineComponent({
 });
 ```
 
-上面的例子中，isHidden 数据为真时，ul 具有 list-hidden 的 class，为假时不具有。
+In the above example, `list-hidden` class appears when `isHidden` is `true`, otherwise it is omitted
 
-San 在设计时，希望视图模板开发者像写正常的 attribute 一样编写 class 与 style，所以没有提供特殊的绑定语法。通过三元运算符的支持可以处理这样的场景。
+When designing, San wants the view template developer to write class and style just like a normal attribute, so no special binding syntax is provided. This can be achieved by the ternary operator.
 
-下面例子是一个根据状态不同，切换不同 class 的场景。
+The following example is a scenario where different classes are switched depending on the state.
 
 
 ```html
@@ -45,7 +45,7 @@ San 在设计时，希望视图模板开发者像写正常的 attribute 一样�
 style
 -----
 
-对 style 的处理通常没有 class 那么复杂。我们很少会把样式信息写在数据中，但有时我们期望用户能定制一些界面样式，这个时候样式可能来源于数据。
+The handling of `style` is usually not as complicated as `class`. We rarely write style information in the data, but sometimes we expect users to be able to customize some interface styles, at which point the style may be derived from data.
 
 ```html
 <ul>
@@ -58,7 +58,7 @@ style
 </ul>
 ```
 
-此时需要警惕的是，数据可能并不存在，导致你设置的 style 并不是一个合法的样式。如果你不能保证数据一定有值，需要把样式名包含在插值中。
+The caveat is that the data may not exist, and the style you set is not a legal style. If you can't guarantee that the data must have a value, you need to include the style name in the interpolation.
 
 ```html
 <ul>
