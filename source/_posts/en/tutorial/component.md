@@ -1,16 +1,15 @@
 ---
-title: 组件
+title: Components
 categories:
 - tutorial
 ---
 
-组件是 San 的基本单位，是独立的数据、逻辑、视图的封装单元。从页面的角度看，组件是 HTML 元素的扩展。从功能模式的角度看，组件是一个 ViewModel。
+Component, the basic unit of San, is an independent unit of data, logic, and view. From a page perspective, a component is an extension of an HTML element; from a functional mode perspective, a component is a ViewModel.
 
-
-组件定义
+Component defining
 ------
 
-定义组件最基本的方法是，从 **san.Component** 继承。San 提供了 **san.inherits** 方法，用于继承。
+The most basic way to define a component is to inherit from **san.Component**. San also provides the **san.inherits** method for inheritance.
 
 ```javascript
 function MyApp(options) {
@@ -25,17 +24,16 @@ MyApp.prototype.attached = function () {
 };
 ```
 
-然后，通过 new 的方式就可以使用这个组件了。当然，通常你可能希望让组件出现在页面上，所以需要调用 attach 方法，将组件添加到页面的相应位置。
-
+Then you can use this component by creating an instance with 'new' method. Obviously, if you want the component to appear on the page, you need to call the attach method to render the component inside root DOM.
 
 ```javascript
 var myApp = new MyApp();
 myApp.attach(document.body);
 ```
 
-通过继承的方式定义组件的好处是，当你使用 ESNext 时，你可以很自然的 extends。
+The advantage of defining components in an inherited way is that when you use ESNext, you can naturally use **extends**.
 
-`注意`：由于 ESNext 没有能够编写 prototype 属性的语法，所以 San 对组件定义时的属性支持 static property，通过 ESNext 的 extends 继承时，template / filters / components 属性请使用 static property 的方式定义。
+`tips`: Since ESNext itself does not support overwriting prototype, San supports the static property. You should define template/filters/components properties as static property when use extends a component in ESNext.
 
 ```javascript
 import {Component} from 'san';
@@ -57,7 +55,7 @@ class HelloComponent extends Component {
 new HelloComponent().attach(document.body);
 ```
 
-对于不使用 ESNext 时，写一个 function 然后调用 **san.inherits** 再写各种 prototype 实在是有点麻烦，San 提供了快捷方法 **san.defineComponent** 用于方便地定义组件。
+When defining a component in non-ESNext way, it is boring to create a function, call **san.inherits** and define various prototypes. San provides a shortcut method **san.defineComponent** to make it easy.
 
 ```javascript
 var MyApp = san.defineComponent({
@@ -70,28 +68,28 @@ var MyApp = san.defineComponent({
 ```
 
 
-lifecycle
+Lifecycle
 ------
 
-San 的组件是 HTML 元素扩展的风格，所以其生命周期与 WebComponents 相符合。
+San components use HTML-based template syntax in order too keep their lifecycles consistent with WebComponents.
 
-- `compiled` - 组件视图模板编译完成
-- `inited` - 组件实例初始化完成
-- `created` - 组件元素创建完成
-- `attached` - 组件已被附加到页面中
-- `detached` - 组件从页面中移除
-- `disposed` - 组件卸载完成
+- `compiled` - Compiled the template of a component
+- `inited` - Initialized a component instance with template and data
+- `created` - Created a component element
+- `attached` - Attached a component to DOM
+- `detached` - Detached a component from DOM
+- `disposed` - Destoryed a component instance
 
-组件的生命周期有这样的一些特点：
+The lifecycle of a component has some of these features.
 
-- 生命周期代表组件的状态，生命周期本质就是状态管理。
-- 在生命周期到达时，对应的钩子函数会被触发运行。
-- 并存。比如 attached 和 created 等状态是同时并存的。
-- 互斥。attached 和 detached 是互斥的，disposed 会互斥掉其它所有的状态。
-- 有的时间点并不代表组件状态，只代表某个行为。当行为完成时，钩子函数也会触发。如 **updated** 代表每次数据变化导致的视图变更完成。
+- The lifecycle represents the state of the component. The essence of the lifecycle is state management.
+- At the different stages of the life cycle, the component will trigger the corresponding hook functions.
+- States coexist such as `attached` and `created`.
+- States are mutually exclusive such as `attached` and `detached` , `disposed` and others.
+- Some time points do not represent the state of the component, only a certain behavior. The hook function is also triggered when the behavior is completed. For example, **updated** represents the completion of the view change caused by each data change.
 
 
-通过声明周期的钩子函数，我们可以在生命周期到达时做一些事情。比如在生命周期 **attached** 中发起获取数据的请求，在请求返回后更新数据，使视图刷新。
+Through the hook function of the life cycle, we can customize to do something in different lifecycles. For example, in the **attached** lifecycle initiate a request to get data, and then update the data to refresh the view.
 
 ```javascript
 var ListComponent = san.defineComponent({
@@ -114,17 +112,17 @@ var ListComponent = san.defineComponent({
 ```
 
 
-下图详细描述了组件的生存过程：
+The following diagram details the lifecycle of the component
 
 <img src="../../img/life-cycle.png" width="540">
 
 
-视图
+View
 ------
 
 ### component template
 
-定义组件时，通过 template 可以定义组件的视图模板。
+When defining a component, you can assign a component's view template through the `template`.
 
 
 ```javascsript
@@ -143,15 +141,15 @@ san.defineComponent({
 });
 ```
 
-通常，将 HTML 片段写在 JavaScript 中是不友好的，我们可以把模板写在单独的文件里，通过工具或装载器去管理。
+Usually, it's not friendly to write HTML snippets in JavaScript. We can write templates in separate files and manage them through tools or loaders.
 
-在 webpack + ESNext 环境下引用模板：
+Referencing a template by webpack + ESNext:
 
 ```
-待补充
+TODO
 ```
 
-在 AMD 环境下通过 text plugin 引用模板：
+Referencing a template via the text plugin in an AMD environment
 
 ```javascript
 san.defineComponent({
@@ -165,7 +163,7 @@ san.defineComponent({
 });
 ```
 
-`强调`：San 要求组件对应 **一个** HTML 元素，所以视图模板定义时，只能包含一个 HTML 元素，其它所有内容需要放在这个元素下。
+`attention`. It is a rule of San template that is for a component to return **one** HTML element. You should group a list of children with adding root element.
 
 ```html
 <dl>
@@ -174,7 +172,7 @@ san.defineComponent({
 </dl>
 ```
 
-组件对应的 HTML 元素可能是由其 **owner** 组件通过视图模板指定的，视图模板不好直接定死对应 HTML 元素的标签。此时可以将视图模板对应的 HTML 元素指定为 **template**。
+The HTML element corresponding to the component may be specified by its **owner** component through the view template, and the view template does not directly declare the corresponding HTML element. You can now specify the HTML element of the view template as **template**.
 
 ```html
 <template class="ui-timepicker">{{ value | valueText }}</template>
@@ -183,7 +181,7 @@ san.defineComponent({
 
 ### slot
 
-在视图模板中可以通过 slot 声明一个插槽的位置，其位置的内容可以由外层组件定义。具体请参考[插槽](../slot/)文档。
+The position of a slot can be declared in the view template by slot, the content of which can be defined by the outer component. Refer to the [slot](../slot/) document for more details.
 
 ```javascript
 var Panel = san.defineComponent({
@@ -205,7 +203,7 @@ var MyComponent = san.defineComponent({
     template: '<div><ui-panel>Hello San</ui-panel></div>'
 });
 
-/* MyComponent渲染结果
+/*  MyComponent rendered
 <div>
   <div class="head">title</div>
   <p style="display:none">Hello San</p>
@@ -217,28 +215,27 @@ var MyComponent = san.defineComponent({
 ### el
 
 
-组件实例的属性 **el** 表示组件对应的 HTML 元素，组件初始化时可以通过 option 传入。
+The properties of the component instance **el** represents the HTML element of the component, which can be passed in via `option` when the component is initialized.
 
-基本上在编写组件时不需要关心它，但是在初始化组件时如果传入 **el**，意味着让组件以此元素作为组件根元素。元素将：
+Most of the time you don't need to care about it when writing components. But if you pass **el** when you initialize the component, it means that the component has this element as the component root element. And the element will:
 
-- 不会使用预设的 template 渲染视图
-- 不会创建根元素
-- 直接到达 compiled、created、attached 生命周期
+- not render the view using the default template
+- not create a root element
+- directly call compiled, created, attached lifecycle
 
-有时我们为了首屏时间，期望初始的视图是直接的 HTML，不希望初始视图是由组件渲染的。但是我们希望组件为我们管理数据、逻辑与视图，后续的用户交互行为与视图变换通过组件管理，此时就可以通过 **el** 传入一个现有元素。
+Sometimes we want the initial view to be direct HTML for the first time, not by the component rendering. But at the same time, we want components to manage data, logic, and views for us, as well as subsequent user interactions and view transformations through component management. In this case, you can pass in an existing element via **el**.
 
-组件将以传入的 **el** 元素作为组件根元素并反解析出视图结构。这个过程我们称作 **组件反解**。详细请参考[组件反解](../reverse/)文档。
+The component will take the element passed in by **el** as the component root element and parse out the view structure. This process is called **component reversal**. Refer to the [component reversal](../reverse/) document for more.
 
 
-
-数据
+Data
 ----
 
-所有组件数据相关的操作，都由组件实例的 **data** 成员提供。
+All component data related operations are provided by the **data** property of the component instance.
 
-### 获取数据
+### retrieving data
 
-通过 **data.get** 方法可以获取数据。
+Retrieve data through the **data.get** method.
 
 ```javascript
 san.defineComponent({
@@ -249,7 +246,7 @@ san.defineComponent({
 });
 ```
 
-**data.get** 方法接受一个表示 property accessor 的字符串，所以上面的例子也可以写成这样：
+The **data.get**  method accepts a string representing the `property accessor`, so the above example can also be written like this:
 
 ```javascript
 san.defineComponent({
@@ -260,14 +257,14 @@ san.defineComponent({
 });
 ```
 
-### 操作数据
+### manipulating data
 
-**data** 上提供了一些数据操作的方法，具体请参考[数据操作](../data-method/)文档。
+**data** provides some methods of data manipulation. Refer to the [data method](../data-method/) document for more.
 
 
-### init data
+### initializing data
 
-组件在实例化时可以通过 option 传入 **data**，指定组件初始化时的数据。
+When the component is instantiated, you can pass the **data** option to specify the component's initial data.
 
 ```javascript
 var MyApp = san.defineComponent({
@@ -282,7 +279,7 @@ var myApp = new MyApp({
 myApp.attach(document.body);
 ```
 
-new 时传入初始数据是针对实例的特例需求。有时我们在定义组件时希望每个实例都具有初始的一些数据，此时可以定义 **initData** 方法，可以在定义组件时指定组件初始化时的数据。**initData** 方法返回组件实例的初始化数据。
+Passing in the initial data when `new` a component is not a common parttern. In general, If you want to set initial data for each instance when you define a component, you can specify it in the **initData** method. The **initData** method returns initial data for the component instance.
 
 ```javascript
 var MyApp = san.defineComponent({
@@ -301,7 +298,7 @@ myApp.attach(document.body);
 
 ### computed data
 
-有时候，一个数据项的值可能由其他数据项计算得来，这时我们可以通过 **computed** 定义计算数据。 **computed** 是一个对象，key 为计算数据项的名称，value 是返回数据项值的函数。
+Sometimes, the value of a data item may be computed from other data items, and we can define  **computed** to compute data. **computed** is an object, the key is the name of the computed data item, and value is a function that returns the value of the data item.
 
 ```javascript
 san.defineComponent({
@@ -316,9 +313,9 @@ san.defineComponent({
 });
 ```
 
-上面的例子中，name 数据项是计算数据，依赖 firstName 和 lastName 数据项，其值由 firstName 和 lastName 计算得来。
+In this case, item  `name` is a computed data, whose value computed from `firstName` and `lastName` data item.
 
-`注意`：计算数据的函数中只能使用 *this.data.get* 方法获取数据项的值，不能通过 this.method 调用组件方法，也不能通过 this.data.set 设置组件数据。
+`tips`: In functions of computing data, you can only use the *this.data.get* method to get the values of data items. You cannot call a component method with this.method or set the component data with this.data.set.
 
 ```javascript
 san.defineComponent({
@@ -337,31 +334,30 @@ san.defineComponent({
 });
 ```
 
-计算数据项可以依赖另外一个计算数据项，上面的例子中，info 项依赖的 name 项就是一个计算数据项。但是使用时一定要注意，不要形成计算数据项之间的循环依赖。
+The computed data item can depend on another computed data item. In the above example, the `name` item that the `info` item depends on is a computed data item. However, be careful when using it, do not form a circular dependency between the computed data items.
 
-
-filter
+Filter
 ------
 
-在定义视图模板时，插值是常用的展现数据的方式。在编写插值时，我们常使用 **过滤器** 将数据转换成适合视图展现的形式。
+Interpolation is a common way of presenting data when defining view templates. When writing interpolation, we often use **filter** to convert the data into a form suitable for view presentation.
 
 ```
 {{createTime | dateFormat('yyyy-MM-dd')}}
 ```
 
-### 内置过滤器
+### Built-in filter
 
 
-San 针对常用场景，内置了几个过滤器：
+San has several filters built in for common scenarios
 
-- `html` - HTML 转义。当不指定过滤器时，默认使用此过滤器
-- `url` - URL 转义
-- `raw` - 不进行转义。当不想使用 HTML 转义时，使用此过滤器
+- `html` - Escaping HTML. This filter is used by default when no filter is specified.
+- `url` - Escaping URL
+- `raw` - No escaping. Use this filter when you don't want to use HTML escaping
 
 
-### 定制过滤器
+### Customized filter
 
-通过定义组件的 **filters** 成员，可以指定组件的视图模板可以使用哪些过滤器。
+By defining the component's **filters** member, you can specify which filters the component's view template can use.
 
 ```javascript
 san.defineComponent({
@@ -375,16 +371,16 @@ san.defineComponent({
 });
 ```
 
-过滤器函数的第一个参数是表达式对应的数据值，过滤器调用时传入的参数从第二个参数开始接在后面。
+The first parameter of the filter function is the data value corresponding to the expression. The parameters passed in the filter call are followed by the second parameter.
 
-`注意`：考虑到组件的独立性，San 没有提供全局过滤器注册的方法，组件要使用的过滤器必须在自身的 **filters** 中定义。
+`tips`: Given the independence of components, San does not provide a way to register global filters. Defining the filters used by components must be in their own **filters**.
 
 
 
-component level
+Component Level
 -----
 
-我们知道组件体系下，组件必须是可嵌套的树形关系。下面从一段代码，做一些说明。在下面的代码中，AddForm 内部使用了两个自定义组件：ui-calendar 和 ui-timepicker。
+We know that under the component system, components must be nestable tree relationships. Let's do some explanation from a piece of code below. In the code below, AddForm internally uses two custom components: ui-calendar and ui-timepicker.
 
 ```html
 <!-- Template -->
@@ -392,7 +388,7 @@ component level
     <input type="text" class="form-title" placeholder="标题" value="{= title =}">
     <textarea class="form-desc" placeholder="备注" value="{= desc =}"></textarea>
 
-    <div>预期完成时间：
+    <div>Expected completion time:
         <ui-calendar value="{= endTimeDate =}" s-ref="endDate"></ui-calendar>
         <ui-timepicker value="{= endTimeHour =}" s-ref="endHour"></ui-timepicker>
     </div>
@@ -422,13 +418,13 @@ var AddForm = san.defineComponent({
 
 ### components
 
-组件中通常通过声明自定义元素，使用其它组件。
+Components typically use other components by declaring custom elements.
 
-组件视图可以使用哪些子组件类型，必须通过定义组件的 **components** 成员指定。key 是自定义元素的标签名，value 是组件的类。
+Which subcomponent types can be used by the component view, which must first be specified by the component's **components** member. In  **components** object, the key is the name of a custom element, and the value is component class.
 
-`注意`：考虑到组件的独立性，San 没有提供全局组件注册的方法，组件必须在自身的 **components** 中声明自己内部会用到哪些组件。
+`tips`：Given the independence of components, San does not provide a way to register global components. Components must declare which components they use internally in their own **components**.
 
-有些组件可能在内容中会使用自己，比如树的节点。我们可以将 **components** 中这一项的值设置为字符串 **self**。
+Some components may use themselves in content, such as tree nodes. We can set the value of this item in **components** to a string **self**
 
 ```javascript
 var Node = san.defineComponent({
@@ -442,23 +438,23 @@ var Node = san.defineComponent({
 
 ### owner 与 parent
 
-**owner** 与 **parent** 的概念已经被 react 明确过了，但这里还是要专门明确下。
+The concept of **owner** and **parent** has been clarified by react, but it is still specific here.
 
-**owner** 指的是目标在声明时位于哪个组件的组件视图中，其生存时间、交互的通信等行为都由 **owner** 管理。**owner** 必须是一个组件。ui-calendar 的 **owner** 是 AddForm 组件。
+**owner** of a component is whoever creates the one and manages its lifetime, interactive communication, etc. **owner** must be a component. **owner**  of `ui-calendar` is component `AddForm`.
 
-**parent** 指的是目标在视图中对应的直接父级元素。ui-calendar 的 **parent** 是其上层的 div。**parent** 对组件管理并没有直接的意义。
+**parent** of a component is whoever would be the containing ancestor of the DOM hierarchy in view. **parent** of `ui-calendar` is the outer `div`。**parent** has no direct meaning to component management.
 
 
 ### ref
 
-子组件声明时如果通过 **s-ref** 指定了名称，则可以在 JavaScript 中通过组件实例的 **ref** 方法调用到。
+When declaring a subcomponent with a name specified by **s-ref**, you can call it from the **ref** method of the owner component instance.
 
-`提示`：有了声明式的初始化、数据绑定与事件绑定，我们很少需要在 JavaScript 中拿到子组件的实例。San 提供了这个途径，但当你用到它的时候，请先思考是不是非要这么干。
+`tips`: With declarative initialization, data binding, and event binding, we rarely need to get an instance of a subcomponent in the owner component. Although San provides this approach, when you use it, please think about whether you want to do this.
 
 
 ### message
 
-通过 **dispatch** 方法，组件可以向组件树的上层派发消息。
+With the **dispatch** method, components can dispatch messages to the upper layers of the component tree.
 
 ```javascript
 var SelectItem = san.defineComponent({
@@ -473,25 +469,25 @@ var SelectItem = san.defineComponent({
 });
 ```
 
-消息将沿着组件树向上传递，直到遇到第一个处理该消息的组件，则停止。通过 **messages** 可以声明组件要处理的消息。**messages** 是一个对象，key 是消息名称，value 是消息处理的函数，接收一个包含 target(派发消息的组件) 和 value(消息的值) 的参数对象。
+The message will be passed up the component tree until it encounters the first component that processes the message. We can declare messages to be processed by the component in **messages**. **messages** is an object, the key is a message's name, and the value is a function of message handler that receives a parameter object containing the target (the component that dispatches the message) and the value (the value of the message).
 
 ```javascript
 var Select = san.defineComponent({
     template: '<ul><slot></slot></ul>',
 
-    // 声明组件要处理的消息
+    // Declare messages that the component will process
     messages: {
         'UI:select-item-selected': function (arg) {
             var value = arg.value;
             this.data.set('value', value);
 
-            // arg.target 可以拿到派发消息的组件
+            // arg.target Get the component that dispatches the message
         }
     }
 });
 ```
 
-消息主要用于组件与非 **owner** 的上层组件进行通信。比如，slot 内组件 SelectItem 的 **owner** 是更上层的组件，但它需要和 Select 进行通信。
+Messages are primarily used for components to communicate with upper-level components of non-**owner**. For example, the **owner** of the component SelectItem in the slot is the upper-level component. And it needs to communicate with Select.
 
 ```javascript
 san.defineComponent({
@@ -514,17 +510,17 @@ san.defineComponent({
 
 ### dynamic child components
 
-在一些场景下，我们希望组件不在自身视图渲染时创建子组件，而是通过 JavaScript 灵活控制在未来的某些时间点创建子组件。比如：
+In some scenarios, we want components to not create subcomponents when their own views are rendered, but rather to have the flexibility to create subcomponents at some point in the future. For example
 
-- 浮动层子组件的 **parent** 不在其根元素 **el** 内，声明式用着不方便
-- 列表只有在用户点击时才需要创建并展示
+- It is inconvenient using declarative way while **parent** of floating layer(subcomponent) is not in its root element **el**.
+- The list needs to be created and displayed only when the user clicks
 
 
-动态子组件对开发者要求更高，我们在这里给出一些需要注意的地方，下面节选的代码也做了一些简单的说明：
+Dynamic subcomponents are more demanding for developers. Here are some tips to note, and the following fragment also gives some simple instructions.
 
-- 动态创建的子组件无需在 **components** 中声明类型
-- 保证动态子组件不要被重复创建。常见的做法是在实例的属性上持有对创建组件的引用，并以此作判断
-- 保证动态子组件能够被销毁。你可以在创建时 push 到 **children** 中，或者在 **disposed** 中销毁它
+- Dynamically created subcomponents do not need to declare types in **components**
+- Ensure not creating dynamic subcomponents repeatedly. A typical practice is attaching a reference of the dynamic subcomponents to the component as properties and judgments by these properties.
+- Ensure that dynamic subcomponents can be destroyed. You can push them into **children** at creation time or destroy it manually in **disposed**
 
 ```javascript
 san.defineComponent({

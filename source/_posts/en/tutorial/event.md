@@ -1,18 +1,20 @@
 ---
-title: 事件处理
+title: Event Handling
 categories:
 - tutorial
 ---
 
-事件是开发中最常用的行为管理方式。通过 **on-** 前缀，可以将事件的处理绑定到组件的方法上。
+Events are the most commonly used behavior management methods in development.
+Bind the processing of events to the component's methods with the **on-** prefix。
 
-`提示`：在 San 中，无论是 DOM 事件还是组件的自定义事件，都通过 **on-** 前缀绑定，没有语法区分。
+`Hint`: In San, both the DOM event and the component's custom event are bound by the **on-** prefix, with no syntax distinction.
 
 
-DOM 事件
+DOM Event
 -------
 
-**on- + 事件名** 将 DOM 元素的事件绑定到组件方法上。当 DOM 事件触发时，组件方法将被调用，this 指向组件实例。下面的例子中，当按钮被点击时，组件的 submit 方法被调用。
+**on- + event name** binds the event of the DOM element to the component method. When a DOM event fires, the component method is called and this points to the component instance. 
+In the following example, when the button is clicked, the component's submit method is called.
 
 
 ```javascript
@@ -30,8 +32,7 @@ san.defineComponent({
 });
 ```
 
-
-绑定事件时，可以指定参数，引用当前渲染环境中的数据。参数可以是任何类型的[表达式](../template/#表达式)。
+When binding events, you can specify parameters that reference the data in the current rendering environment. The argument can be any type of [expression] (../template/#expression).
 
 ```html
 <!-- Template -->
@@ -54,8 +55,8 @@ san.defineComponent({
 });
 ```
 
-
-指定参数时，**$event** 是 San 保留的一个特殊变量，指定 $event 将引用到 DOM Event 对象。从而你可以拿到事件触发的 DOM 对象、鼠标事件的鼠标位置等事件信息。
+When specifying a parameter, **$event** is a special variable reserved by San, specifying that $event will be referenced to the DOM Event object. 
+So you can get event information such as the event-triggered DOM object, mouse position of the mouse event.
 
 ```javascript
 san.defineComponent({
@@ -73,10 +74,9 @@ san.defineComponent({
 customized event
 --------
 
-在组件上通过 **on-** 前缀，可以绑定组件的自定义事件。
+Custom events for components can be bound by the **on-** prefix on the component.
 
-
-下面的例子中，MyComponent 为 Label 组件绑定了 done 事件的处理方法。
+In the following example, MyComponent binds the done event of Label component with an event handler.
 
 ```javascript
 var MyComponent = san.defineComponent({
@@ -92,7 +92,7 @@ var MyComponent = san.defineComponent({
 });
 ```
 
-San 的组件体系提供了事件功能，Label 直接通过调用 fire 方法就能方便地派发一个事件。
+San's component architecture provides event functionality, and Label can easily dispatch an event directly by calling the fire method.
 
 ```javascript
 var Label = san.defineComponent({
@@ -105,14 +105,14 @@ var Label = san.defineComponent({
 ```
 
 
-修饰符
+Modifier
 --------
 
 ### capture
 
-`版本`：>= 3.3.0
+`Version`：>= 3.3.0
 
-在元素的事件声明中使用 capture 修饰符，事件将被绑定到捕获阶段。
+The capture modifier is used in the element's event declaration and the event is bound to the capture phase.
 
 ```javascript
 var MyComponent = san.defineComponent({
@@ -131,14 +131,14 @@ var MyComponent = san.defineComponent({
 });
 ```
 
-`注意`：只有在支持 **addEventListener** 的浏览器环境支持此功能，老旧 IE 上使用 capture 修饰符将没有效果。
+`Note`: This feature is only supported in browser environments that support **addEventListener**. Using the capture modifier on older IEs will have no effect.
 
 ### native
 
-`版本`：>= 3.3.0
+`Version`：>= 3.3.0
 
 
-在组件的事件声明中使用 native 修饰符，事件将被绑定到组件根元素的 DOM 事件。
+Using the native modifier in the component's event declaration, the event is bound to the DOM event of the component's root element.
 
 ```javascript
 var Button = san.defineComponent({
@@ -158,6 +158,7 @@ var MyComponent = san.defineComponent({
 });
 ```
 
-有时候组件封装了一些基础结构和样式，同时希望点击、触摸等 DOM 事件由外部使用方处理。如果组件需要 fire 每个根元素 DOM 事件是很麻烦并且难以维护的。native 修饰符解决了这个问题。
+Sometimes components encapsulate some infrastructure and styles, and hope that DOM events such as clicks and touches are handled by external consumers. 
+If the component needs fire each root element DOM event is cumbersome and difficult to maintain. The native modifier solves this problem.
 
 

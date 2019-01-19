@@ -1,17 +1,17 @@
 ---
-title: 表单
+title: Form
 categories:
 - tutorial
 ---
 
 
-表单是常见的用户输入承载元素，本篇介绍一些常用表单元素的用法。在 MVVM 中，我们一般在用户输入的表单元素或组件上应用 **双向绑定**。
+Forms are common user input hosting elements, and this section describes the usage of some common form elements. In MVVM, we typically apply **two-way binding** on form elements or components entered by the user.
 
 
-输入框
+Input
 -----
 
-输入框的绑定方法比较简单，直接对输入框的 value 属性应用双向绑定就行了。
+The binding method of the input box is relatively simple, and it is sufficient to apply the two-way binding directly to the value attribute of the input box.
 
 
 ```html
@@ -22,9 +22,9 @@ categories:
 checkbox
 -------
 
-checkbox 常见的使用场景是分组，在组件模板中，我们把需要分组的 checkbox 将 checked 属性双向绑定到同名的组件数据中。
+The common usage scenarios for checkboxes are grouping. In the component template, we bind the checked property to the component data of the same name in both directions.
 
-`提示`：除非你需要进行传统的表单提交，否则无需指定 checkbox 的 name 属性。San 仅以 checked 作为分组的依据。
+`Hint`: Unless you need to make a traditional form submission, you don't need to specify the checkbox's name attribute. San only uses checked as the basis for grouping.
 
 ```html
 <!-- Template -->
@@ -35,7 +35,7 @@ checkbox 常见的使用场景是分组，在组件模板中，我们把需要�
 </div>
 ```
 
-我们期望 checkbox 绑定到的数据项是一个 **Array&lt;string&gt;** 。当 checkbox 被选中时，其 value 会被添加到绑定的数据项中；当 checkbox 被取消选中时，其 value 会从绑定数据项中移除。
+The data item we expect the checkbox to bind to is a **Array&lt;string&gt;** . When the checkbox is selected, its value is added to the bound data item; when the checkbox is unchecked, its value is removed from the bound data item.
 
 ```js
 // Component
@@ -60,9 +60,9 @@ san.defineComponent({
 radio
 -----
 
-与 checkbox 类似，我们在组件模板中，把需要分组的 radio 将 checked 属性绑定到同名的组件数据中。
+Similar to the checkbox, in the component template, we bind the checked attribute to the component data of the same name in the radio that needs to be grouped.
 
-`提示`：你需要手工指定分组 radio 的 name 属性，使浏览器能处理 radio 选择的互斥。可以把它设置成与绑定数据的名称相同。
+`Hint`: You need to manually specify the name attribute of the group radio so that the browser can handle the mutual exclusion of the radio selection. It can be set to the same name as the bound data.
 
 ```html
 <!-- Template -->
@@ -73,7 +73,7 @@ radio
 </div>
 ```
 
-我们期望 radio 绑定到的数据项是一个 **string** 。当 radio 被选中时，绑定的数据项值被设置成选中的 radio 的 value 属性值。
+The data item we expect radio to bind to is a **string** . When radio is selected, the bound data item value is set to the value of the selected radio's value property.
 
 ```js
 // Component
@@ -92,7 +92,7 @@ san.defineComponent({
 select
 ------
 
-select 的使用方式和输入框类似，直接对 value 属性应用双向绑定。
+The select is used in a similar way to the input box, applying a two-way binding directly to the value property.
 
 ```html
 <!-- Template -->
@@ -103,7 +103,7 @@ select 的使用方式和输入框类似，直接对 value 属性应用双向绑
 </select>
 ```
 
-`提示`：在浏览器中，select 的 value 属性并不控制其选中项，select 的选中项是由 option 的 selected 属性控制的。考虑到开发的方便，开发者不需要编写 option 的 selected 属性，San 会在下一个视图更新时间片中刷新 select 的选中状态。
+`Hint`: In the browser, the value attribute of select does not control its selected item, and the selected item of select is controlled by the selected attribute of option. Considering the ease of development, the developer does not need to write the selected property of option, and San will refresh the selected state of select in the next view update time slice.
 
 ```js
 // Component
