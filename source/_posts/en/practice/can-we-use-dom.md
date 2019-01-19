@@ -4,7 +4,7 @@ categories:
 - practice
 ---
 
-When we were using San, especially the newcomers who just used it, and the experience of the MVVM framework is not so rich, are still more accustomed to using jQuery as a class library to manipulate the interaction of the page, so it is natural to write such code.
+When san is introduced to some developers, especially those new to MVVM frameworks, may lead to jQuery style imperative implements like below:
 
 ```
 var MyApp = san.defineComponent({
@@ -24,7 +24,7 @@ myApp.attach(document.querySelector('#app'));
 
 Then run this program in the browser, the results are completely in line with expectations, perfect.
 
-However, as we become more familiar with the way San is used, we will write such code for the above functions.
+However, as we become more familiar with the san should be used, we will write such code for the above functions.
 
 ```
 var MyApp = san.defineComponent({
@@ -42,7 +42,7 @@ var myApp = new MyApp();
 myApp.attach(document.querySelector('#app'));
 ```
 
-Careful scrutiny of the two pieces of code, can not help but raise a question.
+One question may be raised up after we carefully compared these two pieces of code
 
 Intuitively, in San's code, we directly call this.data.set to modify the value of an attribute. It automatically renders the modified content to the DOM. It seems to be very magical, but it is still fundamentally the operation of the DOM. This operation is done by the San framework. Since this is the case, why can't we directly modify it directly like the first piece of code, and do these operations to San to complete? If you give it to San for performance reasons, it needs to complete the relationship binding from Model to view. It also needs some performance loss, so it seems to be quite costly. So why do we still have to do this?
 
