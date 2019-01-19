@@ -14,9 +14,9 @@ categories:
 Overview
 -----
 
-When the component is initialized, it is passed to **el**, which will be the root element of the component, and the view structure will be parsed backwards.
+When the component is initialized, it is passed to **el** element, which will be the root element of the component, and the view structure will be parsed backwards.
 
-The intent of this feature is that sometimes we want the initial view to be direct HTML for the first time, not to be rendered by the component. But we want components to manage data, logic, and views for us, and subsequent user interactions and view transformations are managed through components.
+The intent of this feature is that sometimes we want the initial view to be direct HTML, rather than being rendered by components. But we want components to manage data, logic, and views for us, and subsequent user interactions and view transformations are managed through components.
 
 ```javascript
 var myComponent = new MyComponent({
@@ -27,7 +27,7 @@ var myComponent = new MyComponent({
 When **el** initializes the component, San will respect the current HTML form of **el** and will not perform any additional rendering actions that affect the visual.
 
 - Will not render the view using the default template
-- will not create a root element
+- Will not create a root element
 - Direct access to compiled, created, attached lifecycle
 
 However, **el** may require some additional markup to help San understand the structure of data and views (interpolation, bindings, loops, branches, components, etc.) for subsequent behavior management and view refresh.
