@@ -1,5 +1,5 @@
 ---
-title: Q&A
+title: FAQ
 categories:
 - practice
 ---
