@@ -5,12 +5,12 @@ categories:
 ---
 
 #### Introduction
-First make sure you understand the need for state management content and related concepts in [san-store](https://github.com/baidu/san-store). Here we go.
+First make sure you understand the necessity of state management content and related concepts in [san-store](https://github.com/baidu/san-store). Here we go.
 
 This project code can be viewed in [https://github.com/jiangjiu/san-store-spa](https://github.com/jiangjiu/san-store-spa).
 
 #### Setup
-The previous document [How to use san-router to create a back-end system for a single-page application?](https://baidu.github.io/san/practice/san-router-spa/) has built a single-page back-end application of san+san-router. We added san-store to manage the application state based on it.
+The previous document [How to use san-router to create a back-end system for a single-page application?](https://baidu.github.io/san/practice/san-router-spa/) has built a single-page back-end application with san+san-router. We added san-store to manage the application state based on it.
 
 ```js
     // only need to install san-store and san-update
@@ -23,7 +23,7 @@ Currently the system has three channels, home, about, and list.
 Suppose this is a system similar to e-commerce back-office orders management
 
 1. Different channels need to synchronize the status of the current order (pending payment, pending delivery, transaction completed => orderState:1、2、3)
-2. Different channels have the right to modify the current order status
+2. Different channels have the permission to modify the current order status
 3. Each modification requires an asynchronous request to the server for confirmation
 
 The state management here mixes asynchronous requests, and for the sake of simplicity, security and exception handling are not considered.
