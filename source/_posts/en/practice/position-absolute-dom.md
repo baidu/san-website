@@ -9,7 +9,7 @@ When we use San to develop, we often write various components. When a subcompone
 - scene A: The parent (grandfather) component is large enough or does not exist `overflow: hidden;`
 - scene B: The parent (grandfather) component is not large enough and exists `overflow: hidden;`
 
-In both cases, we need to do some processing on the DOM of the absolutely positioned component.
+In both cases, we need to do some processing on the DOM of a absolutely positioned component.
 
 How can we deal with these two scenarios separately?
 
