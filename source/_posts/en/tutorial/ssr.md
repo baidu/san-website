@@ -6,17 +6,17 @@ categories:
 
 
 
-San's server-side rendering is based on [component inverse](../reverse/).
+San's server-side rendering is based on [component reversion](../reverse/).
 
-- The HTML output from the server has a markup fragment that has no effect on the view and helps the component understand the structure of the data and view.
+- The HTML output from the server contains markups fragment that has no effect on the view and helps the component understand the structure of the data and view.
 - On the browser side, the component structure is understood from the markup fragment when the component is initialized, and the component can respond correctly when the user operates.
 
-`tips`: Since the component runtime environment needs to consider browser versions and NodeJS, the sample code is guaranteed to be simple and no transform is required, all written in ES5.
+`tips`: Since the component runtime environment needs to consider various browser version as well as NodeJS, the sample code is guaranteed to be simple and no transform is required, all written in ES5.
 
 Do you need SSR?
 ----
 
-Server-side rendering, view HTML straight out has some obvious benefits:
+We can gain some obvious benefits from server-side rendering which outputs HTML directly:
 
 - SEO friendly, HTML direct output is more beneficial to search engine understanding and understanding
 - Users can see the content the first time. In the developer's opinion, the first screen time is coming sooner.
