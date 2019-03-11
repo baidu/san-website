@@ -1,21 +1,20 @@
 ---
-title: 我们可以操作 DOM 吗？
+title: can use operate dom?
 categories:
 - practice
 ---
 
-
-我们在使用 San 的时候，特别是刚刚使用不久的新人，且 MVVM 框架的经验不是那么丰富，我们还是更习惯于使用 jQuery 作为类库来操作页面的交互，于是很自然的写出了这样的代码。
+When san is introduced to some developers, especially those new to MVVM frameworks, may lead to jQuery style imperative implements like below:
 
 ```
 var MyApp = san.defineComponent({
-    template: '<input value="没点" class="ipt"/><button class="btn"></button>',
+    template: '<input value="noClick" class="ipt"/><button class="btn"></button>',
     attached: function () {
         this.bindSomeEvents();
     },
     bindSomeEvents: function () {
         $('.btn').click(()=>{
-            $('.ipt').val('点了');
+            $('.ipt').val('clicked');
         });
     }
 });
@@ -23,56 +22,55 @@ var myApp = new MyApp();
 myApp.attach(document.querySelector('#app'));
 ```
 
-然后用浏览器运行了这段程序，结果完全符合预期，完美~
+Then run this program in the browser, the results are completely in line with expectations, perfect.
 
-然而当我们进一步熟悉了 San 的使用方式后，对于上面的功能我们会写出这样的代码。
+However, as we become more familiar with the san should be used, we will write such code for the above functions.
 
 ```
 var MyApp = san.defineComponent({
-    template: '<div><input value="{{value}}"/><button on-click="clickHandler">点我</button></div>',
+    template: '<div><input value="{{value}}"/><button on-click="clickHandler">click me</button></div>',
     initData: function () {
         return {
-            value: '没点'
+            value: 'no click'
         };
     },
     clickHandler: function () {
-        this.data.set('value', '点了')
+        this.data.set('value', 'clicked')
     }
 });
 var myApp = new MyApp();
 myApp.attach(document.querySelector('#app'));
 ```
 
-仔细推敲了下这两段代码，不禁产生了一个疑问。
+One question may be raised up after we carefully compared these two pieces of code
 
-直观的来看，San 的代码中我们直接调用 this.data.set 来修改某个属性的值，它自动将修改后的内容渲染到了 DOM 上，似乎看起来非常的神奇，但是它的根本上还是对 DOM 进行的操作，只不过这个操作是San框架帮你完成的，既然是这样，那我们为什么不能直接像第一段代码一样，直接修改，而要把这些操作交给 San 来完成呢？如果从性能上考虑交给 San 来做，它要完成从 Model 到视图上的关系绑定，还需要有一部分性能的损失，这样看起来代价还挺大的，那我们为什么还要这么做呢？
+Intuitively, in San's code, we directly call this.data.set to modify the value of an attribute. It automatically renders the modified content to the DOM. It seems to be very magical, but it is still fundamentally the operation of the DOM. This operation is done by the San framework. Since this is the case, why can't we directly modify it directly like the first piece of code, and do these operations to San to complete? If you give it to San for performance reasons, it needs to complete the relationship binding from Model to view. It also needs some performance loss, so it seems to be quite costly. So why do we still have to do this?
 
-带着这个问题，我们可以从这几方面进行考虑。
+Follow this question, we can consider these aspects.
 
-### 使用 San 的初衷？
+### What was the original intention of using San?
 
-San 是一个 MVVM（Model-View-ViewModel） 的组件框架，借助 MVVM 框架，我们只需完成包含 **声明绑定** 的视图模板，编写 ViewModel 中业务数据变更逻辑，View 层则完全实现了自动化。这将极大的降低前端应用的操作复杂度、极大提升应用的开发效率。MVVM 最标志性的特性就是 **数据绑定** ，MVVM 的核心理念就是通过 **声明式的数据绑定** 来实现 View 层和其他层的分离，完全解耦 View 层这种理念，也使得 Web 前端的单元测试用例编写变得更容易。
+San is a component framework of MVVM (Model-View-ViewModel). With the MVVM framework, we only need to complete the view template containing the **declaration binding**, write the business data change logic in the ViewModel, and the View layer is fully automated. This will greatly reduce the operational complexity of the front-end application and greatly improve the development efficiency of the application. The most iconic feature of MVVM is **data binding**. The core idea of MVVM is to realize the separation of View layer and other layers through **declarative data binding**, completely decoupling the concept of View layer. It also makes it easier to write unit test cases for the web front end.
 
-简单来说就是：操作数据，就是操作视图，也就是操作 DOM。
+To put it simply: the operational data is the operational view, which is the operation of the DOM.
 
-### 此 DOM 非彼 DOM
+### This DOM is not a DOM
 
-在我们写的代码中的 template 属性，在 San 中被称作 **内容模板**，它是一个符合 HTML 语法规则的字符串，它会被 San 解析，返回一个 [ANode](https://github.com/baidu/san/blob/master/doc/anode.md) 对象。
+The template attribute in the code we wrote, called the **content template** in San, is a string that conforms to the HTML syntax rules, which is parsed by San, returning an [ANode] (https:// Github.com/baidu/san/blob/master/doc/anode.md) Object.
 
-也就是说我们在 template 中写的东西实际上并不是要放到 DOM 上的，它是给 San 使用的，真正生成的 DOM 实际上是 San 根据你的 template 的解析结果也就是 [ANode](https://github.com/baidu/san/blob/master/doc/anode.md) 生成的，你的代码与DOM之间其实还隔了一层 San。
+That is to say, what we write in the template is not actually placed on the DOM. It is used by San. The actual generated DOM is actually San. According to the parsing result of your template, it is [ANode] (https ://github.com/baidu/san/blob/master/doc/anode.md) Build, there is actually a layer of San between your code and the DOM.
 
-我们如果直接使用原生的 api 或者 jQuery 来直接操作 San 生成的DOM，这是不合理的，因为那些DOM根本不是我们写的，而我们却要去试图修改它，显然我们不应该这样做。
+If we directly use the native api or jQuery to directly manipulate the San generated DOM, this is unreasonable, because those DOM are not written by us at all, but we have to try to modify it, obviously we should not do so.
 
-不直接操做 DOM 这其实也是符合计算机领域中分层架构设计的基本原则的，每一层完成独立的功能，然后上层通过调用底层的 api 来使用底层暴露出来的功能，但禁止跨层的调用。
+Not directly operating DOM This is actually in line with the basic principles of hierarchical architecture design in the computer field. Each layer performs independent functions, and then the upper layer uses the underlying api to call the exposed functions of the underlying layer, but prohibits cross-layer calls.
 
-### 有时候我们过度的考虑了性能这个问题
+### Sometimes we overestimate the problem of performance
 
-San 框架极大的提升了应用的开发效率，它帮我们屏蔽繁琐的 DOM 操作，帮我们处理了 Model 与 View的关系，这看起来真的很美好，但一切美好的事情总是要付出代价的，San要做这些，就会带来性能上的开销，所以它用起来比直接操做 DOM 性能要差，这是毋庸置疑的，世界上也不可能存在这种框架性能比直接操作 DOM 还要好，如果你要改变一个页面的显示状态，DOM 是它的唯一 API，任何框架都不可能绕过。
+The San framework greatly improves the development efficiency of the application. It helps us to shield the cumbersome DOM operations and helps us deal with the relationship between Model and View. This looks really good, but all the good things always cost a lot. If San does this, it will bring performance overhead, so it is worse than using DOM directly. It is undoubted that the world is not likely to have better performance than direct DOM. If you want to change the display state of a page, DOM is its only API, and no framework can be bypassed.
 
-但这种性能上的消耗真的给我的应用带来的不可维护的问题了吗，反而是大部分原因是因为我们在开发中代码结构的不合理，代码不够规范，功能划分不够清晰，等一系列主观上的问题导致的项目无法维护下去。
+But is this performance consumption really bringing unmaintainable problems to my application? But most of the reason is because the code structure in development is unreasonable, the code is not standardized, the function division is not clear enough, etc. Projects caused by a series of subjective problems cannot be maintained.
+### Conclusion
 
-### 总之
-
-在我们的项目中选择 San 做为框架，它不仅可以让你从繁琐的 DOM 操作中解脱出来，通过 MVVM 的模式极大的降低前端应用的操作复杂度、极大提升应用的开发效率，它的组件系统作为一个独立的数据、逻辑、视图的封装单元更是能够帮你很好的在开发中梳理好应用的代码结构，保证系统能够更加易于维护。
+In our project, choose San as the framework, which not only frees you from the cumbersome DOM operation, but also greatly reduces the operational complexity of the front-end application and greatly improves the development efficiency of the application. As a separate data, logic, and view encapsulation unit, the component system can help you sort out the application code structure in development and ensure that the system can be more easily maintained.
 
 
