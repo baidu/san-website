@@ -1,5 +1,5 @@
 ---
-title: can use operate dom?
+title: Can we do DOM manipulation?
 categories:
 - practice
 ---
