@@ -3,6 +3,42 @@ index:
     features: 特性
     resources: 资料
     facilities: 周边
+  headernav:
+    tutorial: 教程
+    practice: 指南
+    example: 示例
+    api: API
+    home: HOME
+article:
+  edit: 编辑本文
+  gotop: 回到顶部
+recommend:
+  tutorial: 教程
+  tutorial_setup: 安装
+  tutorial_background: 背景
+  tutorial_start: 开始
+  tutorial_template: 模板
+  tutorial_data_method: 数据操作
+  tutorial_data_checking: 数据校验
+  tutorial_style: 样式
+  tutorial_if: 条件
+  tutorial_for: 循环
+  tutorial_event: 事件处理
+  tutorial_form: 表单
+  tutorial_slot: 插槽
+  tutorial_transition: 过渡
+  tutorial_component: 组件
+  tutorial_reverse: 组件反解
+  tutorial_ssr: 服务端渲染
+  more: 了解更多
+  more_component_api: 组件 API
+  more_main_api: 主模块 API
+  more_dist_files: 发布版本说明
+  more_changelog: 版本更新日志
+  facilities: 周边
+  example: 示例
+  example_start: 一些小示例
+  example_single_way_flow: 单向流
 practice:
   data:
     title: 数据
