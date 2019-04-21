@@ -39,6 +39,14 @@ recommend:
   example: 示例
   example_start: 一些小示例
   example_single_way_flow: 单向流
+example:
+  start: 小示例
+  start_description: 一些小的示例，主要是展示 San 一些小特性的用法。
+  todos_description: 一个 Todos 应用的例子，包含列表、列表内操作、表单提交、浮出层、交互组件等应用开发中常见的场景。
+  todos_esnext_description: 上面 Todos 应用的 ESNext 版本。其使用了webpack + babel，更符合流行的应用开发习惯。
+  single_way_flow: 单向流
+  todos_store_description: 上面 Todos 应用的单向流版本。其使用了 san-store。
+  online: 在线用法小示例
 practice:
   data:
     title: 数据
