@@ -21,7 +21,7 @@ index:
     reverse: 组件反解
     reverse_description: 为首屏时间优化，服务端通常直接输出HTML。我们能从现有的元素中反向解析出组件，并构建绑定关系。
     size: 体积小巧
-    size_description: &lt;15k (gzipped) 的体积，无需担心对页面下载带来负担。体积强迫症患者的福音。
+    size_description: 小于15k (gzipped) 的体积，无需担心对页面下载带来负担。体积强迫症患者的福音。
     compatibility: 良好的兼容性
     compatibility_description: 通过方法修改数据的另一好处是，可以获得更好的浏览器兼容性。毕竟有时我们产品的受众用户有点死板。
     module: 模块管理自由

@@ -21,7 +21,7 @@ index:
     reverse: 组件反解
     reverse_description: 为首屏时间优化，服务端通常直接输出HTML。我们能从现有的元素中反向解析出组件，并构建绑定关系。
     size: 体积小巧
-    size_description: &lt;15k (gzipped) 的体积，无需担心对页面下载带来负担。体积强迫症患者的福音。
+    size_description: 小于15k (gzipped) 的体积，无需担心对页面下载带来负担。体积强迫症患者的福音。
     compatibility: 良好的兼容性
     compatibility_description: 通过方法修改数据的另一好处是，可以获得更好的浏览器兼容性。毕竟有时我们产品的受众用户有点死板。
     module: 模块管理自由
@@ -45,29 +45,29 @@ article:
   edit: Edit
   gotop: Top
 recommend:
-  tutorial: 教程
-  tutorial_setup: 安装
-  tutorial_background: 背景
-  tutorial_start: 开始
-  tutorial_template: 模板
-  tutorial_data_method: 数据操作
-  tutorial_data_checking: 数据校验
-  tutorial_style: 样式
-  tutorial_if: 条件
-  tutorial_for: 循环
-  tutorial_event: 事件处理
-  tutorial_form: 表单
-  tutorial_slot: 插槽
-  tutorial_transition: 过渡
-  tutorial_component: 组件
-  tutorial_reverse: 组件反解
-  tutorial_ssr: 服务端渲染
-  more: 了解更多
+  tutorial: Tutorial
+  tutorial_setup: Setup
+  tutorial_background: Background
+  tutorial_start: Start
+  tutorial_template: Template
+  tutorial_data_method: Data Manipulation
+  tutorial_data_checking: Data Validation
+  tutorial_style: Style
+  tutorial_if: Conditional
+  tutorial_for: Loop
+  tutorial_event: Event
+  tutorial_form: Form
+  tutorial_slot: Slot
+  tutorial_transition: Transition
+  tutorial_component: Component
+  tutorial_reverse: Component Reversion
+  tutorial_ssr: SSR
+  more: More
   more_component_api: 组件 API
   more_main_api: 主模块 API
   more_dist_files: 发布版本说明
   more_changelog: 版本更新日志
-  facilities: 周边
+  facilities: Facilities
   example: 示例
   example_start: 一些小示例
   example_single_way_flow: 单向流
