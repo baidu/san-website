@@ -10,7 +10,7 @@ layout: false
         <h1>San</h1>
         <iframe src="https://ghbtns.com/github-btn.html?user=baidu&repo=san&type=star&count=true&size=large" class="home-iframe"></iframe>
         <p class="overlay-p">A fast, portable, flexible JavaScript component framework</p>
-        <a href="/san/tutorial/start/" class="get-start">GET STARTED</a>
+        <a href="<%- url_for_lang('tutorial/start/')%>" class="get-start">GET STARTED</a>
     </div>
 
     <!-- NavBar-->
@@ -104,7 +104,7 @@ layout: false
 
     <div class="resource-row">
         <div class="resource-block">
-            <a class="resource-item" href="<%- url_for('tutorial/start/')%>">
+            <a class="resource-item" href="<%- url_for_lang('tutorial/start/')%>">
                 <div class="resource-item-top resource-item-top-one">
                     <div style="width:130px;height:130px;display:inline-block;" class="bodymovin" data-movpath="<%- url_for('js/tutor.json') %>"></div>
                 </div>
@@ -116,7 +116,7 @@ layout: false
         </div>
 
         <div class="resource-block" href="/san/layout/">
-            <a class="resource-item" href="<%- url_for('practice/')%>">
+            <a class="resource-item" href="<%- url_for_lang('practice/')%>">
                 <div class="resource-item-top resource-item-top-two">
                     <div style="width:130px;height:130px;display:inline-block;" class="bodymovin" data-movpath="<%- url_for('js/compass.json') %>"></div>
                 </div>
@@ -128,7 +128,7 @@ layout: false
         </div>
 
        <div class="resource-block">
-            <a class="resource-item" href="<%- url_for('example/')%>">
+            <a class="resource-item" href="<%- url_for_lang('example/')%>">
                 <div class="resource-item-top resource-item-top-three">
                     <div style="width:130px;height:130px;display:inline-block;" class="bodymovin" data-movpath="<%- url_for('js/example.json') %>"></div>
                 </div>
@@ -140,7 +140,7 @@ layout: false
         </div>
 
         <div class="resource-block">
-            <a class="resource-item" href="<%- url_for('doc/api/')%>">
+            <a class="resource-item" href="<%- url_for_lang('doc/api/')%>">
                 <div class="resource-item-top resource-item-top-four">
                     <div style="width:130px;height:130px;display:inline-block;" class="bodymovin" data-movpath="<%- url_for('js/api.json') %>"></div>
                 </div>

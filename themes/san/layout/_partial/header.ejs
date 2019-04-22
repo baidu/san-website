@@ -1,5 +1,5 @@
 <header>
-    <a href="<%- url_for('') %>" class="logo-s-link">
+    <a href="<%- url_for_lang('') %>" class="logo-s-link">
         <img height="80" src="<%- url_for('img/logo.svg') %>" class="logo-s" alt="LOGO" title="San">
         </a>
     <a id="mobile-nav-toggle">
@@ -24,10 +24,10 @@
                  </div>   
             <ul>
      
-                <li><a class="router" href="<%- url_for('tutorial/start/') %>"><%= __('index.headernav.tutorial') %></a>
-                <li><a class="router" href="<%- url_for('practice/') %>"><%= __('index.headernav.practice') %></a>
-                <li><a class="router" href="<%- url_for('example/') %>"><%= __('index.headernav.example') %></a>
-                <li><a class="router" href="<%- url_for('doc/api/') %>"><%= __('index.headernav.api') %></a>
+                <li><a class="router" href="<%- url_for_lang('tutorial/start/') %>"><%= __('index.headernav.tutorial') %></a>
+                <li><a class="router" href="<%- url_for_lang('practice/') %>"><%= __('index.headernav.practice') %></a>
+                <li><a class="router" href="<%- url_for_lang('example/') %>"><%= __('index.headernav.example') %></a>
+                <li><a class="router" href="<%- url_for_lang('doc/api/') %>"><%= __('index.headernav.api') %></a>
                 <li><a class="router" href="https://github.com/baidu/san" class="github" target="_blank">
                     <img src="<%- url_for('img/github2.svg') %>" width="20" height="20">
                 </a>
