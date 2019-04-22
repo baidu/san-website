@@ -1,5 +1,5 @@
-hexo.extend.helper.register('url_for_lang', function(path) {
-  var lang = this.page.lang;
+hexo.extend.helper.register('url_for_lang', function(path, lang) {
+  lang = lang == null ? this.page.lang : lang;
 
   if (lang) {
     path = lang + '/' + path;
