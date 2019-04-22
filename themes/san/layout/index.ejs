@@ -17,16 +17,14 @@ layout: false
     <nav class="navbar-default" role="navigation">
         <div class="navbar-container">
 
-            <a href="#home"><img class="nav-logo" src="<%- url_for('img/logo2.png') %>"></a>
+            <a href="#home" class="nav-logo"><img src="<%- url_for('img/logo2.png') %>"></a>
 
 
-            <div class="navbar-right">
-                <ul class="nav navbar-nav">
-                    <li><a class="nav-a1" href="#Features"><%= __('index.nav.features') %></a></li>
-                    <li><a class="nav-a2" href="#Resources"><%= __('index.nav.resources') %></a></li>
-                    <li><a class="nav-a3" href="#Facilities"><%= __('index.nav.facilities') %></a></li>
-                </ul>
-            </div>
+            <a class="nav-a1" href="#Features"><%= __('index.nav.features') %></a>
+            <a class="nav-a2" href="#Resources"><%= __('index.nav.resources') %></a>
+            <a class="nav-a3" href="#Facilities"><%= __('index.nav.facilities') %></a>
+
+            <a class="nav-lang" href="<% if (page.lang) { %><%=url_for_lang(page.path.replace(page.lang + '/', ''), '')%><% } else { %><%=url_for_lang(page.path, 'en')%><% } %>"><% if (page.lang) { %>中文<% } else { %>EN<% } %></a>
 
         </div>
     </nav>
