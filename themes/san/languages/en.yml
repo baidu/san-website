@@ -9,6 +9,38 @@ index:
     example: Example
     api: API
     home: HOME
+  feature:
+    tpl: HTML模版
+    tpl_description: 声明式的模板，在编写视图时就像是在写一个普通的页面，更符合 HTML 开发人员的习惯。
+    data_driven: 数据驱动
+    data_driven_description: 修改数据，视图引擎会根据绑定关系自动刷新视图，从此摆脱手工调用 DOM API 的繁琐与可能的遗漏。
+    component: 组件化
+    component_description: 组件是数据、逻辑与视图的聚合体。通过组件，我们封装独立的功能区块，小到输入组合，大到一个页面。
+    view: 高性能视图
+    view_description: 通过修改数据的方法，视图引擎能够直接刷新需要变更的视图区域，无需进行任何检测，性能更高。
+    reverse: 组件反解
+    reverse_description: 为首屏时间优化，服务端通常直接输出HTML。我们能从现有的元素中反向解析出组件，并构建绑定关系。
+    size: 体积小巧
+    size_description: &lt;15k (gzipped) 的体积，无需担心对页面下载带来负担。体积强迫症患者的福音。
+    compatibility: 良好的兼容性
+    compatibility_description: 通过方法修改数据的另一好处是，可以获得更好的浏览器兼容性。毕竟有时我们产品的受众用户有点死板。
+    module: 模块管理自由
+    module_description: 项目中可以任意选择 ESNext Module 或 AMD 管理模块。当然，如果你想要用全局变量也是支持的。
+    use: 引用方便
+    use_description: 支持多种引用方式：NPM、GitHub、下载、HTTP 与 HTTPS CDN，让开发和线上引用更便利。
+  resource:
+    description: 这里有一些教程、文档或示例，可以帮助你学习和了解 San
+    tutorial_description: 教程是入门的捷径，请从这里开始了解San。
+    practice_description: 我们正在编写指南手册，以指导各种应用场景下怎么使用San。
+    example_description: 这里展示了一些简单例子，以及在实际项目如何使用San。
+    api: 组件 API
+    api_description: 当你想不起来组件的接口时，请查阅这里。
+  facility:
+    description: 一些工具和库能够帮助你更快、更便捷地搭建自己的应用
+    router_description: 支持hash和html5模式的router，单页或同构的Web应用通常需要它。
+    store_description: 应用状态管理套件，其理念是类似flux的单向流。
+    update_description: Immutable的对象更新库，和san-store配合进行应用状态数据更新。
+    devtool_description: 基于Chrome扩展的开发者工具。
 article:
   edit: Edit
   gotop: Top
