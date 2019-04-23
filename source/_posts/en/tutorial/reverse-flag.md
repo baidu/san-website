@@ -1,23 +1,22 @@
 ---
-title: 组件反解（old）
+title: component reversed parsing（old）
 categories:
 - tutorial
 ---
 
+**This document was deprecated. The new component reverses mechanism is based on data and template matching instead of the original markup mechanism.**
 
-**该文档已经过期。新的组件反解基于数据和模板匹配的机制，代替原来的标记机制。**
+`version`：< 3.4.0
 
-`版本`：< 3.4.0
-
-`提示`：通过 San 进行[服务端渲染](../ssr/)，一定能通过相同版本的 San 在浏览器端进行反解。
+`hint`：With [Server Rendering] (../ssr/) via San, you can definitely reverse the browser side with the same version of San.
 
 
-概述
-----
+Overview
+-----
 
-组件初始化时传入 **el**，其将作为组件根元素，并以此反解析出视图结构。
+When the component is initialized, it is passed to **el** element, which will be the root element of the component, and the view structure will be parsed backwards.
 
-该特性的意图是：有时我们为了首屏时间，期望初始的视图是直接的 HTML，不由组件渲染。但是我们希望组件为我们管理数据、逻辑与视图，后续的用户交互行为与视图变换通过组件管理。
+The intent of this feature is that sometimes we want the initial view to be direct HTML, rather than being rendered by components. But we want components to manage data, logic, and views for us, and subsequent user interactions and view transformations are managed through components.
 
 ```javascript
 var myComponent = new MyComponent({
@@ -25,64 +24,64 @@ var myComponent = new MyComponent({
 });
 ```
 
-以 **el** 初始化组件时，San 会尊重 **el** 的现时 HTML 形态，不会执行任何额外影响视觉的渲染动作。
+When **el** initializes the component, San will respect the current HTML form of **el** and will not perform any additional rendering actions that affect the visual.
 
-- 不会使用预设的 template 渲染视图
-- 不会创建根元素
-- 直接到达 compiled、created、attached 生命周期
+- Will not render the view using the default template
+- Will not create a root element
+- Direct access to compiled, created, attached lifecycle
 
-但是，**el** 可能需要一些额外的标记，来帮助 San 认识数据与视图的结构（插值、绑定、循环、分支、组件等），以便于后续的行为管理与视图刷新。
+However, **el** may require some additional markup to help San understand the structure of data and views (interpolation, bindings, loops, branches, components, etc.) for subsequent behavior management and view refresh.
 
-数据和视图是组件重要的组成部分，我们将从这两个方面说明组件反解的功能。
+Data and views are an important part of the component, and we will explain the reverse function of the component from these two aspects.
 
-`提示`：如果使用 NodeJS 做服务端，San 提供了 [服务端渲染](../ssr/) 的支持，能够天然输出标记好可被组件反解的 HTML，你无需了解组件反解的标记形式。如果你服务端使用其他的语言（比如PHP），请继续往下阅读。
+`Hint`: If you use NodeJS as the server, San provides support for [server-side rendering] (../ssr/), which can naturally output HTML that can be reversed by the component. You don't need to know the tag of component resolving form. If your server uses a different language (such as PHP), please read on.
 
 
-视图
+View
 ----
 
-该章节介绍如何对视图的结构（插值、绑定、循环、分支、组件等）进行标记。
+This section describes how to mark the structure of the view (interpolation, binding, loops, branches, components, etc).
 
-### 插值文本
+### Interpolated text
 
-插值文本的标记方式是：在文本的前后各添加一个注释。
+Interpolated text is marked by adding a comment before and after the text.
 
-- 文本前的注释以 **s-text:** 开头，紧跟着插值文本的声明。
-- 文本后的注释内容为 **/s-text**，代表插值文本片段结束。
+- The comment before the text begins with **s-text:** followed by the declaration of the interpolated text.
+- The comment content after the text is **/s-text**, which means the end of the interpolated text fragment.
 
 ```html
 <span><!--s-text:{{name}} - {{email}}-->errorrik - errorrik@gmail.com<!--/s-text--></span>
 ```
 
-`提示`：**s- 开头的 HTML Comment** 是重要的标记手段，在循环与分支标记中也会用到它。
+`Hint`: **s- \[html comment\]** at the beginning is an important tagging method, and it is also used in loops and branch tags.
 
 
-### 插值属性
+### Interpolated props
 
-插值属性的标记方式是：在 **prop-** 为前缀的属性上声明属性的内容。
+The interpolation props is marked by: Declaring the content of the attribute on the attribute whose **prop-** is prefixed.
 
 ```html
 <span title="errorrik - errorrik@gmail.com" prop-title="{{name}} - {{email}}"></span>
 ```
 
-### 绑定
+### Bindings
 
-绑定属性的标记方式与插值属性完全一样：在 **prop-** 为前缀的属性上声明属性的内容。
+The binding attribute is marked exactly the same as the interpolation attribute: the content of the attribute is declared on the attribute whose **prop-** is prefixed.
 
 ```html
 <ui-label prop-title="{{name}}" prop-text="{{jokeName}}"></ui-label>
 ```
 
-双向绑定用 **{= expression =}** 的形式。
+Two-way binding is in the form of **{= expression =}**.
 
 ```html
 <input prop-value="{=name=}" value="errorrik">
 ```
 
 
-### 循环
+### Loops
 
-对于循环，我们需要以桩元素，分别标记循环的 **起始** 和 **结束**。
+For loops, we need to mark the **start** and **end** of the loop with the stub element.
 
 ```html
 <ul id="list">
@@ -93,42 +92,43 @@ var myComponent = new MyComponent({
 </ul>
 ```
 
-**起始** 的桩元素标记是一个以 **s-for:** 开头的 HTML Comment，接着是声明循环的标签内容。
+**The start** stub element tag is an HTML comment that begins with **s-for:**, followed by the tag content that declares the loop.
+
 
 ```html
 <!--s-for:<li s-for="p,i in persons" title="{{p.name}}">{{p.name}} - {{p.email}}</li>-->
 ```
 
-**结束** 的桩元素标记是一个内容为 **/s-for** 的 HTML Comment。
+**The End** sub element tag is an HTML Comment with the content **/s-for**.
 
 ```html
 <!--/s-for-->
 ```
 
-对于循环的每个元素，按照普通元素标记，无需标记 **for** directive。通常它们在 HTML 输出端也是以循环的形式存在，不会带来重复编写的工作量。
+For each element of the loop, mark it as a normal element without marking the **for** directive. Usually they also exist in a loop on the HTML output, without the burden of rewriting.
 
 ```html
 <li prop-title="{{p.name}}" title="otakustay"><!--s-text:{{p.name}} - {{p.email}}-->otakustay - otakustay@gmail.com<!--/s-text--></li>
 ```
 
-`提示`：当初始没有数据时，标记循环只需要声明 **起始** 和 **结束** 桩即可。
+`Hint`: When there is no data at the beginning, the markup loop only needs to declare **start** and **end**.
 
 
-### 分支
+### Branch
 
-分支的标记比较简单，以 **s-if** 标记分支元素即可。
+The branch tag is simpler, and the branch element can be marked with **s-if**.
 
 ```html
 <span s-if="condition" title="errorrik" prop-title="{{name}}"></span>
 ```
 
-当初始条件为假时，分支元素不会出现，此时以 **HTML Comment** 为桩，标记分支。在桩的内部声明分支的语句。
+When the initial condition is false, the branch element does not appear. At this time, the branch is marked with **HTML Comment**. A statement that declares a branch inside the pile.
 
 ```html
 <!--s-if:<span s-if="cond" title="{{name}}">{{name}}</span>--><!--/s-if-->
 ```
 
-一个包含完整 if-else 的分支，总有一个元素是具体元素，有一个元素是桩。
+A branch that contains a complete if-else, there is always one element that is a concrete element, and one element that is a stub.
 
 ```html
 <!--s-if:<span s-if="isErik" title="{{name}}">{{name}}</span>--><!--/s-if-->
@@ -141,7 +141,7 @@ var myComponent = new MyComponent({
 ```
 
 
-### 组件
+### Component
 
 ```javascript
 san.defineComponent({
@@ -151,7 +151,7 @@ san.defineComponent({
 });
 ```
 
-组件的标记与视图模板中声明是一样的，在相应的自定义元素上标记绑定。San 将根据自定义元素的标签自动识别组件。
+The markup of the component is the same as the declaration in the view template, marking the binding on the corresponding custom element. San will automatically identify the component based on the label of the custom element.
 
 ```html
 <ui-label prop-title="{{name}}" prop-text="{{email}}">
@@ -159,7 +159,7 @@ san.defineComponent({
 </ui-label>
 ```
 
-我们可能因为样式、兼容性等原因不想使用自定义元素。当组件未使用自定义元素时，可以在元素上通过 **s-component** 标记组件类型。
+We may not want to use custom elements for style, compatibility, etc. When a component does not use a custom element, you can mark the component type with **s-component** on the element.
 
 ```html
 <label s-component="ui-label" prop-title="{{name}}" prop-text="{{email}}">
@@ -169,7 +169,7 @@ san.defineComponent({
 
 ### slot
 
-slot 的标记与循环类似，我们需要以桩元素，分别标记循环的 **起始** 和 **结束**。
+The slot's tag is similar to the loop, we need to mark the loop's **start** and **end** with the stub element.
 
 ```html
 <div id="main">
@@ -218,19 +218,21 @@ var myComponent = new MyComponent({
 ```
 
 
-**起始** 的桩元素标记是一个以 **s-slot:** 开头的 HTML Comment，接着是 slot 名称。
+**The start** element's stub element tag is an HTML Comment starting with **s-slot:** followed by the slot name.
+
 
 ```html
 <!--s-slot:title-->
 ```
 
-**结束** 的桩元素标记是一个内容为 **/s-slot** 的 HTML Comment。
+**The end** element's stub elements tag is an HTML Comments with the content **/s-slot**.
+
 
 ```html
 <!--/s-slot-->
 ```
 
-当 owner 未给予相应内容时，slot 的内容为组件内声明的默认内容，这时 slot 内环境为组件内环境，而不是组件外环境。对默认内容，需要在 **起始** 的桩元素 name 之前加上 **!** 声明。
+When the owner does not give the content, the content of the slot is the default content declared in the component, and the environment inside the slot is the environment inside the component, not the environment outside the component. For the default content, you need to add a **!** declaration before the pile element name of the **start**.
 
 ```html
 <!--s-slot:!title-->
@@ -238,10 +240,10 @@ var myComponent = new MyComponent({
 
 
 
-数据
+Data
 ----
 
-组件的视图是数据的呈现。我们需要通过在组件起始时标记 **data**，以指定正确的初始数据。初始数据标记是一个 **s-data:** 开头的 HTML Comment，在其中声明数据。
+The view of the component is the rendering of the data. We need to specify the correct initial data by marking **data** at the beginning of the component. The initial data tag is an HTML Comment starting with **s-data:**, in which the data is declared.
 
 ```html
 <div id="wrap">
@@ -259,9 +261,9 @@ var myComponent = new MyComponent({
 });
 ```
 
-`警告`：如果 HTML 中只包含视图结果，不包含数据，组件无法从视图的 DOM 结构中解析出其代表数据，在后续的操作中可能会导致不期望的后果。
+`Warning`: If the HTML contains only view results and no data, the component cannot parse its representative data from the view's DOM structure, which may cause undesired consequences in subsequent operations.
 
-比如，对于列表数据应该在初始化时保证数据与视图的一致，因为列表的添加删除等复杂操作与视图更新上关系密切，如果一开始对应不上，视图更新可能产生难以预测的结果。
+For example, for the list data, the data should be consistent with the view at the time of initialization, because the complicated operations such as adding and deleting the list are closely related to the view update. If the initial correspondence is not matched, the view update may produce unpredictable results.
 
 ```html
 <ul id="list">
@@ -278,15 +280,15 @@ var myComponent = new MyComponent({
     el: document.getElementById('list')
 });
 
-// 组件不包含初始数据标记
-// 下面的语句将导致错误
+// component does not contain initial data tag
+// The following statement will cause an error
 myComponent.data.removeAt('persons', 1);
 ```
 
-`提示`：如果一个组件拥有 owner，可以不用标记初始数据。其初始数据由 owner 根据绑定关系灌入。
+`Hint`: If a component has owner, you can not mark the initial data. Its initial data is populated by the owner based on the binding relationship.
 
 ```html
-<!-- ui-label 组件拥有 owner，无需进行初始数据标记 -->
+<!-- the ui-label component has owner and does not require initial data tagging -->
 <div id="main">
     <!--s-data:{"name":"errorrik"}-->
     <span s-component="ui-label" prop-text="{{name}}"><!--s-text:{{text}}-->errorrik<!--/s-text--></span>

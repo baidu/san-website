@@ -468,6 +468,25 @@ var MyComponent = san.defineComponent({
 });
 ```
 
+### updateMode
+
+`解释`：
+
+可控制视图刷新的逻辑，当前仅支持 `optimized`。当取值为 `optimized` 时，对 s-for 指令的视图更新会根据不同浏览器环境进行优化，更新过程对 DOM 的操作和数据变化可能无法对应。
+
+`版本`：>= 3.7.4
+
+`类型`： string
+
+`用法`：
+
+```javascript
+var MyComponent = san.defineComponent({
+    updateMode: 'optimized',
+    template: '<ul><li s-for="item in list">{{item}}</li></ul>'
+});
+```
+
 
 组件方法
 -------

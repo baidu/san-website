@@ -1,12 +1,12 @@
 index:
   nav:
-    features: Features
-    resources: Resources
-    facilities: Facilities
+    features: 特性
+    resources: 资料
+    facilities: 周边
   headernav:
-    tutorial: Tutorial
-    practice: Practice
-    example: Example
+    tutorial: 教程
+    practice: 指南
+    example: 示例
     api: API
     home: HOME
   feature:
@@ -42,32 +42,32 @@ index:
     update_description: Immutable的对象更新库，和san-store配合进行应用状态数据更新。
     devtool_description: 基于Chrome扩展的开发者工具。
 article:
-  edit: Edit
-  gotop: Top
+  edit: 编辑本文
+  gotop: 回到顶部
 recommend:
-  tutorial: Tutorial
-  tutorial_setup: Setup
-  tutorial_background: Background
-  tutorial_start: Start
-  tutorial_template: Template
-  tutorial_data_method: Data Manipulation
-  tutorial_data_checking: Data Validation
-  tutorial_style: Style
-  tutorial_if: Conditional
-  tutorial_for: Loop
-  tutorial_event: Event
-  tutorial_form: Form
-  tutorial_slot: Slot
-  tutorial_transition: Transition
-  tutorial_component: Component
-  tutorial_reverse: Component Reversion
-  tutorial_ssr: SSR
-  more: More
+  tutorial: 教程
+  tutorial_setup: 安装
+  tutorial_background: 背景
+  tutorial_start: 开始
+  tutorial_template: 模板
+  tutorial_data_method: 数据操作
+  tutorial_data_checking: 数据校验
+  tutorial_style: 样式
+  tutorial_if: 条件
+  tutorial_for: 循环
+  tutorial_event: 事件处理
+  tutorial_form: 表单
+  tutorial_slot: 插槽
+  tutorial_transition: 过渡
+  tutorial_component: 组件
+  tutorial_reverse: 组件反解
+  tutorial_ssr: 服务端渲染
+  more: 了解更多
   more_component_api: 组件 API
   more_main_api: 主模块 API
   more_dist_files: 发布版本说明
   more_changelog: 版本更新日志
-  facilities: Facilities
+  facilities: 周边
   example: 示例
   example_start: 一些小示例
   example_single_way_flow: 单向流
@@ -81,30 +81,30 @@ example:
   online: 在线用法小示例
 practice:
   data:
-    title: Data
-    0: What Content is Suitable for the Data?
-    1: What Content is Not Suitable for the Data?
-    2: Auto camel when data bind
+    title: 数据
+    0: 什么东西可以保存在 data 里？
+    1: 什么东西不要保存在 data 里？
+    2: data bind 时的 auto camel
   tpl:
-    title: View Templates
-    0: Object Traversal
-    1: How does an array deep update trigger a view update?
-    2: How to Implement Hide and Show?
+    title: 视图模板
+    0: 如何遍历一个对象？
+    1: 数组深层更新如何触发视图更新？
+    2: 如何实现元素的显示/隐藏？
   msg:
-    title: Inter-Component Messaging
-    0: How to Update Child Components?
-    1: Child-to-Parent Messaging
-    2: How child components communicate with higher layer components
-    3: Messaging from Dynamic Child Components
+    title: 组件间通信
+    0: 父组件如何更新子组件？
+    1: 子组件如何通知父组件？
+    2: 子组件与更高层的组件如何通信？
+    3: 动态子组件如何传递消息给父组件?
   component:
-    title: Component Management
-    0: Can we do DOM manipulation?
-    1: How to deal with the absolute positioning component's DOM？
+    title: 组件管理
+    0: 我们可以操作 DOM 吗？
+    1: 如何处理绝对定位组件的 DOM？
   route:
-    title: Router Management
-    0: How to use san-router to create a back-end system for a single-page application?
+    title: 路由管理
+    0: 如何使用 san-router 建立一个单页应用的后台系统？
   state:
-    title: Application State Management
-    0: How to use san-store to implement state management of the backend system?
+    title: 应用状态管理
+    0: 如何使用 san-store 实现后台系统的状态管理？
   faq:
-    0: FAQ
+    0: Q&A集锦

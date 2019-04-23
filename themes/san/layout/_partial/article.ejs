@@ -9,7 +9,7 @@
         <%- post.excerpt %>
         <% if (theme.excerpt_link){ %>
           <p class="article-more-link">
-            <a href="<%- url_for(post.path) %>#more"><%= theme.excerpt_link %></a>
+            <a href="<%- url_for_lang(post.path) %>#more"><%= theme.excerpt_link %></a>
           </p>
         <% } %>
       <% } else { %>
@@ -21,7 +21,5 @@
 
 <aside class="toc-wrap">
   <%- toc(post.content, {list_number: false}) %>
-  <a href="#" class="toc-top">
-    回到顶部
-  </a>
+  <a href="#" class="toc-top"><%= __('article.gotop') %></a>
 </aside>

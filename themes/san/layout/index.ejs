@@ -9,24 +9,22 @@ layout: false
         <img height="220" src="<%- url_for('img/logo-colorful.svg') %>" class="logo" alt="LOGO" title="San">
         <h1>San</h1>
         <iframe src="https://ghbtns.com/github-btn.html?user=baidu&repo=san&type=star&count=true&size=large" class="home-iframe"></iframe>
-        <p class="overlay-p">A Flexible JavaScript Component Framework</p>
-        <a href="/san/tutorial/start/" class="get-start">GET STARTED</a>
+        <p class="overlay-p">A fast, portable, flexible JavaScript component framework</p>
+        <a href="<%- url_for_lang('tutorial/start/')%>" class="get-start">GET STARTED</a>
     </div>
 
     <!-- NavBar-->
     <nav class="navbar-default" role="navigation">
         <div class="navbar-container">
 
-            <a href="#home"><img class="nav-logo" src="<%- url_for('img/logo2.png') %>"></a>
+            <a href="#home" class="nav-logo"><img src="<%- url_for('img/logo2.png') %>"></a>
 
 
-            <div class="navbar-right">
-                <ul class="nav navbar-nav">
-                    <li><a class="nav-a1" href="#Features"><%= __('index.nav.features') %></a></li>
-                    <li><a class="nav-a2" href="#Resources"><%= __('index.nav.resources') %></a></li>
-                    <li><a class="nav-a3" href="#Facilities"><%= __('index.nav.facilities') %></a></li>
-                </ul>
-            </div>
+            <a class="nav-a1" href="#Features"><%= __('index.nav.features') %></a>
+            <a class="nav-a2" href="#Resources"><%= __('index.nav.resources') %></a>
+            <a class="nav-a3" href="#Facilities"><%= __('index.nav.facilities') %></a>
+
+            <a class="nav-lang" href="<% if (page.lang) { %><%=url_for_lang(page.path.replace(page.lang + '/', ''), '')%><% } else { %><%=url_for_lang(page.path, 'en')%><% } %>"><% if (page.lang) { %>中文<% } else { %>EN<% } %></a>
 
         </div>
     </nav>
@@ -35,59 +33,59 @@ layout: false
 
     <div class="feature-container" id="Features">
 
-         <section class="feature">
+        <section class="feature">
 
         <div class="feature-row">
             <div class="feature-item">
                 <img src="<%- url_for('img/8.svg') %>" width="44" height="44">
-                <h5>HTML模版</h5>
-                <p>声明式的模板，在编写视图时就像是在写一个普通的页面，更符合 HTML 开发人员的习惯。</p>
+                <h5><%= __('index.feature.tpl') %></h5>
+                <p><%= __('index.feature.tpl_description') %></p>
             </div>
             <div class="feature-item">
                <img src="<%- url_for('img/1.svg') %>" width="44" height="44">
-                <h5>数据驱动</h5>
-                <p>修改数据，视图引擎会根据绑定关系自动刷新视图，从此摆脱手工调用 DOM API 的繁琐与可能的遗漏。</p>
+                <h5><%= __('index.feature.data_driven') %></h5>
+                <p><%= __('index.feature.data_driven_description') %></p>
             </div>
             <div class="feature-item">
                 <img src="<%- url_for('img/2.svg') %>" width="44" height="44">
-                <h5>组件化</h5>
-                <p>组件是数据、逻辑与视图的聚合体。通过组件，我们封装独立的功能区块，小到输入组合，大到一个页面。</p>
+                <h5><%= __('index.feature.component') %></h5>
+                <p><%= __('index.feature.component_description') %></p>
             </div>
         </div>
 
         <div class="feature-row">
             <div class="feature-item">
                 <img src="<%- url_for('img/3.svg') %>" width="44" height="44">
-                <h5>高性能视图</h5>
-                <p>通过修改数据的方法，视图引擎能够直接刷新需要变更的视图区域，无需进行任何检测，性能更高。</p>
+                <h5><%= __('index.feature.view') %></h5>
+                <p><%= __('index.feature.view_description') %></p>
             </div>
             <div class="feature-item">
                 <img src="<%- url_for('img/5.svg') %>" width="44" height="44">
-                <h5>组件反解</h5>
-                <p>为首屏时间优化，服务端通常直接输出HTML。我们能从现有的元素中反向解析出组件，并构建绑定关系。</p>
+                <h5><%= __('index.feature.reverse') %></h5>
+                <p><%= __('index.feature.reverse_description') %></p>
             </div>
             <div class="feature-item">
                 <img src="<%- url_for('img/4.svg') %>" width="44" height="44">
-                <h5>体积小巧</h5>
-                <p>13k (gzipped) 的体积，无需担心对页面下载带来负担。体积强迫症患者的福音。</p>
+                <h5><%= __('index.feature.size') %></h5>
+                <p><%= __('index.feature.size_description') %></p>
             </div>
         </div>
 
         <div class="feature-row">
             <div class="feature-item">
                 <img src="<%- url_for('img/9.svg') %>" width="44" height="44">
-                <h5>良好的兼容性</h5>
-                <p>通过方法修改数据的另一好处是，可以获得更好的浏览器兼容性。毕竟有时我们产品的受众用户有点死板。</p>
+                <h5><%= __('index.feature.compatibility') %></h5>
+                <p><%= __('index.feature.compatibility_description') %></p>
             </div>
             <div class="feature-item">
                 <img src="<%- url_for('img/6.svg') %>" width="44" height="44">
-                <h5>模块管理自由</h5>
-                <p>项目中可以任意选择 ESNext Module 或 AMD 管理模块。当然，如果你想要用全局变量也是支持的。</p>
+                <h5><%= __('index.feature.module') %></h5>
+                <p><%= __('index.feature.module_description') %></p>
             </div>
             <div class="feature-item">
                 <img src="<%- url_for('img/7.svg') %>" width="44" height="44">
-                <h5>引用方便</h5>
-                <p>支持多种引用方式：NPM、GitHub、下载、HTTP 与 HTTPS CDN，让开发和线上引用更便利。</p>
+                <h5><%= __('index.feature.use') %></h5>
+                <p><%= __('index.feature.use_description') %></p>
             </div>
         </div>
     </section>
@@ -98,55 +96,55 @@ layout: false
     <section id ="Resources" class="resource">
     <hr>
     <div class="resource-title">
-    <h4>资料</h4>
-    <p>这里有一些教程、文档或示例，可以帮助你学习和了解 San</p>
+    <h4><%= __('index.nav.resources') %></h4>
+    <p><%= __('index.resource.description') %></p>
     </div>
 
     <div class="resource-row">
         <div class="resource-block">
-            <a class="resource-item" href="<%- url_for('tutorial/start/')%>">
+            <a class="resource-item" href="<%- url_for_lang('tutorial/start/')%>">
                 <div class="resource-item-top resource-item-top-one">
                     <div style="width:130px;height:130px;display:inline-block;" class="bodymovin" data-movpath="<%- url_for('js/tutor.json') %>"></div>
                 </div>
                 <div class="resource-item-bottom">
-                    <h5>教程</h5>
-                    <p>教程是入门的捷径，请从这里开始了解San。</p>
+                    <h5><%= __('index.headernav.tutorial') %></h5>
+                    <p><%= __('index.resource.tutorial_description') %></p>
                 </div>
             </a>
         </div>
 
         <div class="resource-block" href="/san/layout/">
-            <a class="resource-item" href="<%- url_for('practice/')%>">
+            <a class="resource-item" href="<%- url_for_lang('practice/')%>">
                 <div class="resource-item-top resource-item-top-two">
                     <div style="width:130px;height:130px;display:inline-block;" class="bodymovin" data-movpath="<%- url_for('js/compass.json') %>"></div>
                 </div>
                 <div class="resource-item-bottom">
-                    <h5>指南</h5>
-                    <p>我们正在编写指南手册，以指导各种应用场景下怎么使用San。</p>
+                    <h5><%= __('index.headernav.practice') %></h5>
+                    <p><%= __('index.resource.practice_description') %></p>
                 </div>
             </a>
         </div>
 
        <div class="resource-block">
-            <a class="resource-item" href="<%- url_for('example/')%>">
+            <a class="resource-item" href="<%- url_for_lang('example/')%>">
                 <div class="resource-item-top resource-item-top-three">
                     <div style="width:130px;height:130px;display:inline-block;" class="bodymovin" data-movpath="<%- url_for('js/example.json') %>"></div>
                 </div>
                 <div class="resource-item-bottom">
-                    <h5>示例</h5>
-                    <p>这里展示了一些简单例子，以及在实际项目如何使用San。</p>
+                    <h5><%= __('index.headernav.example') %></h5>
+                    <p><%= __('index.resource.example_description') %></p>
                 </div>
             </a>
         </div>
 
         <div class="resource-block">
-            <a class="resource-item" href="<%- url_for('doc/api/')%>">
+            <a class="resource-item" href="<%- url_for_lang('doc/api/')%>">
                 <div class="resource-item-top resource-item-top-four">
                     <div style="width:130px;height:130px;display:inline-block;" class="bodymovin" data-movpath="<%- url_for('js/api.json') %>"></div>
                 </div>
                 <div class="resource-item-bottom">
-                    <h5>组件 API</h5>
-                    <p>当你想不起来组件的接口时，请查阅这里。</p>
+                    <h5><%= __('index.resource.api') %></h5>
+                    <p><%= __('index.resource.api_description') %></p>
                 </div>
             </a>
         </div>
@@ -159,8 +157,8 @@ layout: false
 <section class="facility" id="Facilities">
 <hr>
 <div class="facility-title">
-    <h4>周边</h4>
-    <p>一些工具和库能够帮助你更快、更便捷地搭建自己的应用</p>
+    <h4><%= __('index.nav.facilities') %></h4>
+    <p><%= __('index.facility.description') %></p>
     </div>
 
     <div class="facility-row">
@@ -172,7 +170,7 @@ layout: false
                 </div>
                 <div class="facility-item-bottom">
                     <h5>Router</h5>
-                    <p>支持hash和html5模式的router，单页或同构的Web应用通常需要它。</p>
+                    <p><%= __('index.facility.router_description') %></p>
                 </div>
             </a>
         </div>
@@ -184,7 +182,7 @@ layout: false
                 </div>
                 <div class="facility-item-bottom">
                     <h5>Store</h5>
-                    <p>应用状态管理套件，其理念是类似flux的单向流。</p>
+                    <p><%= __('index.facility.store_description') %></p>
                 </div>
             </a>
         </div>
@@ -196,7 +194,7 @@ layout: false
                 </div>
                 <div class="facility-item-bottom">
                     <h5>Update</h5>
-                    <p>Immutable的对象更新库，和san-store配合进行应用状态数据更新。</p>
+                    <p><%= __('index.facility.update_description') %>。</p>
                 </div>
             </a>
         </div>
@@ -209,7 +207,7 @@ layout: false
                 </div>
                 <div class="facility-item-bottom">
                     <h5>DevTool</h5>
-                    <p>基于Chrome扩展的开发者工具</p>
+                    <p><%= __('index.facility.devtool_description') %></p>
                 </div>
             </a>
         </div>
@@ -218,12 +216,14 @@ layout: false
 </section>
 
     <footer id="More">
+      <% if (!page.path){ %>
       <div class="efe-products" id="links">
         <p><i class="fa fa-info-circle"></i> 开源的 San 来自百度 EFE。在 <a target="_blank" href="http://efe.baidu.com">EFE</a>，我们有一系列开源产品：</p>
         <script src="https://ecomfe.github.io/efe-meta/js/full-intro.js"></script>
-    </div>
+      </div>
+      <% } %>
     <div class="copyright">
-        &copy; 2018 <a target="_blank" href="http://efe.baidu.com">Baidu EFE</a>
+        &copy; 2019 <a target="_blank" href="http://efe.baidu.com">Baidu EFE</a>
     </div>
     </footer>
 

@@ -1,12 +1,12 @@
 ---
-title: 子组件如何通知父组件？
+title: Child-to-Parent Messaging
 categories:
 - practice
 ---
 
-San的组件体系提供了事件功能，子组件可以通过调用组件的[fire](/san/doc/api/#fire)方法派发一个自定义事件，父组件在视图模板中通过on-事件名的方式或通过子组件实例的on方法就可以监听子组件派发的自定义事件，实现子组件到父组件的通信。
+San components provide event mechanism. By calling [fire](/san/doc/api/#fire) method child component can dispatch a custom event, which will be received by the parent component via the on-"event name" directive or **on** method on the child component instance. That is child-to-parent component messaging.
 
-#### 使用
+#### Usage
 ```javascript
 var childComponent = san.defineComponent({    
     template: `
@@ -16,7 +16,7 @@ var childComponent = san.defineComponent({
     `,
     
     onClick: function () {
-        // 向父组件派发一个child-change事件
+        // Dispatch a child-change event
         this.fire('child-change', 'from child');
     }
 });
@@ -33,13 +33,13 @@ var parentComponent = san.defineComponent({
     `,
   
     changeHandler: function (val) {
-        // 事件处理
+        // event handling
     }
 
 });
 ```
-说明: 我们知道使用「双向绑定」可以将子组件内部的数据变化同步给父组件，但除了类表单组件外，其它情况不建议使用「双向绑定」的方式来达到通知父组件的目的。
+Note: Two-way data binding can also achieve child-to-parent messaging. But it's not recommended to notify the parent component using two-way data binding other than use cases like form components.
 
-#### 示例
+#### Demo
 <p data-height="265" data-theme-id="0" data-slug-hash="wqrGLy" data-default-tab="js,result" data-user="naatgit" data-embed-version="2" data-pen-title="child-to-parent" class="codepen">See the Pen <a href="https://codepen.io/naatgit/pen/wqrGLy/">child-to-parent</a> by funa (<a href="https://codepen.io/naatgit">@naatgit</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>

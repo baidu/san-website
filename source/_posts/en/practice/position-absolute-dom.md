@@ -1,32 +1,32 @@
 ---
-title: 如何处理绝对定位组件的 DOM？
+title: How to deal with the absolute positioning component's DOM？
 categories:
 - practice
 ---
 
-在我们使用 San 开发的时候，我们常常会写各种的组件，当一个父组件的子组件是绝对定位组件(比如：Select、Tip 等)的时候，我们会遇到两种场景：
+When we use San to develop, we often write various components. When a subcomponent of a parent component is an absolutely positioned component (eg: Select, Tip, etc.), we encounter two scenarios:
 
-- 场景一：父(祖)组件足够大或不存在 `overflow: hidden;`
-- 场景二：父(祖)组件不够大且存在 `overflow: hidden;`
+- scene A: The parent (grandfather) component is large enough or does not exist `overflow: hidden;`
+- scene B: The parent (grandfather) component is not large enough and exists `overflow: hidden;`
 
-而这两种情形下，我们需要对绝对定位组件的 DOM 做一些处理。
+In both cases, we need to do some processing on the DOM of a absolutely positioned component.
 
-那针对这两种场景我们分别可以如何处理呢？
+How can we deal with these two scenarios separately?
 
-### 如何处理
+### How to deal
 
-#### 场景一
-父(祖)组件足够大或不存在 `overflow: hidden;` 时的绝对定位。
+#### scene A
+The parent (grandfather) component is large enough or does not exist `overflow: hidden;`
 
-这种情况比较常规，我们可以直接引入组件，然后可选择在外部或组件内部包含一个 (not static) 元素，来控制显示即可。
+This situation is more conventional, we can directly import the component, and then choose to include a (not static) element inside or outside the component to control the display.
 
-##### 使用
+##### usage
 
 ```javascript
 class AbsComponent extends san.Component {
     static template = `
         <div>
-            <p class="absolute">子绝对定位组件</p>
+            <p class="absolute">absolute positioning subcomponent</p>
         </div>
     `;
 }
@@ -35,7 +35,7 @@ class Parent extends san.Component {
     static template = `
         <div>
             <div class="parent-rel">
-                <h3>父是static</h3>
+                <h3>static parent component</h3>
                 <abs-comp></abs-comp>
             </div>
         </div>
@@ -49,7 +49,7 @@ class Parent extends san.Component {
 new Parent().attach(document.querySelector('#paIsRel'));
 ```
 
-##### 示例
+##### example
 <p
     data-height="365"
     data-theme-id="dark"
@@ -65,18 +65,18 @@ new Parent().attach(document.querySelector('#paIsRel'));
 </p>
 
 
-#### 场景二
-父(祖)组件不够大且存在 `overflow: hidden;` 时的绝对定位。
+#### sense B
+The parent (grandfather) component is not large enough and exists `overflow: hidden;`
 
-这种情况会很常见，如果直接包含的话绝对定位元素会因为父(祖)组件有`overflow: hidden;`且不够大而导致组件中超出部分被遮住。
+This situation is also very common, and if it is imported directly, the absolute positioning element will be obscured by the parent (ancestor) component for it has an 'overflow: hidden;` and is not large enough.
 
-若不想被遮住的话，我们可以在组件中做一层处理：
+If you don't want it to be obscured, we can add one layer in the component to process:
 
-- 将组件元素挂到 body 上
-- 需要显示的时候进行位置控制
-- 父组件调用
+- append element to `body`
+- do position control when display is required
+- call by parent component
 
-##### 使用
+##### usage
 ```javascript
 class AbsComponent extends san.Component {
     static template = `
@@ -95,20 +95,20 @@ class AbsComponent extends san.Component {
     }
 
     attached() {
-        // 将绝对定位元素放在body上
+        // append absolute position element to body
         if (this.el.parentNode !== document.body) {
             document.body.appendChild(this.el);
         }
 
-        // 显示的时候进行位置控制
+        // do position control when display is required
         this.changePosition();
     }
 
     /**
-     * 调整位置信息
+     * change position
      */
     changePosition() {
-        // 这里可以替换成封装的组件来进行位置控制
+        // Here you can replace it with a packaged component for position control
         let targetElem = this.data.get('targetElem');
         targetElem = typeof targetElem === 'function' ? targetElem() : targetElem;
 
@@ -124,7 +124,7 @@ class AbsComponent extends san.Component {
 class Parent extends san.Component {
     static template = `
         <div>
-            <p class="info">父元素100px overflow:hidden;</p>
+            <p class="info">parent component 100px overflow:hidden;</p>
             <div class="parent-wrap">
                 <span class="btn">click toggle</span>
                 <abs-comp targetElem="{{getTarget}}"></abs-comp>
@@ -143,9 +143,9 @@ class Parent extends san.Component {
     }
 
     /**
-     * 获取相对定位的元素
+     * get relative positioned elements
      *
-     * @return {HTMLElemnt} 相对定位的元素
+     * @return {HTMLElemnt} relatively positioned element
      */
     getTarget() {
         return this.el.querySelector('.btn');

@@ -1,61 +1,61 @@
 ---
-title: 如何使用 san-store 实现后台系统的状态管理？
+title: How to use san-store to implement state management of the backend system?
 categories:
 - practice
 ---
 
-#### 引言
-首先确保已经理解了[san-store](https://github.com/baidu/san-store) 中是否需要状态管理的内容以及相关概念，下面开始。
+#### Introduction
+First make sure you understand the necessity of state management content and related concepts in [san-store](https://github.com/baidu/san-store). Here we go.
 
-本项目代码在 [https://github.com/jiangjiu/san-store-spa](https://github.com/jiangjiu/san-store-spa) 可以查看。
+This project code can be viewed in [https://github.com/jiangjiu/san-store-spa](https://github.com/jiangjiu/san-store-spa).
 
-#### 搭建环境
-上一篇文档 [如何使用 san-router 建立一个单页应用的后台系统?](https://baidu.github.io/san/practice/san-router-spa/) 已经搭建了一个san+san-router的单页后台应用，我们在它的基础上加入san-store来管理应用状态。
+#### Setup
+The previous document [How to use san-router to create a back-end system for a single-page application?](https://baidu.github.io/san/practice/san-router-spa/) has built a single-page back-end application with san+san-router. We added san-store to manage the application state based on it.
 
 ```js
-    // 只需安装san-store和san-update
+    // only need to install san-store and san-update
     npm i san-update san-store --save
 ```
 
-#### 状态设计
-目前系统有三个频道，home、about、list。
+#### State design
+Currently the system has three channels, home, about, and list.
 
-假设这是一个类似电商后台管理订单的系统：
+Suppose this is a system similar to e-commerce back-office orders management
 
-1. 不同的频道都需要同步当前订单的状态（待付款、待发货、交易完成 => orderState:1、2、3）
-2. 不同频道有权利修改当前订单状态
-3. 每次修改都需要异步请求到服务端进行确认
+1. Different channels need to synchronize the status of the current order (pending payment, pending delivery, transaction completed => orderState:1、2、3)
+2. Different channels have the permission to modify the current order status
+3. Each modification requires an asynchronous request to the server for confirmation
 
-这里的状态管理混合了异步请求，为了简单起见，暂不考虑安全性及异常处理。
+The state management here mixes asynchronous requests, and for the sake of simplicity, security and exception handling are not considered.
 
-#### 思考
-如果不使用san-store，每一个频道都需要自行发起异步请求，同时要和其他频道通信当前的订单状态，在实际业务中会是件很头疼的事儿。
+#### Thinking
+If you do not use san-store, each channel needs to initiate an asynchronous request by itself, and it is a headache in the actual business to communicate the current order status with other channels.
 
-使用san-store后，异步请求在action中发起而无需在不同组件中分别处理，同时store作为唯一应用状态源，无需考虑信息同步问题，系统流程清晰很多，简单可靠。
+After using san-store, asynchronous requests are initiated in the action without having to deal with them separately in different components. At the same time, store is the only application state source, no need to consider the information synchronization problem, the system flow is clear, simple and reliable.
 
-#### 创建store
-首先新建一个文件来初始化和管理store。
+#### Create store
+First create a new file to initialize and manage the store.
 
 ```js
 // store.js
 import {updateBuilder} from 'san-update/src/index';
 import {store} from 'san-store';
 
-// 第一个action，处理边界条件和异步请求
+// First action: handling boundary conditions and asynchronous requests
 store.addAction('changeOrderState', (state, {getState, dispatch}) => {
-    // 取出当前订单状态值，如果为空就初始化为1
+    // Take the current order status value, initialize to 1 if it is empty
     const orderState = getState('orderState');
     if (!state) {
         return dispatch('fillOrderState', 1);
     }
-    // 如果改变的订单值和原来状态相同或异常值就不更新了
+    // Not update if the changed order value is the same as the original state or is the abnormal value
     else if (state === orderState || state < 1 || state > 3) {
         return;
     }
-    // 符合修改条件后，发起异步请求
+    // Initiate an asynchronous request after the modification condition is met
     axios.post('/api/orderState', {state})
         .then(res => {
-            // 状态码正确，修改store中的订单值
+            // The status code is correct, modify the order value in the store
             if (res.status === 200) {
                 dispatch('fillOrderState', state);
             }
@@ -65,18 +65,18 @@ store.addAction('changeOrderState', (state, {getState, dispatch}) => {
             console.log(error);
         });
 });
-// 同步orderState值
+// Synchronize orderState value
 store.addAction('fillOrderState', state => updateBuilder().set('orderState', state));
 
-// 给订单状态一个初始值
+// Give the order status an initial value
 store.dispatch('fillOrderState', 1);
 ```
-#### 初始值
-看到上面的`store.dispatch('fillOrderState', 1)`了吗？
-这是为了给订单状态一个初始值。
-为什么会这样做？
+#### Initial value
+See the `store.dispatch('fillOrderState', 1)` above?
+This is to give the order status an initial value.
+Why we do it in this way?
 
-也许你会想到san-store手动实例化store时中提供了initData属性:
+Maybe you will think of the `initData` property provided by san-store when manually instantiating the store:
 
 ```js
 let myStore = new Store({
@@ -94,50 +94,50 @@ let myStore = new Store({
 })
 ```
 
-这确实是个很不错的初始办法。
-可惜的是，`connect.san`方法只能连接san-store默认提供的store，手动实例化的store无法使用`connect.san`方法。
+This is indeed a very good initial approach.
+Unfortunately, the `connect.san` method can only be connected to the store provided by san-store by default. The manually instantiated store cannot use the `connect.san` method.
 
-而且erik和灰大在设计之初认为：
+And at the beginning of the design, Erik and Gray think:
 
-1. store应该只存在一个（按常理出牌），如果提供连接其他store的方法，可能会在业务中被玩坏
-2. 大部分初始值都是异步获取的，仍然需要dispatch action获得
+1. Store should only have one (by common sense), if you provide a way to connect to other stores, unpredictable errors may occur in the business.
+2. Most of the initial values are obtained asynchronously and still require `dispatch action` to get
 
-所以当初并没有提供手动指定store进行连接的能力。
-好消息是，我们会在近期开放这个功能，敬请期待。
+So San didn't provide the ability to manually specify the store to connect.
+The good news is that we will be opening this feature in the near future, so stay tuned.
 
-#### 入口文件引入store.js
-别忘了在main.js中添加store.js。
+#### Import store.js in the entry file.
+Don't forget to add `store.js` to `main.js`.
 
 ```js
-// 入口文件 main.js
+// entry file main.js
 import './store';
 ```
 
-#### 修改频道
+#### Modify channel
 
-为不同频道增加显示以及修改订单状态。
+Add displays to different channels and method to modify order status.
 
-首先修改Home频道。
+First, modify the Home channel.
 
 ```js
-// 修改Home.js
+// modify Home.js
 import {connect} from 'san-store';
 import san from 'san';
 
 const Home = san.defineComponent({
     template: `
         <div>
-            <p>目前状态：{{orderState}}</p>
-            <button on-click="onClick">订单更改为状态2：待发货</button>
+            <p>current status: {{orderState}}</p>
+            <button on-click="onClick">Order changed to status 2: pending delivery</button>
         </div>
     `,
     onClick() {
-        // 改变订单状态至待发货，简单起见就不做成下拉框可选形式了
+        // Change the order status to be shipped, for the sake of simplicity, it is not made into a drop-down box.
         this.actions.changeOrderState(2);
     }
 });
 
-// 连接这个组件至store
+// Connect this component to the store
 export default connect.san(
     {orderState: 'orderState'},
     {changeOrderState: 'changeOrderState'}
@@ -145,23 +145,23 @@ export default connect.san(
 
 ```
 
-然后修改About频道。
+Then modify the About channel.
 
 ```js
-// 修改 About.js
+// modify About.js
 import {connect} from 'san-store';
 import san from 'san';
 
 const About = san.defineComponent({
     template: `
         <div>
-            <span>目前状态：{{orderState}}</span>
-            <button on-click="onClick">订单更改为状态3：交易完成</button>
+            <span>current status: {{orderState}}</span>
+            <button on-click="onClick">Order changed to status 3: transaction completed</button>
         </div>
     `,
 
     onClick() {
-        // 改变订单状态至交易完成，简单起见就不做成下拉框可选形式了
+        // Change the order status to the transaction completed. For the sake of simplicity, the drop-down box is not available.
         this.actions.changeOrderState(3);
     }
 });
@@ -172,15 +172,15 @@ export default connect.san(
 )(About);
 ```
 
-就改两个频道好了。
-可以看到，不同路由下（Home、About）都正确显示了订单状态orderState，同时不同频道修改成不同的订单状态也无需手动监听通信，san-store自动完成了orderState的更新。
+Just change the two channels.
+It can be seen that the order status orderState is correctly displayed under different routes (Home, About), and different channels are modified into different order states without manual monitoring communication. The san-store automatically completes the orderState update.
 
-#### 总结
-以上只是一个简单的例子，演示了后台系统如何添加store来管理应用状态。
+#### Summary
+The above is just a simple example that demonstrates how the background system adds a store to manage application state.
 
->我们并不认为 san-store 适合所有场景。统一的进行应用状态管理，只有当你的应用足够大时，它带来维护上的便利才会逐渐显现出来。如果你只是开发一个小系统，并且预期不会有陆续的新需求，那我们并不推荐你使用它。大多数增加可维护性的手段意味着拆分代码到多处，意味着你没有办法在实现一个功能的时候一路到尾畅快淋漓，意味着开发成本可能会上升。
+> We don't think san-store is suitable for all scenarios. Only when your application is large enough, the unified maintenance of application state management will gradually show the convenience of maintenance. If you are only developing a small system and anticipate that there will be no new requirements, we do not recommend you to use it. Most methods of increasing maintainability mean splitting code into multiple locations, meaning that you have no way to get through the way when you implement a feature, which means development costs may increase.
 
-所以，你应该根据你要做的是一个什么样的应用，决定要不要使用 san-store。
+So, you should decide whether you want to use san-store depending on what kind of application you are going to do.
 
 
 

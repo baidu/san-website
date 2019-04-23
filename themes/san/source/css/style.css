@@ -4,7 +4,7 @@ html {
 
 body {
     margin: 0;
-    font-family: Helvetica Neue,Helvetica,Roboto,Arial,PingFang SC,Hiragino Sans GB,Microsoft Yahei,Microsoft Jhenghei,sans-serif;
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
 }
 
 
@@ -43,7 +43,11 @@ header nav li:first-child{
     margin-left: 30px;
 }
 
-header nav .router {
+header nav a,
+header nav a:link,
+header nav a:visited,
+header nav a:hover,
+header nav a:active {
     font-weight: 300;
     color: rgba(255,255,255,.7);
     font-size: 1.4rem;
@@ -68,9 +72,9 @@ header .icon{
     z-index: 1;
 }
 .search-input{
-    float: right;
+    float: left;
     position: relative;
-    margin-right: 15px;
+    margin-left: 50px;
 }
 
 #san-query-input{
@@ -99,11 +103,15 @@ header .icon{
 }
 
 #san-query-input::-webkit-input-placeholder{
-    color: #717e82;
+    color: #000;
     letter-spacing: 2px;
 }
 
-
+.header-lang {
+    float: right;
+    width: 40px;
+    margin-right: 50px;
+}
 
 .github {
     font-size: 3rem;
@@ -238,8 +246,8 @@ main {
 .san-perf {
     display: block;
     margin: 60px auto;
-    width: 728px;
-    height: 1150px;
+    width: 597px;
+    height: 803px;
 }
 .example-main {
     background: #00222d;
