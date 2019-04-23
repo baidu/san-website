@@ -29,12 +29,12 @@ index:
     use: 引用方便
     use_description: 支持多种引用方式：NPM、GitHub、下载、HTTP 与 HTTPS CDN，让开发和线上引用更便利。
   resource:
-    description: 这里有一些教程、文档或示例，可以帮助你学习和了解 San
-    tutorial_description: 教程是入门的捷径，请从这里开始了解San。
-    practice_description: 我们正在编写指南手册，以指导各种应用场景下怎么使用San。
-    example_description: 这里展示了一些简单例子，以及在实际项目如何使用San。
-    api: 组件 API
-    api_description: 当你想不起来组件的接口时，请查阅这里。
+    description: Tutorials, documents and demos to understanding and using San.
+    tutorial_description: Reading the tutorials is a good starting point to learn San.
+    practice_description: Practice guidelines suggest specifit ways to deal with many different situations.
+    example_description: Real-world demos showing how to use San.
+    api: Component API
+    api_description: Refer to this when you're looking for Component API manuals.
   facility:
     description: 一些工具和库能够帮助你更快、更便捷地搭建自己的应用
     router_description: 支持hash和html5模式的router，单页或同构的Web应用通常需要它。
