@@ -36,7 +36,7 @@ index:
     api: 组件 API
     api_description: 当你想不起来组件的接口时，请查阅这里。
   facility:
-    description: Some tools and librarys can help you build your app faster and easier.
+    description: Some tools and libraries can help you build your app faster and easier.
     router_description: Support for hash and html5 mode routes to build SPA(Single Page Application) or isomorphism web applications.
     store_description: Application state management suite, the idea is a one-way flow like flux.
     update_description: Immutable's object update library, with san-store for application state data updates.
