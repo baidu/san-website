@@ -10,12 +10,12 @@ index:
     api: API
     home: HOME
   feature:
-    tpl: HTML模版
-    tpl_description: 声明式的模板，在编写视图时就像是在写一个普通的页面，更符合 HTML 开发人员的习惯。
-    data_driven: 数据驱动
-    data_driven_description: 修改数据，视图引擎会根据绑定关系自动刷新视图，从此摆脱手工调用 DOM API 的繁琐与可能的遗漏。
-    component: 组件化
-    component_description: 组件是数据、逻辑与视图的聚合体。通过组件，我们封装独立的功能区块，小到输入组合，大到一个页面。
+    tpl: HTML Template
+    tpl_description: Declarative template. HTML conformant template makes it easier for HTML developers.
+    data_driven: Data Driven
+    data_driven_description: The DOM will be updated accordingly by the view engine upon any data modification. Free yourself from trivial and error-prone DOM APIs.
+    component: Component
+    component_description: A component is a combination of data, logic and view. Feature blocks, from a single input combination to a whole page, can be built via San components.
     view: High Performance View
     view_description: By modifying the data, the view engine can directly refresh the view area that needs to be changed without any detection and better performance.
     reverse: Component Reversion
