@@ -22,19 +22,19 @@ index:
     reverse_description: Optimized for the first screen and output HTML from the server side. Reverse parse components from existing elements and build bindings.
     size: Small Size
     size_description: Volume less that 15kb (gzipped), no need to worry about the burden of page downloads. The gospel of patients with volume obsessive.
-    compatibility: 良好的兼容性
-    compatibility_description: 通过方法修改数据的另一好处是，可以获得更好的浏览器兼容性。毕竟有时我们产品的受众用户有点死板。
-    module: 模块管理自由
-    module_description: 项目中可以任意选择 ESNext Module 或 AMD 管理模块。当然，如果你想要用全局变量也是支持的。
-    use: 引用方便
-    use_description: 支持多种引用方式：NPM、GitHub、下载、HTTP 与 HTTPS CDN，让开发和线上引用更便利。
+    compatibility: Good compatibility
+    compatibility_description: Another benefit of modifying data by method is that you can get better browser compatibility. After all, some users of our products are a bit rigid.
+    module: Flexible module management
+    module_description: The ESNext Module or AMD can be selected in the project. Of course, if you want to use global variables it is also supported.
+    use: Convenient reference
+    use_description: Support for multiple methods such as NPM, GitHub, download, HTTP and HTTPS CDN, making development and online reference more convenient.
   resource:
-    description: 这里有一些教程、文档或示例，可以帮助你学习和了解 San
-    tutorial_description: 教程是入门的捷径，请从这里开始了解San。
-    practice_description: 我们正在编写指南手册，以指导各种应用场景下怎么使用San。
-    example_description: 这里展示了一些简单例子，以及在实际项目如何使用San。
-    api: 组件 API
-    api_description: 当你想不起来组件的接口时，请查阅这里。
+    description: Tutorials, documents and demos to understand and use San.
+    tutorial_description: Reading the tutorials is a good starting point to learn San.
+    practice_description: Practice guidelines suggest specific ways to deal with many different situations.
+    example_description: Real-world demos showing how to use San.
+    api: Component API
+    api_description: Refer to this when you're looking for Component API manuals.
   facility:
     description: Some tools and libraries can help you build your app faster and easier.
     router_description: Support for hash and html5 mode routes to build SPA(Single Page Application) or isomorphism web applications.
@@ -72,13 +72,13 @@ recommend:
   example_start: 一些小示例
   example_single_way_flow: 单向流
 example:
-  start: 小示例
-  start_description: 一些小的示例，主要是展示 San 一些小特性的用法。
-  todos_description: 一个 Todos 应用的例子，包含列表、列表内操作、表单提交、浮出层、交互组件等应用开发中常见的场景。
-  todos_esnext_description: 上面 Todos 应用的 ESNext 版本。其使用了webpack + babel，更符合流行的应用开发习惯。
-  single_way_flow: 单向流
-  todos_store_description: 上面 Todos 应用的单向流版本。其使用了 san-store。
-  online: 在线用法小示例
+  start: small example
+  start_description: Some small examples, mainly to show the usage of some small features of San.
+  todos_description: An example of a Todos application that includes scenarios common to application development such as lists, in-list operations, form submissions, floating layers, and interactive components.
+  todos_esnext_description: The ESNext version of the Todos app above uses webpack + babel, which is more in line with popular application development habits.
+  single_way_flow: One-way flow
+  todos_store_description: The one-way streaming version of the Todos app above uses san-store.
+  online: Small example of online usage
 practice:
   data:
     title: Data
