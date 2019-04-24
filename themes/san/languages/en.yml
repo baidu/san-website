@@ -16,12 +16,12 @@ index:
     data_driven_description: 修改数据，视图引擎会根据绑定关系自动刷新视图，从此摆脱手工调用 DOM API 的繁琐与可能的遗漏。
     component: 组件化
     component_description: 组件是数据、逻辑与视图的聚合体。通过组件，我们封装独立的功能区块，小到输入组合，大到一个页面。
-    view: 高性能视图
-    view_description: 通过修改数据的方法，视图引擎能够直接刷新需要变更的视图区域，无需进行任何检测，性能更高。
-    reverse: 组件反解
-    reverse_description: 为首屏时间优化，服务端通常直接输出HTML。我们能从现有的元素中反向解析出组件，并构建绑定关系。
-    size: 体积小巧
-    size_description: 小于15k (gzipped) 的体积，无需担心对页面下载带来负担。体积强迫症患者的福音。
+    view: High Performance View
+    view_description: By modifying the data, the view engine can directly refresh the view area that needs to be changed without any detection and better performance.
+    reverse: Component Reversion
+    reverse_description: Optimized for the first screen and output HTML from the server side. Reverse parse components from existing elements and build bindings.
+    size: Small Size
+    size_description: Volume less that 15kb (gzipped), no need to worry about the burden of page downloads. The gospel of patients with volume obsessive.
     compatibility: Good compatibility
     compatibility_description: Another benefit of modifying data by method is that you can get better browser compatibility. After all, some users of our products are a bit rigid.
     module: Flexible module management
@@ -36,11 +36,11 @@ index:
     api: Component API
     api_description: Refer to this when you're looking for Component API manuals.
   facility:
-    description: 一些工具和库能够帮助你更快、更便捷地搭建自己的应用
-    router_description: 支持hash和html5模式的router，单页或同构的Web应用通常需要它。
-    store_description: 应用状态管理套件，其理念是类似flux的单向流。
-    update_description: Immutable的对象更新库，和san-store配合进行应用状态数据更新。
-    devtool_description: 基于Chrome扩展的开发者工具。
+    description: Some tools and libraries can help you build your app faster and easier.
+    router_description: Support for hash and html5 mode routes to build SPA(Single Page Application) or isomorphism web applications.
+    store_description: Application state management suite, the idea is a one-way flow like flux.
+    update_description: Immutable's object update library, with san-store for application state data updates.
+    devtool_description: Developer tools based on Chrome extensions.
 article:
   edit: Edit
   gotop: Top
