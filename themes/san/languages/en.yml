@@ -29,9 +29,9 @@ index:
     use: 引用方便
     use_description: 支持多种引用方式：NPM、GitHub、下载、HTTP 与 HTTPS CDN，让开发和线上引用更便利。
   resource:
-    description: Tutorials, documents and demos to understanding and using San.
+    description: Tutorials, documents and demos to understand and use San.
     tutorial_description: Reading the tutorials is a good starting point to learn San.
-    practice_description: Practice guidelines suggest specifit ways to deal with many different situations.
+    practice_description: Practice guidelines suggest specific ways to deal with many different situations.
     example_description: Real-world demos showing how to use San.
     api: Component API
     api_description: Refer to this when you're looking for Component API manuals.
