@@ -68,11 +68,11 @@ recommend:
   more_dist_files: Dist Files
   more_changelog: Changelog
   facilities: Facilities
-  example: 示例
-  example_start: 一些小示例
-  example_single_way_flow: 单向流
+  example: Example
+  example_start: Small examples
+  example_single_way_flow: One-way flow
 example:
-  start: small example
+  start: Small Examples
   start_description: Some small examples, mainly to show the usage of some small features of San.
   todos_description: An example of a Todos application that includes scenarios common to application development such as lists, in-list operations, form submissions, floating layers, and interactive components.
   todos_esnext_description: The ESNext version of the Todos app above uses webpack + babel, which is more in line with popular application development habits.
