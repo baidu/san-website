@@ -63,10 +63,10 @@ recommend:
   tutorial_reverse: Component Reversion
   tutorial_ssr: SSR
   more: More
-  more_component_api: 组件 API
-  more_main_api: 主模块 API
-  more_dist_files: 发布版本说明
-  more_changelog: 版本更新日志
+  more_component_api: Component API
+  more_main_api: San API
+  more_dist_files: Dist Files
+  more_changelog: Changelog
   facilities: Facilities
   example: 示例
   example_start: 一些小示例
