@@ -282,7 +282,10 @@ body{
     width: 33%;
     height: 130px;
     float: left;
-    padding: 0 50px 0 50px;
+    padding: 0 50px;
+}
+.feature-en .feature-item {
+  height: 170px;
 }
 .feature-item>embed{
   margin-bottom: -9px;
