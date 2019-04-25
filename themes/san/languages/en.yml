@@ -22,11 +22,11 @@ index:
     reverse_description: Optimized for the first screen and output HTML from the server side. Reverse parse components from existing elements and build bindings.
     size: Small Size
     size_description: Volume less that 15kb (gzipped), no need to worry about the burden of page downloads. The gospel of patients with volume obsessive.
-    compatibility: Good compatibility
+    compatibility: Good Compatibility
     compatibility_description: Another benefit of modifying data by method is that you can get better browser compatibility. After all, some users of our products are a bit rigid.
-    module: Flexible module management
+    module: Flexible Module Management
     module_description: The ESNext Module or AMD can be selected in the project. Of course, if you want to use global variables it is also supported.
-    use: Convenient reference
+    use: Convenient Reference
     use_description: Support for multiple methods such as NPM, GitHub, download, HTTP and HTTPS CDN, making development and online reference more convenient.
   resource:
     description: Tutorials, documents and demos to understand and use San.
