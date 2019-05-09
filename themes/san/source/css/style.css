@@ -317,7 +317,8 @@ main {
 
 @media only screen and  (max-width: 768px){
 
-    .san-perf {
+    .san-perf,
+    .header-lang {
         display: none;
     }
     .algolia-autocomplete .ds-dropdown-menu {
@@ -356,10 +357,10 @@ main {
     }
 
     .search-input{
-    float: none;
-    margin-right: 0;
-}
-   
+        float: none;
+        margin-right: 0;
+    }
+
     #san-query-input{
     position: absolute;
     width: 100px;

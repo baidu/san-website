@@ -11,8 +11,8 @@
         <li><a href="<%- url_for_lang('practice/') %>"><%= __('index.headernav.practice') %></a>
         <li><a href="<%- url_for_lang('example/') %>"><%= __('index.headernav.example') %></a>
         <li><a href="<%- url_for_lang('doc/api/') %>"><%= __('index.headernav.api') %></a>
-        <li><a href="https://github.com/baidu/san" class="github" target="_blank">Github
-        </a></li>
+        <li><a href="https://github.com/baidu/san" class="github" target="_blank">Github</a></li>
+        <li><a href="<% if (page.lang) { %><%=url_for_lang(page.path.replace(page.lang + '/', ''), '')%><% } else { %><%=url_for_lang(page.path, 'en')%><% } %>"><% if (page.lang) { %>中文<% } else { %>EN<% } %></a></li>
     </ul>
     <aside class="mobile-nav-recommend"><%- partial('_partial/recommend') %></aside>
 </div>
