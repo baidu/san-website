@@ -508,7 +508,19 @@ footer dt{
     height: 100%;
   }
   .navbar-container{
-    display: none;
+    text-align: left;
+  }
+
+  .navbar-default .nav-a1 {
+    padding: 0 0 0 54px;
+  }
+  .navbar-default .nav-a2,
+  .navbar-default .nav-a3 {
+    padding: 0 0 0 18px;
+  }
+
+  .nav-logo {
+    left: 10px;
   }
 
   .home-iframe{
