@@ -43,7 +43,7 @@ var myComponent = new MyComponent({
 
 `解释`：
 
-组件根元素。传入此参数意味着不使用组件的 **template** 作为视图模板，组件视图由 San 自动反解。详情可参考[组件反解](../../tutorial/reverse/)文档。
+组件根元素。传入此参数意味着不使用组件的 **template** 作为视图模板，组件视图由 San 自动反解。开发中可以使用 **this.el** 获取组件根元素。详情可参考[组件反解](../../tutorial/reverse/)文档。
 
 `类型`： HTMLElement
 
@@ -561,7 +561,7 @@ var MyComponent = san.defineComponent({
 
 ```javascript
 var SelectItem = san.defineComponent({
-    template: 
+    template:
         '<li on-click="select" class="{{value === selectValue ? \'selected\' : \'\'">'
         + '<slot></slot>'
         + '</li>',
@@ -675,6 +675,8 @@ san.defineComponent({
 
 获取定义了 **s-ref** 的子组件。详细请参考[组件层级](../../tutorial/component/#组件层级)文档。
 
+`注意`：对组件根元素的获取要使用 **this.el**， 不要使用 **s-ref** 。
+
 `用法`：
 
 
@@ -690,11 +692,13 @@ var AddForm = san.defineComponent({
     submit: function () {
         this.ref('endDate')
         this.ref('endHour')
+        this.ref('rootNode') // undefined
+        this.el  //根元素 <div class="form"> ... </div>
     }
 });
 
 /* template:
-<div class="form">
+<div class="form" s-ref="rootNode">
     <div>预期完成时间：
         <ui-calendar bindx-value="endTimeDate" s-ref="endDate"></ui-calendar>
         <ui-timepicker bindx-value="endTimeHour" s-ref="endHour"></ui-timepicker>
