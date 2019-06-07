@@ -9,3 +9,15 @@ deployment:
       - git config --global user.name erik
       - git config --global user.email erik168@163.com
       - npm run build
+
+offline:
+  maximumFileSizeToCacheInBytes: 10485760
+  staticFileGlobs:
+    - public/**/*.{js,html,css,png,jpg,jpeg,gif,svg,json,xml}
+  stripPrefix: public
+  verbose: true
+    runtimeCaching:
+    - urlPattern: /*
+      handler: cacheFirst
+      options:
+        origin: baidu.github.io
