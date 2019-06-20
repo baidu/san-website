@@ -2,7 +2,7 @@
   "name": "san-site",
   "version": "1.0.0",
   "hexo": {
-    "version": "3.8.0"
+    "version": "3.7.1"
   },
   "scripts": {
     "start": "npx hexo s",
