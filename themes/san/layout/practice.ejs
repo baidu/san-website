@@ -43,7 +43,6 @@
 </style>
 
 <main class="practice">
-<input type="text" id="practice-search">
 <dl id="practice-list">
     <dt><%= __('practice.data.title') %></dt>
     <dd><a href="<%- url_for_lang('practice/data-valid/') %>"><%= __('practice.data.0') %></a></dd>
@@ -79,29 +78,3 @@
     <dd><a href="<%- url_for_lang('practice/ie-compatibility/') %>"><%= __('practice.faq.1') %></a></dd>
 </dl>
 </main>
-
-<script>
-(function () {
-    var searchEl = document.getElementById('practice-search');
-    var timeout;
-    searchEl.onkeyup = function () {
-        if (timeout) {
-            clearTimeout(timeout);
-        }
-
-        timeout = setTimeout(doSearch, 500);
-    };
-
-    function doSearch() {
-        var key = searchEl.value;
-        var dds = document.getElementById('practice-list').getElementsByTagName('dd');
-        var len = dds.length;
-
-        while (len--) {
-            var dd = dds[len];
-            dd.style.display = key && dd.getElementsByTagName('a')[0].innerHTML.indexOf(key) < 0
-                ? 'none' : '';
-        }
-    }
-})();
-</script>
