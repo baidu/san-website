@@ -284,13 +284,19 @@ main {
     max-width: 80rem;
 }
 
+.example-main .example-online-title {
+    font-size: 2rem;
+    color: #2da2f8;
+    margin-top: 5rem;
+}
+
 .example-main{
     margin-bottom: 0;
 }
 
 .example-main dd, 
 .example-main dt {
-    margin-left: 90px;
+    margin-left: 9rem;
 }
 
 .footer-copyright{
