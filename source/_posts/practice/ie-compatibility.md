@@ -5,34 +5,89 @@ categories:
 ---
 
 ### 开始
-San 本身的API是支持IE6以上的，但是在实际开发过程中，多多少少会碰到IE的一些兼容性问题,但是兼容性问题的本质就是新旧浏览器环境对不同API支持程度的不同导致的问题，本章主要梳理了一些常用的关于JS的解决思路。
 
-### 通用方案1 -- @babel/polyfill
+虽然 San 支持 IE6，但是在实际开发过程中，多少会碰到一些兼容性问题。兼容性问题主要来源于老旧浏览器可能对如下特性不支持：
 
-`@babel/polyfill` 帮我们做的事情是模拟了一个ES6+的环境，让我们能够愉快地使用最新的ES6+的APIs，我们在使用的时候要确保它在其他代码或者引用前被调用（比如可以在入口文件中直接引入）。
+- 新的 JavaScript 语法特性
+- 新的 JavaScript API 或 DOM API
+- 新的 CSS 特性
 
-`npm install --save @babel/polyfill`
+对于应用开发而言，如果想要支持老旧的 IE 浏览器，建议遵循如下原则：
+
+- 使用 ES5 或 ES3 语法进行开发
+- 仅使用当前浏览器环境下支持的 API
+- 使用老一些的模块管理方式，比如 AMD
+- 仅使用当前浏览器环境支持的布局与样式定义
+- 不使用较新的打包构建工具，或自己开发打包构建
+
+
+但是，某些应用仅期望在老旧 IE 下基本可用，对性能等因素并没有严苛的要求，应用开发工程师期望使用现代的开发模式、语言特性、开发过程与开发工具。本文的下面部分，主要梳理了在这种情况下，可能遇到的 JavaScript 常见问题和解决办法。主要思路是：
+
+- 通过实现不支持的 API 解决 API 差异性
+- 通过编译解决旧环境不支持新语法
+
+
+本文内容不涵盖 CSS 兼容性问题和解决方案。
+
+
+### shim
+
+一些 shim 库使用老旧浏览器下的 API，实现现代浏览器的 API，帮助开发者抹平浏览器环境的差异。下面推荐一些常用的。
+
+```html
+<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-shim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-sham.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.34.2/es6-shim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.34.2/es6-sham.min.js"></script>
+
+
+<script src="https://wzrd.in/standalone/es7-shim@latest"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/json2/20160511/json2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/json3/3.3.2/json3.min.js"></script>
+```
+
+这些 shim 可以通过 IE 的条件注释，按需引入。
+
+```html
+<!--[if lt IE 9]>
+  <script src="es5-shim/es5-shim.min.js"></script>
+  <script src="es5-shim/es5-sham.min.js"></script>
+  <script src="/json2/json2.min.js"></script>
+<![endif]-->
+```
+
+想要更详细的了解条件注释，可以参考 [https://www.cnblogs.com/dtdxrk/archive/2012/03/06/2381868.html](https://www.cnblogs.com/dtdxrk/archive/2012/03/06/2381868.html)
+
+
+### @babel/polyfill
+
+**@babel/polyfill** 模拟了一个 ES6+ 的环境，让我们能够使用 ES6+ 的 APIs，我们在使用的时候要确保它在其他代码或者引用前被调用（比如可以在入口文件中直接引入）。
+
+```
+npm install --save @babel/polyfill
+```
 
 ```javascript
-# 引入方式1
-
+// 引入方式1
 require("@babel/polyfill");
 
 
-# 引入方式2
-
+// 引入方式2
 import "@babel/polyfill";
 
 
-# 引入方式3--在webpack的entry入口处添加
-
+// 引入方式3--在webpack的entry入口处添加
 module.exports = {
   entry:['@babel/polyfill','src/index.js']
 }
 ```
-但是在实际开发过程中，我们用不到所有的兼容包代码，这就让我们的代码体积变的很大，这里我们可以使用babel的配置来按需加载
+
+在实际应用场景下，整个 **@babel/polyfill** 体积较大。我们可以配置 **.babelrc** 来按需加载
+
 ```javascript
-# .babelrc
 {
   "presets": [["@babel/preset-env", {
     "useBuiltIns": "usage", //如果我们配置了该项 就不需要在webpack中配置entry了
@@ -40,47 +95,16 @@ module.exports = {
   }]]
 }
 ```
-### 通用方案2 -- 条件注释 按需引入es5-shim.js & es5-sham.js 等库
+
+
+### es3ify-loader
+
+
+老旧的 JavaScript 引擎在对象声明或属性访问表达式中，不支持保留字。
+
+
 ```javascript
-# es5-shim.js & es5-sham.js 解决ES5语法不兼容问题
-<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-shim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-sham.min.js"></script>
-
-# es6-shim.js & es6-sham.js 解决ES6语法不兼容问题
-<script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.34.2/es6-shim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.34.2/es6-sham.min.js"></script>
-
-# es7-shim 解决ES6+语法不兼容问题
-<script src="https://wzrd.in/standalone/es7-shim@latest"></script>
-```
-```javascript
-# IE 6/7 与部分 IE8 浏览器不支持 JSON 对象的情况
-<script src="https://cdnjs.cloudflare.com/ajax/libs/json2/20160511/json2.min.js"></script>
-或
-<script src="https://cdnjs.cloudflare.com/ajax/libs/json3/3.3.2/json3.min.js"></script>
-```
-在实际开发中，我们不用全部都引入，这些库为我们解决了不兼容ES5，ES6语法的情况，为我们提供了一系列API重写的代码（原理是把一个库引入一个旧的浏览器, 然后用旧的API, 实现一些新的API的功能）
-
-典型不兼容的就是 IE 6/7/8 的浏览器,目前的 Chrome ，FireFox ，IE9+ 都是支持 ES5+ 语法的，所以为了使用这些库，我们可以配合使用一些`条件注释`来辅助我们引入这些库，而不是全部的浏览器都引入
-```javascript
-# IE版本 小于等于9
-<!--[if lt IE 9]>
-	<script src="es5-shim/es5-shim.min.js"></script>
-	<script src="es5-shim/es5-sham.min.js"></script>
-	<script src="/json2/json2.min.js"></script>
-<![endif]-->
-```
->针对`条件注释`不是很明白的同学，可以参考这篇文章 https://www.cnblogs.com/dtdxrk/archive/2012/03/06/2381868.html
-
-
->以上方案只能解决部分问题，在实际开发过程中，肯定会遇到一些其他问题，但是对于JS的兼容性问题只要保持着，没有这个API可以通过重写或者HACK的方式来解决，以下是一些单个情况的解决方案
-
-### Case1 : `default` `class` `catch` ES3 保留字问题
-```javascript
-SCRIPTxxx: 缺少标识符
-```
-```javascript
-# 不识别default
+// 提示 SCRIPTxxx: 缺少标识符
 e.n = function (t) {
     var n = t && t.__esModule ? function () {
         return t.default
@@ -91,10 +115,16 @@ e.n = function (t) {
 }
 ```
 
-```javascript
-# webpack中配置 es3ify-loader
-npm intall --save-dev es3ify-loader post-loader
+使用 **es3ify-loader** 编译，可以解决这个问题。
 
+```
+npm intall --save-dev es3ify-loader post-loader
+```
+
+**es3ify-loader** 可以结合 **webpack** 使用。
+
+```javascript
+// webpack 配置 es3ify-loader
 module: {
     rules: [{
             test: /.js$/,
@@ -104,15 +134,24 @@ module: {
     ]
 }
 ```
+
+下面是 es3ify-loader 编译后的简单示例。
+
 ```javascript
 // 编译前
 function(t) { return t.default; }
 
 // 编译后
-function(t) { return t["default"]; } #这里将保留字添加字符串进行引入
+function(t) { return t["default"]; }
 ```
-### Case2 : `Object.defineProperty` 问题
-这是因为我们使用了`import & export`语法，ES6 Module语法在通过`babel`编译后会产生`Object.defineProperty`的问题，在IE8下只能对DOM对象使用, 如果对原生对象使用Object.defineProtry()会报错，引用了一系列库之后其实也并非可以解决该问题，这里找到一个方案仅供参考
+
+
+### Object.defineProperty
+
+如果使用了 `import & export`，**babel** 编译后会产生 `Object.defineProperty` 问题。
+
+在IE8下，`Object.defineProperty` 只能对 DOM 对象使用，对原生对象使用 `Object.defineProperty` 会报错。下面提供一个方案，仅供参考
+
 ```javascript
 (function () {
   if (!Object.defineProperty ||
@@ -151,7 +190,8 @@ function(t) { return t["default"]; } #这里将保留字添加字符串进行引
 }());
 ```
 
-### Case3 : 在IE6和IE7浏览器中，支持`Element.querySelectorAll` & `Element.querySelectorAll`方法
+### querySelector and querySelectorAll
+
 ```javascript
 if (!document.querySelectorAll) {
   document.querySelectorAll = function (selectors) {
@@ -210,7 +250,8 @@ var qsaWorker = (function () {
 })();
 ```
 
-### Case4 : IE 不支持`Object.assign`
+### Object.assign
+
 ```javascript
 if (typeof Object.assign != 'function') {
   Object.assign = function (target) {
@@ -234,8 +275,12 @@ if (typeof Object.assign != 'function') {
   };
 }     
 ```
-### Case5:  在IE8下不支持 webpack4打包代码中的`getter/setter` 访问器属性
-在使用webpack4+san的过程中，IE8以下无法支持webpack4打包代码中的getter/setter访问器属性,这里建议可以更换其他构建工具来进行打包
+
+### Webpack
+
+IE9- 环境下，不支持 webpack4 打包代码中的 `getter/setter` 访问器属性。建议更换其他构建工具来进行打包构建。
 
 
-> IE的问题还有很多，比如css样式的不兼容问题等等，这里只是提供了一些解决办法，无法做到全部囊括，后面会不断补充，最后感谢董睿大神提供这次梳理文章的机会～ 欢迎一起交流
+### 最后 
+
+要兼容老旧 IE 浏览器，问题还有很多。这里只是提供了一些解决办法，无法做到全部囊括。欢迎大家整理和贡献
