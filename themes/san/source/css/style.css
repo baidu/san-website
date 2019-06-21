@@ -253,7 +253,6 @@ main {
     background: #fff;
     padding: 3rem 1rem 8rem;
     font-size: 1.4rem;
-    text-align: center;
     color: #aaa;
 }
 
@@ -281,12 +280,17 @@ main {
 }
 
 .example-codepen {
-    margin: 2rem auto;
+    margin: 2rem 0;
     max-width: 80rem;
 }
 
 .example-main{
     margin-bottom: 0;
+}
+
+.example-main dd, 
+.example-main dt {
+    margin-left: 90px;
 }
 
 .footer-copyright{
