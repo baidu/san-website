@@ -78,6 +78,8 @@ example:
   todos_esnext_description: The ESNext version of the Todos app above uses webpack + babel, which is more in line with popular application development habits.
   single_way_flow: One-way flow
   todos_store_description: The one-way streaming version of the Todos app above uses san-store.
+  realworld: RealWorld example app
+  realworld_description: A fully fledged application including CRUD operations, authentication, routing, pagination, and more.
   online: Small example of online usage
 practice:
   data:

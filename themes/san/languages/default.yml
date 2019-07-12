@@ -78,6 +78,8 @@ example:
   todos_esnext_description: 上面 Todos 应用的 ESNext 版本。其使用了webpack + babel，更符合流行的应用开发习惯。
   single_way_flow: 单向流
   todos_store_description: 上面 Todos 应用的单向流版本。其使用了 san-store。
+  realworld: RealWorld 应用
+  realworld_description: 一个 RealWorld 应用例子，包含 CRUD、权限、路由、列表等应用开发中常见的场景。
   online: 在线用法小示例
 practice:
   data:
