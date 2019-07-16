@@ -1,5 +1,5 @@
 {
-  "name": "san-site",
+  "name": "san-website",
   "version": "1.0.0",
   "hexo": {
     "version": "3.7.1"
@@ -8,7 +8,7 @@
     "start": "npx hexo s",
     "deploy": "npx hexo clean && npx hexo g && npx hexo deploy"
   },
-  "dependencies": {
+  "devDependencies": {
     "hexo": "^3.7.1",
     "hexo-deployer-git": "^0.3.1",
     "hexo-generator-archive": "^0.1.4",
