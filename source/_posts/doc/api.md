@@ -81,7 +81,7 @@ var myComponent = new MyComponent({
 - 组件无需手工 dispose，owner dispose 时会自动释放
 - 组件及其子组件 dispatch 的消息，owner 组件可以接收
 
-更多说明请参考[owner 与 parent](../../tutorial/component/#owner-%E4%B8%8E-parent)文档。
+更多说明请参考[owner与parent](../../tutorial/component/#owner-%E4%B8%8E-parent)文档。
 
 
 `注意`：
