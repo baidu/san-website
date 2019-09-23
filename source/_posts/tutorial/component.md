@@ -599,7 +599,6 @@ var MyApp = san.defineComponent({
         if (!this.editor) {
             this.editor = new Person({
                 owner: this,
-                scope: this.data,
                 source: '<x-person name="{{author.name}}" email="{{author.email}}" on-done="editDone($event)"/>'
             });
             this.editor.attach(document.body)
@@ -643,7 +642,6 @@ var MyApp = san.defineComponent({
         if (!this.editor) {
             this.editor = new Person({
                 owner: this,
-                scope: this.data,
                 source: '<x-person name="{=author.name=}" email="{=author.email=}"/>'
             });
             this.editor.attach(document.body)
@@ -691,7 +689,6 @@ var MyApp = san.defineComponent({
         if (!this.editor) {
             this.editor = new Person({
                 owner: this,
-                scope: this.data,
                 source: '<x-person name="{{author.name}}" email="{{author.email}}"/>'
             });
             this.editor.attach(document.body)
@@ -745,7 +742,6 @@ var Person = san.defineComponent({
         if (!this.detail) {
             this.detail = new PersonDetail({
                 owner: this,
-                scope: this.data,
                 source: this.detailSource
             });
             this.detail.attach(document.body)
@@ -790,7 +786,6 @@ var MyApp = san.defineComponent({
         if (!this.dialog) {
             this.dialog = new Dialog({
                 owner: this,
-                scope: this.data,
                 source: '<x-dialog>'
                     + '<h2 slot="title">{{title}}</h2>'
                     + '<b s-if="strongContent">{{content}}</b><u s-else>{{content}}</u>'
