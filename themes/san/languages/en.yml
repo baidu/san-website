@@ -1,4 +1,7 @@
 index:
+  jumbotron:
+    get_started: Get Started
+    description: A fast, portable, flexible JavaScript component framework
   nav:
     features: Features
     resources: Resources

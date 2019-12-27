@@ -1,4 +1,7 @@
 index:
+  jumbotron:
+    get_started: 快速开始
+    description: 一个快速、轻量、灵活的 JavaScript 组件框架
   nav:
     features: 特性
     resources: 资料

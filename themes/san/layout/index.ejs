@@ -9,8 +9,8 @@ layout: false
         <img height="220" src="<%- url_for('img/logo-colorful.svg') %>" class="logo" alt="LOGO" title="San">
         <h1>San</h1>
         <iframe src="https://ghbtns.com/github-btn.html?user=baidu&repo=san&type=star&count=true&size=large" class="home-iframe"></iframe>
-        <p class="overlay-p">A fast, portable, flexible JavaScript component framework</p>
-        <a href="<%- url_for_lang('tutorial/start/')%>" class="get-start">GET STARTED</a>
+        <p class="overlay-p"><%= __('index.jumbotron.description') %></p>
+        <a href="<%- url_for_lang('tutorial/start/')%>" class="get-start"><%= __('index.jumbotron.get_started') %></a>
     </div>
 
     <!-- NavBar-->
@@ -24,7 +24,7 @@ layout: false
             <a class="nav-a2" href="#Resources"><%= __('index.nav.resources') %></a>
             <a class="nav-a3" href="#Facilities"><%= __('index.nav.facilities') %></a>
 
-            <a class="nav-lang" href="<% if (page.lang) { %><%=url_for_lang(page.path.replace(page.lang + '/', ''), '')%><% } else { %><%=url_for_lang(page.path, 'en')%><% } %>"><% if (page.lang) { %>中文<% } else { %>EN<% } %></a>
+            <a class="nav-lang" href="<% if (page.lang != "default") { %><%=url_for_lang(page.path.replace(page.lang + '/', ''), 'default')%><% } else { %><%=url_for_lang(page.path, 'en')%><% } %>"><% if (page.lang != "default") { %>中文<% } else { %>EN<% } %></a>
 
         </div>
     </nav>
