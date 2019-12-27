@@ -4,16 +4,16 @@ categories:
 - tutorial
 ---
 
-
+> 从 3.8.0 开始，san 的服务器端渲染由 [san-ssr][san-ssr] 实现。如果你在使用 3.8.0 之前的 san，请参考 [服务器端渲染（3.8.0 之前）](../ssr-before-3.8/)。
 
 San 的服务端渲染支持是基于 [组件反解](../reverse/) 的：
 
 - 服务端输出的 HTML 中带有对视图无影响，能帮助组件了解数据与视图结构的标记片段
 - 浏览器端，组件初始化时从标记片段理解组件结构，在后续用户操作时组件能正确响应，发挥作用
 
-`提示`：由于组件运行环境需要考虑浏览器各版本和NodeJS，示例代码为保证简单无需transform，全部采用ES5编写。
+`提示`：由于组件运行环境需要考虑浏览器各版本和 NodeJS，示例代码为保证简单无需 transform，全部采用 ES5 编写。
 
-是否需要SSR
+是否需要 SSR
 ----
 
 服务端渲染，视图 HTML 直出有一些显而易见的好处：
@@ -34,42 +34,105 @@ San 的服务端渲染支持是基于 [组件反解](../reverse/) 的：
 - 偏重内容型页面，可以使用 SSR。但是组件是管理行为交互的，对内容部分无需进行组件渲染，只需要在有交互的部分进行组件反解渲染
 
 
-输出HTML
+输出 HTML
 ----
 
 ```javascript
-var MyComponent = san.defineComponent({
+const { defineComponent } = require('san');
+const { compileToRenderer } = require('san-ssr');
+const MyComponent = defineComponent({
     template: '<a><span title="{{email}}">{{name}}</span></a>'
 });
+const render = compileToRenderer(MyComponent);
 
-var render = san.compileToRenderer(MyComponent);
-render({
+console.log(render({
     email: 'errorrik@gmail.com',
     name: 'errorrik'
-});
-// render html result:
-// <a>....</a>
+}));
+// Outputs:
+// <a><!--s-data:{"email":"errorrik@gmail.com","name":"errorrik"}--><span title="errorrik@gmail.com">errorrik</span></a>
 ```
 
+san-ssr 提供了 **compileToRenderer** 方法。该方法接收组件的类作为参数，编译返回一个 **{string}render({Object} data)** 方法。 **render** 方法接收数据，返回组件渲染后的 HTML 字符串。
 
-San 在主包下提供了 **compileToRenderer** 方法。该方法接收组件的类作为参数，编译返回一个 **{string}render({Object} data)** 方法。 **render** 方法接收数据，返回组件渲染后的 HTML 字符串。
 
-
-编译NodeJS模块
+输出 CommonJS 模块
 ----
 
-有时候，我们希望组件编译的 render 方法是一个单独的 NodeJS Module，以便于其他模块引用它。通过 San 主包下提供的 **compileToSource** 方法我们可以编译 NodeJS Module。
+有时候，我们希望组件编译的 render 方法是一个单独的 NodeJS Module，以便于其他模块引用它。通过 san-ssr 提供的 **compileToSource** 方法我们可以编译 NodeJS Module。
 
 ```javascript
-var san = require('san');
-var fs = require('fs');
-
-var MyComponent = san.defineComponent({
+const { defineComponent } = require('san');
+const { compileToSource } = require('san-ssr');
+const { writeFileSync } = require('fs');
+const MyComponent = defineComponent({
     template: '<a><span title="{{email}}">{{name}}</span></a>'
 });
-
-var renderSource = san.compileToSource(MyComponent);
-fs.writeFileSync('your-module.js', 'exports = module.exports = ' + renderSource, 'UTF-8');
+const fnBody = compileToSource(MyComponent);
+writeFileSync('ssr.js', 'exports = module.exports = ' + fnBody);
 ```
 
 **compileToSource** 方法接收组件的类作为参数，编译返回组件 render 的 source code，具体为 `function (data) {...}` 形式的字符串。我们只需要在前面增加 `exports = module.exports = `，并写入 **.js** 文件中，就能得到一个符合 CommonJS 标准的 NodeJS Module。
+
+
+从文件编译到文件
+----
+
+在编写编译工具时我们对 san-ssr 有更多需求，比如以文件作为输入，文件作为输出；支持 TypeScript 等。以下是以 TypeScript 文件作为输入，CommonJS 作为输出的示例。
+
+组件代码（一个 `NameComponent` 组件）：
+
+```typescript
+import { Component } from 'san'
+
+export default class NameComponent extends Component {
+    public static template = '<a><span title="{{email}}">{{name}}</span></a>'
+}
+```
+
+编译代码（产出 CommonJS 的渲染函数）：
+
+```typescript
+import { SanProject } from 'san-ssr'
+import { writeFileSync } from 'fs'
+
+const project = new SanProject()
+const targetCode = project.compile('./name.comp.ts')
+
+writeFileSync('name.ssr.js', targetCode)
+```
+
+使用渲染函数：
+
+```typescript
+import nameRenderer = require('./name.ssr')
+
+console.log(nameRenderer({
+    email: 'errorrik@gmail.com',
+    name: 'errorrik'
+}))
+// Outputs:
+// <a><!--s-data:{"email":"errorrik@gmail.com","name":"errorrik"}--><span title="errorrik@gmail.com">errorrik</span></a>
+```
+
+命令行工具
+----
+
+san-ssr 提供了命令行接口，可以局部安装在 node_modules 下供 npm scripts 使用，也可以把它安装到全局：
+
+```bash
+npm install -g san-ssr
+```
+
+编译上述 `NameComponent` 组件：
+
+```bash
+san-ssr ./name.comp.ts > name.ssr.js
+```
+
+更多 SSR 的指南和 API 请参考：
+
+* README：https://github.com/baidu/san-ssr
+* TypeDoc: https://baidu.github.com/san-ssr
+
+[san-ssr]: https://github.com/baidu/san-ssr

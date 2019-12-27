@@ -4,7 +4,7 @@ categories:
 - tutorial
 ---
 
-
+> From 3.8.0, server side rendering for san is provided by [san-ssr][san-ssr]. If you're using san@<3.8.0, please refer to [Server Side Rendering (before 3.8.0)](../ssr-before-3.8/).
 
 San's server-side rendering is based on [component reversion](../reverse/).
 
@@ -33,42 +33,107 @@ Therefore, we recommend a comprehensive evaluation when using server-side render
 - Appear only in the App's WebView, not as an open web page, no need to use SSR.
 - Focus on content pages, you can use SSR. But the component manages the behavioral interaction, and no component rendering is required for the content part. Only need to perform component de-rendering in the part with interaction.
 
+
 Output HTML
 ----
 
 ```javascript
-var MyComponent = san.defineComponent({
+const { defineComponent } = require('san');
+const { compileToRenderer } = require('san-ssr');
+const MyComponent = defineComponent({
     template: '<a><span title="{{email}}">{{name}}</span></a>'
 });
+const render = compileToRenderer(MyComponent);
 
-var render = san.compileToRenderer(MyComponent);
-render({
+console.log(render({
     email: 'errorrik@gmail.com',
     name: 'errorrik'
-});
-// render html result:
-// <a>....</a>
+}));
+// Outputs:
+// <a><!--s-data:{"email":"errorrik@gmail.com","name":"errorrik"}--><span title="errorrik@gmail.com">errorrik</span></a>
 ```
 
+san-ssr provides a **compileToRenderer** function, which takes the component class as the parameter and returns a **{string}render({Object} data)** method, which takes a data object and returns the rendered HTML string.
 
-San provides the **compileToRenderer** method in the main package. This method takes the component's class as a parameter, then compiles, and returns a **{string}render({Object} data)** method. **render** method receives the data and returns rendered HTML string of the component.
 
-
-Compile the NodeJS module
+Output CommonJS Module
 ----
 
-Sometimes, we want the render method compiled  by a component to be a separate NodeJS Module so that other modules can reference it. We can compile the NodeJS Module via the **compileToSource** method provided by the San main package.
+In some cases, we need the render method to be a standalone CommonJS Module which can be required and called by other modules. san-ssr provides a **compileToSource** function for this:
 
 ```javascript
-var san = require('san');
-var fs = require('fs');
-
-var MyComponent = san.defineComponent({
+const { defineComponent } = require('san');
+const { compileToSource } = require('san-ssr');
+const { writeFileSync } = require('fs');
+const MyComponent = defineComponent({
     template: '<a><span title="{{email}}">{{name}}</span></a>'
 });
-
-var renderSource = san.compileToSource(MyComponent);
-fs.writeFileSync('your-module.js', 'exports = module.exports = ' + renderSource, 'UTF-8');
+const fnBody = compileToSource(MyComponent);
+writeFileSync('ssr.js', 'exports = module.exports = ' + fnBody);
 ```
 
-The **compileToSource** method takes the component's class as a parameter, then compiles, and returns the source code of the component rendered. Specifically it is `function (data) {...}` string. We only need to add `exports = module.exports = ` to the front and write it to the **.js** file to get a NodeJS Module that conforms to the CommonJS standard.
+**compileToSource** takes the component class as input, and returns the function body of the renderer for this component class, which looks like `function (data) {...}`. You'll need to add a `exports = module.exports = ` prefix before it's written into a .js file. This way you'll get a CommonJS module.
+
+
+From File To File
+----
+
+You'll need more capability from san-ssr when it comes to writting build tools. For instance, take a file as input and output a file, support TypeScript files, etc. The following is a demo for taking TypeScript file as input and output a CommonJS file:
+
+The component source code (a San component named `NameComponent`):
+
+```typescript
+import { Component } from 'san'
+
+export default class NameComponent extends Component {
+    public static template = '<a><span title="{{email}}">{{name}}</span></a>'
+}
+```
+
+Compile the component class into a CommonJS module containing the renderer:
+
+```typescript
+import { SanProject } from 'san-ssr'
+import { writeFileSync } from 'fs'
+
+const project = new SanProject()
+const targetCode = project.compile('./name.comp.ts')
+
+writeFileSync('name.ssr.js', targetCode)
+```
+
+Use `name.ssr.js` as a CommonJS module:
+
+```typescript
+import nameRenderer = require('./name.ssr')
+
+console.log(nameRenderer({
+    email: 'errorrik@gmail.com',
+    name: 'errorrik'
+}))
+// Outputs:
+// <a><!--s-data:{"email":"errorrik@gmail.com","name":"errorrik"}--><span title="errorrik@gmail.com">errorrik</span></a>
+```
+
+Commandline Interface
+----
+
+san-ssr can also be used as a CLI tool. Install locally for npm scripts usage, or install globally:
+
+```bash
+npm install -g san-ssr
+```
+
+Compile the `NameComponent` component class mentioned above:
+
+```bash
+san-ssr ./name.comp.ts > name.ssr.js
+```
+
+For more tutorials and API regarding to SSR, please refer to:
+
+* README：https://github.com/baidu/san-ssr
+* TypeDoc: https://baidu.github.com/san-ssr
+
+[san-ssr]: https://github.com/baidu/san-ssr
+
