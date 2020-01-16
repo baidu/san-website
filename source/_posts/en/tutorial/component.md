@@ -114,7 +114,7 @@ var ListComponent = san.defineComponent({
 
 The following diagram details the lifecycle of the component
 
-<img src="../../img/life-cycle.png" width="540">
+<img src="../../../img/life-cycle.png" width="540">
 
 
 View
