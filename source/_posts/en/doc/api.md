@@ -104,7 +104,7 @@ The life cycle represents the survival process of the component, and the hook fu
 
 `explanation`:
 
-The component view template is compiled. The **compiled** method on the component will be called. 
+The component view template is compiled. The **compiled** method on the component will be called.
 
 ### inited
 
@@ -143,7 +143,7 @@ The component is removed from the DOM and components had destroyed. The **dispos
 
 `explanation`:
 
-The component completes a refresh due to data changes. The **updated** method on the component will be called. 
+The component completes a refresh due to data changes. The **updated** method on the component will be called.
 
 define Component
 -------
@@ -176,7 +176,7 @@ Declare which filters can be used in a component view template. see [filter](../
 
 ```javascript
 san.defineComponent({
-    template: '<a>{{createTime | dateFormat('yyyy-MM-dd')}}</a>',
+    template: '<a>{{createTime | dateFormat("yyyy-MM-dd")}}</a>',
 
     filters: {
         dateFormat: function (value, format) {
@@ -189,7 +189,7 @@ san.defineComponent({
 
 `Warning`:
 
-The filter method can access the component's data through `this.data` at runtime, however doing so can result in an implicit dependency on the data, causing the view to not update as the data changes. Therefore, the filter method should be a pure function with no side effects. 
+The filter method can access the component's data through `this.data` at runtime, however doing so can result in an implicit dependency on the data, causing the view to not update as the data changes. Therefore, the filter method should be a pure function with no side effects.
 
 ```javascript
 var Bad = san.defineComponent({
@@ -275,7 +275,7 @@ san.defineComponent({
 
 `explanation`:
 
-declare how to handle subcomponent dispatch messages. see [message](../../tutorial/component/#message) for more details. 
+declare how to handle subcomponent dispatch messages. see [message](../../tutorial/component/#message) for more details.
 
 `type`: Object
 
@@ -346,7 +346,7 @@ var MyApp = san.defineComponent({
 
 `explanation`:
 
-Define the separator for interpolation when parsing a component template. An array of 2 items with starting and ending delimiters. 
+Define the separator for interpolation when parsing a component template. An array of 2 items with starting and ending delimiters.
 
 default:
 
@@ -399,7 +399,7 @@ Component Method
 
 `explanation`:
 
-Fire a custom event. San provides custom event functionality for components. Component developers can fire events through this method. Events can be bound in the view template by **on-**, or be listened to by the **on** method of the component instance. see [customized event](../../tutorial/event/#customized-event) for more details. 
+Fire a custom event. San provides custom event functionality for components. Component developers can fire events through this method. Events can be bound in the view template by **on-**, or be listened to by the **on** method of the component instance. see [customized event](../../tutorial/event/#customized-event) for more details.
 
 `usage`:
 
@@ -459,7 +459,7 @@ Dispatch a message. The message will be passed up in the component tree util it 
 
 ```javascript
 var SelectItem = san.defineComponent({
-    template: 
+    template:
         '<li on-click="select" class="{{value === selectValue ? \'selected\' : \'\'">'
         + '<slot></slot>'
         + '</li>',
@@ -539,7 +539,7 @@ var MyComponent = san.defineComponent({
 
 `explanation`:
 
-Watch component's data changes. Usually we use bindings to automatically update the corresponding data of the parent component when the child component data changes. **watch** is generally only used in components that are dynamically created using JavaScript. see [dynamic child components](../../tutorial/component/#dynamic-child-components) for more details. 
+Watch component's data changes. Usually we use bindings to automatically update the corresponding data of the parent component when the child component data changes. **watch** is generally only used in components that are dynamically created using JavaScript. see [dynamic child components](../../tutorial/component/#dynamic-child-components) for more details.
 
 
 ```javascript
@@ -571,7 +571,7 @@ san.defineComponent({
 
 `explanation`:
 
-Get the subcomponents that define **s-ref**. see [component level](../../tutorial/component/#component-level) for more details. 
+Get the subcomponents that define **s-ref**. see [component level](../../tutorial/component/#component-level) for more details.
 
 `usage`:
 
@@ -613,7 +613,7 @@ var AddForm = san.defineComponent({
 
 `explanation`:
 
-Get the node information of the component slot. The return value is an array, and the items in the array are node objects and usually only one. And there will be more that one node objects when if or for is applied in the slot declaration. The node objects include `isScoped`, `isInserted`, and `children` property. see [slot](../../tutorial/component/#slot) for more details. 
+Get the node information of the component slot. The return value is an array, and the items in the array are node objects and usually only one. And there will be more that one node objects when if or for is applied in the slot declaration. The node objects include `isScoped`, `isInserted`, and `children` property. see [slot](../../tutorial/component/#slot) for more details.
 
 `attention`: do not make any modifications to the returned slot object. If you want to manipulate the view changes, please manipulate the data.
 
