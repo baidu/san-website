@@ -67,6 +67,112 @@ var myComponent = new MyComponent({
 */
 ```
 
+### owner
+
+
+`版本`：>= 3.7.0
+
+`类型`： Object
+
+`解释`：
+
+指定组件所属的 owner 组件。指定 owner 组件后：
+
+- 组件无需手工 dispose，owner dispose 时会自动释放
+- 组件及其子组件 dispatch 的消息，owner 组件可以接收
+
+更多说明请参考[owner与parent](../../tutorial/component/#owner-%E4%B8%8E-parent)文档。
+
+
+`注意`：
+
+指定 owner 后，不允许将组件 push 到 owner 的 children 中
+
+
+`用法`：
+
+```javascript
+san.defineComponent({
+    mainClick: function () {
+        if (!this.layer) {
+            // 为动态创建的子组件指定 owner
+            this.layer = new Layer({
+                owner: this
+            });
+
+            this.layer.attach(document.body);
+        }
+
+        this.layer.show();
+    }
+});
+```
+
+
+### source
+
+`版本`：>= 3.7.0
+
+`类型`： string|Object
+
+`解释`：
+
+通过 HTML 格式的一个标签，声明组件与 owner 之间的数据绑定和事件。指定 source 同时需要指定 owner。更详细的用法请参考 [动态子组件](../../tutorial/component/#动态子组件) 文档，更多声明格式细节请参考 [模板](../../tutorial/template/) 与 [事件](../../tutorial/event/) 文档。
+
+`提醒`：
+
+source 串的标签名称通常没什么用，除了以下情况：组件本身根节点为 template 时，以 source 的标签名称为准。
+
+
+`用法`：
+
+```javascript
+san.defineComponent({
+    mainClick: function () {
+        if (!this.calendar) {
+            this.calendar = new Calendar({
+                owner: this,
+                source: '<x-cal value="{{birthday}}' on-change="birthdayChange($event)"/>'
+            });
+
+            this.calendar.attach(document.body);
+        }
+    },
+
+    birthdayChange: function (value) {
+        this.data.set('birthday', value);
+    }
+});
+```
+
+
+### transition
+
+`版本`：>= 3.6.0
+
+`类型`： Object
+
+`解释`：
+
+组件的过渡动画控制器。可参考 [动画控制器](../../tutorial/transition/#动画控制器) 和 [动画控制器 Creator](../../tutorial/transition/#动画控制器-Creator) 文档。
+
+
+
+`用法`：
+
+```javascript
+var MyComponent = san.defineComponent({
+    template: '<span>transition</span>'
+});
+
+var myComponent = new MyComponent({
+    transition: {
+        enter: function (el, done) { /* 进入时的过渡动画 */ },
+        leave: function (el, done) { /* 离开时的过渡动画 */ },
+    }
+});
+```
+
 
 生命周期钩子
 -------
@@ -164,6 +270,47 @@ san.defineComponent({
 });
 ```
 
+`警告`：
+
+filter 方法在运行时通过 this.data 可以触及组件的数据。但是，这么干会造成对数据的隐式依赖，导致数据变化时，视图不会随着更新。所以，filter 方法应该是无副作用的 pure function。
+
+```javascript
+var Bad = san.defineComponent({
+    template: '<u>{{num | enhance}}</u>',
+
+    filters: {
+        enhance: function (n) {
+            return n * this.data.get('times');
+        }
+    },
+
+    initData: function () {
+        return {
+            num: 2,
+            times: 3
+        };
+    }
+});
+
+var Good = san.defineComponent({
+    template: '<u>{{num | enhance(times)}}</u>',
+
+    filters: {
+        enhance: function (n, times) {
+            return n * times;
+        }
+    },
+
+    initData: function () {
+        return {
+            num: 2,
+            times: 3
+        };
+    }
+});
+```
+
+
 ### components
 
 `解释`：
@@ -255,6 +402,94 @@ var MyApp = san.defineComponent({
 ```
 
 
+### trimWhitespace
+
+定义组件模板解析时对空白字符的 trim 模式。
+
+- 默认为 **none**，不做任何事情
+- **blank** 时将清除空白文本节点
+- **all** 时将清除所有文本节点的前后空白字符
+
+`版本`：>= 3.2.5
+
+`类型`： string
+
+`用法`：
+
+```javascript
+var MyApp = san.defineComponent({
+    trimWhitespace: 'blank'
+
+    // ,
+    // ......
+});
+```
+
+### delimiters
+
+`解释`：
+
+定义组件模板解析时插值的分隔符。值为2个项的数组，分别为起始分隔符和结束分隔符。默认为:
+
+```js
+['{{', '}}']
+```
+
+`版本`：>= 3.5.0
+
+`类型`： Array
+
+`用法`：
+
+```javascript
+var MyComponent = san.defineComponent({
+    delimiters: ['{%', '%}'],
+    template: '<a><span title="Good {%name%}">Hello {%name%}</span></a>'
+});
+```
+
+### transition
+
+`解释`：
+
+定义组件根节点的过渡动画控制器。已废弃。
+
+
+`版本`：>= 3.3.0, < 3.6.0
+
+`类型`： Object
+
+`用法`：
+
+```javascript
+var MyComponent = san.defineComponent({
+    template: '<span>transition</span>',
+    transition: {
+        enter: function (el) { /* 根节点进入时的过渡动画 */ },
+        leave: function (el, done) { /* 根节点离开时的过渡动画 */ },
+    }
+});
+```
+
+### updateMode
+
+`解释`：
+
+可控制视图刷新的逻辑，当前仅支持 `optimized`。当取值为 `optimized` 时，对 s-for 指令的视图更新会根据不同浏览器环境进行优化，更新过程对 DOM 的操作和数据变化可能无法对应。
+
+`版本`：>= 3.7.4
+
+`类型`： string
+
+`用法`：
+
+```javascript
+var MyComponent = san.defineComponent({
+    updateMode: 'optimized',
+    template: '<ul><li s-for="item in list">{{item}}</li></ul>'
+});
+```
+
 
 组件方法
 -------
@@ -329,7 +564,7 @@ var MyComponent = san.defineComponent({
 
 ```javascript
 var SelectItem = san.defineComponent({
-    template: 
+    template:
         '<li on-click="select" class="{{value === selectValue ? \'selected\' : \'\'">'
         + '<slot></slot>'
         + '</li>',
@@ -441,7 +676,9 @@ san.defineComponent({
 
 `解释`：
 
-获取定义了 **s-ref** 的子组件。详细请参考[组件层级](../../tutorial/component/#组件层级)文档。
+获取定义了 **s-ref** 的子组件或 HTMLElement。详细请参考[组件层级](../../tutorial/component/#组件层级)文档。
+
+`注意`：组件根元素即使定义了 **s-ref**，也无法通过 **ref** 方法获得。获取组件根元素请使用 **this.el**。
 
 `用法`：
 
@@ -456,13 +693,16 @@ var AddForm = san.defineComponent({
     },
 
     submit: function () {
-        this.ref('endDate')
-        this.ref('endHour')
+        this.ref('endDate');
+        this.ref('endHour');
+
+        this.ref('rootNode'); // undefined
+        this.el;  //根元素 <div class="form"> ... </div>
     }
 });
 
 /* template:
-<div class="form">
+<div class="form" s-ref="rootNode">
     <div>预期完成时间：
         <ui-calendar bindx-value="endTimeDate" s-ref="endDate"></ui-calendar>
         <ui-timepicker bindx-value="endTimeHour" s-ref="endHour"></ui-timepicker>
@@ -529,6 +769,33 @@ var myComponent = new MyComponent({
 });
 ```
 
+### nextTick
 
+`解释`：
 
+San 的视图更新是异步的。组件数据变更后，将在下一个时钟周期更新视图。如果你修改了某些数据，想要在 DOM 更新后做某些事情，则需要使用 `nextTick` 方法。
 
+`用法`：
+
+```javascript
+const Component = san.defineComponent({
+    template: `
+        <div>
+            <div s-ref="name">{{name}}</div>
+            <button on-click="clicker">change name</button>
+        </div>
+    `,
+
+    initData() {
+        return {name: 'erik'};
+    },
+
+    clicker() {
+        this.data.set('name', 'leeight');
+        console.log(this.ref('name').innerHTML); // erik
+        this.nextTick(() => {
+            console.log(this.ref('name').innerHTML); // leeight
+        });
+    }
+});
+```

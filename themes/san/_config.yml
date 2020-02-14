@@ -4,6 +4,11 @@ menu:
   Archives: /archives
 rss: /atom.xml
 
+# i18n
+language:
+  - zh-cn
+  - en
+
 # Content
 excerpt_link: Read More
 fancybox: true

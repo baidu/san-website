@@ -5,12 +5,12 @@ categories:
 ---
 
 #### 引言
-首先确保已经理解了[san-store](https://github.com/ecomfe/san-store) 中是否需要状态管理的内容以及相关概念，下面开始。
+首先确保已经理解了[san-store](https://github.com/baidu/san-store) 中是否需要状态管理的内容以及相关概念，下面开始。
 
 本项目代码在 [https://github.com/jiangjiu/san-store-spa](https://github.com/jiangjiu/san-store-spa) 可以查看。
 
 #### 搭建环境
-上一篇文档 [如何使用 san-router 建立一个单页应用的后台系统?](https://ecomfe.github.io/san/practice/san-router-spa/) 已经搭建了一个san+san-router的单页后台应用，我们在它的基础上加入san-store来管理应用状态。
+上一篇文档 [如何使用 san-router 建立一个单页应用的后台系统?](https://baidu.github.io/san/practice/san-router-spa/) 已经搭建了一个san+san-router的单页后台应用，我们在它的基础上加入san-store来管理应用状态。
 
 ```js
     // 只需安装san-store和san-update

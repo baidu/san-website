@@ -10,7 +10,7 @@ categories:
 
 ### defineComponent
 
-`描述`： defineComponent({Object}propertiesAndMethods)
+`描述`： {Function} defineComponent({Object}propertiesAndMethods)
 
 `解释`：
 
@@ -30,6 +30,56 @@ var MyApp = san.defineComponent({
 });
 ```
 
+### createComponentLoader
+
+`版本`：>= 3.7.0
+
+`描述`： {Object} createComponentLoader({Object|Function}options)
+
+`解释`：
+
+**方法** 。创建组件 Loader，主要应用于子组件的后加载与异步渲染，详细请参考 [异步组件](../../tutorial/component/#异步组件) 文档。 options 参数为 Object 类型时，支持如下成员：
+
+- {function():Promise}options.load : load 方法。该方法需要返回一个 Promise，load 完成时 reslove，由框架自动调用
+- {Function=}options.placeholder : loading 过程中渲染的占位组件
+- {Function=}options.fallback : load 失败时渲染的组件
+
+options 参数为 Function时，代表 load 方法。不需要指定 placeholder 和 fallback 时，直接传入 load 方法会更方便。
+
+
+`用法`：
+
+```javascript
+var InputComponent = san.defineComponent({
+    template: '<input type="text" value="{{value}}"/>'
+});
+
+var MyApp = san.defineComponent({
+    components: {
+        // component loader 示例，1秒后渲染 x-input
+        'x-input': san.createComponentLoader(function () {
+            return new Promise(function (resolve) {
+                
+                setTimeout(function () {
+                    resolve(InputComponent);
+                }, 1000);
+            });
+        })
+    },
+
+    template: '<div><x-input value="{{name}}"/></div>'
+});
+
+var myApp = new MyApp({
+    data: {
+        name: 'San'
+    }
+});
+myApp.attach(document.body);
+```
+
+
+
 
 ### compileComponent
 
@@ -39,7 +89,7 @@ var MyApp = san.defineComponent({
 
 `解释`：
 
-**方法** 。编译组件，组件的编译过程主要是解析 template 成 [ANode](https://github.com/ecomfe/san/blob/master/doc/anode.md)，并对 components 中的 plain object 执行 defineComponent。
+**方法** 。编译组件，组件的编译过程主要是解析 template 成 [ANode](https://github.com/baidu/san/blob/master/doc/anode.md)，并对 components 中的 plain object 执行 defineComponent。
 
 组件会在其第一个实例初始化时自动编译。我们通常不会使用此方法编译组件，除非你有特殊的需求希望组件的编译过程提前。
 
@@ -165,7 +215,7 @@ fs.writeFileSync('your-module.js', 'exports = module.exports = ' + renderSource,
 
 `解释`：
 
-**属性** 。表达式类型枚举，有助于帮你理解和使用 San 的模板编译结果。详细请参考[ANode](https://github.com/ecomfe/san/blob/master/doc/anode.md)文档。
+**属性** 。表达式类型枚举，有助于帮你理解和使用 San 的模板编译结果。详细请参考[ANode](https://github.com/baidu/san/blob/master/doc/anode.md)文档。
 
 
 ### parseExpr
@@ -176,7 +226,7 @@ fs.writeFileSync('your-module.js', 'exports = module.exports = ' + renderSource,
 
 `解释`：
 
-**方法** 。将源字符串解析成表达式对象。详细请参考[ANode](https://github.com/ecomfe/san/blob/master/doc/anode.md)文档。
+**方法** 。将源字符串解析成表达式对象。详细请参考[ANode](https://github.com/baidu/san/blob/master/doc/anode.md)文档。
 
 `用法`：
 
@@ -204,7 +254,7 @@ expr = {
 
 `解释`：
 
-**方法** 。将源字符串解析成 ANode 对象。如果你想使用 San 的模板形式，但是自己开发视图渲染机制，可以使用该方法解析模板。详细请参考[ANode](https://github.com/ecomfe/san/blob/master/doc/anode.md#user-content-%E6%A8%A1%E6%9D%BF%E8%A7%A3%E6%9E%90%E7%BB%93%E6%9E%9C)文档。
+**方法** 。将源字符串解析成 ANode 对象。如果你想使用 San 的模板形式，但是自己开发视图渲染机制，可以使用该方法解析模板。详细请参考[ANode](https://github.com/baidu/san/blob/master/doc/anode.md#user-content-%E6%A8%A1%E6%9D%BF%E8%A7%A3%E6%9E%90%E7%BB%93%E6%9E%9C)文档。
 
 `用法`：
 
@@ -215,7 +265,7 @@ aNode = {
     "directives": [],
     "props": [],
     "events": [],
-    "childs": [
+    "children": [
         {
             "isText": true,
             "text": "Hello {{name}}!",
@@ -249,6 +299,66 @@ aNode = {
 ```
 
 
+数据
+----
+
+San 开放了组件中使用的数据容器类与表达式计算函数，开发者可以用来管理一些与组件无关的数据，比如应用状态等。
+
+
+### Data
+
+`版本`：>= 3.5.6
+
+`类型`： Class Function
+
+`解释`：
+
+**数据容器类** ，包含 get、set、splice、push、pop、unshift、shift、merge、apply 数据方法，详细请参考[数据操作](../../tutorial/data-method/)文档。
+
+通过方法变更数据时，data 对象将 fire change 事件。通过 listen 和 unlisten 方法可以监听或取消监听 change 事件。
+
+```javascript
+var data = new san.Data({
+    num1: 1,
+    num2: 2
+});
+
+data.listen(function (change) {
+    console.log(change.value);
+});
+
+data.set('num2', 10);
+// console 10
+```
+
+
+### evalExpr
+
+`版本`：>= 3.5.6
+
+`描述`： {*} evalExpr({Object}expr, {Data}data, {Component=}owner)
+
+
+`解释`：
+
+**方法** ，计算表达式的值。 
+
+- `expr` 可以通过 [parseExpr](#parseExpr) 方法得到。支持的表达式类型可参考[表达式](../../tutorial/template/#表达式)文档
+- `data` 可以是组件的数据对象，也可以是自己通过 new [Data](#Data) 得到的数据对象
+- `owner` 仅用于表达式中 filter 的执行，表达式中无自定义 filter 时无需此参数
+
+
+```javascript
+var data = new san.Data({
+    num1: 1,
+    num2: 2
+});
+
+san.evalExpr(san.parseExpr('num1 + num2'), data)
+// console 3
+```
+
+
 其他
 ----
 
@@ -261,7 +371,7 @@ aNode = {
 **属性** 。是否开启调试功能。当同时满足以下两个条件时，可以在 chrome 中使用 **devtool** 进行调试。
 
 - 主模块 **debug** 属性设为 **true**
-- 当前页面环境中的 San 是带有 **devtool** 功能的版本。[查看San的打包发布版本](https://github.com/ecomfe/san/tree/master/dist)
+- 当前页面环境中的 San 是带有 **devtool** 功能的版本。[查看San的打包发布版本](https://github.com/baidu/san/tree/master/dist)
 
 
 ### version

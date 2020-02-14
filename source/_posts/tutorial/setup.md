@@ -12,7 +12,7 @@ categories:
 
 ### 直接下载
 
-从 [下载页面](https://github.com/ecomfe/san/releases) 可以获得最新以及过往版本的下载地址。
+从 [下载页面](https://github.com/baidu/san/releases) 可以获得最新以及过往版本的下载地址。
 
 ### CDN
 
@@ -79,7 +79,7 @@ require.config({
 });
 ```
 
-在[这个例子](https://github.com/ecomfe/san/tree/master/example/todos-amd)里，我们可以看到一个通过 AMD 管理模块的项目是怎么引用 San 的。
+在[这个例子](https://github.com/baidu/san/tree/master/example/todos-amd)里，我们可以看到一个通过 AMD 管理模块的项目是怎么引用 San 的。
 
 ### ESNext
 
@@ -100,8 +100,10 @@ import san from 'san';
 
 <script>
     export default {
-        data: {
-            msg: 'world'
+        initData () {
+            return {
+                msg: 'world'
+            };
         }
     }
 </script>
@@ -115,7 +117,7 @@ import san from 'san';
 
 在 `webpack` 中可以使用 [san-loader](https://github.com/ecomfe/san-loader)  来加载 `.san` 文件
 
-在 [这个例子](https://github.com/ecomfe/san/tree/master/example/todos-esnext) 里，
+在 [这个例子](https://github.com/baidu/san/tree/master/example/todos-esnext) 里，
 我们可以看到如何使用 `San component` 构建一个应用
 
 开发版本 VS 生产版本

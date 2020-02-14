@@ -13,7 +13,7 @@ body{
 
 .overlay{
    background:url(..//img/lowpoly.jpg);
-   background-size: cover; 
+   background-size: cover;
   -webkit-animation:150s scroll infinite linear;
   -moz-animation:150s scroll infinite linear;
   -o-animation:150s scroll infinite linear;
@@ -21,7 +21,7 @@ body{
   animation:150s scroll infinite linear;
   width:100%;
  height:460px;
- padding-top:25px; 
+ padding-top:25px;
  overflow: hidden;
  text-align: center;
  position: relative;
@@ -62,7 +62,7 @@ body{
   top: 30px;
   right: 10px;
   border:0;
-  width: 134px;
+  width: 150px;
   height: 40px;
 }
 
@@ -211,24 +211,41 @@ body{
   max-width: 1170px;
   margin: 0 auto;
   height: 60px;
+  position: relative;
+  text-align: center;
 }
-.nav-logo{
+.nav-logo {
+  position: absolute;
+  top: 15px;
+  left: 0;
+}
+.nav-logo img{
   width: 34px;
-  margin-top: 15px;
 }
-.navbar-default .navbar-nav>li>a{
-  font-size: 14px;
+.navbar-default .nav-a1,
+.navbar-default .nav-a2,
+.navbar-default .nav-a3 {
   color: rgba(48,92,113,.8);
+  padding:0 22px;
+  line-height:60px;
   font-family: 'brandon-grotesque','Work Sans', sans-serif;
   text-transform:uppercase;
   transition-timing-function: ease;
     transition-duration: .2s;
-    transition-property: color; 
+    transition-property: color;
 }
-.navbar-default .navbar-nav>li>a:hover{
+.navbar-default .nav-a1:hover,
+.navbar-default .nav-a2:hover,
+.navbar-default .nav-a3:hover{
   color: #2EA2F8;
+  text-decoration: none;
 }
-
+.nav-lang {
+  position: absolute;
+  right: 20px;
+  top: 0;
+  line-height: 60px;
+}
 .nav-a{
 }
 
@@ -265,7 +282,10 @@ body{
     width: 33%;
     height: 130px;
     float: left;
-    padding: 0 50px 0 50px;
+    padding: 0 50px;
+}
+.feature-en .feature-item {
+  height: 170px;
 }
 .feature-item>embed{
   margin-bottom: -9px;
@@ -295,9 +315,6 @@ body{
 /*facilities*/
 
 
-.resource,.facility{
-  height: 800px;
-}
 
 .resource-title,.facility-title{
 text-align: center;
@@ -327,7 +344,7 @@ text-align: center;
 .resource-row,.facility-row{
   display: flex;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 60px auto;
 }
 .resource-block,.facility-block{
   flex-basis: 25%;
@@ -354,7 +371,7 @@ text-decoration: none;
 
 .resource-item:hover,.facility-item:hover{
   text-decoration: none;
-  box-shadow: 
+  box-shadow:
 }
 .resource-item-top,.facility-item-top{
   height: 200px;
@@ -444,17 +461,17 @@ dl {
 footer{
   border-top: 1px solid #F1F1F1;
   background: #F2F4F6;
-  position: relative; 
+  position: relative;
   display: block;
   overflow: hidden;
 }
 .efe-products{
-  padding-top:40px; 
+  padding-top:40px;
   margin: 0 auto;
   width:720px;
-}  
+}
 
-  
+
 footer dt,footer dd {
   float: left;
   line-height: 24px;
@@ -463,7 +480,7 @@ footer dt,footer dd {
   color: #999;
   margin-left: 0;
 }
-  
+
 footer dt{
   clear: left;
   width: 70px;
@@ -472,20 +489,47 @@ footer dt{
 .copyright {
   clear: both;
   text-align: center;
-  padding: 18px 0 0 0;
-}  
-  
+  padding: 18px 0;
+}
+
+.banner-md {
+  max-width: 1200px;
+  margin: 100px auto;
+  padding: 0 20px;
+}
+
+
 /*响应式的部分*/
 
-@media only screen and  (max-width: 768px){
+@media only screen and (max-width: 768px) {
   .overlay{
     animation: none;
     padding-top: 5px;
     height: 100%;
   }
-  .navbar-container,.home-iframe{
-    display: none;
+  .navbar-container{
+    text-align: left;
   }
+
+  .navbar-default .nav-a1 {
+    padding: 0 0 0 54px;
+  }
+  .navbar-default .nav-a2,
+  .navbar-default .nav-a3 {
+    padding: 0 0 0 9px;
+  }
+
+  .nav-logo {
+    left: 10px;
+  }
+
+  .home-iframe{
+    position: static;
+    height: 33px;
+    transform: scale(0.75);
+    margin: 20px auto 0 auto;
+  }
+
   .overlay>h1{
     font-size: 45px;
   }
@@ -550,7 +594,9 @@ footer dt{
     width: 20%;
   }
 
-
+  .banner-md {
+    margin: 0 auto 20px;
+  }
 
 }
 

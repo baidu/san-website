@@ -1,19 +1,116 @@
-categories: Categories
-search: Search
-tags: Tags
-tagcloud: Tag Cloud
-tweets: Tweets
-prev: Prev
-next: Next
-comment: Comments
-archive_a: Archives
-archive_b: "Archives: %s"
-page: Page %d
-recent_posts: Recent Posts
-newer: Newer
-older: Older
-share: Share
-powered_by: Powered by
-rss_feed: RSS Feed
-category: Category
-tag: Tag
+index:
+  jumbotron:
+    get_started: 快速开始
+    description: 一个快速、轻量、灵活的 JavaScript 组件框架
+  nav:
+    features: 特性
+    resources: 资料
+    facilities: 周边
+  headernav:
+    tutorial: 教程
+    practice: 指南
+    example: 示例
+    api: API
+    home: HOME
+  feature:
+    tpl: HTML模版
+    tpl_description: 声明式的模板，在编写视图时就像是在写一个普通的页面，更符合 HTML 开发人员的习惯。
+    data_driven: 数据驱动
+    data_driven_description: 修改数据，视图引擎会根据绑定关系自动刷新视图，从此摆脱手工调用 DOM API 的繁琐与可能的遗漏。
+    component: 组件化
+    component_description: 组件是数据、逻辑与视图的聚合体。通过组件，我们封装独立的功能区块，小到输入组合，大到一个页面。
+    view: 高性能视图
+    view_description: 通过修改数据的方法，视图引擎能够直接刷新需要变更的视图区域，无需进行任何检测，性能更高。
+    reverse: 组件反解
+    reverse_description: 为首屏时间优化，服务端通常直接输出HTML。我们能从现有的元素中反向解析出组件，并构建绑定关系。
+    size: 体积小巧
+    size_description: 小于15k (gzipped) 的体积，无需担心对页面下载带来负担。体积强迫症患者的福音。
+    compatibility: 良好的兼容性
+    compatibility_description: 通过方法修改数据的另一好处是，可以获得更好的浏览器兼容性。毕竟有时我们产品的受众用户有点死板。
+    module: 模块管理自由
+    module_description: 项目中可以任意选择 ESNext Module 或 AMD 管理模块。当然，如果你想要用全局变量也是支持的。
+    use: 引用方便
+    use_description: 支持多种引用方式：NPM、GitHub、下载、HTTP 与 HTTPS CDN，让开发和线上引用更便利。
+  resource:
+    description: 这里有一些教程、文档或示例，可以帮助你学习和了解 San
+    tutorial_description: 教程是入门的捷径，请从这里开始了解San。
+    practice_description: 我们正在编写指南手册，以指导各种应用场景下怎么使用San。
+    example_description: 这里展示了一些简单例子，以及在实际项目如何使用San。
+    api: 组件 API
+    api_description: 当你想不起来组件的接口时，请查阅这里。
+  facility:
+    description: 一些工具和库能够帮助你更快、更便捷地搭建自己的应用
+    router_description: 支持hash和html5模式的router，单页或同构的Web应用通常需要它。
+    store_description: 应用状态管理套件，其理念是类似flux的单向流。
+    update_description: Immutable的对象更新库，和san-store配合进行应用状态数据更新。
+    devtool_description: 基于Chrome扩展的开发者工具。
+article:
+  edit: 编辑本文
+  gotop: 回到顶部
+recommend:
+  tutorial: 教程
+  tutorial_setup: 安装
+  tutorial_background: 背景
+  tutorial_start: 开始
+  tutorial_template: 模板
+  tutorial_data_method: 数据操作
+  tutorial_data_checking: 数据校验
+  tutorial_style: 样式
+  tutorial_if: 条件
+  tutorial_for: 循环
+  tutorial_event: 事件处理
+  tutorial_form: 表单
+  tutorial_slot: 插槽
+  tutorial_transition: 过渡
+  tutorial_component: 组件
+  tutorial_reverse: 组件反解
+  tutorial_ssr: 服务端渲染
+  more: 了解更多
+  more_component_api: 组件 API
+  more_main_api: 主模块 API
+  more_dist_files: 发布版本说明
+  more_changelog: 版本更新日志
+  facilities: 周边
+  example: 示例
+  example_start: 一些小示例
+  example_single_way_flow: 单向流
+example:
+  start: 小示例
+  start_description: 一些小的示例，主要是展示 San 一些小特性的用法。
+  todos_description: 一个 Todos 应用的例子，包含列表、列表内操作、表单提交、浮出层、交互组件等应用开发中常见的场景。
+  todos_esnext_description: 上面 Todos 应用的 ESNext 版本。其使用了webpack + babel，更符合流行的应用开发习惯。
+  single_way_flow: 单向流
+  todos_store_description: 上面 Todos 应用的单向流版本。其使用了 san-store。
+  realworld: RealWorld 应用
+  realworld_description: 一个 RealWorld 应用例子，包含 CRUD、权限、路由、列表等应用开发中常见的场景。
+  online: 在线用法小示例
+practice:
+  data:
+    title: 数据
+    0: 什么东西可以保存在 data 里？
+    1: 什么东西不要保存在 data 里？
+    2: data bind 时的 auto camel
+  tpl:
+    title: 视图模板
+    0: 如何遍历一个对象？
+    1: 数组深层更新如何触发视图更新？
+    2: 如何实现元素的显示/隐藏？
+  msg:
+    title: 组件间通信
+    0: 父组件如何更新子组件？
+    1: 子组件如何通知父组件？
+    2: 子组件与更高层的组件如何通信？
+    3: 动态子组件如何传递消息给父组件?
+  component:
+    title: 组件管理
+    0: 我们可以操作 DOM 吗？
+    1: 如何处理绝对定位组件的 DOM？
+  route:
+    title: 路由管理
+    0: 如何使用 san-router 建立一个单页应用的后台系统？
+  state:
+    title: 应用状态管理
+    0: 如何使用 san-store 实现后台系统的状态管理？
+  faq:
+    0: Q&A集锦
+    1: IE兼容性问题以及解决方案

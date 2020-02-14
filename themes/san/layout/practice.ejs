@@ -1,106 +1,69 @@
 <style>
-#practice-search {
-    width: 600px;
-    height: 30px;
-    padding: .5rem;
-    font-size: 1.4rem;
-    display: block;
-    margin: 2rem auto;
-}
-
-.practice dl {
-    width: 80rem;
-    margin: 2rem auto;
-}
-
 .practice dt {
-    padding: 2rem 0 1rem;
-    font-size: 1.8rem;
-    color: #295892;
-    border-bottom: 1px solid #d8d8d8;
+    font-size: 1.7rem;
+    margin-top: 3.5rem;
+    margin-bottom: 1.25rem;
+    font-weight:  500;
+    color: #2da2f8;
+    margin-left: 90px;
 }
 
 .practice dd {
-    font-size: 1.4rem;
-    line-height: 2rem;
-    color: #295892;
-    border-bottom: 1px solid #d8d8d8;
-    border-left: 1px solid #d8d8d8;
-    border-right: 1px solid #d8d8d8;
-    background: #f6f6f6;
-    padding: .2rem .5rem;
+    margin-left: 90px;
 }
-
-.practice dd:hover {
-    background: #fff;
-}
-
-.practice a:link,
-.practice a:visited {
-    color: #5a7d96;
+.practice dd a {
+    color: #818688;
     text-decoration: none;
+    line-height: 2.2em;
+    font-weight: 300;
+    font-size:1.05em;
+    transition-timing-function: ease;
+    transition-duration: .1s;
+    transition-property: color;
+    cursor: pointer;
+}
+.practice dd a:visited {
+    color:#818688;
+    text-decoration: none;
+}
+.practice dd a:hover{
+    color: #2EA2F8;
 }
 </style>
 
 <main class="practice">
-<input type="text" id="practice-search">
 <dl id="practice-list">
-    <dt>数据</dt>
-    <dd><a href="<%- url_for('practice/data-valid/') %>">什么东西可以保存在 data 里？</a></dd>
-    <dd><a href="<%- url_for('practice/data-invalid/') %>">什么东西不要保存在 data 里？</a></dd>
-    <dd><a href="<%- url_for('practice/auto-camel/') %>">data bind 时的 auto camel</a></dd>
+    <dt><%= __('practice.data.title') %></dt>
+    <dd><a href="<%- url_for_lang('practice/data-valid/') %>"><%= __('practice.data.0') %></a></dd>
+    <dd><a href="<%- url_for_lang('practice/data-invalid/') %>"><%= __('practice.data.1') %></a></dd>
+    <dd><a href="<%- url_for_lang('practice/auto-camel/') %>"><%= __('practice.data.2') %></a></dd>
 
-    <dt>视图模板</dt>
-    <dd><a href="<%- url_for('practice/traverse-object/') %>">如何遍历一个对象？</a></dd>
-    <dd><a href="<%- url_for('practice/array-deep-updates-trigger-view/') %>">数组深层更新如何触发视图更新？</a></dd>
-    <dd><a href="<%- url_for('practice/how-to-show-or-hide-an-element') %>">如何实现元素的显示/隐藏？</a></dd>
+    <dt><%= __('practice.tpl.title') %></dt>
+    <dd><a href="<%- url_for_lang('practice/traverse-object/') %>"><%= __('practice.tpl.0') %></a></dd>
+    <dd><a href="<%- url_for_lang('practice/array-deep-updates-trigger-view/') %>"><%= __('practice.tpl.1') %></a></dd>
+    <dd><a href="<%- url_for_lang('practice/how-to-show-or-hide-an-element') %>"><%= __('practice.tpl.2') %></a></dd>
 
-    <dt>组件间通信</dt>
-    <dd><a href="<%- url_for('practice/parent-to-child/') %>">父组件如何更新子组件？</a></dd>
-    <dd><a href="<%- url_for('practice/child-to-parent/') %>">子组件如何通知父组件？</a></dd>
-    <dd><a href="<%- url_for('practice/child-to-grandparent/') %>">子组件与更高层的组件如何通信？</a></dd>
-    <dd><a href="<%- url_for('practice/dynamic-parent-child/') %>">动态子组件如何传递消息给父组件?</a></dd>
+    <dt><%= __('practice.msg.title') %></dt>
+    <dd><a href="<%- url_for_lang('practice/parent-to-child/') %>"><%= __('practice.msg.0') %></a></dd>
+    <dd><a href="<%- url_for_lang('practice/child-to-parent/') %>"><%= __('practice.msg.1') %></a></dd>
+    <dd><a href="<%- url_for_lang('practice/child-to-grandparent/') %>"><%= __('practice.msg.2') %></a></dd>
+    <dd><a href="<%- url_for_lang('practice/dynamic-parent-child/') %>"><%= __('practice.msg.3') %></a></dd>
 
-    <dt>组件管理</dt>
-    <dd><a href="<%- url_for('practice/can-we-use-dom/') %>">我们可以操作 DOM 吗？</a></dd>
-    <!-- <dd><a href="<%- url_for('practice/position-absolute-dom/') %>">如何处理绝对定位组件的 DOM？</a></dd> -->
+    <dt><%= __('practice.component.title') %></dt>
+    <dd><a href="<%- url_for_lang('practice/can-we-use-dom/') %>"><%= __('practice.component.0') %></a></dd>
+    <!-- <dd><a href="<%- url_for_lang('practice/position-absolute-dom/') %>"><%= __('practice.component.1') %></a></dd> -->
 
-    <dt>路由管理</dt>
-    <dd><a href="<%- url_for('practice/san-router-spa/') %>">如何使用 san-router 建立一个单页应用的后台系统？</a></dd>
+    <dt><%= __('practice.route.title') %></dt>
+    <dd><a href="<%- url_for_lang('practice/san-router-spa/') %>"><%= __('practice.route.0') %></a></dd>
 
-    <dt>应用状态管理</dt>
-    <dd><a href="<%- url_for('practice/san-store-spa/') %>">如何使用 san-store 实现后台系统的状态管理？</a></dd>
+    <dt><%= __('practice.state.title') %></dt>
+    <dd><a href="<%- url_for_lang('practice/san-store-spa/') %>"><%= __('practice.state.0') %></a></dd>
 
     <!-- <dt>DevTool</dt>
 
     <dt>应用状态管理</dt> -->
     <dt>FAQ</dt>
-    <dd><a href="<%- url_for('practice/question-and-answer/') %>">Q&A集锦</a></dd>
+    <dd><a href="<%- url_for_lang('practice/question-and-answer/') %>"><%= __('practice.faq.0') %></a></dd>
+    <dd><a href="<%- url_for_lang('practice/ie-compatibility/') %>"><%= __('practice.faq.1') %></a></dd>
 </dl>
 </main>
-
-<script>
-(function () {
-    var searchEl = document.getElementById('practice-search');
-    var timeout;
-    searchEl.onkeyup = function () {
-        if (timeout) {
-            clearTimeout(timeout);
-        }
-
-        timeout = setTimeout(doSearch, 500);
-    };
-
-    function doSearch() {
-        var key = searchEl.value;
-        var dds = document.getElementById('practice-list').getElementsByTagName('dd');
-        var len = dds.length;
-
-        while (len--) {
-            var dd = dds[len];
-            dd.style.display = key && dd.getElementsByTagName('a')[0].innerHTML.indexOf(key) < 0
-                ? 'none' : '';
-        }
-    }
-})();
-</script>

@@ -2,7 +2,11 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="description" content="San - A Flexible JavaScript Component Framework">
+  <meta name="keywords" content="San,JavaScript,Framework,MVVM,Component,Web">
+  <meta name="apple-mobile-web-app-capable" content="yes">
   <link rel="shortcut icon" href="<%- url_for('img/favicon.ico') %>" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="<%- url_for('img/icons/icon-144x144.png') %>">
   <%
   var title = page.title;
 
@@ -29,6 +33,7 @@
   <% if (theme.favicon){ %>
     <link rel="icon" href="<%- theme.favicon %>">
   <% } %>
+  <link rel="manifest" href="<%- url_for('manifest.json') %>">
 
   <%- css('css/font-awesome.min') %>
   <%- css('css/bootstrap.min') %>
@@ -38,14 +43,14 @@
   <%- css('css/code') %>
   
   <script>
-  var _hmt = _hmt || [];
-  (function() {
-    var hm = document.createElement("script");
-    hm.src = "https://hm.baidu.com/hm.js?fe8285f51c25503f85b1082c854a41e0";
-    var s = document.getElementsByTagName("script")[0]; 
-    s.parentNode.insertBefore(hm, s);
-  })();
-  </script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?3fd0e328e9b2f9b1af04ac25c143093f";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
 
   <!-- search -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />

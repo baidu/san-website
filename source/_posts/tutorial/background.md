@@ -68,4 +68,4 @@ MVVM框架的工作
 
 >有了前端 MVVM 框架，应用开发如此简单!
 
-前端 MVVM 已是趋势，是大型 Web 应用开发效率提升的利器。由百度 EFE 出品的 MVVM 框架 － [san](https://ecomfe.github.io/san/)，在保持功能强大、特性支持完整的前提下，还兼顾到IE8的市场份额，对老版本浏览器提供了良好的兼容性，更难能可贵的是 GZip 后体积仅 **11k**， 现已为百度内多个产品提供了强劲驱动，可谓百度 EFE 又一精工之作！开源的 [san](https://ecomfe.github.io/san/) 欢迎广大开发者体验、使用，更欢迎广大开发者加入到 [san 生态](https://github.com/ecomfe?utf8=%E2%9C%93&q=san&type=&language=) 的建设中来，让 [san](https://ecomfe.github.io/san/) 变得更好！
+前端 MVVM 已是趋势，是大型 Web 应用开发效率提升的利器。由百度 EFE 出品的 MVVM 框架 － [san](https://baidu.github.io/san/)，在保持功能强大、特性支持完整的前提下，还兼顾到IE8的市场份额，对老版本浏览器提供了良好的兼容性，更难能可贵的是 GZip 后体积仅 **11k**， 现已为百度内多个产品提供了强劲驱动，可谓百度 EFE 又一精工之作！开源的 [san](https://baidu.github.io/san/) 欢迎广大开发者体验、使用，更欢迎广大开发者加入到 [san 生态](https://github.com/baidu?utf8=%E2%9C%93&q=san&type=&language=) 的建设中来，让 [san](https://baidu.github.io/san/) 变得更好！

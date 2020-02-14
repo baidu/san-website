@@ -28,7 +28,7 @@ var MyComponent = san.defineComponent({
     template: '<div><ui-panel>Hello San</ui-panel></div>'
 });
 
-/* MyComponent渲染结果
+/* MyComponent 渲染结果
 <div>
   <div class="head">title</div>
   <p style="display:none">Hello San</p>
@@ -68,7 +68,7 @@ var MyComponent = san.defineComponent({
     }
 });
 
-/* MyComponent渲染结果
+/* MyComponent 渲染结果
 <div>
   <div class="head">title</div>
   <p>I am MyComponent</p>
@@ -81,7 +81,6 @@ var MyComponent = san.defineComponent({
 
 通过 name 属性可以给 slot 命名。一个视图模板的声明可以包含一个默认 slot 和多个命名 slot。外层组件的元素通过 `slot="name"` 的属性声明，可以指定自身的插入点。
 
-`注意`：slot 是声明时定义，所以 slot 命名只能是静态的名称，不能使用运行时数据定义 slot name。
 
 ```javascript
 var Tab = san.defineComponent({
@@ -102,7 +101,7 @@ var MyComponent = san.defineComponent({
         + '</ui-tab></div>'
 });
 
-/* MyComponent渲染结果
+/* MyComponent 渲染结果
 <div>
   <header><h3>1</h3><h3>2</h3></header>
   <main><p>one</p><p>two</p></main>
@@ -131,7 +130,7 @@ var MyComponent = san.defineComponent({
         + '</ui-tab></div>'
 });
 
-/* MyComponent渲染结果，a 元素无法被插入 title slot
+/* MyComponent 渲染结果，a 元素无法被插入 title slot
 <div>
   <header><h3>1</h3><h3>2</h3></header>
   <main><p>one</p><p>two<a>slot fail</a></p></main>
@@ -139,8 +138,10 @@ var MyComponent = san.defineComponent({
 */
 ```
 
-动态插槽
+插槽的应用
 -----
+
+`版本`：>= 3.3.0
 
 在 slot 声明时应用 if 或 for 指令，可以让插槽根据组件数据动态化。
 
@@ -181,6 +182,12 @@ var myComponent = new MyComponent({
         name: 'San'
     }
 });
+
+/* MyComponent 渲染结果，hidden为true所以不包含default slot
+<div>
+    <b>San</b>
+</div>
+*/
 ```
 
 ### for指令
@@ -199,7 +206,7 @@ var MyComponent = san.defineComponent({
 
     template: ''
         + '<div>'
-          + '<x-panel data="{{folderHidden}}" s-ref="panel">'
+          + '<x-panel data="{{panelData}}" s-ref="panel">'
               + '<p>{{name}}</p>'
           + '</x-panel>'
         + '</div>',
@@ -218,7 +225,7 @@ var myComponent = new MyComponent({
     }
 });
 
-/* MyComponent渲染结果，<p>{{name}}</p>输出 3 遍
+/* MyComponent 渲染结果，<p>{{name}}</p> 输出 3 遍
 <div>
     <p>San</p>
     <p>San</p>
@@ -232,9 +239,19 @@ var myComponent = new MyComponent({
 scoped 插槽
 -----
 
-如果 slot 声明中包含 1 个以上 **var-** 数据前缀声明，该 slot 为 scoped slot。scoped slot 具有独立的 **数据环境**，其中仅包含 **var-** 声明的数据。scoped 数据声明的形式为 **var-name="expression"**。
+如果 slot 声明中包含 **s-bind** 或 1 个以上 **var-** 数据前缀声明，该 slot 为 scoped slot。scoped slot 具有独立的 **数据环境**。
 
-scoped slot 通常用于组件的视图部分期望由 **外部传入视图结构**，渲染过程使用组件内部数据。下面是典型的列表数据渲染场景：
+scoped slot 通常用于组件的视图部分期望由 **外部传入视图结构**，渲染过程使用组件内部数据。
+
+`注意`：scoped slot 中不支持双向绑定。
+
+
+### var
+
+`版本`：>= 3.3.0
+
+
+**var-** 的 scoped 数据声明的形式为 **var-name="expression"**。
 
 
 ```javascript
@@ -280,7 +297,7 @@ var myComponent = new MyComponent({
     }
 });
 
-/* MyComponent渲染结果
+/* MyComponent 渲染结果
 <div>
     <h3>errorrik</h3>
     <p><b>male</b><u>errorrik@gmail.com</u></p>
@@ -292,5 +309,198 @@ var myComponent = new MyComponent({
 */
 ```
 
-`注意`：scoped slot 中不支持双向绑定。
+### s-bind
+
+`版本`：>= 3.6.0
+
+
+**s-bind** 的 scoped 数据声明的形式为 **s-bind="expression"**。
+
+当 **s-bind** 和 **var-** 并存时，**var-** 将覆盖整体绑定中相应的数据项。
+
+
+```javascript
+var Men = san.defineComponent({
+    template: '<div>'
+      + '<slot s-for="item in data" s-bind="{n: item.name, email: item.email, sex: item.sex ? \'male\' : \'female\'}">'
+        + '<p>{{n}},{{sex}},{{email}}</p>'
+      + '</slot>'
+      + '</div>'
+});
+
+var MyComponent = san.defineComponent({
+    components: {
+        'x-men': Men
+    },
+
+    template: '<div><x-men data="{{men}}" s-ref="men">'
+          + '<h3>{{n}}</h3>'
+          + '<p><b>{{sex}}</b><u>{{email}}</u></p>'
+        + '</x-men></div>',
+
+    attached: function () {
+        var slots = this.ref('men').slot();
+
+        // 3
+        slots.length
+
+        // truthy
+        slots[0].isInserted
+
+        // truthy
+        contentSlot.isScoped
+    }
+});
+
+var myComponent = new MyComponent({
+    data: {
+        men: [
+            {name: 'errorrik', sex: 1, email: 'errorrik@gmail.com'},
+            {name: 'leeight', sex: 0, email: 'leeight@gmail.com'},
+            {name: 'otakustay', email: 'otakustay@gmail.com', sex: 1}
+        ]
+    }
+});
+
+/* MyComponent 渲染结果
+<div>
+    <h3>errorrik</h3>
+    <p><b>male</b><u>errorrik@gmail.com</u></p>
+    <h3>leeight</h3>
+    <p><b>female</b><u>leeight@gmail.com</u></p>
+    <h3>otakustay</h3>
+    <p><b>male</b><u>otakustay@gmail.com</u></p>
+</div>
+*/
+```
+
+
+### 访问环境数据
+
+`版本`：>= 3.3.1
+
+scoped slot 中，除了可以访问 **var-** 声明的数据外，还可以访问当前环境的数据。
+
+- 使用 slot 默认内容时，可以访问组件内部环境数据
+- 外层组件定义的 slot 内容，可以访问外层组件环境的数据
+
+```javascript
+var Man = san.defineComponent({
+    template: '<p>'
+      +   '<slot var-n="who.name" var-email="who.email">'
+      +     '{{n}},{{email}},{{country}}'
+      +   '</slot>'
+      + '</p>'
+});
+
+var MyComponent = san.defineComponent({
+    components: {
+        'x-man': Man
+    },
+
+    template: ''
+        + '<div><x-man who="{{man}}" country="{{country}}">'
+        +   '<b>{{n}} - {{province}}</b>'
+        +   '<u>{{email}}</u>'
+        + '</x-men></div>'
+});
+
+var myComponent = new MyComponent({
+    data: {
+        man: {
+            name: 'errorrik', 
+            email: 'errorrik@gmail.com'
+        },
+        country: 'China',
+        province: 'HN'
+    }
+});
+
+/* MyComponent 渲染结果
+<div>
+    <p>
+        <b>errorrik - HN</b>
+        <u>errorrik@gmail.com</u>
+    </p>
+</div>
+*/
+```
+
+
+动态命名
+-----
+
+`版本`：>= 3.3.1
+
+
+slot 声明中，组件可以使用当前的数据环境进行命名，从而提供动态的插槽。插槽的动态命名常用于 **组件结构根据数据生成** 的场景下，比如表格组件。
+
+```javascript
+var Table = san.defineComponent({
+    template: ''
+        + '<table>'
+        +   '<thead><tr><th s-for="col in columns">{{col.label}}</th></tr></thead>'
+        +   '<tbody>'
+        +     '<tr s-for="row in datasource">'
+        +       '<td s-for="col in columns">'
+        +         '<slot name="col-{{col.name}}" var-row="row" var-col="col">{{row[col.name]}}</slot>'
+        +       '</td>'
+        + '    </tr>'
+        +   '</tbody>'
+        + '</table>'
+});
+
+var MyComponent = san.defineComponent({
+    components: {
+        'x-table': Table
+    },
+
+    template: ''
+        + '<div>'
+        +   '<x-table columns="{{columns}}" datasource="{{list}}">'
+        +     '<b slot="col-name">{{row.name}}</b>'
+        +   '</x-table>'
+        + '</div>'
+
+});
+
+var myComponent = new MyComponent({
+    data: {
+        columns: [
+            {name: 'name', label: '名'},
+            {name: 'email', label: '邮'}
+        ],
+        list: [
+            {name: 'errorrik', email: 'errorrik@gmail.com'},
+            {name: 'leeight', email: 'leeight@gmail.com'}
+        ]
+    }
+});
+
+/* MyComponent 渲染结果
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>名</th>
+                <th>邮</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><b>errorrik</b></td>
+                <td>errorrik@gmail.com</td>
+            </tr>
+            <tr>
+                <td><b>leeight</b></td>
+                <td>leeight@gmail.com</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+*/
+```
+
+`注意`：表格的视图更新在 IE 下可能存在兼容性问题。
+
 

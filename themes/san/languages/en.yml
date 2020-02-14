@@ -1,0 +1,116 @@
+index:
+  jumbotron:
+    get_started: Get Started
+    description: A fast, portable, flexible JavaScript component framework
+  nav:
+    features: Features
+    resources: Resources
+    facilities: Facilities
+  headernav:
+    tutorial: Tutorial
+    practice: Practice
+    example: Example
+    api: API
+    home: HOME
+  feature:
+    tpl: HTML Template
+    tpl_description: Declarative template. HTML conformant template makes it easier for HTML developers.
+    data_driven: Data Driven
+    data_driven_description: The DOM will be updated accordingly by the view engine upon any data modification. Free yourself from trivial and error-prone DOM APIs.
+    component: Component
+    component_description: A component is a combination of data, logic and view. Feature blocks, from a single input combination to a whole page, can be built via San components.
+    view: High Performance View
+    view_description: By modifying the data, the view engine can directly refresh the view area that needs to be changed without any detection and better performance.
+    reverse: Component Reversion
+    reverse_description: Optimized for the first screen and output HTML from the server side. Reverse parse components from existing elements and build bindings.
+    size: Small Size
+    size_description: Volume less that 15kb (gzipped), no need to worry about the burden of page downloads. The gospel of patients with volume obsessive.
+    compatibility: Good Compatibility
+    compatibility_description: Another benefit of modifying data by method is that you can get better browser compatibility. After all, some users of our products are a bit rigid.
+    module: Flexible Module Management
+    module_description: The ESNext Module or AMD can be selected in the project. Of course, if you want to use global variables it is also supported.
+    use: Convenient Reference
+    use_description: Support for multiple methods such as NPM, GitHub, download, HTTP and HTTPS CDN, making development and online reference more convenient.
+  resource:
+    description: Tutorials, documents and demos to understand and use San.
+    tutorial_description: Reading the tutorials is a good starting point to learn San.
+    practice_description: Practice guidelines suggest specific ways to deal with many different situations.
+    example_description: Real-world demos showing how to use San.
+    api: Component API
+    api_description: Refer to this when you're looking for Component API manuals.
+  facility:
+    description: Some tools and libraries can help you build your app faster and easier.
+    router_description: Support for hash and html5 mode routes to build SPA(Single Page Application) or isomorphism web applications.
+    store_description: Application state management suite, the idea is a one-way flow like flux.
+    update_description: Immutable's object update library, with san-store for application state data updates.
+    devtool_description: Developer tools based on Chrome extensions.
+article:
+  edit: Edit
+  gotop: Top
+recommend:
+  tutorial: Tutorial
+  tutorial_setup: Setup
+  tutorial_background: Background
+  tutorial_start: Start
+  tutorial_template: Template
+  tutorial_data_method: Data Manipulation
+  tutorial_data_checking: Data Validation
+  tutorial_style: Style
+  tutorial_if: Conditional
+  tutorial_for: Loop
+  tutorial_event: Event
+  tutorial_form: Form
+  tutorial_slot: Slot
+  tutorial_transition: Transition
+  tutorial_component: Component
+  tutorial_reverse: Component Reversion
+  tutorial_ssr: SSR
+  more: More
+  more_component_api: Component API
+  more_main_api: San API
+  more_dist_files: Dist Files
+  more_changelog: Changelog
+  facilities: Facilities
+  example: Example
+  example_start: Small examples
+  example_single_way_flow: One-way flow
+example:
+  start: Small Examples
+  start_description: Some small examples, mainly to show the usage of some small features of San.
+  todos_description: An example of a Todos application that includes scenarios common to application development such as lists, in-list operations, form submissions, floating layers, and interactive components.
+  todos_esnext_description: The ESNext version of the Todos app above uses webpack + babel, which is more in line with popular application development habits.
+  single_way_flow: One-way flow
+  todos_store_description: The one-way streaming version of the Todos app above uses san-store.
+  realworld: RealWorld example app
+  realworld_description: A fully fledged application including CRUD operations, authentication, routing, pagination, and more.
+  online: Small example of online usage
+practice:
+  data:
+    title: Data
+    0: What Content is Suitable for the Data?
+    1: What Content is Not Suitable for the Data?
+    2: Auto camel when data bind
+  tpl:
+    title: View Templates
+    0: Object Traversal
+    1: How does an array deep update trigger a view update?
+    2: How to Implement Hide and Show?
+  msg:
+    title: Inter-Component Messaging
+    0: How to Update Child Components?
+    1: Child-to-Parent Messaging
+    2: How child components communicate with higher layer components
+    3: Messaging from Dynamic Child Components
+  component:
+    title: Component Management
+    0: Can we do DOM manipulation?
+    1: How to deal with the absolute positioning component's DOM？
+  route:
+    title: Router Management
+    0: How to use san-router to create a back-end system for a single-page application?
+  state:
+    title: Application State Management
+    0: How to use san-store to implement state management of the backend system?
+  faq:
+    0: FAQ
+    1: IE compatibility

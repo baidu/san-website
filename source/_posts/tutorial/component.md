@@ -35,7 +35,7 @@ myApp.attach(document.body);
 
 通过继承的方式定义组件的好处是，当你使用 ESNext 时，你可以很自然的 extends。
 
-`注意`：由于 ESNext 没有能够编写 prototype 属性的语法，所以 San 对组件定义时的属性支持 static property，通过 ESNext 的 extends 继承时，template / filters / components 属性请使用 static property 的方式定义。
+`注意`：由于 ESNext 没有能够编写 prototype 属性的语法，所以 San 对组件定义时的属性支持 static property。通过 ESNext 的 extends 继承时，template / filters / components 属性请使用 static property 的方式定义。
 
 ```javascript
 import {Component} from 'san';
@@ -85,13 +85,13 @@ San 的组件是 HTML 元素扩展的风格，所以其生命周期与 WebCompon
 组件的生命周期有这样的一些特点：
 
 - 生命周期代表组件的状态，生命周期本质就是状态管理。
-- 在生命周期到达时，对应的钩子函数会被触发运行。
+- 在生命周期的不同阶段，组件对应的钩子函数会被触发运行。
 - 并存。比如 attached 和 created 等状态是同时并存的。
 - 互斥。attached 和 detached 是互斥的，disposed 会互斥掉其它所有的状态。
 - 有的时间点并不代表组件状态，只代表某个行为。当行为完成时，钩子函数也会触发。如 **updated** 代表每次数据变化导致的视图变更完成。
 
 
-通过声明周期的钩子函数，我们可以在生命周期到达时做一些事情。比如在生命周期 **attached** 中发起获取数据的请求，在请求返回后更新数据，使视图刷新。
+通过生命周期的钩子函数，我们可以在生命周期到达时做一些事情。比如在生命周期 **attached** 中发起获取数据的请求，在请求返回后更新数据，使视图刷新。
 
 ```javascript
 var ListComponent = san.defineComponent({
@@ -168,10 +168,15 @@ san.defineComponent({
 `强调`：San 要求组件对应 **一个** HTML 元素，所以视图模板定义时，只能包含一个 HTML 元素，其它所有内容需要放在这个元素下。
 
 ```html
+<!-- 正确 -->
 <dl>
     <dt>name - email</dt>
     <dd s-for="p in persons" title="{{p.name}}">{{p.name}}({{dept}}) - {{p.email}}</dd>
 </dl>
+
+<!-- 错误 -->
+<p>name</p>
+<p>email</p>
 ```
 
 组件对应的 HTML 元素可能是由其 **owner** 组件通过视图模板指定的，视图模板不好直接定死对应 HTML 元素的标签。此时可以将视图模板对应的 HTML 元素指定为 **template**。
@@ -227,7 +232,7 @@ var MyComponent = san.defineComponent({
 
 有时我们为了首屏时间，期望初始的视图是直接的 HTML，不希望初始视图是由组件渲染的。但是我们希望组件为我们管理数据、逻辑与视图，后续的用户交互行为与视图变换通过组件管理，此时就可以通过 **el** 传入一个现有元素。
 
-组件将以传入的 **el** 元素作为组件根元素并反解析出视图结构。这个过程我们称作 **组件反解**。详细请参考[组件反解](../reverse/)文档。
+组件将以 **el** 传入的元素作为组件根元素并反解析出视图结构。这个过程我们称作 **组件反解**。详细请参考[组件反解](../reverse/)文档。
 
 
 
@@ -282,7 +287,7 @@ var myApp = new MyApp({
 myApp.attach(document.body);
 ```
 
-new 时传入初始数据是针对实例的特例需求。有时我们在定义组件时希望每个实例都具有初始的一些数据，此时可以定义 **initData** 方法，可以在定义组件时指定组件初始化时的数据。**initData** 方法返回组件实例的初始化数据。
+new 时传入初始数据是针对实例的特例需求。当我们希望在定义组件时，就设置每个实例的初始数据，可以通过 **initData** 方法指定组件初始化时的数据。**initData** 方法返回组件实例的初始化数据。
 
 ```javascript
 var MyApp = san.defineComponent({
@@ -451,9 +456,9 @@ var Node = san.defineComponent({
 
 ### ref
 
-子组件声明时如果通过 **s-ref** 指定了名称，则可以在 JavaScript 中通过组件实例的 **ref** 方法调用到。
+声明子组件时，如果通过 **s-ref** 指定了名称，则可以在owner组件实例的 **ref** 方法调用到。
 
-`提示`：有了声明式的初始化、数据绑定与事件绑定，我们很少需要在 JavaScript 中拿到子组件的实例。San 提供了这个途径，但当你用到它的时候，请先思考是不是非要这么干。
+`提示`：有了声明式的初始化、数据绑定与事件绑定，我们很少需要在 owner 中拿到子组件的实例。虽然 San 提供了这个途径，但当你用到它的时候，请先思考是不是非要这么干。
 
 
 ### 消息
@@ -524,7 +529,6 @@ san.defineComponent({
 
 - 动态创建的子组件无需在 **components** 中声明类型
 - 保证动态子组件不要被重复创建。常见的做法是在实例的属性上持有对创建组件的引用，并以此作判断
-- 保证动态子组件能够被销毁。你可以在创建时 push 到 **childs** 中，或者在 **disposed** 中销毁它
 
 ```javascript
 san.defineComponent({
@@ -532,9 +536,6 @@ san.defineComponent({
         if (!this.layer) {
             this.layer = new Layer();
             this.layer.attach(document.body);
-
-            // 如果有下面一句，则可以不用手动在 disposed 中释放
-            // this.childs.push(this.layer);
         }
 
         this.layer.show();
@@ -548,4 +549,414 @@ san.defineComponent({
         this.layer = null;
     }
 });
+```
+
+在 3.7.0 以上的版本，创建动态子组件增加了 owner 和 source 参数的支持。
+
+指定 owner 可以自动维护 owner 与动态子组件之间的关系：
+
+- owner 可以收到动态子组件 dispatch 的消息
+- owner dispose 时，动态子组件将自动 dispose
+
+`注意`：
+
+指定 owner 后，不允许将组件 push 到 owner 的 children 中，否则组件 dispose 过程中，会对动态子组件进行多次 dispose 操作。
+
+
+source 可以声明动态子组件与 owner 之间的绑定关系：
+
+- 数据绑定，含双向绑定
+- 事件
+
+
+
+
+```javascript
+// 动态子组件的数据与事件绑定，指定owner和source
+// 3.7.0+
+var Person = san.defineComponent({
+    template: '<div>'
+        + '  <input type="text" value="{=name=}">'
+        + '  <input type="text" value="{=email=}">'
+        + '  <button on-click="done">Done</button>'
+        + '</div>',
+
+    done: function () {
+        this.fire('done', {
+            name: this.data.get('name'),
+            email: this.data.get('email')
+        });
+    }
+});
+
+var MyApp = san.defineComponent({
+    template: '<div>'
+        + '  name: {{author.name}}; email{{author.email}}'
+        + '  <button on-click="edit">edit</button>'
+        + '</div>',
+
+    edit: function () {
+        if (!this.editor) {
+            this.editor = new Person({
+                owner: this,
+                source: '<x-person name="{{author.name}}" email="{{author.email}}" on-done="editDone($event)"/>'
+            });
+            this.editor.attach(document.body)
+        }
+    },
+
+    editDone: function (e) {
+        this.data.set('author', e);
+    }
+});
+
+var myApp = new MyApp({
+    data: {
+        author: {
+            name: 'erik',
+            email: 'errorrik@gmail.com'
+        }
+    }
+});
+myApp.attach(document.body);
+```
+
+
+```javascript
+// 动态子组件双向绑定，指定owner和source
+// 3.7.0+
+var Person = san.defineComponent({
+    template: '<div>'
+        + '  <input type="text" value="{=name=}">'
+        + '  <input type="text" value="{=email=}">'
+        + '</div>'
+});
+
+var MyApp = san.defineComponent({
+    template: '<div>'
+        + '  name: {{author.name}}; email{{author.email}}'
+        + '  <button on-click="edit">edit</button>'
+        + '</div>',
+
+    edit: function () {
+        if (!this.editor) {
+            this.editor = new Person({
+                owner: this,
+                source: '<x-person name="{=author.name=}" email="{=author.email=}"/>'
+            });
+            this.editor.attach(document.body)
+        }
+    }
+});
+
+var myApp = new MyApp({
+    data: {
+        author: {
+            name: 'erik',
+            email: 'errorrik@gmail.com'
+        }
+    }
+});
+myApp.attach(document.body);
+```
+
+
+```javascript
+// 动态子组件指定owner，可以dispatch
+// 3.7.0+
+var Person = san.defineComponent({
+    template: '<div>'
+        + '  <input type="text" value="{=name=}">'
+        + '  <input type="text" value="{=email=}">'
+        + '  <button on-click="done">Done</button>'
+        + '</div>',
+
+    done: function () {
+        this.dispatch('person-done', {
+            name: this.data.get('name'),
+            email: this.data.get('email')
+        });
+    }
+});
+
+var MyApp = san.defineComponent({
+    template: '<div>'
+        + '  name: {{author.name}}; email{{author.email}}'
+        + '  <button on-click="edit">edit</button>'
+        + '</div>',
+
+    edit: function () {
+        if (!this.editor) {
+            this.editor = new Person({
+                owner: this,
+                source: '<x-person name="{{author.name}}" email="{{author.email}}"/>'
+            });
+            this.editor.attach(document.body)
+        }
+    },
+
+    messages: {
+        'person-done': function (e) {
+            this.data.set('author', e.value);
+        }
+    }
+});
+
+var myApp = new MyApp({
+    data: {
+        author: {
+            name: 'erik',
+            email: 'errorrik@gmail.com'
+        }
+    }
+});
+myApp.attach(document.body);
+```
+
+`提示`：如果你的组件包含指定 source 声明的动态子组件，并且预期会被循环多次创建，可以将 source 模板手动预编译，避免框架对 source 字符串进行多次重复编译，提升性能。
+
+```javascript
+// 手工预编译 source
+// 3.7.0+
+var PersonDetail = san.defineComponent({
+    template: '<div>'
+        + '  {{name}}, {{email}}'
+        + '  <button on-click="close">close</button>'
+        + '</div>',
+
+    close: function () { this.el.style.display = 'none' },
+    open: function () { this.el.style.display = 'block' }
+});
+
+var Person = san.defineComponent({
+    template: '<div>'
+        + '  name: {{info.name}}'
+        + '  <button on-click="showDetail">detail</button>'
+        + '</div>',
+
+    // 手工预编译 source
+    detailSource: san.parseTemplate('<x-person name="{{info.name}}" email="{{info.email}}"/>')
+        .children[0],
+
+    showDetail: function () {
+        if (!this.detail) {
+            this.detail = new PersonDetail({
+                owner: this,
+                source: this.detailSource
+            });
+            this.detail.attach(document.body)
+        }
+
+        this.detail.open();
+    }
+});
+
+var MyApp = san.defineComponent({
+    template: '<div><x-p s-for="p in members" info="{{p}}" /></div>',
+
+    components: {
+        'x-p': Person
+    }
+});
+
+var myApp = new MyApp({
+    data: {
+        members: [
+            { name: 'errorrik', email: 'errorrik@what.com' },
+            { name: 'otakustay', email: 'otakustay@what.com' }
+        ]
+    }
+});
+```
+
+在 3.7.1 以上的版本，动态子组件的 source 参数允许声明子元素，指定插入 slot 部分的内容。
+
+
+```javascript
+// 指定插入 slot 部分的内容
+// 3.7.1+
+var Dialog = san.defineComponent({
+    template: '<span><slot name="title"/><slot/></span>'
+});
+
+var MyApp = san.defineComponent({
+    template: '<div><button on-click="alterStrong">alter strong</button></div>',
+
+    attached: function () {
+        if (!this.dialog) {
+            this.dialog = new Dialog({
+                owner: this,
+                source: '<x-dialog>'
+                    + '<h2 slot="title">{{title}}</h2>'
+                    + '<b s-if="strongContent">{{content}}</b><u s-else>{{content}}</u>'
+                    + '</x-dialog>'
+            });
+            this.dialog.attach(this.el);
+        }
+    },
+
+    alterStrong: function () {
+        this.data.set('strongContent', !this.data.get('strongContent'));
+    }
+});
+
+var myApp = new MyApp({
+    data: {
+        title: 'MyDialog',
+        content: 'Hello San',
+        strongContent: true
+    }
+});
+```
+
+
+异步组件
+----
+
+`版本`：>= 3.7.0
+
+[createComponentLoader](../../doc/main-members/#createComponentLoader) 方法返回一个组件加载器。components 中的声明为组件加载器时，将进行异步渲染：在 attach 过程中将不渲染该组件，组件将在加载完成后进行渲染。异步渲染有如下特性：
+
+- 对同一个[createComponentLoader](../../doc/main-members/#createComponentLoader) 方法返回的组件加载器，只会进行一次加载。换句话说，load 方法只会调用一次
+- 组件的渲染一定是异步的。即使组件加载器当前已经完成加载，也会在主体渲染完成后的下一个 macro task，进行异步组件渲染
+
+
+[createComponentLoader](../../doc/main-members/#createComponentLoader) 方法可以接受一个返回 Promise 的函数，加载完成后，使用组件类 resolve。
+
+```javascript
+var InputComponent = san.defineComponent({
+    template: '<input type="text" value="{{value}}"/>'
+});
+
+// 模拟加载，1秒后加载完成
+var inputLoader = san.createComponentLoader(function () {
+    return new Promise(function (resolve) {
+        setTimeout(function () {
+            resolve(InputComponent);
+        }, 1000);
+    });
+});
+
+var MyApp = san.defineComponent({
+    components: {
+        'x-input': inputLoader
+    },
+
+    template: '<div><x-input value="{{name}}"/></div>'
+});
+
+var myApp = new MyApp({
+    data: {
+        name: 'San'
+    }
+});
+myApp.attach(document.body);
+```
+
+通常情况，需要异步加载的组件都会有一定的复杂度。如果期望在加载过程中显示简单的替代视图，可以传入一个 Object 给 [createComponentLoader](../../doc/main-members/#createComponentLoader) 方法，通过 load 属性传入加载方法，并指定一个 placeholder 组件。
+
+```javascript
+var InputComponent = san.defineComponent({
+    template: '<input type="text" value="{{value}}"/>'
+});
+
+var LabelComponent = san.defineComponent({
+    template: '<u>{{value}}</u>'
+});
+
+// 模拟加载，1秒后加载完成
+var inputLoader = san.createComponentLoader({
+    load: function () {
+        return new Promise(function (resolve) {
+            setTimeout(function () {
+                resolve(InputComponent);
+            }, 1000);
+        });
+    },
+
+    placeholder: LabelComponent
+});
+
+var MyApp = san.defineComponent({
+    components: {
+        'x-input': inputLoader
+    },
+
+    template: '<div><x-input value="{{name}}"/></div>'
+});
+
+var myApp = new MyApp({
+    data: {
+        name: 'San'
+    }
+});
+myApp.attach(document.body);
+```
+
+你可以指定一个 fallback 组件，用于加载失败时使用的视图组件。但是，标识失败需要你 reject 返回的 Promise。
+
+```javascript
+var LabelComponent = san.defineComponent({
+    template: '<u>{{value}}</u>'
+});
+
+// 模拟加载，1秒后加载完成
+var inputLoader = san.createComponentLoader({
+    load: function () {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                reject();
+            }, 1000);
+        });
+    },
+
+    fallback: LabelComponent
+});
+
+var MyApp = san.defineComponent({
+    components: {
+        'x-input': inputLoader
+    },
+
+    template: '<div><x-input value="{{name}}"/></div>'
+});
+
+var myApp = new MyApp({
+    data: {
+        name: 'San'
+    }
+});
+myApp.attach(document.body);
+```
+
+加载失败时使用的视图组件，除了通过 fallback 指定，也可以通过 reject 指定。
+
+```javascript
+var LabelComponent = san.defineComponent({
+    template: '<u>{{value}}</u>'
+});
+
+// 模拟加载，1秒后加载完成
+var inputLoader = san.createComponentLoader(function () {
+    return new Promise(function (resolve, reject) {
+        setTimeout(function () {
+            reject(LabelComponent);
+        }, 1000);
+    });
+});
+
+var MyApp = san.defineComponent({
+    components: {
+        'x-input': inputLoader
+    },
+
+    template: '<div><x-input value="{{name}}"/></div>'
+});
+
+var myApp = new MyApp({
+    data: {
+        name: 'San'
+    }
+});
+myApp.attach(document.body);
 ```
