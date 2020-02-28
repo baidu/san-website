@@ -260,7 +260,7 @@ san.defineComponent({
 
 ```javascript
 san.defineComponent({
-    template: '<a>{{createTime | dateFormat('yyyy-MM-dd')}}</a>',
+    template: '<a>{{createTime | dateFormat("yyyy-MM-dd")}}</a>',
 
     filters: {
         dateFormat: function (value, format) {
