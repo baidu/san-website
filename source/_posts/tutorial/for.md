@@ -85,18 +85,21 @@ san.defineComponent({
 虚拟元素
 ------
 
-和 if 指令一样，对 template 元素应用 for 指令，能够让多个元素同时根据遍历渲染，可以省掉一层不必要的父元素。
+和 if 指令一样，对 fragment 元素应用 for 指令，能够让多个元素同时根据遍历渲染，可以省掉一层不必要的父元素。
 
 
 ```html
 <!-- Template -->
 <dl>
-    <template s-for="p in persons">
+    <fragment s-for="p in persons">
         <dt>{{p.name}}</dt>
         <dd>{{p.email}}</dd>
-    </template>
+    </fragment>
 </dl>
 ```
+
+`注意`：**fragment** 标签名在 3.8.3 版本开始支持，低版本中使用的是 **template** 标签名。由于更符合语义，我们建议你使用 san 的最新版本，并使用 **fragment**。
+
 
 trackBy
 ------

@@ -68,26 +68,28 @@ s-else
 虚拟元素
 ------
 
-在 san 中，template 元素在渲染时不会包含自身，只会渲染其内容。对 template 元素应用 if 指令能够让多个元素同时根据条件渲染视图，可以省掉一层不必要的父元素。
+在 san 中，fragment 元素在渲染时不会包含自身，只会渲染其内容。对 fragment 元素应用 if 指令能够让多个元素同时根据条件渲染视图，可以省掉一层不必要的父元素。
 
 ```html
 <div>
-    <template s-if="num > 10000">
+    <fragment s-if="num > 10000">
         <h2>biiig</h2>
         <p>{{num}}</p>
-    </template>
-    <template s-elif="num > 1000">
+    </fragment>
+    <fragment s-elif="num > 1000">
         <h3>biig</h3>
         <p>{{num}}</p>
-    </template>
-    <template s-elif="num > 100">
+    </fragment>
+    <fragment s-elif="num > 100">
         <h4>big</h4>
         <p>{{num}}</p>
-    </template>
-    <template s-else>
+    </fragment>
+    <fragment s-else>
         <h5>small</h5>
         <p>{{num}}</p>
-    </template>
+    </fragment>
 </div>
 ```
+
+`注意`：**fragment** 标签名在 3.8.3 版本开始支持，低版本中使用的是 **template** 标签名。由于更符合语义，我们建议你使用 san 的最新版本，并使用 **fragment**。
 
