@@ -85,18 +85,21 @@ To manipulate list data such as inserting or deleting items, we use the array me
 Virtual element
 ------
 
-As with the if directive, applying the for directive to the template element allows multiple elements to be rendered at the same time based on traversal, eliminating the need for an unnecessary parent element.
+Similar to the `if` directive, you can also use a `fragment` element with `for` directive to render a block of multiple elements. For example:
 
 
 ```html
 <!-- Template -->
 <dl>
-    <template s-for="p in persons">
+    <fragment s-for="p in persons">
         <dt>{{p.name}}</dt>
         <dd>{{p.email}}</dd>
-    </template>
+    </fragment>
 </dl>
 ```
+
+
+`Note`: **fragment** is supported since 3.8.3, for older versions please use **template** instead. The name **fragment** is more consistent with the HTML semantic so it's recommended to upgrade san to the latest version.
 
 trackBy
 ------

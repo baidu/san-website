@@ -68,26 +68,27 @@ s-else
 Virtual Element
 ------
 
-In san templates, only contents of **template** are rendered, NOT including the **template** element itself. By applying an **if** directive for **template** element, multiple elements (without a redundant parent element) can be rendered regarding to the **if** condition.
+The **fragment** element serves as an invisible wrapper, allowing a block of multiple elements to be rendered without a parent element. By applying an **if** directive to the **fragment** element, we can render a block of multiple elements regarding to the **if** condition.
 
 ```html
 <div>
-    <template s-if="num > 10000">
+    <fragment s-if="num > 10000">
         <h2>biiig</h2>
         <p>{{num}}</p>
-    </template>
-    <template s-elif="num > 1000">
+    </fragment>
+    <fragment s-elif="num > 1000">
         <h3>biig</h3>
         <p>{{num}}</p>
-    </template>
-    <template s-elif="num > 100">
+    </fragment>
+    <fragment s-elif="num > 100">
         <h4>big</h4>
         <p>{{num}}</p>
-    </template>
-    <template s-else>
+    </fragment>
+    <fragment s-else>
         <h5>small</h5>
         <p>{{num}}</p>
-    </template>
+    </fragment>
 </div>
 ```
 
+`Note`: **fragment** is supported since 3.8.3, for older versions please use **template** instead. The name **fragment** is more consistent with the HTML semantic so it's recommended to upgrade san to the latest version.
