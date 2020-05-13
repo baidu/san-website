@@ -157,19 +157,17 @@ apply({string|Object}expr, {function({*}):{*}}value, {Object?}option)
 
 ```javascript
 san.defineComponent({
-    attached: function () {
-        this.data.set('number', {
-            value: 1
-        });
-        this.updateNumber();
+    initData: function () {
+        return {
+            number: 1,
+        }
     },
 
-    updateNumber: function (data) {
-        this.data.apply('number', function (number) {
-            return {
-                value: number.value * 2
-            };
-        })
+    attached: function () {
+        // increment
+        this.data.apply('number', function (n) {
+            return n + 1;
+        });
     }
 });
 ```
