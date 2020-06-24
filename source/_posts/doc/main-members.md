@@ -303,6 +303,132 @@ aNode = {
 */
 ```
 
+### parseComponentTemplate
+
+`版本`：>= 3.9.0
+
+`描述`： {ANode} parseComponentTemplate({Function}ComponentClass)
+
+`解释`：
+
+**方法** 。将组件的模板解析成 [ANode](https://github.com/baidu/san/blob/master/doc/anode.md) 对象。与直接调用 `parseTemplate` 不同，`parseComponentTemplate` 会自动抽取第一个子元素作为组件根元素，为其附加 `id/style/class` 的逻辑，其行为与运行时组件编译完全相同。
+
+`用法`：
+
+```javascript
+var MyComponent = san.defineComponent({
+    template: '<p>Hello {{name}}</p>'
+});
+var aNode = san.parseComponentTemplate(MyComponent);
+/* aNode
+{
+    "directives": {},
+    "props": [
+        {
+            "name": "class",
+            "expr": {
+                "type": 5,
+                "expr": {
+                    "type": 4,
+                    "paths": [
+                        {
+                            "type": 1,
+                            "value": "class"
+                        }
+                    ]
+                },
+                "filters": [
+                    {
+                        "type": 6,
+                        "args": [],
+                        "name": {
+                            "type": 4,
+                            "paths": [
+                                {
+                                    "type": 1,
+                                    "value": "_class"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "name": "style",
+            "expr": {
+                "type": 5,
+                "expr": {
+                    "type": 4,
+                    "paths": [
+                        {
+                            "type": 1,
+                            "value": "style"
+                        }
+                    ]
+                },
+                "filters": [
+                    {
+                        "type": 6,
+                        "args": [],
+                        "name": {
+                            "type": 4,
+                            "paths": [
+                                {
+                                    "type": 1,
+                                    "value": "_style"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "name": "id",
+            "expr": {
+                "type": 4,
+                "paths": [
+                    {
+                        "type": 1,
+                        "value": "id"
+                    }
+                ]
+            }
+        }
+    ],
+    "events": [],
+    "children": [
+        {
+            "textExpr": {
+                "type": 7,
+                "segs": [
+                    {
+                        "type": 1,
+                        "value": "Hello "
+                    },
+                    {
+                        "type": 5,
+                        "expr": {
+                            "type": 4,
+                            "paths": [
+                                {
+                                    "type": 1,
+                                    "value": "name"
+                                }
+                            ]
+                        },
+                        "filters": []
+                    }
+                ]
+            }
+        }
+    ],
+    "tagName": "p"
+}
+*/
+```
+
 
 数据
 ----

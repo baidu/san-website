@@ -110,19 +110,54 @@ san.defineComponent({
 });
 ```
 
+assign
+-----
+
+```
+assign({Object}source, {Object?}option)
+```
+
+`版本`：>= 3.9.0
+
+`解释`：
+
+assign 方法将传入数据对象（source）与 data 合并，进行批量更新。作用类似于 JavaScript 中的 `Object.assign`。
+
+
+`用法`：
+
+
+```javascript
+san.defineComponent({
+    initData: function () {
+        return {
+            title: 'ER',
+            type: 'MVC',
+            author: 'Someone'
+        };
+    },
+
+    attached: function () {
+        this.data.assign({
+            title: 'San',
+            type: 'MVVM'
+        });
+    }
+});
+```
 
 merge
 -----
 
 ```
-merge({string|Object}expr, {*}value, {Object?}option)
+merge({string|Object}expr, {Object}source, {Object?}option)
 ```
 
 `版本`：>= 3.4.0
 
 `解释`：
 
-merge 方法用于将目标数据对象（target）和传入数据对象（source）的键进行合并，作用类似于 JavaScript 中的 `Object.assign(target, source)`。
+merge 方法对指定的数据项，使用传入数据对象（source）进行合并。
 
 `用法`：
 
