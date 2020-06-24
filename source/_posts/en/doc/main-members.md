@@ -33,7 +33,7 @@ var MyApp = san.defineComponent({
 
 ### compileComponent
 
-`Version`:>= 3.3.0
+`Version`: >= 3.3.0 & < 3.9.0
 
 `Description`: {void} compileComponent({Function}ComponentClass)
 

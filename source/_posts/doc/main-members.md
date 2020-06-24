@@ -83,7 +83,7 @@ myApp.attach(document.body);
 
 ### compileComponent
 
-`版本`：>= 3.3.0
+`版本`： >= 3.3.0 & < 3.9.0
 
 `描述`： {void} compileComponent({Function}ComponentClass)
 
