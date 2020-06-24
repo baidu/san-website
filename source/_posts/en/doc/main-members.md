@@ -212,38 +212,43 @@ expr = {
 var aNode = san.parseTemplate('<p>Hello {{name}}!</p>');
 /*
 aNode = {
-    "directives": [],
+    "directives": {},
     "props": [],
     "events": [],
     "children": [
         {
-            "isText": true,
-            "text": "Hello {{name}}!",
-            "textExpr": {
-                "type": ExprType.TEXT,
-                "segs": [
-                    {
-                        "type": ExprType.STRING,
-                        "value": "Hello "
-                    },
-                    {
-                        "type": ExprType.INTERP,
-                        "expr": {
-                            "type": ExprType.ACCESSOR,
-                            "paths": [
-                                {
-                                    "type": ExprType.STRING,
-                                    "value": "name"
-                                }
-                            ]
-                        },
-                        "filters": []
+            "directives": {},
+            "props": [],
+            "events": [],
+            "children": [
+                {
+                    "textExpr": {
+                        "type": 7,
+                        "segs": [
+                            {
+                                "type": 1,
+                                "value": "Hello "
+                            },
+                            {
+                                "type": 5,
+                                "expr": {
+                                    "type": 4,
+                                    "paths": [
+                                        {
+                                            "type": 1,
+                                            "value": "name"
+                                        }
+                                    ]
+                                },
+                                "filters": []
+                            }
+                        ]
                     }
-                ]
-            }
+                }
+            ],
+            "tagName": "p"
         }
-    ],
-    "tagName": "p"
+    ]
 }
 */
 ```
