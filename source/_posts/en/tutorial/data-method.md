@@ -110,19 +110,51 @@ san.defineComponent({
 });
 ```
 
+assign
+-----
+
+```
+assign({Object}source, {Object?}option)
+```
+
+`Version`: >= 3.9.0
+
+`Explanation`:
+
+`assign` method merges the `source` object into component's data, which is similar to `Object.assign` in JavaScript, and updates the view in batch.
+
+`Usage`:
+
+```javascript
+san.defineComponent({
+    initData: function () {
+        return {
+            title: 'ER',
+            type: 'MVC',
+            author: 'Someone'
+        };
+    },
+    attached: function () {
+        this.data.assign({
+            title: 'San',
+            type: 'MVVM'
+        });
+    }
+});
+```
 
 merge
 -----
 
 ```
-merge({string|Object}expr, {*}value, {Object?}option)
+merge({string|Object}expr, {Object}source, {Object?}option)
 ```
 
 `Version`: >= 3.4.0
 
 `Explanation`:
 
-The `.merge()` method is used to assign properties of the source object to the target object, just like the `Object.assign()` method in JavaScript.
+The `.merge()` method merges `source` into the data item specified by `expr`.
 
 `Usage`:
 
