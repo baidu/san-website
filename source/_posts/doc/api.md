@@ -490,6 +490,146 @@ var MyComponent = san.defineComponent({
 });
 ```
 
+### aNode
+
+`解释`：
+
+`template` 编译结果。包含该属性时，组件实例化时不会执行编译行为，可节省初始时间。通常用于组件预编译，开发时不直接编写，通过工具编译生成。[ANode](https://github.com/baidu/san/blob/master/doc/anode.md) 处理可使用 [san-anode-utils](https://github.com/ecomfe/san-anode-utils)。
+
+`类型`： Object
+
+`用法`：
+
+```javascript
+var MyComponent = san.defineComponent({
+    // equal to "template: '<p>Hello {{name}}</p>'"
+    aNode: {
+        "directives": {},
+        "props": [
+            {
+                "name": "class",
+                "expr": {
+                    "type": 5,
+                    "expr": {
+                        "type": 4,
+                        "paths": [
+                            {
+                                "type": 1,
+                                "value": "class"
+                            }
+                        ]
+                    },
+                    "filters": [
+                        {
+                            "type": 6,
+                            "args": [],
+                            "name": {
+                                "type": 4,
+                                "paths": [
+                                    {
+                                        "type": 1,
+                                        "value": "_class"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "style",
+                "expr": {
+                    "type": 5,
+                    "expr": {
+                        "type": 4,
+                        "paths": [
+                            {
+                                "type": 1,
+                                "value": "style"
+                            }
+                        ]
+                    },
+                    "filters": [
+                        {
+                            "type": 6,
+                            "args": [],
+                            "name": {
+                                "type": 4,
+                                "paths": [
+                                    {
+                                        "type": 1,
+                                        "value": "_style"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "id",
+                "expr": {
+                    "type": 4,
+                    "paths": [
+                        {
+                            "type": 1,
+                            "value": "id"
+                        }
+                    ]
+                }
+            }
+        ],
+        "events": [],
+        "children": [
+            {
+                "textExpr": {
+                    "type": 7,
+                    "segs": [
+                        {
+                            "type": 1,
+                            "value": "Hello "
+                        },
+                        {
+                            "type": 5,
+                            "expr": {
+                                "type": 4,
+                                "paths": [
+                                    {
+                                        "type": 1,
+                                        "value": "name"
+                                    }
+                                ]
+                            },
+                            "filters": []
+                        }
+                    ]
+                }
+            }
+        ],
+        "tagName": "p"
+    }
+});
+```
+
+### aPack
+
+`解释`：
+
+`aNode` 的压缩结果。`aPack` 相比 `aNode` 在体积和传输上有较大优势，在解压性能上也比 `template` 解析要快很多。通常用于组件预编译，开发时不直接编写，通过工具编译生成。[APack](https://github.com/baidu/san/blob/master/doc/anode-pack.md) 处理可使用 [san-anode-utils](https://github.com/ecomfe/san-anode-utils)。
+
+`版本`：>= 3.9.0
+
+`类型`： Array
+
+`用法`：
+
+```javascript
+var MyComponent = san.defineComponent({
+    // equal to "template: '<p>Hello {{name}}</p>'"
+    aPack: [1,"p",4,2,"class",7,,6,1,3,"class",1,8,6,1,3,"_class",,2,"style",7,,6,1,3,"style",1,8,6,1,3,"_style",,2,"id",6,1,3,"id",,9,,2,3,"Hello ",7,,6,1,3,"name",]
+});
+```
+
 
 组件方法
 -------
