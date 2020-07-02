@@ -121,7 +121,7 @@ assign({Object}source, {Object?}option)
 
 `Explanation`:
 
-`assign` method merges the `source` object into component's data, which is similar to `Object.assign` in JavaScript, and updates the view in batch.
+`assign` method merges `source` object into component's data, which is similar to `Object.assign` in JavaScript, this makes a batch update to view.
 
 `Usage`:
 
