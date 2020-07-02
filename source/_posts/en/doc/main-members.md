@@ -79,8 +79,8 @@ class HelloComponent extends Component {
 
     static template = '<p>Hello {{name}}!</p>';
 
-    initData() { 
-        return {name: 'San'} 
+    initData() {
+        return {name: 'San'}
     }
 }
 ```
@@ -253,6 +253,131 @@ aNode = {
 */
 ```
 
+### parseComponentTemplate
+
+`Version`: >= 3.9.0
+
+`Description`: {ANode} parseComponentTemplate({Function}ComponentClass)
+
+`Explanation`:
+
+**Method**. Parse component template into [ANode](https://github.com/baidu/san/blob/master/doc/anode.md) objects. Different from `parseTemplate`, this method extracts the first child node, attaches `id/style/class` attributes to it, and returns it as the root. Basically, `parseComponentTemplate` parses the template the same way as san parses component in runtime.
+
+`Usage`:
+
+```javascript
+var MyComponent = san.defineComponent({
+    template: '<p>Hello {{name}}</p>'
+});
+var aNode = san.parseComponentTemplate(MyComponent);
+/* aNode
+{
+    "directives": {},
+    "props": [
+        {
+            "name": "class",
+            "expr": {
+                "type": 5,
+                "expr": {
+                    "type": 4,
+                    "paths": [
+                        {
+                            "type": 1,
+                            "value": "class"
+                        }
+                    ]
+                },
+                "filters": [
+                    {
+                        "type": 6,
+                        "args": [],
+                        "name": {
+                            "type": 4,
+                            "paths": [
+                                {
+                                    "type": 1,
+                                    "value": "_class"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "name": "style",
+            "expr": {
+                "type": 5,
+                "expr": {
+                    "type": 4,
+                    "paths": [
+                        {
+                            "type": 1,
+                            "value": "style"
+                        }
+                    ]
+                },
+                "filters": [
+                    {
+                        "type": 6,
+                        "args": [],
+                        "name": {
+                            "type": 4,
+                            "paths": [
+                                {
+                                    "type": 1,
+                                    "value": "_style"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "name": "id",
+            "expr": {
+                "type": 4,
+                "paths": [
+                    {
+                        "type": 1,
+                        "value": "id"
+                    }
+                ]
+            }
+        }
+    ],
+    "events": [],
+    "children": [
+        {
+            "textExpr": {
+                "type": 7,
+                "segs": [
+                    {
+                        "type": 1,
+                        "value": "Hello "
+                    },
+                    {
+                        "type": 5,
+                        "expr": {
+                            "type": 4,
+                            "paths": [
+                                {
+                                    "type": 1,
+                                    "value": "name"
+                                }
+                            ]
+                        },
+                        "filters": []
+                    }
+                ]
+            }
+        }
+    ],
+    "tagName": "p"
+}
+*/
+```
 
 Data
 ----
@@ -296,7 +421,7 @@ data.set('num2', 10);
 
 `Explanation`:
 
-**Method** is used to evaluate the value of an expression. 
+**Method**. `evalExpr` is used to evaluate the value of an expression.
 
 - `expr` can be obtained via [parseExpr](#parseExpr) method. For the supported expression types, refer to [Expression](../../tutorial/template/#expressions)
 - `data` can be either component's data object, or any data object obtained by new [Data](#Data)
