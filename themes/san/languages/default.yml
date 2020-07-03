@@ -44,6 +44,13 @@ index:
     store_description: 应用状态管理套件，其理念是类似flux的单向流。
     update_description: Immutable的对象更新库，和san-store配合进行应用状态数据更新。
     devtool_description: 基于Chrome扩展的开发者工具。
+    loader_description: 使用Webpack loader让项目开发可以编写单文件组件。
+    factory_description: 组件工厂能帮助你在不同环境下更灵活的装配组件。
+    ssr_description: 服务端渲染框架与工具库。
+    drei_description: VSCode插件。
+    cli_description: 帮助你快速搭建应用的命令行工具。
+    anode_utils_description: 一些工具方法能够帮助你处理ANode.
+    test_utils_description: 帮助你创建单元测试的工具库。
 article:
   edit: 编辑本文
   gotop: 回到顶部
