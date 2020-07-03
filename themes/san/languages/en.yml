@@ -44,7 +44,7 @@ index:
     store_description: Application state management suite, the idea is a one-way flow like flux.
     update_description: Immutable's object update library, with san-store for application state data updates.
     devtool_description: Developer tools based on Chrome extensions.
-    loader_description: Webpack loader for single-file components.
+    loader_description: Webpack loader for single-file San components.
     factory_description: Component register and instantiation.
     ssr_description: Server-Side Render framework and utils.
     drei_description: VSCode extension.
