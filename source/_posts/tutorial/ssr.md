@@ -133,6 +133,6 @@ san-ssr ./name.comp.ts > name.ssr.js
 更多 SSR 的指南和 API 请参考：
 
 * README：https://github.com/baidu/san-ssr
-* TypeDoc: https://baidu.github.com/san-ssr
+* TypeDoc: https://baidu.github.io/san-ssr
 
 [san-ssr]: https://github.com/baidu/san-ssr
