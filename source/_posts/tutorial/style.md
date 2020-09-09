@@ -70,3 +70,16 @@ style
     >{{ item.title }}</li>
 </ul>
 ```
+
+s-show
+-----
+
+`>= 3.9.3`
+
+**s-show** 指令可以通过一个表达式控制元素的 **显示/隐藏**，是 **display** 样式的语法糖。
+
+```html
+<span s-show="isActive">Active</span>
+```
+
+`提示`：与 **s-if** 不同在于，当使用 **s-show** 并值为 false 时，元素依然在 DOM 树中存在。
