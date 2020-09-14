@@ -70,3 +70,16 @@ The caveat is that the data may not exist, and the style you set is not a legal 
     >{{ item.title }}</li>
 </ul>
 ```
+
+s-show
+-----
+
+`>= 3.9.3`
+
+The **s-show** directive is used to conditionally display an element by toggling the **display** CSS property of the element.
+
+```html
+<span s-show="isActive">Active</span>
+```
+
+`Note`: The difference between **s-show** and **s-if** is that an element with **s-show** will always be rendered and remain in the DOM.
