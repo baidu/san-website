@@ -539,7 +539,7 @@ var App = san.defineComponent({
         'ULabel': ULabel
     },
 
-    template: '<div><text s-is="type" text="{{name}}"/></div>'
+    template: '<div><x-label s-is="type" text="{{name}}"/></div>'
 });
 
 (new App({
