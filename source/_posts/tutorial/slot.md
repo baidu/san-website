@@ -212,7 +212,7 @@ var MyComponent = san.defineComponent({
         + '</div>',
 
     attached: function () {
-        // 0
+        // 3
         this.ref('panel').slot().length
     }
 });
