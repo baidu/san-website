@@ -436,7 +436,7 @@ var Node = san.defineComponent({
 });
 ```
 
-### owner 与 parent
+### owner and parent
 
 The concept of **owner** and **parent** has been clarified by react, but it is still specific here.
 
