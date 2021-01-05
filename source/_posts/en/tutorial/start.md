@@ -4,7 +4,7 @@ categories:
 - tutorial
 ---
 
-San is an MVVM component-based framework. Its compact size (< 15K), good compatibility (supports IE6), and excellent performance make it a reliable solution for implementing responsive user interfaces.
+San is an MVVM component-based framework. Its compact size (< 17K), good compatibility (supports IE6), and excellent performance make it a reliable solution for implementing responsive user interfaces.
 
 San declaratively renders data to the DOM using an HTML-based template syntax. In the process, San compiles string-based templates to [ANode](https://github.com/baidu/san/blob/master/doc/anode.md), builds UI view instantly by high-performance view engine. Apart from raw HTML features, all San templates implement HTML-data binding, and usual syntaxes such as branching, loop, etc. Combined with the reactivity system(two-way binding and [ANode](https://github.com/baidu/san/blob/master/doc/anode.md)), San is able to intelligently figure out the minimal number of components to re-render asynchronously and apply the minimal amount of DOM manipulations when the app state changes.
 
@@ -76,4 +76,4 @@ var myApp = new MyApp();
 myApp.attach(document.body);
 ```
 
-In this case, We use the **{= expression =}** directive to create two-way data bindings on the input element. It automatically picks the correct way to update the element based on the input. 
+In this case, We use the **{= expression =}** directive to create two-way data bindings on the input element. It automatically picks the correct way to update the element based on the input.

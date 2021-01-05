@@ -24,7 +24,7 @@ index:
     reverse: Component Reversion
     reverse_description: Optimized for the first screen and output HTML from the server side. Reverse parse components from existing elements and build bindings.
     size: Small Size
-    size_description: Volume less that 15kb (gzipped), no need to worry about the burden of page downloads. The gospel of patients with volume obsessive.
+    size_description: Volume less that 17kb (gzipped), no need to worry about the burden of page downloads. The gospel of patients with volume obsessive.
     compatibility: Good Compatibility
     compatibility_description: Another benefit of modifying data by method is that you can get better browser compatibility. After all, some users of our products are a bit rigid.
     module: Flexible Module Management
