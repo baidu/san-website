@@ -212,7 +212,7 @@ var MyComponent = san.defineComponent({
         + '</div>',
 
     attached: function () {
-        // 0
+        // 3
         this.ref('panel').slot().length
     }
 });
@@ -279,11 +279,11 @@ var MyComponent = san.defineComponent({
         // 3
         slots.length
 
-        // truthy
+        // true
         slots[0].isInserted
 
-        // truthy
-        contentSlot.isScoped
+        // true
+        slots[0].isScoped
     }
 });
 
@@ -344,11 +344,11 @@ var MyComponent = san.defineComponent({
         // 3
         slots.length
 
-        // truthy
+        // true
         slots[0].isInserted
 
-        // truthy
-        contentSlot.isScoped
+        // true
+        slots[0].isScoped
     }
 });
 
