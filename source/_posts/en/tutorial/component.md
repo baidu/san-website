@@ -120,7 +120,7 @@ The following diagram details the lifecycle of the component
 View
 ------
 
-### component template
+### Component Template
 
 When defining a component, you can assign a component's view template through the `template`.
 
@@ -233,7 +233,7 @@ Data
 
 All component data related operations are provided by the **data** property of the component instance.
 
-### retrieving data
+### Retrieving Data
 
 Retrieve data through the **data.get** method.
 
@@ -257,12 +257,12 @@ san.defineComponent({
 });
 ```
 
-### manipulating data
+### Manipulating Data
 
 **data** provides some methods of data manipulation. Refer to the [data method](../data-method/) document for more.
 
 
-### initializing data
+### Initializing Data
 
 When the component is instantiated, you can pass the **data** option to specify the component's initial data.
 
@@ -296,7 +296,7 @@ var myApp = new MyApp();
 myApp.attach(document.body);
 ```
 
-### computed data
+### Computed Data
 
 Sometimes, the value of a data item may be computed from other data items, and we can define  **computed** to compute data. **computed** is an object, the key is the name of the computed data item, and value is a function that returns the value of the data item.
 
@@ -508,7 +508,36 @@ san.defineComponent({
 ```
 
 
-### dynamic child components
+### Dynamic Subcomponents
+
+3.10.0 and latter versions support `s-is` directive to dynamically determine the class of subcomponents.
+
+- The value of `s-is` directive can be an expression, and its evaluated value **SHOULD** be a string.
+- The component class to be used is the one defined in `components` with a key equal to the value of `s-is` expression.
+
+```javascript
+var BLabel = san.defineComponent({
+    template: '<b>{{text}}</b>'
+});
+var ULabel = san.defineComponent({
+    template: '<u>{{text}}</u>'
+});
+var App = san.defineComponent({
+    components: {
+        'BLabel': BLabel,
+        'ULabel': ULabel
+    },
+    template: '<div><text s-is="type" text="{{name}}"/></div>'
+});
+(new App({
+    data: {
+        name: 'San',
+        type: 'BLabel'
+    }
+})).attach(document.body);
+```
+
+### Self-Managed Sub-Components
 
 In some scenarios, we want components to not create subcomponents when their own views are rendered, but rather to have the flexibility to create subcomponents at some point in the future. For example
 
@@ -516,11 +545,10 @@ In some scenarios, we want components to not create subcomponents when their own
 - The list needs to be created and displayed only when the user clicks
 
 
-Dynamic subcomponents are more demanding for developers. Here are some tips to note, and the following fragment also gives some simple instructions.
+Self-managed subcomponents should be used carefully. Here are some tips to note, and the following code fragment also gives some clarification.
 
-- Dynamically created subcomponents do not need to declare types in **components**
-- Ensure not creating dynamic subcomponents repeatedly. A typical practice is attaching a reference of the dynamic subcomponents to the component as properties and judgments by these properties.
-- Ensure that dynamic subcomponents can be destroyed. You can push them into **children** at creation time or destroy it manually in **disposed**
+- Self-managed subcomponents don't have to be declared in `components`
+- Avoid recreation of self-managed subcomponents. A simple approach is to keep a reference to the created subcomponents instance and check if it's already exists before creating.
 
 ```javascript
 san.defineComponent({
@@ -529,7 +557,7 @@ san.defineComponent({
             this.layer = new Layer();
             this.layer.attach(document.body);
 
-            // 如果有下面一句，则可以不用手动在 disposed 中释放
+            // Alternatively, uncomment the following line and remove the `disposed` handler
             // this.children.push(this.layer);
         }
 
@@ -544,4 +572,412 @@ san.defineComponent({
         this.layer = null;
     }
 });
+```
+
+In 3.7.0 and latter versions, self-managed subcomponents supports `owner` and `source` options.
+
+Specify `owner` to wire the subcomponent with its owner:
+
+- The owner can receive messages dispatched from the subcomponent.
+- The subcomponent will be automatically disposed when its owner is disposed.
+
+`Note`:
+
+If `owner` is specified, do **NOT** manually push the subcomponent into its owner's children. Or the subcomponent can be disposed multiple times.
+
+
+Specify `source` to bind the self-managed subcomponent to its owner:
+
+- data binding (including 2-way data binding)
+- events
+
+
+```javascript
+// Binding data and events of self-managed subcomponent to its owner via `owner` and `source` options.
+// 3.7.0+
+var Person = san.defineComponent({
+    template: '<div>'
+        + '  <input type="text" value="{=name=}">'
+        + '  <input type="text" value="{=email=}">'
+        + '  <button on-click="done">Done</button>'
+        + '</div>',
+
+    done: function () {
+        this.fire('done', {
+            name: this.data.get('name'),
+            email: this.data.get('email')
+        });
+    }
+});
+
+var MyApp = san.defineComponent({
+    template: '<div>'
+        + '  name: {{author.name}}; email{{author.email}}'
+        + '  <button on-click="edit">edit</button>'
+        + '</div>',
+
+    edit: function () {
+        if (!this.editor) {
+            this.editor = new Person({
+                owner: this,
+                source: '<x-person name="{{author.name}}" email="{{author.email}}" on-done="editDone($event)"/>'
+            });
+            this.editor.attach(document.body)
+        }
+    },
+
+    editDone: function (e) {
+        this.data.set('author', e);
+    }
+});
+
+var myApp = new MyApp({
+    data: {
+        author: {
+            name: 'erik',
+            email: 'errorrik@gmail.com'
+        }
+    }
+});
+myApp.attach(document.body);
+```
+
+
+```javascript
+// 2-way data binding of self-managed subcomponent to its owner via `owner` and `source` options.
+// 3.7.0+
+var Person = san.defineComponent({
+    template: '<div>'
+        + '  <input type="text" value="{=name=}">'
+        + '  <input type="text" value="{=email=}">'
+        + '</div>'
+});
+
+var MyApp = san.defineComponent({
+    template: '<div>'
+        + '  name: {{author.name}}; email{{author.email}}'
+        + '  <button on-click="edit">edit</button>'
+        + '</div>',
+
+    edit: function () {
+        if (!this.editor) {
+            this.editor = new Person({
+                owner: this,
+                source: '<x-person name="{=author.name=}" email="{=author.email=}"/>'
+            });
+            this.editor.attach(document.body)
+        }
+    }
+});
+
+var myApp = new MyApp({
+    data: {
+        author: {
+            name: 'erik',
+            email: 'errorrik@gmail.com'
+        }
+    }
+});
+myApp.attach(document.body);
+```
+
+
+```javascript
+// Dispatch events from self-managed subcomponent to its owner via the `owner` option.
+// 3.7.0+
+var Person = san.defineComponent({
+    template: '<div>'
+        + '  <input type="text" value="{=name=}">'
+        + '  <input type="text" value="{=email=}">'
+        + '  <button on-click="done">Done</button>'
+        + '</div>',
+
+    done: function () {
+        this.dispatch('person-done', {
+            name: this.data.get('name'),
+            email: this.data.get('email')
+        });
+    }
+});
+
+var MyApp = san.defineComponent({
+    template: '<div>'
+        + '  name: {{author.name}}; email{{author.email}}'
+        + '  <button on-click="edit">edit</button>'
+        + '</div>',
+
+    edit: function () {
+        if (!this.editor) {
+            this.editor = new Person({
+                owner: this,
+                source: '<x-person name="{{author.name}}" email="{{author.email}}"/>'
+            });
+            this.editor.attach(document.body)
+        }
+    },
+
+    messages: {
+        'person-done': function (e) {
+            this.data.set('author', e.value);
+        }
+    }
+});
+
+var myApp = new MyApp({
+    data: {
+        author: {
+            name: 'erik',
+            email: 'errorrik@gmail.com'
+        }
+    }
+});
+myApp.attach(document.body);
+```
+
+`Note`: In cases where the self-managed subcomponent with `source` option specified is expected to be created multiple times, the `source` template can be compiled manually to avoid San compiling it each time the subcomponent is created, as a measure of performance improvement.
+
+```javascript
+// Compiling source manually
+// 3.7.0+
+var PersonDetail = san.defineComponent({
+    template: '<div>'
+        + '  {{name}}, {{email}}'
+        + '  <button on-click="close">close</button>'
+        + '</div>',
+
+    close: function () { this.el.style.display = 'none' },
+    open: function () { this.el.style.display = 'block' }
+});
+
+var Person = san.defineComponent({
+    template: '<div>'
+        + '  name: {{info.name}}'
+        + '  <button on-click="showDetail">detail</button>'
+        + '</div>',
+
+    // compile source manually
+    detailSource: san.parseTemplate('<x-person name="{{info.name}}" email="{{info.email}}"/>')
+        .children[0],
+
+    showDetail: function () {
+        if (!this.detail) {
+            this.detail = new PersonDetail({
+                owner: this,
+                source: this.detailSource
+            });
+            this.detail.attach(document.body)
+        }
+
+        this.detail.open();
+    }
+});
+
+var MyApp = san.defineComponent({
+    template: '<div><x-p s-for="p in members" info="{{p}}" /></div>',
+
+    components: {
+        'x-p': Person
+    }
+});
+
+var myApp = new MyApp({
+    data: {
+        members: [
+            { name: 'errorrik', email: 'errorrik@what.com' },
+            { name: 'otakustay', email: 'otakustay@what.com' }
+        ]
+    }
+});
+```
+
+In 3.7.1 and latter versions, the `source` template allows child elements to specify slot contents to be inserted into the self-managed subcomponent.
+
+
+```javascript
+// Specifying slot contents
+// 3.7.1+
+var Dialog = san.defineComponent({
+    template: '<span><slot name="title"/><slot/></span>'
+});
+
+var MyApp = san.defineComponent({
+    template: '<div><button on-click="alterStrong">alter strong</button></div>',
+
+    attached: function () {
+        if (!this.dialog) {
+            this.dialog = new Dialog({
+                owner: this,
+                source: '<x-dialog>'
+                    + '<h2 slot="title">{{title}}</h2>'
+                    + '<b s-if="strongContent">{{content}}</b><u s-else>{{content}}</u>'
+                    + '</x-dialog>'
+            });
+            this.dialog.attach(this.el);
+        }
+    },
+
+    alterStrong: function () {
+        this.data.set('strongContent', !this.data.get('strongContent'));
+    }
+});
+
+var myApp = new MyApp({
+    data: {
+        title: 'MyDialog',
+        content: 'Hello San',
+        strongContent: true
+    }
+});
+```
+
+
+Asynchronous Components
+----
+
+`Version`：>= 3.7.0
+
+[createComponentLoader](../../doc/main-members/#createComponentLoader) function returns a component loader. When a component loader is specified in `components`, the component will be loaded asynchronously: the target component will not be rendered during attaching, instead it'll be rendered after. The features of asynchronous components include:
+
+- Each loader returned by [createComponentLoader](../../doc/main-members/#createComponentLoader) will be loaded only once. In other words, the `load` method will be called only once.
+- The target component is ensured to be rendered asynchronously. Even if the loading has already completed, the target component rendering will still be queued as a macro task after the current component finished rendering.
+
+
+[createComponentLoader](../../doc/main-members/#createComponentLoader) accepts an asynchronous function as its argument, in which case the returned Promise should be resolved as a component class.
+
+```javascript
+var InputComponent = san.defineComponent({
+    template: '<input type="text" value="{{value}}"/>'
+});
+
+// simulate the loading process, will be resolved in 1 second
+var inputLoader = san.createComponentLoader(function () {
+    return new Promise(function (resolve) {
+        setTimeout(function () {
+            resolve(InputComponent);
+        }, 1000);
+    });
+});
+
+var MyApp = san.defineComponent({
+    components: {
+        'x-input': inputLoader
+    },
+
+    template: '<div><x-input value="{{name}}"/></div>'
+});
+
+var myApp = new MyApp({
+    data: {
+        name: 'San'
+    }
+});
+myApp.attach(document.body);
+```
+
+Typically, asynchronous components all have a certain complexity. We can specify a placeholder to be shown while the component is loading. In this case, pass an object with a `load` property specifying the loader function and a `placeholder` property specifying the placeholder component to the [createComponentLoader](../../doc/main-members/#createComponentLoader) function.
+
+```javascript
+var InputComponent = san.defineComponent({
+    template: '<input type="text" value="{{value}}"/>'
+});
+
+var LabelComponent = san.defineComponent({
+    template: '<u>{{value}}</u>'
+});
+
+// simulate the loading process, will be resolved in 1 second
+var inputLoader = san.createComponentLoader({
+    load: function () {
+        return new Promise(function (resolve) {
+            setTimeout(function () {
+                resolve(InputComponent);
+            }, 1000);
+        });
+    },
+
+    placeholder: LabelComponent
+});
+
+var MyApp = san.defineComponent({
+    components: {
+        'x-input': inputLoader
+    },
+
+    template: '<div><x-input value="{{name}}"/></div>'
+});
+
+var myApp = new MyApp({
+    data: {
+        name: 'San'
+    }
+});
+myApp.attach(document.body);
+```
+
+And a `fallback` component can be specified in case of load failure. Remember to `reject` the Promise if it fails.
+
+```javascript
+var LabelComponent = san.defineComponent({
+    template: '<u>{{value}}</u>'
+});
+
+// simulate the loading process, will be resolved in 1 second
+var inputLoader = san.createComponentLoader({
+    load: function () {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                reject();
+            }, 1000);
+        });
+    },
+
+    fallback: LabelComponent
+});
+
+var MyApp = san.defineComponent({
+    components: {
+        'x-input': inputLoader
+    },
+
+    template: '<div><x-input value="{{name}}"/></div>'
+});
+
+var myApp = new MyApp({
+    data: {
+        name: 'San'
+    }
+});
+myApp.attach(document.body);
+```
+
+The fallback component can also be specified dynamically by the loader. Simply reject the Promise with a component class.
+
+```javascript
+var LabelComponent = san.defineComponent({
+    template: '<u>{{value}}</u>'
+});
+
+// simulate the loading process, will be resolved in 1 second
+var inputLoader = san.createComponentLoader(function () {
+    return new Promise(function (resolve, reject) {
+        setTimeout(function () {
+            reject(LabelComponent);
+        }, 1000);
+    });
+});
+
+var MyApp = san.defineComponent({
+    components: {
+        'x-input': inputLoader
+    },
+
+    template: '<div><x-input value="{{name}}"/></div>'
+});
+
+var myApp = new MyApp({
+    data: {
+        name: 'San'
+    }
+});
+myApp.attach(document.body);
 ```
