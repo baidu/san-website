@@ -537,7 +537,7 @@ var App = san.defineComponent({
 })).attach(document.body);
 ```
 
-### Self-Managed Sub-Components
+### Manually Created Subcomponents
 
 In some scenarios, we want components to not create subcomponents when their own views are rendered, but rather to have the flexibility to create subcomponents at some point in the future. For example
 
@@ -545,10 +545,10 @@ In some scenarios, we want components to not create subcomponents when their own
 - The list needs to be created and displayed only when the user clicks
 
 
-Self-managed subcomponents should be used carefully. Here are some tips to note, and the following code fragment also gives some clarification.
+Be careful to create subcomponents manually. Here are some tips to note, and the following code fragment also gives some clarification.
 
-- Self-managed subcomponents don't have to be declared in `components`
-- Avoid recreation of self-managed subcomponents. A simple approach is to keep a reference to the created subcomponents instance and check if it's already exists before creating.
+- Manually created subcomponents don't have to be declared in `components`
+- Avoid recreation. A simple approach is to keep a reference to the created subcomponents instance and check if it's already exists before creating.
 
 ```javascript
 san.defineComponent({
@@ -574,7 +574,7 @@ san.defineComponent({
 });
 ```
 
-In 3.7.0 and latter versions, self-managed subcomponents supports `owner` and `source` options.
+In 3.7.0 and latter versions, manually created subcomponents supports `owner` and `source` options.
 
 Specify `owner` to wire the subcomponent with its owner:
 
@@ -586,14 +586,14 @@ Specify `owner` to wire the subcomponent with its owner:
 If `owner` is specified, do **NOT** manually push the subcomponent into its owner's children. Or the subcomponent can be disposed multiple times.
 
 
-Specify `source` to bind the self-managed subcomponent to its owner:
+Specify `source` to bind the manually created subcomponent to its owner:
 
 - data binding (including 2-way data binding)
 - events
 
 
 ```javascript
-// Binding data and events of self-managed subcomponent to its owner via `owner` and `source` options.
+// Binding data and events of a manually created subcomponent to its owner via `owner` and `source` options.
 // 3.7.0+
 var Person = san.defineComponent({
     template: '<div>'
@@ -644,7 +644,7 @@ myApp.attach(document.body);
 
 
 ```javascript
-// 2-way data binding of self-managed subcomponent to its owner via `owner` and `source` options.
+// 2-way data binding of a manually created subcomponent to its owner via `owner` and `source` options.
 // 3.7.0+
 var Person = san.defineComponent({
     template: '<div>'
@@ -683,7 +683,7 @@ myApp.attach(document.body);
 
 
 ```javascript
-// Dispatch events from self-managed subcomponent to its owner via the `owner` option.
+// Dispatch events from a manually created subcomponent to its owner via the `owner` option.
 // 3.7.0+
 var Person = san.defineComponent({
     template: '<div>'
@@ -734,7 +734,7 @@ var myApp = new MyApp({
 myApp.attach(document.body);
 ```
 
-`Note`: In cases where the self-managed subcomponent with `source` option specified is expected to be created multiple times, the `source` template can be compiled manually to avoid San compiling it each time the subcomponent is created, as a measure of performance improvement.
+`Note`: In cases where the manually created subcomponent with `source` option specified is expected to be created multiple times, the `source` template can be compiled manually to avoid San compiling it each time the subcomponent is created, as a measure of performance improvement.
 
 ```javascript
 // Compiling source manually
@@ -790,7 +790,7 @@ var myApp = new MyApp({
 });
 ```
 
-In 3.7.1 and latter versions, the `source` template allows child elements to specify slot contents to be inserted into the self-managed subcomponent.
+In 3.7.1 and latter versions, the `source` template allows child elements to specify slot contents to be inserted into the manually created subcomponent.
 
 
 ```javascript

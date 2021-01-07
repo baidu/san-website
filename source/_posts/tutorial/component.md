@@ -550,7 +550,7 @@ var App = san.defineComponent({
 })).attach(document.body);
 ```
 
-### 自创建子组件
+### 手动创建子组件
 
 在一些场景下，我们不希望组件通过声明式，在自身视图渲染时创建子组件；而希望通过 JavaScript 灵活控制在未来的某些时间点创建子组件。比如：
 
@@ -558,10 +558,10 @@ var App = san.defineComponent({
 - 列表只有在用户点击时才需要创建并展示
 
 
-自创建子组件对开发者要求更高，我们在这里给出一些需要注意的地方，下面节选的代码也做了一些简单的说明：
+手动创建子组件对开发者要求更高，我们在这里给出一些需要注意的地方，下面节选的代码也做了一些简单的说明：
 
-- 自创建子组件无需在 `components` 中声明类型
-- 保证自创建子组件不要被重复创建。常见的做法是在实例的属性上持有对创建组件的引用，并以此作判断
+- 手动创建的子组件无需在 `components` 中声明类型
+- 确保不要重复创建。常见的做法是在实例的属性上持有对创建组件的引用，并以此作判断
 
 ```javascript
 san.defineComponent({
@@ -584,19 +584,19 @@ san.defineComponent({
 });
 ```
 
-在 3.7.0 以上的版本，自创建子组件增加了 owner 和 source 参数的支持。
+在 3.7.0 以上的版本，手动创建的子组件支持 owner 和 source 参数。
 
-指定 owner 可以自动维护 owner 与自创建子组件之间的关系：
+指定 owner 可以自动维护 owner 与手动创建的子组件之间的关系：
 
-- owner 可以收到自创建子组件 dispatch 的消息
-- owner dispose 时，自创建子组件将自动 dispose
+- owner 可以收到手动创建的子组件 dispatch 的消息
+- owner dispose 时，手动创建的子组件将自动 dispose
 
 `注意`：
 
-指定 owner 后，不允许将组件 push 到 owner 的 children 中，否则组件 dispose 过程中，会对自创建子组件进行多次 dispose 操作。
+指定 owner 后，不允许将组件 push 到 owner 的 children 中，否则组件 dispose 过程中，会对手动创建的子组件进行多次 dispose 操作。
 
 
-source 可以声明自创建子组件与 owner 之间的绑定关系：
+source 可以声明手动创建的子组件与 owner 之间的绑定关系：
 
 - 数据绑定，含双向绑定
 - 事件
@@ -605,7 +605,7 @@ source 可以声明自创建子组件与 owner 之间的绑定关系：
 
 
 ```javascript
-// 自创建子组件的数据与事件绑定，指定owner和source
+// 手动创建的子组件的数据与事件绑定，指定owner和source
 // 3.7.0+
 var Person = san.defineComponent({
     template: '<div>'
@@ -656,7 +656,7 @@ myApp.attach(document.body);
 
 
 ```javascript
-// 自创建子组件双向绑定，指定owner和source
+// 手动创建的子组件双向绑定，指定owner和source
 // 3.7.0+
 var Person = san.defineComponent({
     template: '<div>'
@@ -695,7 +695,7 @@ myApp.attach(document.body);
 
 
 ```javascript
-// 自创建子组件指定owner，可以dispatch
+// 手动创建的子组件指定owner，可以dispatch
 // 3.7.0+
 var Person = san.defineComponent({
     template: '<div>'
@@ -746,7 +746,7 @@ var myApp = new MyApp({
 myApp.attach(document.body);
 ```
 
-`提示`：如果你的组件包含指定 source 声明的自创建子组件，并且预期会被循环多次创建，可以将 source 模板手动预编译，避免框架对 source 字符串进行多次重复编译，提升性能。
+`提示`：如果你的组件包含指定 source 声明的手动创建的子组件，并且预期会被循环多次创建，可以将 source 模板手动预编译，避免框架对 source 字符串进行多次重复编译，提升性能。
 
 ```javascript
 // 手工预编译 source
@@ -802,7 +802,7 @@ var myApp = new MyApp({
 });
 ```
 
-在 3.7.1 以上的版本，自创建子组件的 source 参数允许声明子元素，指定插入 slot 部分的内容。
+在 3.7.1 以上的版本，手动创建的子组件的 source 参数允许声明子元素，指定插入 slot 部分的内容。
 
 
 ```javascript
