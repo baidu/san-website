@@ -33,6 +33,12 @@ layout: false
 
     <div class="feature-container" id="Features">
 
+        <!-- Article Bar-->
+        <div class="article-container hidden">
+            <h5 class="article-bar-title"><%= __('index.feature.article') %></h5>
+            <div class="article-bar"></div>
+        </div>
+
         <section class="feature<% if (page.lang) { %> feature-en<% } %>">
 
         <div class="feature-row">
@@ -272,7 +278,6 @@ layout: false
                 $('.navbar-default').stickUp();
             });
         });
-
     </script>
 </body>
 </html>
