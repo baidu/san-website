@@ -13,6 +13,7 @@ index:
     api: API
     home: HOME
   feature:
+    article: Articles
     tpl: HTML Template
     tpl_description: Declarative template. HTML conformant template makes it easier for HTML developers.
     data_driven: Data Driven
