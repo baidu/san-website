@@ -1,44 +1,64 @@
 $(document).ready(function() {
-    // 拉取文章数据，优先拉取 GitHub 上的文章数据，拉取失败时（比如被墙了），再走降级方案
-    fetch('https://raw.githubusercontent.com/baidu/san-website/master/source/article.json')
-      .then(res => res.json())
-      .then(res => setArticle(res))
-      .catch(() => {
-        fetch('article.json')
-          .then(res => res.json())
-          .then(res => setArticle(res));
+    // 动画方法
+    var createAnimation = function(selector) {
+      var wrapper =  document.querySelector(selector);
+      wrapper.style.opacity = 1;
+      var el = wrapper.querySelector('.article-text-wrapper');
+      el.innerHTML = el.textContent.replace(/\S/g, '<span class="article-char">$&</span>');
+      anime.timeline({loop: false})
+      .add({
+        targets: selector + ' .article-char',
+        translateY: ['30px', 0],
+        translateZ: 0,
+        duration: 750,
+        delay: (el, i) => 50 * i
+      })
+      .add({
+        targets: selector,
+        opacity: 0,
+        duration: 1000,
+        easing: 'easeOutExpo',
+        delay: 618
       });
+    };
 
-    function setArticle(response) {
-      if (response && response.length) {
-        document.querySelector('.article-container').classList.remove('hidden');
-        const frag = document.createDocumentFragment();
-        response.forEach(article => {
-          const a = document.createElement('a');
-          a.textContent = article.title;
-          a.href = article.link;
-          a.target = '_blank';
-          frag.appendChild(a);
-        });
-        const bar = document.querySelector('.article-bar')
-        bar.appendChild(frag);
-        let isForward = true;   // 文章滚动条的滚动方向
-        const scrollLeftMax = bar.scrollWidth - bar.clientWidth;
-        setTimeout(() => {
-          setInterval(() => {
-            if (isForward) {
-              if (++bar.scrollLeft >= scrollLeftMax) {
-                isForward = false;
-              }
-            } else {
-              if (--bar.scrollLeft <= 0) {
-                isForward = true;
-              }
-            }
-          }, 50);
-        }, 1000);
+    var createArticleAnimation = function (selector, data) {
+      if (data && data.length) {
+        var createArticleItem = function(item) {
+          document.querySelector(selector).innerHTML = '<a class="article-text-wrapper" href="' + item.link + '" target="_blank"><span class="article-text">' + item.title + '</span></a>';
+          createAnimation(selector);
+        };
+        var i = 0;
+        createArticleItem(data[i]);
+        setInterval(function() {
+          if (++i >= data.length) { 
+            i = 0;
+          }
+          createArticleItem(data[i]);
+        }, 4000);
       }
-    }
+    };
+
+    var initArticle = function() {
+      var selector = '.article-container';
+      var el = document.querySelector(selector);
+      var articleSrc = el.getAttribute('data-src');
+      fetch(articleSrc)
+        .then(function(res) {
+          return res.json();
+        })
+        .then(function(res) {
+          return createArticleAnimation(selector, res);
+        })
+        .catch(function(){
+          el.parentNode.removeChild(el);
+          console.log('Create Article Failed!');
+        });
+    };
+   
+    initArticle();
+
+    
 
 		//SmothScroll
 		$('a[href*=#]').click(function() {
