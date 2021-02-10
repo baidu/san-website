@@ -246,8 +246,6 @@ body{
   top: 0;
   line-height: 60px;
 }
-.nav-a{
-}
 
 .nav>li>a{
   padding-right: 10px;
@@ -258,11 +256,33 @@ body{
   margin-left: 20px;
 }
 
+/*article*/
+.article-container {
+  text-align: center;
+  position: relative;
+  font-size: 18px;
+  margin: 60px auto -65px;
+}
+.article-container .article-text-wrapper {
+  position: relative;
+  display: inline-block;
+  padding: 5px 2px 3px 0;
+  overflow: hidden;
+  text-decoration: none;
+  z-index: 3;
+}
+
+.article-container .article-text-wrapper .article-char {
+  display: inline-block;
+  line-height: 1em;
+}
+
 /*feature*/
 .feature-container{
   margin: 0 auto;
   max-width: 1170px;
   overflow:hidden;
+  position: relative;
 }
 .feature{
   border-top: 0;
@@ -546,7 +566,7 @@ footer dt{
   }
 
   .feature{
-    margin-top: 30px;
+    margin-top: 55px;
   }
   .feature-item{
     width: 100%;

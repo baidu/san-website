@@ -16,23 +16,23 @@ layout: false
     <!-- NavBar-->
     <nav class="navbar-default" role="navigation">
         <div class="navbar-container">
-
             <a href="#home" class="nav-logo"><img src="<%- url_for('img/logo2.png') %>"></a>
-
-
             <a class="nav-a1" href="#Features"><%= __('index.nav.features') %></a>
             <a class="nav-a2" href="#Resources"><%= __('index.nav.resources') %></a>
             <a class="nav-a3" href="#Facilities"><%= __('index.nav.facilities') %></a>
-
             <a class="nav-lang" href="<% if (page.lang != "default") { %><%=url_for_lang(page.path.replace(page.lang + '/', ''), 'default')%><% } else { %><%=url_for_lang(page.path, 'en')%><% } %>"><% if (page.lang != "default") { %>中文<% } else { %>EN<% } %></a>
-
         </div>
     </nav>
 
+    <!-- 公众号文章 -->
+    <div class="article-container" data-src="<%- url_for('data/article.json') %>">
+        <a class="article-text-wrapper">
+            <span class="article-text"></span>
+        </a>
+    </div>
+
     <!-- feature-->
-
     <div class="feature-container" id="Features">
-
         <section class="feature<% if (page.lang) { %> feature-en<% } %>">
 
         <div class="feature-row">
@@ -263,6 +263,7 @@ layout: false
     <script src="<%- url_for('js/jquery-1.10.2.js') %>"></script>
     <script src="<%- url_for('js/script.js') %>"></script>
     <script src="<%- url_for('js/bodymovin.min.js') %>"></script>
+    <script src="<%- url_for('js/anime.js') %>"></script>
     <!-- StikyMenu -->
     <script src="<%- url_for('js/stickUp.min.js') %>"></script>
 
@@ -272,7 +273,6 @@ layout: false
                 $('.navbar-default').stickUp();
             });
         });
-
     </script>
 </body>
 </html>

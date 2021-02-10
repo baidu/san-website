@@ -13,6 +13,7 @@ index:
     api: API
     home: HOME
   feature:
+    article: 相关文章
     tpl: HTML模版
     tpl_description: 声明式的模板，在编写视图时就像是在写一个普通的页面，更符合 HTML 开发人员的习惯。
     data_driven: 数据驱动

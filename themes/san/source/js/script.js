@@ -1,4 +1,65 @@
 $(document).ready(function() {
+    // 动画方法
+    var createAnimation = function(selector) {
+      var wrapper =  document.querySelector(selector);
+      wrapper.style.opacity = 1;
+      var el = wrapper.querySelector('.article-text-wrapper');
+      el.innerHTML = el.textContent.replace(/\S/g, '<span class="article-char">$&</span>');
+      anime.timeline({loop: false})
+      .add({
+        targets: selector + ' .article-char',
+        translateY: ['30px', 0],
+        translateZ: 0,
+        duration: 750,
+        delay: (el, i) => 50 * i
+      })
+      .add({
+        targets: selector,
+        opacity: 0,
+        duration: 1000,
+        easing: 'easeOutExpo',
+        delay: 618
+      });
+    };
+
+    var createArticleAnimation = function (selector, data) {
+      if (data && data.length) {
+        var createArticleItem = function(item) {
+          document.querySelector(selector).innerHTML = '<a class="article-text-wrapper" href="' + item.link + '" target="_blank"><span class="article-text">' + item.title + '</span></a>';
+          createAnimation(selector);
+        };
+        var i = 0;
+        createArticleItem(data[i]);
+        setInterval(function() {
+          if (++i >= data.length) { 
+            i = 0;
+          }
+          createArticleItem(data[i]);
+        }, 4000);
+      }
+    };
+
+    var initArticle = function() {
+      var selector = '.article-container';
+      var el = document.querySelector(selector);
+      var articleSrc = el.getAttribute('data-src');
+      fetch(articleSrc)
+        .then(function(res) {
+          return res.json();
+        })
+        .then(function(res) {
+          return createArticleAnimation(selector, res);
+        })
+        .catch(function(){
+          el.parentNode.removeChild(el);
+          console.log('Create Article Failed!');
+        });
+    };
+   
+    initArticle();
+
+    
+
 		//SmothScroll
 		$('a[href*=#]').click(function() {
 			if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
