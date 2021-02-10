@@ -49,7 +49,7 @@ var myComponent = new MyComponent({
 
 ```html
 <a id="wrap"><!--s-data:{
-        email: 'error@gmail.com',
+        email: 'errorrik@gmail.com',
         name: 'errorrik'}-->
     <span title="errorrik@gmail.com">errorrik</span>
 </a>
