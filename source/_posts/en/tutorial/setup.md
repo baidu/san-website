@@ -42,6 +42,11 @@ NPM is a package manager with a large community, which is especially useful when
 $ npm install san
 ```
 
+### CLI
+
+San provides an official CLI for quickly scaffolding ambitious projects. It provides out-of-the-box build setup for modern front-end workflows, takes just a few minutes to get a brand new San project up and running, and comes with useful features such as hot reloading, code linting, and build versions available for production environments. It also has a graphical user interface. Details are available in [the San CLI documentation]((https://ecomfe.github.io/san-cli/)).
+
+
 Usage
 -----
 
