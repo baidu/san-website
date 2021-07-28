@@ -49,7 +49,7 @@ index:
     loader_description: Webpack loader for single-file San components.
     factory_description: Component register and instantiation.
     ssr_description: Server-Side Render framework and utils.
-    drei_description: VSCode extension.
+    sanny_description: VSCode extension.
     cli_description: A CommandLine tooling for rapid development.
     anode_utils_description: Util Functions for ANode.
     test_utils_description: Unit testing utility library.

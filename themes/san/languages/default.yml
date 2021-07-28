@@ -49,7 +49,7 @@ index:
     loader_description: San 单文件组件的 Webpack loader。
     factory_description: 组件工厂能帮助你在不同环境下更灵活的装配组件。
     ssr_description: 服务端渲染框架与工具库。
-    drei_description: VSCode插件。
+    sanny_description: VSCode插件。
     cli_description: 帮助你快速搭建San应用的命令行工具。
     anode_utils_description: 一些工具方法能够帮助你处理ANode.
     test_utils_description: San的单元测试实用工具库。
