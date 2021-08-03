@@ -117,7 +117,7 @@ san.defineComponent({
 
 `解释`：
 
-通过 HTML 格式的一个标签，声明组件与 owner 之间的数据绑定和事件。指定 source 同时需要指定 owner。更详细的用法请参考 [动态子组件](../../tutorial/component/#动态子组件) 文档，更多声明格式细节请参考 [模板](../../tutorial/template/) 与 [事件](../../tutorial/event/) 文档。
+通过 HTML 格式的一个标签，声明组件与 owner 之间的数据绑定和事件。指定 source 同时需要指定 owner。更详细的用法请参考 [手动创建子组件](../../tutorial/component/#手动创建子组件) 文档，更多声明格式细节请参考 [模板](../../tutorial/template/) 与 [事件](../../tutorial/event/) 文档。
 
 `提醒`：
 
@@ -132,7 +132,7 @@ san.defineComponent({
         if (!this.calendar) {
             this.calendar = new Calendar({
                 owner: this,
-                source: '<x-cal value="{{birthday}}' on-change="birthdayChange($event)"/>'
+                source: '<x-cal value="{{birthday}}" on-change="birthdayChange($event)"/>'
             });
 
             this.calendar.attach(document.body);
