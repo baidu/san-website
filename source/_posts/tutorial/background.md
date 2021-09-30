@@ -34,7 +34,7 @@ View 层，作为视图模板存在，在 MVVM 里，整个 View 是一个动态
 
 ### ViewModel 层
 
-ViewModel 层把 View 需要的层数据暴露，并对 View 层的 **数据绑定声明**、 **指令声明**、 **事件绑定声明** 负责，也就是处理 View 层的具体业务逻辑。ViewModel 底层会做好绑定属性的监听。当 ViewModel 中数据变化，View 层会得到更新；而当 View 中声明了数据的双向绑定（通常是表单元素），框架也会监听 View 层（表单）值的变化。一旦值变化，View 层绑定的 ViewModel 中的数据也会得到自动更新。
+ViewModel 层把 View 层需要的数据暴露，并对 View 层的 **数据绑定声明**、 **指令声明**、 **事件绑定声明** 负责，也就是处理 View 层的具体业务逻辑。ViewModel 底层会做好绑定属性的监听。当 ViewModel 中数据变化，View 层会得到更新；而当 View 中声明了数据的双向绑定（通常是表单元素），框架也会监听 View 层（表单）值的变化。一旦值变化，View 层绑定的 ViewModel 中的数据也会得到自动更新。
 
 ### 前端 MVVM 图示
 
