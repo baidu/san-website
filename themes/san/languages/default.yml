@@ -45,6 +45,7 @@ index:
     router_description: 支持hash和html5模式的router，单页或同构的Web应用通常需要它。
     store_description: 应用状态管理套件，其理念是类似flux的单向流。
     update_description: Immutable的对象更新库，和san-store配合进行应用状态数据更新。
+    composition_description: 支持按功能定义相应的数据、方法、生命周期运行逻辑。
     devtool_description: 基于Chrome扩展的开发者工具。
     loader_description: San 单文件组件的 Webpack loader。
     factory_description: 组件工厂能帮助你在不同环境下更灵活的装配组件。
@@ -120,6 +121,9 @@ practice:
   state:
     title: 应用状态管理
     0: 如何使用 san-store 实现后台系统的状态管理？
+  composition:
+    title: 组合式 API
+    0: 如何使用 san-composition 按功能组织代码？
   faq:
     0: Q&A集锦
     1: IE兼容性问题以及解决方案
