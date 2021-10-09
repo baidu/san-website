@@ -145,6 +145,14 @@ The component is removed from the DOM and components had destroyed. The **dispos
 
 The component completes a refresh due to data changes. The **updated** method on the component will be called.
 
+### error
+
+`version`：>= 3.10.7
+
+`explanation`：
+
+Called when an error from any descendent component is captured. The hook receives three arguments: the error, the component instance that triggered the error, and a string containing information on where the error was captured. The hook will stop the error from propagating further.
+
 define Component
 -------
 
