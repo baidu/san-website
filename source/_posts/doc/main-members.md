@@ -14,7 +14,7 @@ categories:
 
 `解释`：
 
-**方法** 。定义组件的快捷方法。详细请参考[组件定义](../../tutorial/component/#组件定义)文档。
+**方法** 。定义组件的快捷方法。详细请参考 [组件定义](../../tutorial/component/#组件定义) 文档。
 
 `用法`：
 
@@ -28,6 +28,24 @@ var MyApp = san.defineComponent({
         };
     }
 });
+```
+
+### defineTemplateComponent
+
+`版本`：>= 3.12.0
+
+`描述`： {Function} defineTemplateComponent({string|Object}templateOrOptions)
+
+`解释`：
+
+**方法** 。定义模板组件。详细请参考 [模版组件](../../tutorial/component/#模版组件) 文档。
+
+`用法`：
+
+```javascript
+var PanelWithHeader = san.defineTemplateComponent(
+    '<dl><dt><slot name="header"/></dt><dd><slot/></dd></dl>'
+);
 ```
 
 ### createComponentLoader
