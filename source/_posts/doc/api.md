@@ -479,6 +479,43 @@ var MyComponent = san.defineComponent({
 });
 ```
 
+
+### autoFillStyleAndId
+
+`解释`：
+
+组件根节点是否应用外部通过绑定传入的 id / class / style。默认为 **true**。
+
+`版本`：>= 3.7.5
+
+`类型`： boolean
+
+`用法`：
+
+```javascript
+var AComponent = san.defineComponent({
+    template: '<a class="inner">my component</a>',
+    autoFillStyleAndId: false
+});
+
+var BComponent = san.defineComponent({
+    template: '<b class="inner">my component</b>'
+});
+
+var MyApp = san.defineComponent({
+    component: {
+        'a-cmpt': AComponent,
+        'b-cmpt': BComponent
+    },
+
+    // element a class: "inner"
+    // element b class: "inner outer"
+    template: '<div><a-cmpt class="outer"/><b-cmpt class="outer"/></div>'
+});
+```
+
+
+
 ### updateMode
 
 `解释`：
