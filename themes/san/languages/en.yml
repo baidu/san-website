@@ -76,9 +76,12 @@ recommend:
   tutorial_component: Component
   tutorial_reverse: Component Reversion
   tutorial_ssr: SSR
+  api: API
+  component_api: Component API
+  main_api: San API
   more: More
-  more_component_api: Component API
-  more_main_api: San API
+  more_anode_doc: ANode Doc
+  more_apack_doc: APack Doc
   more_dist_files: Dist Files
   more_changelog: Changelog
   facilities: Facilities

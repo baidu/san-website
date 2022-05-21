@@ -75,9 +75,12 @@ recommend:
   tutorial_component: 组件
   tutorial_reverse: 组件反解
   tutorial_ssr: 服务端渲染
+  api: API
+  component_api: 组件 API
+  main_api: 主模块 API
   more: 了解更多
-  more_component_api: 组件 API
-  more_main_api: 主模块 API
+  more_anode_doc: ANode 文档
+  more_apack_doc: APack 文档
   more_dist_files: 发布版本说明
   more_changelog: 版本更新日志
   facilities: 周边
