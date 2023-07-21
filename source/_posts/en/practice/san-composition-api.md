@@ -500,7 +500,7 @@ defineComponent(() => {
     template(/* ... */);
     const count = data('count', 1);
 
-    // 这里定义的方法不能使用剪头函数
+    // 这里定义的方法不能使用箭头函数
     method('increment', function () {
         this.dispatch('increment:count', count.get());
     });
