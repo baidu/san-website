@@ -76,6 +76,16 @@ recommend:
   tutorial_component: Component
   tutorial_reverse: Component Reversion
   tutorial_ssr: SSR
+  component: Component
+  component_define: Define Component
+  component_lifecycle: Component Lifecycle
+  component_view: Component View
+  component_data: Component Data
+  component_tree: Component Tree
+  component_template_component: Template Component
+  component_async: Async Component
+  component_hydrate: Component Hydrate
+  component_error: Component Error
   api: API
   component_api: Component API
   main_api: San API
