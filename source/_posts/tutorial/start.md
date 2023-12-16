@@ -10,7 +10,7 @@ San 通过声明式的类 HTML 视图模板，在支持所有原生 HTML 的语�
 
 组件是 San 的基本单位，是独立的数据、逻辑、视图的封装单元。从页面角度看，组件是 HTML 元素的扩展；从功能模式角度看，组件是一个 ViewModel。San 组件提供了完整的生命周期，与 WebComponent 的生命周期相符合，组件间是可嵌套的树形关系，完整的支持了组件层级、组件间的通信，方便组件间的数据流转。San 的组件机制，可以有效支撑业务开发上的组件化需求。
 
-San 支持[组件反解](https://baidu.github.io/san/tutorial/reverse/)，以此提供[服务端渲染](https://baidu.github.io/san/tutorial/ssr/)能力，可以解决纯前端渲染导致的响应用户交互时延长、SEO 问题。除此之外，San 还提供了一些周边开源产品，与 San 配合使用，可以帮助开发者快速搭建可维护的大型 SPA 应用。
+San 支持[组件反解](../../component/hydrate/)，以此提供[服务端渲染](../ssr/)能力，可以解决纯前端渲染导致的响应用户交互时延长、SEO 问题。除此之外，San 还提供了一些周边开源产品，与 San 配合使用，可以帮助开发者快速搭建可维护的大型 SPA 应用。
 
 现在，我们从一些简单的例子，开始了解 San。这些例子可以从[这里](https://github.com/baidu/san/tree/master/example/start)找到。
 
@@ -82,3 +82,19 @@ myApp.attach(document.body);
 双向绑定通常出现在用户输入的场景，将用户输入结果自动更新到组件数据。在这个例子中，通过 **{= expression =}** 声明双向绑定，把输入框的 value 与数据项 name 绑定起来。
 
 
+组件
+--------
+
+组件是 San 的基本单位，是独立的数据、逻辑、视图的封装单元。从页面的角度看，组件是 HTML 元素的扩展。从功能模式的角度看，组件是一个 ViewModel。
+
+组件的内容比较多，下面的文档详细描述了组件机制：
+
+- [组件定义](../../component/define/)
+- [组件生命周期](../../component/lifecycle/)
+- [组件视图](../../component/view/)
+- [组件数据](../../component/data/)
+- [组件树结构](../../component/tree/)
+- [模版组件](../../component/template-component/)
+- [异步组件](../../component/async/)
+- [组件反解](../../component/hydrate/)
+- [组件异常](../../component/error/)

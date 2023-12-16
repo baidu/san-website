@@ -6,7 +6,7 @@ categories:
 
 > From 3.8.0, server side rendering for san is provided by [san-ssr][san-ssr]. If you're using san@<3.8.0, please refer to [Server Side Rendering (before 3.8.0)](../ssr-before-3.8/).
 
-San's server-side rendering is based on [component reversion](../reverse/).
+San's server-side rendering is based on [component hydrate](../../component/hydrate/).
 
 - The HTML output from the server contains markups fragment that has no effect on the view and helps the component understand the structure of the data and view.
 - On the browser side, the component structure is understood from the markup fragment when the component is initialized, and the component can respond correctly when the user operates.

@@ -10,7 +10,7 @@ San declaratively renders data to the DOM using an HTML-based template syntax. I
 
 Component, the basic unit of San, is an independent unit of data, logic, and view. From a page perspective, a component is an extension of an HTML element; from a functional mode perspective, a component is a ViewModel. San components provide a complete lifecycle, which is part of the Web Components Spec. Also, San components can be tree-nested and communicated with each other via cross-component data flow. Therefore, San's component mechanism can effectively support the componentization requirements of business development.
 
-Based on the [component reversion](https://baidu.github.io/san/tutorial/reverse/), San provides server side rendering features through which we can create SEO friendly apps with faster initial page rendering and other pros compared with pure client side rendering. Meanwhile, the ecosystem of San offer a series of modern tooling and supporting libraries. In short, San is perfectly capable of powering large-scaled maintainable Single-Page Applications.
+Based on the [component hydrate](../../component/hydrate/), San provides server side rendering features through which we can create SEO friendly apps with faster initial page rendering and other pros compared with pure client side rendering. Meanwhile, the ecosystem of San offer a series of modern tooling and supporting libraries. In short, San is perfectly capable of powering large-scaled maintainable Single-Page Applications.
 
 The easiest way to try out San is using some simple [examples]. Now, Here we go.
 
@@ -77,3 +77,21 @@ myApp.attach(document.body);
 ```
 
 In this case, We use the **{= expression =}** directive to create two-way data bindings on the input element. It automatically picks the correct way to update the element based on the input.
+
+Component
+-----
+
+Component, the basic unit of San, is an independent unit of data, logic, and view. From a page perspective, a component is an extension of an HTML element; from a functional mode perspective, a component is a ViewModel.
+
+Following links are talking about component tech details：
+
+- [Define Component](../../component/define/)
+- [Component Lifecycle](../../component/lifecycle/)
+- [Component View](../../component/view/)
+- [Component Data](../../component/data/)
+- [Component Tree](../../component/tree/)
+- [Template Component](../../component/template-component/)
+- [Async Component](../../component/async/)
+- [Component Hydrate](../../component/hydrate/)
+- [Error Capture](../../component/error/)
+
