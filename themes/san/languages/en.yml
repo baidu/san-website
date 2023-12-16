@@ -85,7 +85,7 @@ recommend:
   component_template_component: Template Component
   component_async: Async Component
   component_hydrate: Component Hydrate
-  component_error: Component Error
+  component_error: Error Capture
   api: API
   component_api: Component API
   main_api: San API

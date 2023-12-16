@@ -1,7 +1,6 @@
     <dl>
         <dt><%= __('recommend.tutorial') %></dt>
         <dd><a href="<%- url_for_lang('tutorial/setup/') %>"<%if(page.path.indexOf('tutorial/setup/')==0){%> class="recommend-active"<%}%>><%= __('recommend.tutorial_setup') %></a></dd>
-        <dd><a href="<%- url_for_lang('tutorial/background/') %>"<%if(page.path.indexOf('tutorial/background/')==0){%> class="recommend-active"<%}%>><%= __('recommend.tutorial_background') %></a></dd>
         <dd><a href="<%- url_for_lang('tutorial/start/') %>"<%if(page.path.indexOf('tutorial/start/')==0){%> class="recommend-active"<%}%>><%= __('recommend.tutorial_start') %></a></dd>
         <dd><a href="<%- url_for_lang('tutorial/template/') %>"<%if(page.path.indexOf('tutorial/template/')==0){%> class="recommend-active"<%}%>><%= __('recommend.tutorial_template') %></a></dd>
         <dd><a href="<%- url_for_lang('tutorial/data-method/') %>"<%if(page.path.indexOf('tutorial/data-method/')==0){%> class="recommend-active"<%}%>><%= __('recommend.tutorial_data_method') %></a></dd>
@@ -13,9 +12,6 @@
         <dd><a href="<%- url_for_lang('tutorial/form/') %>"<%if(page.path.indexOf('tutorial/form/')==0){%> class="recommend-active"<%}%>><%= __('recommend.tutorial_form') %></a></dd>
         <dd><a href="<%- url_for_lang('tutorial/slot/') %>"<%if(page.path.indexOf('tutorial/slot/')==0){%> class="recommend-active"<%}%>><%= __('recommend.tutorial_slot') %></a></dd>
         <dd><a href="<%- url_for_lang('tutorial/transition/') %>"<%if(page.path.indexOf('tutorial/transition/')==0){%> class="recommend-active"<%}%>><%= __('recommend.tutorial_transition') %></a></dd>
-        <dd><a href="<%- url_for_lang('tutorial/component/') %>"<%if(page.path.indexOf('tutorial/component/')==0){%> class="recommend-active"<%}%>><%= __('recommend.tutorial_component') %></a></dd>
-        <dd><a href="<%- url_for_lang('tutorial/reverse/') %>"<%if(page.path.indexOf('tutorial/reverse/')==0){%> class="recommend-active"<%}%>><%= __('recommend.tutorial_reverse') %></a></dd>
-        <dd><a href="<%- url_for_lang('tutorial/ssr/') %>"<%if(page.path.indexOf('tutorial/ssr/')==0){%> class="recommend-active"<%}%>><%= __('recommend.tutorial_ssr') %></a></dd>
 
         <dt><%= __('recommend.component') %></dt>
         <dd><a href="<%- url_for_lang('component/define/') %>"<%if(page.path.indexOf('component/define/')==0){%> class="recommend-active"<%}%>><%= __('recommend.component_define') %></a></dd>
@@ -33,10 +29,12 @@
         <dd><a href="<%- url_for_lang('doc/main-members/') %>"<%if(page.path.indexOf('doc/main-members/')==0){%> class="recommend-active"<%}%>><%= __('recommend.main_api') %></a></dd>
 
         <dt><%= __('recommend.more') %></dt>
+        <dd><a href="<%- url_for_lang('tutorial/ssr/') %>"<%if(page.path.indexOf('tutorial/ssr/')==0){%> class="recommend-active"<%}%>><%= __('recommend.tutorial_ssr') %></a></dd>
         <dd><a href="https://github.com/baidu/san/blob/master/doc/anode.md" target="_blank"><%= __('recommend.more_anode_doc') %></a></dd>
         <dd><a href="https://github.com/baidu/san/blob/master/doc/anode-pack.md" target="_blank"><%= __('recommend.more_apack_doc') %></a></dd>
         <dd><a href="https://github.com/baidu/san/tree/master/dist" target="_blank"><%= __('recommend.more_dist_files') %></a></dd>
         <dd><a href="https://github.com/baidu/san/blob/master/CHANGELOG.md" target="_blank"><%= __('recommend.more_changelog') %></a></dd>
+        <dd><a href="<%- url_for_lang('tutorial/background/') %>"<%if(page.path.indexOf('tutorial/background/')==0){%> class="recommend-active"<%}%>><%= __('recommend.tutorial_background') %></a></dd>
 
         <dt><%= __('recommend.facilities') %></dt>
         <dd><a href="https://github.com/baidu/san-devtools" target="_blank">san-devtools</a></dd>
