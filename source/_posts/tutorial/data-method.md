@@ -414,7 +414,7 @@ let MyComponent = san.defineComponent({
 
 请参考[这里](https://github.com/baidu/san/tree/master/dist)来确认在不同的 san 发布版本中数据校验功能的支持情况。
 
-## DataTypes
+### DataTypes
 
 下边是 `DataTypes` 提供的各种校验的一个示例代码：
 

@@ -412,7 +412,7 @@ let MyComponent = san.defineComponent({
 
 Please refer to this [link](https://github.com/baidu/san/tree/master/dist) to check out their availabilities in different san releases.
 
-## DataTypes
+### DataTypes
 
 Following is a demo for a variety of `DataTypes` validators:
 
