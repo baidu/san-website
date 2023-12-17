@@ -15,7 +15,7 @@ Initialization Arguments
 
 `Explanation`:
 
-Component initialization data. Usually used in the [component reversion](../../tutorial/reverse/) scenario.
+Component initialization data. Usually used in the [component hydrate](../../component/hydrate/) scenario.
 
 `Type`: Object
 
@@ -43,7 +43,7 @@ var myComponent = new MyComponent({
 
 `explanation`:
 
-Component root element. Passing in this parameter means that the component's **template** is not used as the view template, and the component view is automatically reversed by San. See [here](../../tutorial/reverse/) for more details.
+Component root element. Passing in this parameter means that the component's **template** is not used as the view template, and the component view is automatically reversed by San. See [here](../../component/hydrate/) for more details.
 
 `type`: HTMLElement
 
@@ -98,7 +98,7 @@ var myComponent = new MyComponent({
 Lifecycle hooks
 -------
 
-The life cycle represents the survival process of the component, and the hook function is triggered when each process arrives. See [lifecycle](../../tutorial/component/#lifecycle) for more details.
+The life cycle represents the survival process of the component, and the hook function is triggered when each process arrives. See [lifecycle](../../component/lifecycle/) for more details.
 
 ### compiled
 
@@ -160,7 +160,7 @@ define Component
 
 `explanation`:
 
-The view template for the component. see [component template](../../tutorial/component/#component-template) for more details.
+The view template for the component. see [component template](../../component/view/#Component-Template) for more details.
 
 `type`: string
 
@@ -176,7 +176,7 @@ san.defineComponent({
 
 `explanation`:
 
-Declare which filters can be used in a component view template. see [filter](../../tutorial/component/#filter) for more details.
+Declare which filters can be used in a component view template. see [filter](../../component/view/#Filter) for more details.
 
 `type`: Object
 
@@ -240,7 +240,7 @@ var Good = san.defineComponent({
 
 `explanation`:
 
-Declare which types of subcomponents can be used in a component. see [components](../../tutorial/component/#components) for more details.
+Declare which types of subcomponents can be used in a component. see [components](../../component/tree/#components) for more details.
 
 `type`: Object
 
@@ -260,7 +260,7 @@ var AddForm = san.defineComponent({
 
 `explanation`:
 
-Declare the calculated data in the component. see [computed data](../../tutorial/component/#computed-data) for more details.
+Declare the calculated data in the component. see [computed data](../../component/data/#Computed-Data) for more details.
 
 `type`: Object
 
@@ -283,7 +283,7 @@ san.defineComponent({
 
 `explanation`:
 
-declare how to handle subcomponent dispatch messages. see [message](../../tutorial/component/#message) for more details.
+declare how to handle subcomponent dispatch messages. see [message](../../component/tree/#message) for more details.
 
 `type`: Object
 
@@ -308,7 +308,7 @@ var Select = san.defineComponent({
 
 `explanation`:
 
-Return the initial data of the component instance. see [init data](../../tutorial/component/#init-data) for more details.
+Return the initial data of the component instance. see [init data](../../component/data/#Initializing-Data) for more details.
 
 `type`: function():Object
 
@@ -602,7 +602,7 @@ var MyComponent = san.defineComponent({
 
 `explanation`:
 
-Add a custom event listener.  **on** is generally only used in components that are dynamically created using JavaScript. Subcomponents created through view template should be bound by **on-**. see [dynamic child components](../../tutorial/component/#dynamic-child-components) for more details.
+Add a custom event listener.  **on** is generally only used in components that are dynamically created using JavaScript. Subcomponents created through view template should be bound by **on-**. see [dynamic child components](../../component/tree/##Dynamic-Subcomponents) for more details.
 
 ### un
 
@@ -618,7 +618,7 @@ Remove event listener. Remote the listeners for all eventName events when the ev
 
 `explanation`:
 
-Dispatch a message. The message will be passed up in the component tree util it encounters the first component that processes the message. The upper component declares the message to be processed by the component via **message**. The message is mainly used for communication between components with none owner upper components. see [message](../../tutorial/component/#message) for more details.
+Dispatch a message. The message will be passed up in the component tree util it encounters the first component that processes the message. The upper component declares the message to be processed by the component via **message**. The message is mainly used for communication between components with none owner upper components. see [message](../../component/tree/#message) for more details.
 
 `usage`:
 
@@ -705,7 +705,7 @@ var MyComponent = san.defineComponent({
 
 `explanation`:
 
-Watch component's data changes. Usually we use bindings to automatically update the corresponding data of the parent component when the child component data changes. **watch** is generally only used in components that are dynamically created using JavaScript. see [dynamic child components](../../tutorial/component/#dynamic-child-components) for more details.
+Watch component's data changes. Usually we use bindings to automatically update the corresponding data of the parent component when the child component data changes. **watch** is generally only used in components that are dynamically created using JavaScript. see [dynamic child components](../../component/tree/##Dynamic-Subcomponents) for more details.
 
 
 ```javascript
@@ -737,7 +737,7 @@ san.defineComponent({
 
 `explanation`:
 
-Get the subcomponents that define **s-ref**. see [component level](../../tutorial/component/#component-level) for more details.
+Get the subcomponents that define **s-ref**. see [component tree](../../component/tree/) for more details.
 
 `usage`:
 
@@ -779,7 +779,7 @@ var AddForm = san.defineComponent({
 
 `explanation`:
 
-Get the node information of the component slot. The return value is an array, and the items in the array are node objects and usually only one. And there will be more that one node objects when if or for is applied in the slot declaration. The node objects include `isScoped`, `isInserted`, and `children` property. see [slot](../../tutorial/component/#slot) for more details.
+Get the node information of the component slot. The return value is an array, and the items in the array are node objects and usually only one. And there will be more that one node objects when if or for is applied in the slot declaration. The node objects include `isScoped`, `isInserted`, and `children` property. see [slot](../../tutorial/slot/) for more details.
 
 `attention`: do not make any modifications to the returned slot object. If you want to manipulate the view changes, please manipulate the data.
 

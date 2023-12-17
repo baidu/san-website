@@ -14,7 +14,7 @@ Component Initialization
 
 `Explanation`:
 
-**Method**. A shortcut to define components. Refer to [Component Definition](../../tutorial/component/#component-definition) for details.
+**Method**. A shortcut to define components. Refer to [Component Definition](../../component/define/) for details.
 
 `Usage`:
 
@@ -68,7 +68,7 @@ typeof MyApp.prototype.aNode // object
 
 `Explanation`:
 
-**Property**. The component class, from which the newly defined components will inherit. For most cases the **san.defineComponent** method should be used instead. Refer to [Component Definition](../../tutorial/component/#component-definition) for details.
+**Property**. The component class, from which the newly defined components will inherit. For most cases the **san.defineComponent** method should be used instead. Refer to [Component Definition](../../component/define/) for details.
 
 `Usage`:
 
@@ -94,7 +94,7 @@ class HelloComponent extends Component {
 
 **Method**. An util method to implement inheritance, which is the case when defining components (inherit from **san.Component**). Usually, to define a component we use **san.defineComponent** in ES5 and **extends** in ESNext.
 
-It is not recommended to use `.inherits()` in most cases. Refer to [Component Definition](../../tutorial/component/#component-definition) for details.
+It is not recommended to use `.inherits()` in most cases. Refer to [Component Definition](../../component/define/) for details.
 
 
 Server-Side Rendering

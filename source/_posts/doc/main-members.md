@@ -14,7 +14,7 @@ categories:
 
 `解释`：
 
-**方法** 。定义组件的快捷方法。详细请参考 [组件定义](../../tutorial/component/#组件定义) 文档。
+**方法** 。定义组件的快捷方法。详细请参考 [组件定义](../../component/define/) 文档。
 
 `用法`：
 
@@ -38,7 +38,7 @@ var MyApp = san.defineComponent({
 
 `解释`：
 
-**方法** 。定义模板组件。详细请参考 [模版组件](../../tutorial/component/#模版组件) 文档。
+**方法** 。定义模板组件。详细请参考 [模版组件](../../component/template-component/) 文档。
 
 `用法`：
 
@@ -56,7 +56,7 @@ var PanelWithHeader = san.defineTemplateComponent(
 
 `解释`：
 
-**方法** 。创建组件 Loader，主要应用于子组件的后加载与异步渲染，详细请参考 [异步组件](../../tutorial/component/#异步组件) 文档。 options 参数为 Object 类型时，支持如下成员：
+**方法** 。创建组件 Loader，主要应用于子组件的后加载与异步渲染，详细请参考 [异步组件](../../component/async/) 文档。 options 参数为 Object 类型时，支持如下成员：
 
 - {function():Promise}options.load : load 方法。该方法需要返回一个 Promise，load 完成时 reslove，由框架自动调用
 - {Function=}options.placeholder : loading 过程中渲染的占位组件
@@ -136,7 +136,7 @@ typeof MyApp.prototype.aNode // object
 
 `解释`：
 
-**属性** 。组件类，定义组件时可以从此继承。通常通过 **san.defineComponent** 定义组件，不使用此方法。详细请参考[组件定义](../../tutorial/component/#组件定义)文档。
+**属性** 。组件类，定义组件时可以从此继承。通常通过 **san.defineComponent** 定义组件，不使用此方法。详细请参考[组件定义](../../component/define/)文档。
 
 `用法`：
 
@@ -162,7 +162,7 @@ class HelloComponent extends Component {
 
 **方法** 。一个通用的实现继承的方法，定义组件时可以使用此方法从 **san.Component** 继承。通常在 ES5 下通过 **san.defineComponent** 定义组件，在 ESNext 下使用 **extends** 定义组件。
 
-绝大多数情况不推荐使用此方法。详细请参考[组件定义](../../tutorial/component/#组件定义)文档。
+绝大多数情况不推荐使用此方法。详细请参考[组件定义](../../component/define/)文档。
 
 
 服务端渲染

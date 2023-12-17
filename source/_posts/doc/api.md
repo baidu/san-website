@@ -14,7 +14,7 @@ categories:
 
 `解释`：
 
-组件初始化数据。通常在[组件反解](../../tutorial/reverse/)的场景下使用。
+组件初始化数据。通常在[组件反解](../../component/hydrate/)的场景下使用。
 
 
 `类型`： Object
@@ -43,7 +43,7 @@ var myComponent = new MyComponent({
 
 `解释`：
 
-组件根元素。传入此参数意味着不使用组件的 **template** 作为视图模板，组件视图由 San 自动反解。详情可参考[组件反解](../../tutorial/reverse/)文档。
+组件根元素。传入此参数意味着不使用组件的 **template** 作为视图模板，组件视图由 San 自动反解。详情可参考[组件反解](../../component/hydrate/)文档。
 
 `类型`： HTMLElement
 
@@ -81,7 +81,7 @@ var myComponent = new MyComponent({
 - 组件无需手工 dispose，owner dispose 时会自动释放
 - 组件及其子组件 dispatch 的消息，owner 组件可以接收
 
-更多说明请参考[owner与parent](../../tutorial/component/#owner-%E4%B8%8E-parent)文档。
+更多说明请参考[owner与parent](../../component/tree/#owner-与-parent)文档。
 
 
 `注意`：
@@ -117,7 +117,7 @@ san.defineComponent({
 
 `解释`：
 
-通过 HTML 格式的一个标签，声明组件与 owner 之间的数据绑定和事件。指定 source 同时需要指定 owner。更详细的用法请参考 [手动创建子组件](../../tutorial/component/#手动创建子组件) 文档，更多声明格式细节请参考 [模板](../../tutorial/template/) 与 [事件](../../tutorial/event/) 文档。
+通过 HTML 格式的一个标签，声明组件与 owner 之间的数据绑定和事件。指定 source 同时需要指定 owner。更详细的用法请参考 [手动创建子组件](../../component/tree/#手动创建子组件) 文档，更多声明格式细节请参考 [模板](../../tutorial/template/) 与 [事件](../../tutorial/event/) 文档。
 
 `提醒`：
 
@@ -177,7 +177,7 @@ var myComponent = new MyComponent({
 生命周期钩子
 -------
 
-生命周期代表组件的生存过程，在每个过程到达时将触发钩子函数。具体请参考[生命周期](../../tutorial/component/#生命周期)文档。
+生命周期代表组件的生存过程，在每个过程到达时将触发钩子函数。具体请参考[生命周期](../../component/lifecycle/)文档。
 
 
 ### compiled
@@ -244,7 +244,7 @@ var myComponent = new MyComponent({
 
 `解释`：
 
-组件的视图模板。详细描述请参考[视图模板](../../tutorial/component/#视图模板)文档。
+组件的视图模板。详细描述请参考[视图模板](../../component/view/#视图模板)文档。
 
 `类型`： string
 
@@ -260,7 +260,7 @@ san.defineComponent({
 
 `解释`：
 
-声明组件视图模板中可以使用哪些过滤器。详细描述请参考[过滤器](../../tutorial/component/#过滤器)文档。
+声明组件视图模板中可以使用哪些过滤器。详细描述请参考[过滤器](../../component/view/#过滤器)文档。
 
 `类型`： Object
 
@@ -323,7 +323,7 @@ var Good = san.defineComponent({
 
 `解释`：
 
-声明组件中可以使用哪些类型的子组件。详细描述请参考[components](../../tutorial/component/#components)文档。
+声明组件中可以使用哪些类型的子组件。详细描述请参考[components](../../component/tree/#components)文档。
 
 `类型`： Object
 
@@ -343,7 +343,7 @@ var AddForm = san.defineComponent({
 
 `解释`：
 
-声明组件中的计算数据。详细描述请参考[计算数据](../../tutorial/component/#计算数据)文档。
+声明组件中的计算数据。详细描述请参考[计算数据](../../component/data/#计算数据)文档。
 
 `类型`： Object
 
@@ -366,7 +366,7 @@ san.defineComponent({
 
 `解释`：
 
-声明处理子组件派发消息的方法。详细描述请参考[消息](../../tutorial/component/#消息)文档。
+声明处理子组件派发消息的方法。详细描述请参考[消息](../../component/tree/#消息)文档。
 
 `类型`： Object
 
@@ -391,7 +391,7 @@ var Select = san.defineComponent({
 
 `解释`：
 
-返回组件实例的初始数据。详细描述请参考[初始数据](../../tutorial/component/#初始数据)文档。
+返回组件实例的初始数据。详细描述请参考[初始数据](../../component/data/#初始数据)文档。
 
 `类型`： function():Object
 
@@ -743,7 +743,7 @@ var MyComponent = san.defineComponent({
 
 `解释`：
 
-添加自定义事件监听器。 **on** 一般仅用在使用 JavaScript 动态创建的组件中，通过视图模板创建的子组件应通过 **on-** 的方式绑定监听。可参考[动态子组件](../../tutorial/component/#动态子组件)文档
+添加自定义事件监听器。 **on** 一般仅用在使用 JavaScript 动态创建的组件中，通过视图模板创建的子组件应通过 **on-** 的方式绑定监听。可参考[动态子组件](../../component/tree/#动态子组件)文档
 
 
 ### un
@@ -761,7 +761,7 @@ var MyComponent = san.defineComponent({
 
 `解释`：
 
-派发一个消息。消息将沿着组件树向上传递，直到遇到第一个处理该消息的组件。上层组件通过 **messages** 声明组件要处理的消息。消息主要用于组件与非 **owner** 的上层组件进行通信。可参考[消息](../../tutorial/component/#消息)文档。
+派发一个消息。消息将沿着组件树向上传递，直到遇到第一个处理该消息的组件。上层组件通过 **messages** 声明组件要处理的消息。消息主要用于组件与非 **owner** 的上层组件进行通信。可参考[消息](../../component/tree/#消息)文档。
 
 
 `用法`：
@@ -849,7 +849,7 @@ var MyComponent = san.defineComponent({
 
 `解释`：
 
-监听组件的数据变化。通常我们使用绑定，在子组件数据变化时自动更新父组件的对应数据。 **watch** 一般仅用在使用 JavaScript 动态创建的组件中。可参考[动态子组件](../../tutorial/component/#动态子组件)文档
+监听组件的数据变化。通常我们使用绑定，在子组件数据变化时自动更新父组件的对应数据。 **watch** 一般仅用在使用 JavaScript 动态创建的组件中。可参考[动态子组件](../../component/tree/#动态子组件)文档
 
 
 ```javascript
@@ -881,7 +881,7 @@ san.defineComponent({
 
 `解释`：
 
-获取定义了 **s-ref** 的子组件或 HTMLElement。详细请参考[组件层级](../../tutorial/component/#组件层级)文档。
+获取定义了 **s-ref** 的子组件或 HTMLElement。详细请参考[组件层级](../../component/tree/#组件层级)文档。
 
 `注意`：组件根元素即使定义了 **s-ref**，也无法通过 **ref** 方法获得。获取组件根元素请使用 **this.el**。
 
@@ -930,7 +930,7 @@ var AddForm = san.defineComponent({
 
 获取组件插槽的节点信息。返回值是一个数组，数组中的项是节点对象。通常只有一项，当 slot 声明中应用了 if 或 for 时可能为 0 项或多项。节点对象包含 isScoped 、 isInserted 和 children。
 
-插槽详细用法请参考 [slot](../../tutorial/component/#slot) 文档。
+插槽详细用法请参考 [slot](../../tutorial/slot/) 文档。
 
 `注意`：不要对返回的 slot 对象进行任何修改。如果希望操作视图变更，请操作数据。
 

@@ -103,7 +103,7 @@ The first parameter of the filter function is the data value corresponding to th
 
 ## slot
 
-The position of a slot can be declared in the view template by slot, the content of which can be defined by the outer component. Refer to the [slot](../slot/) document for more details.
+The position of a slot can be declared in the view template by slot, the content of which can be defined by the outer component. Refer to the [slot](../../tutorial/slot/) document for more details.
 
 ```javascript
 var Panel = san.defineComponent({
