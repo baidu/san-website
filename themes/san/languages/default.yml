@@ -75,6 +75,7 @@ recommend:
   tutorial_component: 组件
   tutorial_reverse: 组件反解
   tutorial_ssr: 服务端渲染
+  tutorial_attr_fallthrough: 属性透传
   component: 组件
   component_define: 组件定义
   component_lifecycle: 组件生命周期

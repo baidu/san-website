@@ -76,6 +76,7 @@ recommend:
   tutorial_component: Component
   tutorial_reverse: Component Reversion
   tutorial_ssr: SSR
+  tutorial_attr_fallthrough: Attribute Fallthrough
   component: Component
   component_define: Define Component
   component_lifecycle: Component Lifecycle

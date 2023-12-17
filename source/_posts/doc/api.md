@@ -480,6 +480,26 @@ var MyComponent = san.defineComponent({
 ```
 
 
+### inheritAttrs
+
+`解释`：
+
+[属性透传](../../tutorial/attr-fallthrough)功能是否生效。默认值为 **true**。当属性透传功能关闭时，id / class / style 的透传也将失效。
+
+`版本`：>= 3.14.1
+
+`类型`： boolean
+
+`用法`：
+
+```javascript
+var MyComponent = san.defineComponent({
+    inheritAttrs: false,
+    template: '<span><slot/></span>'
+});
+```
+
+
 ### autoFillStyleAndId
 
 `解释`：
