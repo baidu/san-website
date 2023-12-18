@@ -44,7 +44,7 @@ myComponent.attach(wrap);
 [模版组件](../../component/template-component/)也支持属性透传功能。
 
 ```js
-var Inner = san.defineComponent({
+var Inner = san.defineTemplateComponent({
     template: '<span><slot/></span>'
 });
 
