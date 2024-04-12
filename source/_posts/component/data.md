@@ -4,35 +4,38 @@ categories:
 - component
 ---
 
-所有组件数据相关的操作，都由组件实例的 **data** 成员提供。
+组件数据的获取和修改，由组件实例的 **data** 成员提供。
+
+`新增`：在 >= 3.15.0 中，支持通过 **d** 对组件数据进行获取和修改。
+
 
 ## 获取数据
 
-通过 **data.get** 方法可以获取数据。
+通过 **data.get** 方法可以获取数据。在 >= 3.15.0 中，支持通过 **d** 获取数据
 
 ```javascript
 san.defineComponent({
     attached: function () {
         var params = this.data.get('params');
-        this.data.set('list', getList(params[1]));
+        var params = this.d.params;  // >= 3.15.0
     }
 });
 ```
 
-**data.get** 方法接受一个表示 property accessor 的字符串，所以上面的例子也可以写成这样：
+**data.get** 方法接受一个表示 property accessor 的字符串：
 
 ```javascript
 san.defineComponent({
     attached: function () {
         var param = this.data.get('params[1]');
-        this.data.set('list', getList(param));
+        var param = this.d.params[1];  // >= 3.15.0
     }
 });
 ```
 
-## 操作数据
+## 修改数据
 
-**data** 上提供了一些数据操作的方法，具体请参考[数据操作](../../tutorial/data-method/)文档。
+**data** 上提供了一些数据操作的方法，用于修改数据。具体请参考[数据操作](../../tutorial/data-method/)文档。
 
 
 ## 初始数据
@@ -108,3 +111,22 @@ san.defineComponent({
 ```
 
 计算数据项可以依赖另外一个计算数据项，上面的例子中，info 项依赖的 name 项就是一个计算数据项。但是使用时一定要注意，不要形成计算数据项之间的循环依赖。
+
+`新增`：在 >= 3.15.0 中，computed 可以使用 **d** 获取组件数据。
+
+```javascript
+san.defineComponent({
+    template: '<a>{{info}}</a>',
+
+    // name 数据项由 firstName 和 lastName 计算得来
+    computed: {
+        name: function () {
+            return this.d.firstName + ' ' + this.d.lastName;
+        },
+
+        info: function () {
+            return this.d.name + ' - ' + this.d.email;
+        }
+    }
+});
+```

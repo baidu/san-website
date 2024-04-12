@@ -5,9 +5,11 @@ categories:
 ---
 
 
-San 在组件的 data 上提供了一些数据操作的方法。通过 get 方法可以获取数据；通过 set、splice 等方法修改数据，相应的视图会被自动刷新。
+San 在组件的 **data** 上提供了一些数据操作的方法。通过 **get** 方法可以获取数据；通过 **set**、**splice** 等方法修改数据，相应的视图会被自动刷新。
 
 `说明`：为什么是通过 San 提供的方法操作数据，而不是直接操作数据？因为defineProperty并未被国内常用的浏览器广泛支持，并且我们也并不喜欢这种侵入式的风格，所以我们选择了折中的方式。因此，只有通过 San 提供的方法修改数据，视图才会自动刷新。
+
+
 
 初始化
 -----
@@ -26,8 +28,48 @@ san.defineComponent({
 });
 ```
 
-get
+使用 .d
+------
+
+`新增`：在 >= 3.15.0 中，支持通过 **d** 对组件数据进行获取和修改。
+
+```javascript
+san.defineComponent({
+    initData: function () {
+        return {
+            width: 200,
+            top: 100,
+            left: -1000,
+            animals: ['dog', 'cat', 'lion']
+        };
+    },
+
+    attached: function () {
+        this.d.width; // 200
+        
+        // top: 100
+        // left: -1000
+        let {top, left} = this.d;
+
+        // assign
+        this.d.top = 200;
+
+        // for array
+        this.d.animals.push('tiger');
+        this.d.animals.length; // 4
+        this.d.animals.pop();
+        this.d.animals.shift();
+        this.d.animals.unshift('pig');
+        this.d.animals.splice(1, 1);
+    }
+});
+```
+
+
+数据获取
 -----
+
+### get
 
 ```
 {*} get({string|Object?}expr)
@@ -78,9 +120,10 @@ san.defineComponent({
 
 `注意`： **get** 方法获取的数据不能直接修改，否则可能导致不一致的问题。数据修改请使用本文下面的 **set** 、 **splice** 等方法
 
+数据赋值
+------
 
-set
------
+### set
 
 ```
 set({string|Object}expr, {*}value, {Object?}option)
@@ -110,8 +153,7 @@ san.defineComponent({
 });
 ```
 
-assign
------
+### assign
 
 ```
 assign({Object}source, {Object?}option)
@@ -146,8 +188,7 @@ san.defineComponent({
 });
 ```
 
-merge
------
+### merge
 
 ```
 merge({string|Object}expr, {Object}source, {Object?}option)
@@ -174,8 +215,7 @@ san.defineComponent({
 });
 ```
 
-apply
------
+### apply
 
 ```
 apply({string|Object}expr, {function({*}):{*}}value, {Object?}option)
@@ -207,7 +247,7 @@ san.defineComponent({
 });
 ```
 
-数组方法
+数组操作
 ------
 
 我们提供了一些数组操作的方法，这些方法与 JavaScript 的数组操作方法基本同名，以减少使用者的学习与记忆成本。除了 **删除** 操作。
